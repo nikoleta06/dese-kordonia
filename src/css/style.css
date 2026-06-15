@@ -1,0 +1,493 @@
+/* ===== Δέσε Κορδόνια — Modern Athletic Theme ===== */
+
+:root {
+  --bg: #0f1115;          /* βαθύ σκούρο φόντο */
+  --surface: #181b22;     /* κάρτες / επιφάνειες */
+  --surface-2: #21252e;
+  --accent: #ff5722;      /* έντονο πορτοκαλί */
+  --accent-2: #ffa000;    /* δευτερεύον κίτρινο-πορτοκαλί */
+  --text: #f2f3f5;
+  --text-dim: #aab0bb;
+  --border: #2c313c;
+  --radius: 14px;
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  --max: 1100px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Inter", "Segoe UI", Tahoma, sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+}
+
+h1, h2, h3 {
+  font-family: "Oswald", "Segoe UI", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  line-height: 1.2;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* ===== Sticky Header & Nav ===== */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: rgba(15, 17, 21, 0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 0.9rem 1.5rem;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-family: "Oswald", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.brand .logo {
+  width: auto;
+  height: 44px;
+  object-fit: contain;
+}
+
+.brand .dot {
+  color: var(--accent);
+}
+
+.menu {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.menu a {
+  display: block;
+  padding: 0.5rem 0.9rem;
+  border-radius: 999px;
+  color: var(--text-dim);
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: color 0.2s, background 0.2s;
+}
+
+.menu a:hover {
+  color: var(--text);
+  background-color: var(--surface-2);
+}
+
+.menu a.active {
+  color: #fff;
+  background-color: var(--accent);
+}
+
+/* ===== Hero ===== */
+.hero {
+  position: relative;
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 4rem 1.5rem;
+  background:
+    linear-gradient(rgba(15, 17, 21, 0.55), rgba(15, 17, 21, 0.85)),
+    url("../../images/hero.jpg?v=2") center/cover no-repeat;
+}
+
+.hero-content {
+  max-width: 720px;
+}
+
+.hero h1 {
+  font-size: clamp(2.4rem, 6vw, 4.5rem);
+  text-transform: uppercase;
+}
+
+.hero h1 .accent {
+  color: var(--accent);
+}
+
+.hero p {
+  margin: 1.2rem auto 2rem;
+  font-size: 1.15rem;
+  color: var(--text-dim);
+  max-width: 560px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.85rem 2rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: #fff;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: transform 0.15s, box-shadow 0.2s;
+  box-shadow: 0 8px 20px rgba(255, 87, 34, 0.3);
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 26px rgba(255, 87, 34, 0.45);
+}
+
+/* ===== Layout ===== */
+main {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 3.5rem 1.5rem;
+}
+
+.section-title {
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+}
+
+.section-title::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 4px;
+  margin-top: 0.6rem;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+}
+
+.lead {
+  color: var(--text-dim);
+  font-size: 1.1rem;
+  margin-bottom: 2.5rem;
+  max-width: 700px;
+}
+
+/* ===== Cards ===== */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.card {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.8rem;
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent);
+}
+
+.card .icon {
+  font-size: 2rem;
+  margin-bottom: 0.8rem;
+}
+
+.card h3 {
+  margin-bottom: 0.5rem;
+  color: var(--accent-2);
+}
+
+.card p,
+.card li {
+  color: var(--text-dim);
+}
+
+.card ul {
+  margin-left: 1.1rem;
+  margin-top: 0.4rem;
+}
+
+/* ===== Table ===== */
+.table-wrap {
+  overflow-x: auto;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  margin-top: 1.5rem;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: var(--surface);
+  min-width: 480px;
+}
+
+caption {
+  caption-side: top;
+  text-align: left;
+  padding: 0 0 1rem;
+  color: var(--text-dim);
+  font-style: italic;
+}
+
+th, td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+thead th {
+  background-color: var(--surface-2);
+  color: var(--accent-2);
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+}
+
+tbody tr:hover {
+  background-color: var(--surface-2);
+}
+
+tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* ===== Form ===== */
+.contact-form {
+  max-width: 560px;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2rem;
+  margin-top: 1.5rem;
+}
+
+.contact-form label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-weight: 500;
+  color: var(--text-dim);
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  margin-bottom: 1.3rem;
+  background-color: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 1rem;
+  transition: border-color 0.2s;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.contact-form button {
+  border: none;
+  cursor: pointer;
+  width: auto;
+}
+
+/* ===== Story / personal section ===== */
+.story {
+  margin-top: 4rem;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.story img {
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.story p {
+  color: var(--text-dim);
+  margin-bottom: 1rem;
+}
+
+.story p strong {
+  color: var(--text);
+}
+
+@media (max-width: 760px) {
+  .story {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===== Quote ===== */
+.quote {
+  margin: 4rem auto 0;
+  max-width: 760px;
+  text-align: center;
+  padding: 2.5rem 1.5rem;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.quote blockquote {
+  font-family: "Oswald", sans-serif;
+  font-size: clamp(1.4rem, 3.5vw, 2rem);
+  line-height: 1.4;
+  color: var(--text);
+}
+
+.quote blockquote .accent {
+  color: var(--accent);
+}
+
+.quote cite {
+  display: block;
+  margin-top: 1rem;
+  color: var(--text-dim);
+  font-style: normal;
+  font-size: 0.95rem;
+}
+
+/* ===== Tips list ===== */
+.tips {
+  list-style: none;
+  margin-top: 1.5rem;
+  display: grid;
+  gap: 1rem;
+}
+
+.tips li {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
+  border-radius: 10px;
+  padding: 1rem 1.3rem;
+  color: var(--text-dim);
+}
+
+.tips li strong {
+  color: var(--accent-2);
+  display: block;
+  margin-bottom: 0.2rem;
+  font-family: "Oswald", sans-serif;
+  letter-spacing: 0.3px;
+}
+
+/* ===== Contact card ===== */
+.contact-card {
+  max-width: 480px;
+  margin-top: 1.5rem;
+  text-align: center;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2.5rem 2rem;
+  box-shadow: var(--shadow);
+}
+
+.contact-card .contact-icon {
+  font-size: 2.6rem;
+  display: block;
+  margin-bottom: 0.6rem;
+}
+
+.contact-card h3 {
+  color: var(--accent-2);
+  margin-bottom: 0.6rem;
+}
+
+.contact-card p {
+  color: var(--text-dim);
+  margin-bottom: 1.6rem;
+}
+
+/* ===== Image credit ===== */
+.image-credit {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  margin-top: 0.6rem;
+}
+
+/* ===== Footer ===== */
+footer {
+  border-top: 1px solid var(--border);
+  background-color: var(--surface);
+  text-align: center;
+  padding: 2.5rem 1.5rem;
+  color: var(--text-dim);
+  font-size: 0.9rem;
+}
+
+footer .footer-logo {
+  height: 54px;
+  width: auto;
+  margin: 0 auto 0.8rem;
+}
+
+footer .footer-tagline {
+  font-family: "Oswald", sans-serif;
+  font-size: 1.1rem;
+  color: var(--text);
+  letter-spacing: 0.3px;
+  margin-bottom: 1rem;
+}
+
+footer .footer-copy {
+  font-size: 0.85rem;
+}
+
+footer .accent {
+  color: var(--accent);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 600px) {
+  .nav-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .menu {
+    width: 100%;
+  }
+}
