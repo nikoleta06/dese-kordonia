@@ -414,6 +414,125 @@ tbody tr:last-child td {
   letter-spacing: 0.3px;
 }
 
+/* ===== Blog listing ===== */
+.post-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.8rem;
+  margin-top: 1.5rem;
+}
+
+.post-card {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.post-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent);
+}
+
+.post-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.post-card .post-body {
+  padding: 1.4rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.post-card .post-meta {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.5rem;
+}
+
+.post-card h3 {
+  color: var(--text);
+  margin-bottom: 0.5rem;
+  font-size: 1.25rem;
+}
+
+.post-card p {
+  color: var(--text-dim);
+  font-size: 0.95rem;
+  margin-bottom: 1.2rem;
+}
+
+.post-card .read-more {
+  margin-top: auto;
+  color: var(--accent);
+  font-weight: 600;
+  font-family: "Oswald", sans-serif;
+  letter-spacing: 0.3px;
+}
+
+/* ===== Article ===== */
+.article {
+  max-width: 740px;
+  margin: 0 auto;
+}
+
+.article .article-meta {
+  color: var(--text-dim);
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+
+.article .article-meta .accent {
+  color: var(--accent-2);
+}
+
+.article > img {
+  width: 100%;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  margin: 1.5rem 0 2rem;
+}
+
+.article h3 {
+  color: var(--accent-2);
+  margin: 2rem 0 0.6rem;
+  font-size: 1.4rem;
+}
+
+.article p {
+  color: var(--text-dim);
+  margin-bottom: 1.2rem;
+}
+
+.article p strong {
+  color: var(--text);
+}
+
+.article .note {
+  background-color: var(--surface-2);
+  border-left: 4px solid var(--accent);
+  border-radius: 8px;
+  padding: 1rem 1.3rem;
+  font-size: 0.95rem;
+  color: var(--text-dim);
+  margin: 2rem 0;
+}
+
+.back-link {
+  display: inline-block;
+  margin-top: 2.5rem;
+  color: var(--accent);
+  font-weight: 600;
+}
+
 /* ===== Contact card ===== */
 .contact-card {
   max-width: 480px;
