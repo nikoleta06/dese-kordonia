@@ -128,7 +128,7 @@ header {
   padding: 4rem 1.5rem;
   background:
     linear-gradient(rgba(15, 17, 21, 0.55), rgba(15, 17, 21, 0.85)),
-    url("../../images/hero.jpg?v=2") center/cover no-repeat;
+    url("../../images/hero-park.jpg?v=3") center/cover no-repeat;
 }
 
 .hero-content {
