@@ -40,4 +40,12 @@
     <loc>https://nikoleta06.github.io/dese-kordonia/src/html/post-diatrofi-trexsimo.html</loc>
     <priority>0.8</priority>
   </url>
+  <url>
+    <loc>https://nikoleta06.github.io/dese-kordonia/src/html/post-kipchoge.html</loc>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://nikoleta06.github.io/dese-kordonia/src/html/post-easy-running.html</loc>
+    <priority>0.8</priority>
+  </url>
 </urlset>

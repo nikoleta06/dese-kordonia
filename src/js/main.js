@@ -32,6 +32,22 @@ document.addEventListener('DOMContentLoaded', function () {
     targets.forEach((el) => observer.observe(el));
   }
 
+  /* --- Blog category filters --- */
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  if (filterBtns.length) {
+    const cards = document.querySelectorAll('.post-card');
+    filterBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach((b) => b.classList.remove('active'));
+        btn.classList.add('active');
+        const f = btn.dataset.filter;
+        cards.forEach((c) => {
+          c.style.display = (f === 'all' || c.dataset.category === f) ? '' : 'none';
+        });
+      });
+    });
+  }
+
   /* --- Back to top button --- */
   const toTop = document.createElement('button');
   toTop.className = 'to-top';

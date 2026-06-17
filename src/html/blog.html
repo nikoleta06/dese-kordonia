@@ -20,7 +20,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/style.css?v=21">
+  <link rel="stylesheet" href="../css/style.css?v=22">
 </head>
 <body>
   <header>
@@ -45,33 +45,61 @@
   <main>
     <h2 class="section-title">Blog</h2>
     <p class="lead">
-      Ιστορίες από τον δρόμο, συμβουλές που έμαθα στην πορεία και ό,τι με εμπνέει να δένω
-      ξανά και ξανά τα κορδόνια μου. Νέα άρθρα έρχονται τακτικά.
+      Εδώ θα βρεις τέσσερις κατηγορίες περιεχομένου: μαθήματα από <strong>κορυφαίους
+      αθλητές</strong>, την <strong>επιστήμη του τρεξίματος</strong>,
+      <strong>ιστορίες &amp; ψυχολογία</strong>, και <strong>πρακτικές συμβουλές</strong> —
+      πράγματα που δύσκολα βρίσκεις μαζεμένα αλλού.
     </p>
 
+    <div class="blog-filters">
+      <button class="filter-btn active" data-filter="all" type="button">Όλα</button>
+      <button class="filter-btn" data-filter="champions" type="button"><svg style="width:1em;height:1em;vertical-align:-0.15em;margin-right:0.3em" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.26 6.88.56-5.2 4.52 1.56 6.7L12 17.27 5.86 20.54l1.56-6.7-5.2-4.52 6.88-.56z"/></svg>Πρωταθλητές</button>
+      <button class="filter-btn" data-filter="science" type="button"><svg style="width:1em;height:1em;vertical-align:-0.15em;margin-right:0.3em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5a3 3 0 0 0-3 3 2.5 2.5 0 0 0-2 4 2.5 2.5 0 0 0 1.5 4.5A2.5 2.5 0 0 0 12 19V5z"/><path d="M12 5a3 3 0 0 1 3 3 2.5 2.5 0 0 1 2 4 2.5 2.5 0 0 1-1.5 4.5A2.5 2.5 0 0 1 12 19"/></svg>Επιστήμη</button>
+      <button class="filter-btn" data-filter="stories" type="button"><svg style="width:1em;height:1em;vertical-align:-0.15em;margin-right:0.3em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.49 4.04 3 5.5l7 7Z"/></svg>Ιστορίες &amp; Ψυχολογία</button>
+      <button class="filter-btn" data-filter="tips" type="button"><svg style="width:1em;height:1em;vertical-align:-0.15em;margin-right:0.3em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5.76.76 1.23 1.52 1.41 2.5"/></svg>Πρακτικές συμβουλές</button>
+    </div>
+
     <div class="post-grid">
-      <article class="post-card">
+      <article class="post-card" data-category="champions">
+        <img src="../../images/hero.jpg?v=2" alt="Κορδόνια αθλητικού παπουτσιού" loading="lazy" decoding="async" width="400" height="180">
+        <div class="post-body">
+          <p class="post-meta"><span class="post-cat"><svg style="width:1em;height:1em;vertical-align:-0.15em;margin-right:0.25em" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.26 6.88.56-5.2 4.52 1.56 6.7L12 17.27 5.86 20.54l1.56-6.7-5.2-4.52 6.88-.56z"/></svg>Πρωταθλητές</span> · 18 Ιουν 2026</p>
+          <h3>Η φιλοσοφία του Eliud Kipchoge</h3>
+          <p>«Κανένας άνθρωπος δεν έχει όρια.» Τι μας διδάσκει ο σπουδαιότερος μαραθωνοδρόμος όλων των εποχών.</p>
+          <a class="read-more" href="post-kipchoge.html">Διάβασε το άρθρο →</a>
+        </div>
+      </article>
+      <article class="post-card" data-category="science">
+        <img src="../../images/hero.jpg?v=2" alt="Δρομέας πριν από easy προπόνηση" loading="lazy" decoding="async" width="400" height="180">
+        <div class="post-body">
+          <p class="post-meta"><span class="post-cat"><svg style="width:1em;height:1em;vertical-align:-0.15em;margin-right:0.25em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5a3 3 0 0 0-3 3 2.5 2.5 0 0 0-2 4 2.5 2.5 0 0 0 1.5 4.5A2.5 2.5 0 0 0 12 19V5z"/><path d="M12 5a3 3 0 0 1 3 3 2.5 2.5 0 0 1 2 4 2.5 2.5 0 0 1-1.5 4.5A2.5 2.5 0 0 1 12 19"/></svg>Επιστήμη</span> · 18 Ιουν 2026</p>
+          <h3>Γιατί οι ελίτ δρομείς τρέχουν αργά</h3>
+          <p>Η επιστήμη πίσω από τις easy προπονήσεις, την πολωμένη προπόνηση 80/20 και την αερόβια βάση.</p>
+          <a class="read-more" href="post-easy-running.html">Διάβασε το άρθρο →</a>
+        </div>
+      </article>
+      <article class="post-card" data-category="tips">
         <img src="../../images/hero.jpg?v=2" alt="Δρομέας δένει τα κορδόνια του" loading="lazy" decoding="async" width="400" height="180">
         <div class="post-body">
-          <p class="post-meta">18 Ιουνίου 2026 · Διατροφή</p>
+          <p class="post-meta"><span class="post-cat"><svg style="width:1em;height:1em;vertical-align:-0.15em;margin-right:0.25em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5.76.76 1.23 1.52 1.41 2.5"/></svg>Πρακτικές</span> · 18 Ιουν 2026</p>
           <h3>Τι να τρώω πριν και μετά το τρέξιμο</h3>
           <p>Η διατροφή δεν χρειάζεται να είναι περίπλοκη. Απλές συνήθειες για ενέργεια και καλύτερη αποκατάσταση.</p>
           <a class="read-more" href="post-diatrofi-trexsimo.html">Διάβασε το άρθρο →</a>
         </div>
       </article>
-      <article class="post-card">
+      <article class="post-card" data-category="tips">
         <img src="../../images/hero.jpg?v=2" alt="Δρομέας δένει τα κορδόνια του" loading="lazy" decoding="async" width="400" height="180">
         <div class="post-body">
-          <p class="post-meta">17 Ιουνίου 2026 · Συμβουλές</p>
+          <p class="post-meta"><span class="post-cat"><svg style="width:1em;height:1em;vertical-align:-0.15em;margin-right:0.25em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5.76.76 1.23 1.52 1.41 2.5"/></svg>Πρακτικές</span> · 17 Ιουν 2026</p>
           <h3>5 συμβουλές για να ξεκινήσεις τρέξιμο ως αρχάριος</h3>
           <p>Το πιο δύσκολο κομμάτι δεν είναι τα χιλιόμετρα — είναι το ξεκίνημα. 5 πράγματα που θα ήθελα να ήξερα όταν ξεκίνησα.</p>
           <a class="read-more" href="post-arxarios-trexsimo.html">Διάβασε το άρθρο →</a>
         </div>
       </article>
-      <article class="post-card">
+      <article class="post-card" data-category="stories">
         <img src="../../images/hero.jpg?v=2" alt="Δρομέας δένει τα κορδόνια του σε στίβο" loading="lazy" decoding="async" width="400" height="180">
         <div class="post-body">
-          <p class="post-meta">16 Ιουνίου 2026 · Προσωπική ιστορία</p>
+          <p class="post-meta"><span class="post-cat"><svg style="width:1em;height:1em;vertical-align:-0.15em;margin-right:0.25em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.49 4.04 3 5.5l7 7Z"/></svg>Ιστορίες &amp; Ψυχολογία</span> · 16 Ιουν 2026</p>
           <h3>Πώς το τρέξιμο με βοήθησε με τις ημικρανίες</h3>
           <p>Ξεκίνησα να τρέχω σχεδόν τυχαία, κάνοντας παρέα στον αδερφό μου. Δεν φανταζόμουν ότι θα γινόταν το φάρμακό μου.</p>
           <a class="read-more" href="post-trexsimo-imikranies.html">Διάβασε το άρθρο →</a>
@@ -90,6 +118,6 @@
     <p class="footer-copy">© 2026 <span class="accent">Δέσε Κορδόνια</span></p>
   </footer>
 
-  <script src="../js/main.js?v=4" defer></script>
+  <script src="../js/main.js?v=5" defer></script>
 </body>
 </html>
