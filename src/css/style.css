@@ -875,6 +875,62 @@ tbody tr:last-child td {
   }
 }
 
+/* ===== Back to top button ===== */
+.to-top {
+  position: fixed;
+  right: 1.2rem;
+  bottom: 1.2rem;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 20px rgba(255, 87, 34, 0.4);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px);
+  transition: opacity 0.3s, transform 0.3s, visibility 0.3s;
+  z-index: 150;
+}
+
+.to-top.show {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+
+.to-top:hover {
+  transform: translateY(-2px);
+}
+
+.to-top svg {
+  width: 22px;
+  height: 22px;
+}
+
+/* ===== 5K program plan ===== */
+.plan-note {
+  background-color: var(--surface-2);
+  border-left: 4px solid var(--accent);
+  border-radius: 8px;
+  padding: 1rem 1.3rem;
+  color: var(--text-dim);
+  margin: 1.5rem 0;
+  font-size: 0.95rem;
+}
+
+.plan-table td:first-child {
+  font-family: "Oswald", sans-serif;
+  color: var(--accent-2);
+  white-space: nowrap;
+  font-size: 1.05rem;
+}
+
 /* ===== Image credit ===== */
 .image-credit {
   font-size: 0.8rem;

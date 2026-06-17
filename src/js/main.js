@@ -32,6 +32,17 @@ document.addEventListener('DOMContentLoaded', function () {
     targets.forEach((el) => observer.observe(el));
   }
 
+  /* --- Back to top button --- */
+  const toTop = document.createElement('button');
+  toTop.className = 'to-top';
+  toTop.setAttribute('aria-label', 'Επιστροφή στην κορυφή');
+  toTop.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>';
+  document.body.appendChild(toTop);
+  toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+  window.addEventListener('scroll', () => {
+    toTop.classList.toggle('show', window.scrollY > 400);
+  });
+
   /* --- Mobile/tablet hamburger menu --- */
   const navInner = document.querySelector('.nav-inner');
   const menu = document.querySelector('.menu');
