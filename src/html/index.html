@@ -35,9 +35,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/style.css?v=15">
+  <link rel="stylesheet" href="../css/style.css?v=20">
 </head>
-<body>
+<body data-page="home">
   <header>
     <div class="nav-inner">
       <a class="brand" href="index.html">
@@ -65,6 +65,7 @@
         ελευθερίας που μόνο ο δρόμος σού δίνει.
       </p>
       <a class="btn" href="healthy.html">Ανακάλυψε τα οφέλη του τρεξίματος</a>
+      <button class="why-link" id="whyOpen" type="button">Γιατί τρέχεις;</button>
     </div>
   </section>
 
@@ -152,8 +153,31 @@
   </main>
 
   <footer>
-    <img src="../../images/logo.png" alt="Δέσε Κορδόνια" class="footer-logo">
+    <img src="../../images/logo-footer.png" alt="Δέσε Κορδόνια" class="footer-logo">
+    <div class="footer-social">
+      <a href="https://instagram.com/nikol.akr" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+      </a>
+    </div>
     <p class="footer-copy">© 2026 <span class="accent">Δέσε Κορδόνια</span></p>
   </footer>
+
+  <!-- "Γιατί τρέχεις;" modal -->
+  <div class="modal-overlay" id="whyModal" role="dialog" aria-modal="true" aria-label="Γιατί τρέχεις;">
+    <div class="modal">
+      <div id="whyBody">
+        <h3>Γιατί τρέχεις;</h3>
+        <div class="why-options">
+          <button type="button">Ψυχική ηρεμία</button>
+          <button type="button">Καθαρό μυαλό</button>
+          <button type="button">Να χάσω κιλά</button>
+          <button type="button">Να βελτιώσω τις αντοχές μου</button>
+        </div>
+        <button class="modal-close" id="whyClose">Κλείσιμο</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/main.js?v=3" defer></script>
 </body>
 </html>
