@@ -220,8 +220,14 @@ main {
 }
 
 .card .icon {
-  font-size: 2rem;
-  margin-bottom: 0.8rem;
+  margin-bottom: 0.9rem;
+  line-height: 0;
+  color: var(--accent);
+}
+
+.card .icon svg {
+  width: 44px;
+  height: 44px;
 }
 
 .card h3 {
