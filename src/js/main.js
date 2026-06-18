@@ -48,6 +48,24 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
+  /* --- Language toggle (EL / EN) --- */
+  (function () {
+    const header = document.querySelector('header');
+    if (!header) return;
+    const file = location.pathname.split('/').pop() || 'index.html';
+    const isEn = file.includes('-en.html');
+    const target = isEn ? file.replace('-en.html', '.html') : file.replace('.html', '-en.html');
+    const bar = document.createElement('div');
+    bar.className = 'lang-bar';
+    const a = document.createElement('a');
+    a.href = target;
+    a.className = 'lang-toggle';
+    a.textContent = isEn ? 'ΕΛ' : 'EN';
+    a.setAttribute('aria-label', isEn ? 'Ελληνικά' : 'English');
+    bar.appendChild(a);
+    header.insertBefore(bar, header.firstChild);
+  })();
+
   /* --- Theme toggle (dark/light) --- */
   (function () {
     const root = document.documentElement;
@@ -129,10 +147,14 @@ document.addEventListener('DOMContentLoaded', function () {
       overlay.querySelectorAll('.why-options button').forEach((btn) => {
         btn.addEventListener('click', () => {
           const reason = btn.textContent.trim();
-          body.innerHTML =
-            '<p class="why-result">Τρέχεις για <span class="accent">' + reason + '</span>.<br><br>' +
-            'Όποιος κι αν είναι ο λόγος σου, καλώς ήρθες στο <span class="accent">Δέσε Κορδόνια</span>! 🏃</p>' +
-            '<button class="modal-close" id="whyCloseAfter">Κλείσιμο</button>';
+          const en = document.documentElement.lang === 'en';
+          body.innerHTML = en
+            ? '<p class="why-result">You run for <span class="accent">' + reason + '</span>.<br><br>' +
+              'Whatever your reason, welcome to <span class="accent">Δέσε Κορδόνια</span>! 🏃</p>' +
+              '<button class="modal-close" id="whyCloseAfter">Close</button>'
+            : '<p class="why-result">Τρέχεις για <span class="accent">' + reason + '</span>.<br><br>' +
+              'Όποιος κι αν είναι ο λόγος σου, καλώς ήρθες στο <span class="accent">Δέσε Κορδόνια</span>! 🏃</p>' +
+              '<button class="modal-close" id="whyCloseAfter">Κλείσιμο</button>';
           document.getElementById('whyCloseAfter').addEventListener('click', close);
         });
       });

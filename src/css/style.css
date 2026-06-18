@@ -103,11 +103,17 @@ header {
   color: var(--accent);
 }
 
+header nav {
+  flex: 1;
+  min-width: 0;
+}
+
 .menu {
   list-style: none;
   display: flex;
   flex-wrap: wrap;
-  gap: 0.4rem;
+  justify-content: flex-end;
+  gap: 0.35rem;
 }
 
 .menu a {
@@ -128,6 +134,34 @@ header {
 .menu a.active {
   color: #fff;
   background-color: var(--accent);
+}
+
+.lang-bar {
+  max-width: var(--max);
+  margin: 0 auto;
+  display: flex;
+  justify-content: flex-end;
+  padding: 0.45rem 1.5rem 0;
+}
+
+.lang-toggle {
+  display: inline-block;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  background: none;
+  font-family: "Oswald", sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  padding: 0.2rem 0.7rem;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.lang-toggle:hover {
+  background-color: var(--accent);
+  color: #fff;
 }
 
 /* ===== Hero ===== */
