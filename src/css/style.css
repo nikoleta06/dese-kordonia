@@ -175,7 +175,7 @@ header nav {
   padding: 4rem 1.5rem;
   background:
     linear-gradient(rgba(15, 17, 21, 0.55), rgba(15, 17, 21, 0.85)),
-    url("../../images/hero-park.jpg?v=3") center/cover no-repeat;
+    url("../../images/cat-running.jpg?v=1") center/cover no-repeat;
 }
 
 .hero-content {

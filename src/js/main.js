@@ -32,6 +32,21 @@ document.addEventListener('DOMContentLoaded', function () {
     targets.forEach((el) => observer.observe(el));
   }
 
+  /* --- Blog card category images --- */
+  (function () {
+    const catImg = {
+      champions: 'cat-champions.jpg',
+      science: 'cat-science.jpg',
+      stories: 'cat-stories.jpg',
+      tips: 'cat-tips.jpg'
+    };
+    document.querySelectorAll('.post-card').forEach((card) => {
+      const img = card.querySelector('img');
+      const cat = card.dataset.category;
+      if (img && catImg[cat]) img.src = '../../images/' + catImg[cat] + '?v=1';
+    });
+  })();
+
   /* --- Blog category filters --- */
   const filterBtns = document.querySelectorAll('.filter-btn');
   if (filterBtns.length) {
