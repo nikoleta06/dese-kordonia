@@ -81,6 +81,42 @@ document.addEventListener('DOMContentLoaded', function () {
     header.insertBefore(bar, header.firstChild);
   })();
 
+  /* --- Share buttons on articles --- */
+  (function () {
+    const article = document.querySelector('.article');
+    if (!article) return;
+    const en = document.documentElement.lang === 'en';
+    const cleanUrl = location.href.split('?')[0].split('#')[0];
+    const u = encodeURIComponent(cleanUrl);
+    const t = encodeURIComponent(document.title);
+    const FB = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 12a10 10 0 1 0-11.5 9.9v-7H8v-2.9h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.4h-1.2c-1.2 0-1.6.8-1.6 1.5v1.8H16l-.4 2.9h-2.1v7A10 10 0 0 0 22 12z"/></svg>';
+    const X = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.9 2H22l-7.5 8.6L23 22h-6.8l-5.3-7-6 7H2l8-9.2L1.5 2h6.9l4.8 6.4L18.9 2zm-2.4 18h1.9L7.6 4H5.6l10.9 16z"/></svg>';
+    const WA = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.5 15.3L2 22l4.8-1.3A10 10 0 1 0 12 2zm0 18a8 8 0 0 1-4.1-1.1l-.3-.2-2.8.7.8-2.7-.2-.3A8 8 0 1 1 12 20zm4.4-6c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.1-.3.2-.5.1-.7-.3-1.4-.7-2-1.5-.4-.6.4-.6 1.1-1.9.1-.2 0-.4 0-.5l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.8.8-1 1.9-.6 3.1.5 1.5 1.6 2.8 3.6 3.7 2 .9 2 .6 2.4.6.5 0 1.4-.6 1.6-1.1.2-.6.2-1 .1-1.1z"/></svg>';
+    const LINK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg>';
+    const CHECK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>';
+
+    const row = document.createElement('div');
+    row.className = 'share-row';
+    row.innerHTML =
+      '<span class="share-label">' + (en ? 'Share:' : 'Κοινοποίηση:') + '</span>' +
+      '<a class="share-btn" target="_blank" rel="noopener" aria-label="Facebook" href="https://www.facebook.com/sharer/sharer.php?u=' + u + '">' + FB + '</a>' +
+      '<a class="share-btn" target="_blank" rel="noopener" aria-label="X" href="https://twitter.com/intent/tweet?url=' + u + '&text=' + t + '">' + X + '</a>' +
+      '<a class="share-btn" target="_blank" rel="noopener" aria-label="WhatsApp" href="https://wa.me/?text=' + t + '%20' + u + '">' + WA + '</a>' +
+      '<button class="share-btn share-copy" type="button" aria-label="' + (en ? 'Copy link' : 'Αντιγραφή συνδέσμου') + '">' + LINK + '</button>';
+
+    const back = article.querySelector('.back-link');
+    if (back) article.insertBefore(row, back); else article.appendChild(row);
+
+    const copyBtn = row.querySelector('.share-copy');
+    copyBtn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(cleanUrl);
+        copyBtn.innerHTML = CHECK;
+        setTimeout(() => { copyBtn.innerHTML = LINK; }, 1500);
+      } catch (e) {}
+    });
+  })();
+
   /* --- Theme toggle (dark/light) --- */
   (function () {
     const root = document.documentElement;
