@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Running Races in Greece — Interactive Map | Δέσε Κορδόνια</title>
+  <meta name="description" content="Interactive map of well-known running races in Greece: Athens Marathon, Spartathlon, mountain races and more. See where they take place and find details.">
+  <link rel="canonical" href="https://nikoleta06.github.io/dese-kordonia/src/html/agones-en.html">
+  <link rel="alternate" hreflang="el" href="https://nikoleta06.github.io/dese-kordonia/src/html/agones.html">
+  <link rel="alternate" hreflang="en" href="https://nikoleta06.github.io/dese-kordonia/src/html/agones-en.html">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Running Races in Greece — Interactive Map">
+  <meta property="og:description" content="Interactive map of well-known running races in Greece.">
+  <meta property="og:image" content="https://nikoleta06.github.io/dese-kordonia/images/cat-champions.jpg">
+  <meta property="og:url" content="https://nikoleta06.github.io/dese-kordonia/src/html/agones-en.html">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" type="image/x-icon" href="../../images/favicon.ico?v=1">
+  <link rel="apple-touch-icon" href="../../images/favicon.png?v=1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css?v=29">
+
+  <!-- Leaflet (interactive map) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <style>
+    #race-map {
+      height: 520px;
+      width: 100%;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      margin-top: 1.5rem;
+      z-index: 1;
+    }
+    .leaflet-popup-content { font-family: "Inter", sans-serif; }
+    .leaflet-popup-content h4 { font-family: "Oswald", sans-serif; margin: 0 0 0.3rem; color: #0f1115; }
+    .leaflet-popup-content p { margin: 0 0 0.5rem; color: #333; font-size: 0.9rem; }
+    .leaflet-popup-content a { color: #ff5722; font-weight: 600; }
+    @media (max-width: 600px) { #race-map { height: 400px; } }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav-inner">
+      <a class="brand" href="index-en.html">
+        <img src="../../images/logo.png?v=2" alt="Δέσε Κορδόνια logo" class="logo">
+        Δέσε<span class="dot">.</span>Κορδόνια
+      </a>
+      <nav>
+        <ul class="menu">
+          <li><a href="index-en.html">Home</a></li>
+          <li><a href="healthy-en.html">Wellness &amp; Benefits</a></li>
+          <li><a href="blog-en.html">Blog</a></li>
+          <li><a href="agones-en.html" class="active">Races</a></li>
+          <li><a href="programma-5k-en.html">5K Plan</a></li>
+          <li><a href="calculator-en.html">Calculator</a></li>
+          <li><a href="contact-en.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <h2 class="section-title">Running Races in Greece</h2>
+    <p class="lead">
+      From the historic Athens Marathon to mountain races in the highlands — Greece is full of
+      routes. Click any marker on the map to see the race and find details.
+    </p>
+
+    <div id="race-map"></div>
+
+    <p class="plan-note" style="margin-top:1.5rem;">
+      ℹ️ Dates and registration change every year — the links take you to the official/up-to-date
+      information for each race.
+    </p>
+  </main>
+
+  <footer>
+    <img src="../../images/logo-footer.png?v=2" alt="Δέσε Κορδόνια" class="footer-logo">
+    <div class="footer-social">
+      <a href="https://instagram.com/nikol.akr" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+      </a>
+    </div>
+    <p class="footer-copy">© 2026 <span class="accent">Δέσε Κορδόνια</span></p>
+  </footer>
+
+  <script src="../js/main.js?v=10" defer></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    (function () {
+      if (typeof L === 'undefined') return;
+      var map = L.map('race-map').setView([38.8, 23.5], 6);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 18,
+        attribution: '© OpenStreetMap'
+      }).addTo(map);
+
+      var races = [
+        { n: 'Athens Authentic Marathon', c: [38.155, 23.965], d: 'The historic marathon, from Marathon to the Panathenaic Stadium.', q: 'Athens Authentic Marathon' },
+        { n: 'Spartathlon', c: [37.075, 22.43], d: 'Legendary 246 km ultramarathon: Athens → Sparta.', q: 'Spartathlon' },
+        { n: 'Thessaloniki Marathon', c: [40.626, 22.948], d: '"Alexander the Great" — marathon in Thessaloniki.', q: 'Thessaloniki Marathon Alexander the Great' },
+        { n: 'Olympus Marathon', c: [40.088, 22.50], d: 'A demanding mountain race on mythical Mount Olympus.', q: 'Olympus Marathon' },
+        { n: 'Zagori Mountain Running', c: [39.88, 20.75], d: 'Trail running in the stunning Zagori villages.', q: 'Zagori Mountain Running' },
+        { n: 'Run Crete (Rethymno)', c: [35.366, 24.474], d: 'Road races against the backdrop of Cretan nature.', q: 'Run Crete Rethymno race' }
+      ];
+
+      races.forEach(function (r) {
+        var link = 'https://www.google.com/search?q=' + encodeURIComponent(r.q);
+        var html = '<h4>' + r.n + '</h4><p>' + r.d + '</p>' +
+          '<a href="' + link + '" target="_blank" rel="noopener">See details →</a>';
+        L.marker(r.c).addTo(map).bindPopup(html);
+      });
+    })();
+  </script>
+</body>
+</html>
