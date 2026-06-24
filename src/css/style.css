@@ -328,10 +328,10 @@ header nav {
   to { background-position: 200% center; }
 }
 
-.hero h1        { animation: heroRise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
-.hero p         { animation: heroRise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) 0.18s both; }
-.hero-buttons   { animation: heroRise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) 0.34s both; }
-.hero .why-link { animation: heroRise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) 0.50s both; }
+.hero h1        { animation: heroRise 1.6s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.hero p         { animation: heroRise 1.6s cubic-bezier(0.22, 1, 0.36, 1) 0.35s both; }
+.hero-buttons   { animation: heroRise 1.6s cubic-bezier(0.22, 1, 0.36, 1) 0.70s both; }
+.hero .why-link { animation: heroRise 1.6s cubic-bezier(0.22, 1, 0.36, 1) 1.05s both; }
 
 /* Ζωντανό gradient στη λέξη "Κορδόνια" */
 .hero h1 .accent {
@@ -341,7 +341,7 @@ header nav {
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: var(--accent);
-  animation: accentShine 4s linear infinite;
+  animation: accentShine 7s linear infinite;
 }
 
 /* ===== Featured article ===== */
@@ -356,7 +356,7 @@ header nav {
   width: 80px;
   background: linear-gradient(90deg, var(--accent), var(--accent-2), var(--accent));
   background-size: 200% auto;
-  animation: accentShine 3s linear infinite;
+  animation: accentShine 6s linear infinite;
 }
 
 /* Απαλό "ανάσασμα" στο αστέρι/τίτλο */
@@ -366,7 +366,7 @@ header nav {
 }
 
 .featured-heading {
-  animation: headingPulse 3.5s ease-in-out infinite;
+  animation: headingPulse 6s ease-in-out infinite;
   transform-origin: center;
 }
 
