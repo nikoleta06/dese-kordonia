@@ -181,6 +181,35 @@ document.addEventListener('DOMContentLoaded', function () {
     );
   }
 
+  /* --- Nav dropdown (Εργαλεία / Tools) --- */
+  (function () {
+    const toggles = document.querySelectorAll('.dropdown-toggle');
+    if (!toggles.length) return;
+    toggles.forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const li = btn.closest('.dropdown');
+        const willOpen = !li.classList.contains('open');
+        document.querySelectorAll('.dropdown.open').forEach((d) => {
+          if (d !== li) {
+            d.classList.remove('open');
+            const t = d.querySelector('.dropdown-toggle');
+            if (t) t.setAttribute('aria-expanded', 'false');
+          }
+        });
+        li.classList.toggle('open', willOpen);
+        btn.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+      });
+    });
+    document.addEventListener('click', () => {
+      document.querySelectorAll('.dropdown.open').forEach((d) => {
+        d.classList.remove('open');
+        const t = d.querySelector('.dropdown-toggle');
+        if (t) t.setAttribute('aria-expanded', 'false');
+      });
+    });
+  })();
+
   /* --- "Γιατί τρέχεις;" modal --- */
   const openBtn = document.getElementById('whyOpen');
   const overlay = document.getElementById('whyModal');

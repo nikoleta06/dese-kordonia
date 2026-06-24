@@ -136,6 +136,78 @@ header nav {
   background-color: var(--accent);
 }
 
+/* ===== Nav dropdown (Εργαλεία) ===== */
+.dropdown {
+  position: relative;
+}
+
+.dropdown-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.5rem 0.9rem;
+  border: none;
+  background: none;
+  border-radius: 999px;
+  color: var(--text-dim);
+  font-family: inherit;
+  font-weight: 500;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: color 0.2s, background 0.2s;
+}
+
+.dropdown-toggle:hover,
+.dropdown.open .dropdown-toggle {
+  color: var(--text);
+  background-color: var(--surface-2);
+}
+
+.dropdown.active .dropdown-toggle {
+  color: #fff;
+  background-color: var(--accent);
+}
+
+.dropdown .caret {
+  font-size: 0.7em;
+  transition: transform 0.2s;
+}
+
+.dropdown:hover .caret,
+.dropdown.open .caret {
+  transform: rotate(180deg);
+}
+
+.dropdown-menu {
+  list-style: none;
+  margin: 0;
+  padding: 0.4rem;
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  min-width: 190px;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(6px);
+  transition: opacity 0.18s, transform 0.18s, visibility 0.18s;
+  z-index: 60;
+}
+
+.dropdown:hover .dropdown-menu,
+.dropdown.open .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdown-menu a {
+  white-space: nowrap;
+}
+
 .lang-bar {
   max-width: var(--max);
   margin: 0 auto;
@@ -1271,6 +1343,30 @@ footer .accent {
   .menu a {
     display: block;
     padding: 0.7rem 0.9rem;
+  }
+  /* Dropdown γίνεται inline στο κινητό */
+  .dropdown {
+    width: 100%;
+  }
+  .dropdown-toggle {
+    width: 100%;
+    justify-content: space-between;
+    padding: 0.7rem 0.9rem;
+  }
+  .dropdown-menu {
+    position: static;
+    display: none;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    min-width: 0;
+    padding: 0.2rem 0 0.2rem 0.8rem;
+    border: none;
+    background: none;
+    box-shadow: none;
+  }
+  .dropdown.open .dropdown-menu {
+    display: block;
   }
   /* Hamburger → X όταν είναι ανοιχτό */
   .nav-inner.nav-open .nav-toggle span:nth-child(1) {
