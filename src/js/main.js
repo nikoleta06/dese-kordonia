@@ -63,21 +63,26 @@ document.addEventListener('DOMContentLoaded', function () {
     } catch (e) { return null; }
   }
 
-  /* --- Σύνδεσμος «Αποθηκευμένα» στο μενού --- */
+  /* --- Σύνδεσμος «Αποθηκευμένα» στο μενού (εικονίδιο σελιδοδείκτη) --- */
   (function () {
     const menu = document.querySelector('.menu');
     if (!menu) return;
+    if (menu.querySelector('.saved-link')) return;
     const href = DK_PAGE_EN ? 'saved-en.html' : 'saved.html';
-    if (menu.querySelector('a[href="' + href + '"]')) return;
+    const label = DK_PAGE_EN ? 'Saved' : 'Αποθηκευμένα';
     const li = document.createElement('li');
+    li.className = 'saved-item';
     const a = document.createElement('a');
     a.href = href;
-    a.textContent = DK_PAGE_EN ? 'Saved' : 'Αποθηκευμένα';
+    a.className = 'saved-link';
+    a.setAttribute('aria-label', label);
+    a.setAttribute('title', label);
+    a.innerHTML =
+      '<svg class="saved-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg>' +
+      '<span class="saved-text">' + label + '</span>';
     if (DK_FILE === href) a.classList.add('active');
     li.appendChild(a);
-    const contact = menu.querySelector('a[href="contact.html"], a[href="contact-en.html"]');
-    if (contact && contact.closest('li')) menu.insertBefore(li, contact.closest('li'));
-    else menu.appendChild(li);
+    menu.appendChild(li);
   })();
 
   /* --- Scroll reveal animations --- */
