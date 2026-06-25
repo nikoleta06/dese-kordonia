@@ -1,3 +1,6 @@
+# Local tooling (Claude preview config)
+.claude/
+
 # OS / editor junk
 Thumbs.db
 desktop.ini
