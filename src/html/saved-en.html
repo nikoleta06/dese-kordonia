@@ -3,19 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact | Δέσε Κορδόνια</title>
-  <meta name="description" content="Get in touch with me on Instagram — share your running journey and follow my road to the marathon.">
-  <link rel="canonical" href="https://nikoleta06.github.io/dese-kordonia/src/html/contact-en.html">
-  <link rel="alternate" hreflang="el" href="https://nikoleta06.github.io/dese-kordonia/src/html/contact.html">
-  <link rel="alternate" hreflang="en" href="https://nikoleta06.github.io/dese-kordonia/src/html/contact-en.html">
-
-  <!-- Open Graph -->
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Contact | Δέσε Κορδόνια">
-  <meta property="og:description" content="Find me on Instagram and share your running journey.">
-  <meta property="og:image" content="https://nikoleta06.github.io/dese-kordonia/images/hero.jpg">
-  <meta property="og:url" content="https://nikoleta06.github.io/dese-kordonia/src/html/contact-en.html">
-  <meta name="twitter:card" content="summary_large_image">
+  <meta name="robots" content="noindex">
+  <title>Saved | Δέσε Κορδόνια</title>
+  <meta name="description" content="The articles you saved to read later.">
 
   <link rel="icon" type="image/x-icon" href="../../images/favicon.ico?v=1">
   <link rel="apple-touch-icon" href="../../images/favicon.png?v=1">
@@ -44,27 +34,22 @@
               <li><a href="calculator-en.html">Calculator</a></li>
             </ul>
           </li>
-          <li><a href="contact-en.html" class="active">Contact</a></li>
+          <li><a href="contact-en.html">Contact</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
   <main>
-    <h2 class="section-title">Contact</h2>
-    <p class="lead">
-      Got a question, an idea, or want to share your own journey? I'd love to hear from you! The
-      easiest way to reach me is on Instagram — send me a message or see what I post from my
-      training and races.
-    </p>
+    <h2 class="section-title">Saved</h2>
+    <p class="lead">The articles you saved to read later. They are stored on this device.</p>
 
-    <div class="contact-card">
-      <span class="contact-icon">📷</span>
-      <h3>Find me on Instagram</h3>
-      <p>Daily training, thoughts from the road, and the journey towards the marathon.</p>
-      <a class="btn" href="https://instagram.com/nikol.akr" target="_blank" rel="noopener">
-        Follow me @nikol.akr
-      </a>
+    <div class="post-grid" id="savedGrid" hidden></div>
+
+    <div class="saved-empty" id="savedEmpty" hidden>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg>
+      <p>You haven't saved any articles yet.<br>Tap <strong>"Save"</strong> on any article you want to keep for later.</p>
+      <a class="read-more" href="blog-en.html">Browse all articles →</a>
     </div>
   </main>
 

@@ -2,6 +2,84 @@
 
 document.addEventListener('DOMContentLoaded', function () {
 
+  /* ===== Ρυθμίσεις μετρητή «like» (Supabase) =====
+     Για ΠΡΑΓΜΑΤΙΚΟ κοινό μέτρημα (ίδιος αριθμός για όλους τους επισκέπτες),
+     συμπλήρωσε τα δύο πεδία με τα στοιχεία του δωρεάν Supabase project σου.
+     Αναλυτικές οδηγίες: δες το αρχείο SETUP-LIKES.md στον φάκελο του project.
+     Αν μείνουν κενά, ο μετρητής δουλεύει τοπικά (μόνο σε αυτόν τον browser). */
+  const DK_SUPABASE_URL = 'https://kblnwbcyhkgnuwrgzmdt.supabase.co';
+  const DK_SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtibG53YmN5aGtnbnV3cmd6bWR0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIzMzQ0MDAsImV4cCI6MjA5NzkxMDQwMH0.U0u-gQfZkotPPVU-rM5-RqiuiSu_aMSOrerTjPHH5eo';
+
+  /* --- Κατηγορία ανά άρθρο (slug → κατηγορία) --- */
+  const DK_CAT_BY_SLUG = {
+    'post-kipchoge': 'champions',
+    'post-ingebrigtsen': 'champions',
+    'post-sifan-hassan': 'champions',
+    'post-easy-running': 'science',
+    'post-lactate-threshold': 'science',
+    'post-vo2max': 'science',
+    'post-trexsimo-imikranies': 'stories',
+    'post-arxarios-trexsimo': 'tips',
+    'post-diatrofi-trexsimo': 'tips'
+  };
+
+  /* --- Εικονίδια & ονόματα κατηγοριών (για τη σελίδα Αποθηκευμένα) --- */
+  const ICO = 'style="width:1em;height:1em;vertical-align:-0.15em;margin-right:0.25em"';
+  const DK_CAT_META = {
+    champions: { el: 'Πρωταθλητές', en: 'Champions', svg: '<svg ' + ICO + ' viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.26 6.88.56-5.2 4.52 1.56 6.7L12 17.27 5.86 20.54l1.56-6.7-5.2-4.52 6.88-.56z"/></svg>' },
+    science: { el: 'Επιστήμη', en: 'Science', svg: '<svg ' + ICO + ' viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5a3 3 0 0 0-3 3 2.5 2.5 0 0 0-2 4 2.5 2.5 0 0 0 1.5 4.5A2.5 2.5 0 0 0 12 19V5z"/><path d="M12 5a3 3 0 0 1 3 3 2.5 2.5 0 0 1 2 4 2.5 2.5 0 0 1-1.5 4.5A2.5 2.5 0 0 1 12 19"/></svg>' },
+    stories: { el: 'Ιστορίες & Ψυχολογία', en: 'Stories & Psychology', svg: '<svg ' + ICO + ' viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.49 4.04 3 5.5l7 7Z"/></svg>' },
+    tips: { el: 'Πρακτικές', en: 'Practical', svg: '<svg ' + ICO + ' viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5.76.76 1.23 1.52 1.41 2.5"/></svg>' }
+  };
+
+  const DK_PAGE_EN = document.documentElement.lang === 'en';
+  const DK_FILE = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
+  const DK_SLUG = DK_FILE.replace('-en.html', '').replace('.html', '');
+
+  /* --- localStorage helpers --- */
+  function dkRead(key, fallback) {
+    try { const v = JSON.parse(localStorage.getItem(key)); return v === null ? fallback : v; } catch (e) { return fallback; }
+  }
+  function dkWrite(key, val) {
+    try { localStorage.setItem(key, JSON.stringify(val)); } catch (e) {}
+  }
+
+  /* --- Supabase RPC helpers (μετρητής like) --- */
+  async function dkRpc(fn, payload) {
+    if (!DK_SUPABASE_URL || !DK_SUPABASE_KEY) return null;
+    try {
+      const r = await fetch(DK_SUPABASE_URL + '/rest/v1/rpc/' + fn, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          apikey: DK_SUPABASE_KEY,
+          Authorization: 'Bearer ' + DK_SUPABASE_KEY
+        },
+        body: JSON.stringify(payload)
+      });
+      if (!r.ok) return null;
+      const data = await r.json();
+      return typeof data === 'number' ? data : null;
+    } catch (e) { return null; }
+  }
+
+  /* --- Σύνδεσμος «Αποθηκευμένα» στο μενού --- */
+  (function () {
+    const menu = document.querySelector('.menu');
+    if (!menu) return;
+    const href = DK_PAGE_EN ? 'saved-en.html' : 'saved.html';
+    if (menu.querySelector('a[href="' + href + '"]')) return;
+    const li = document.createElement('li');
+    const a = document.createElement('a');
+    a.href = href;
+    a.textContent = DK_PAGE_EN ? 'Saved' : 'Αποθηκευμένα';
+    if (DK_FILE === href) a.classList.add('active');
+    li.appendChild(a);
+    const contact = menu.querySelector('a[href="contact.html"], a[href="contact-en.html"]');
+    if (contact && contact.closest('li')) menu.insertBefore(li, contact.closest('li'));
+    else menu.appendChild(li);
+  })();
+
   /* --- Scroll reveal animations --- */
   const revealSelectors = [
     '.card', '.section-title', '.lead', '.story', '.tips',
@@ -247,5 +325,176 @@ document.addEventListener('DOMContentLoaded', function () {
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
     bind();
   }
+
+  /* ===== Κουμπιά «like» (έμπνευση) + αποθήκευση σε άρθρα ===== */
+  (function () {
+    const article = document.querySelector('.article');
+    if (!article) return;
+    const en = DK_PAGE_EN;
+    const slug = DK_SLUG;
+    const lang = en ? 'en' : 'el';
+    const cat = DK_CAT_BY_SLUG[slug] || 'tips';
+    const inspire = (cat === 'champions' || cat === 'stories');
+
+    const ICON_SHOE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 16v-2.38C4 11.5 2.97 10.5 3 8c.03-2.72 1.49-6 4.5-6C9.37 2 10 3.8 10 5.5c0 3.11-2 5.66-2 8.68V16a2 2 0 1 1-4 0Z"/><path d="M20 20v-2.38c0-2.12 1.03-3.12 1-5.62-.03-2.72-1.49-6-4.5-6C14.63 6 14 7.8 14 9.5c0 3.11 2 5.66 2 8.68V20a2 2 0 1 0 4 0Z"/><path d="M16 17h4"/><path d="M4 13h4"/></svg>';
+    const ICON_FLAME = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>';
+    const ICON_BOOKMARK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg>';
+
+    function countText(n) {
+      const num = '<strong>' + n + '</strong>';
+      if (inspire) {
+        if (n <= 0) return en ? 'Be the first to be inspired by this article' : 'Γίνε ο πρώτος που θα εμπνευστεί από αυτό το άρθρο';
+        if (n === 1) return en ? num + ' runner was inspired by this article' : num + ' δρομέας εμπνεύστηκε από αυτό το άρθρο';
+        return en ? num + ' runners were inspired by this article' : num + ' δρομείς εμπνεύστηκαν από αυτό το άρθρο';
+      }
+      if (n <= 0) return en ? 'Be the first to find this article useful' : 'Γίνε ο πρώτος που θα το βρει χρήσιμο';
+      if (n === 1) return en ? num + ' person found this article useful' : num + ' άνθρωπος βρήκε χρήσιμο αυτό το άρθρο';
+      return en ? num + ' people found this article useful' : num + ' άνθρωποι βρήκαν χρήσιμο αυτό το άρθρο';
+    }
+
+    const likeLabel = inspire
+      ? (en ? 'I was inspired by this article' : 'Εμπνεύστηκα από αυτό το άρθρο')
+      : (en ? 'I found this article useful' : 'Το βρήκα χρήσιμο');
+
+    const likedMap = dkRead('dk_liked', {});
+    let liked = !!likedMap[slug];
+    let count = Number(dkRead('dk_likes_local', {})[slug]) || 0;
+
+    const actions = document.createElement('div');
+    actions.className = 'article-actions';
+
+    const likeWrap = document.createElement('div');
+    likeWrap.className = 'like-wrap';
+    const likeBtn = document.createElement('button');
+    likeBtn.type = 'button';
+    likeBtn.className = 'like-btn' + (liked ? ' liked' : '');
+    likeBtn.setAttribute('aria-label', likeLabel);
+    likeBtn.innerHTML = inspire ? ICON_SHOE : ICON_FLAME;
+    const countEl = document.createElement('span');
+    countEl.className = 'like-count';
+    likeWrap.appendChild(likeBtn);
+    likeWrap.appendChild(countEl);
+
+    const saveBtn = document.createElement('button');
+    saveBtn.type = 'button';
+    saveBtn.className = 'save-btn';
+    saveBtn.innerHTML = ICON_BOOKMARK + '<span class="save-label"></span>';
+    const saveLabelEl = saveBtn.querySelector('.save-label');
+
+    actions.appendChild(likeWrap);
+    actions.appendChild(saveBtn);
+
+    const shareRow = article.querySelector('.share-row');
+    const backLink = article.querySelector('.back-link');
+    if (shareRow) article.insertBefore(actions, shareRow);
+    else if (backLink) article.insertBefore(actions, backLink);
+    else article.appendChild(actions);
+
+    function renderLike() {
+      countEl.innerHTML = countText(count);
+      likeBtn.classList.toggle('liked', liked);
+      likeBtn.setAttribute('aria-pressed', liked ? 'true' : 'false');
+    }
+    function renderSave() {
+      const s = dkRead('dk_saved', []).some((it) => it.slug === slug && it.lang === lang);
+      saveBtn.classList.toggle('saved', s);
+      saveLabelEl.textContent = s ? (en ? 'Saved' : 'Αποθηκεύτηκε') : (en ? 'Save' : 'Αποθήκευση');
+      saveBtn.setAttribute('aria-pressed', s ? 'true' : 'false');
+    }
+    renderLike();
+    renderSave();
+
+    // Πραγματικός αριθμός από το backend (αν έχει ρυθμιστεί)
+    dkRpc('get_likes', { article_slug: slug }).then((n) => {
+      if (typeof n === 'number') { count = n; renderLike(); }
+    });
+
+    likeBtn.addEventListener('click', function () {
+      liked = !liked;
+      likedMap[slug] = liked;
+      dkWrite('dk_liked', likedMap);
+      count = Math.max(0, count + (liked ? 1 : -1));
+      renderLike();
+      likeBtn.classList.remove('pop');
+      void likeBtn.offsetWidth;
+      likeBtn.classList.add('pop');
+
+      if (DK_SUPABASE_URL && DK_SUPABASE_KEY) {
+        dkRpc('increment_likes', { article_slug: slug, delta: liked ? 1 : -1 }).then((n) => {
+          if (typeof n === 'number') { count = n; renderLike(); }
+        });
+      } else {
+        const ll = dkRead('dk_likes_local', {});
+        ll[slug] = count;
+        dkWrite('dk_likes_local', ll);
+      }
+    });
+
+    saveBtn.addEventListener('click', function () {
+      const list = dkRead('dk_saved', []);
+      const idx = list.findIndex((it) => it.slug === slug && it.lang === lang);
+      if (idx >= 0) {
+        list.splice(idx, 1);
+      } else {
+        const titleEl = article.querySelector('.section-title');
+        const title = (titleEl ? titleEl.textContent : document.title.split('|')[0]).trim();
+        list.unshift({ slug: slug, file: DK_FILE, title: title, cat: cat, lang: lang, savedAt: Date.now() });
+      }
+      dkWrite('dk_saved', list);
+      renderSave();
+    });
+  })();
+
+  /* ===== Σελίδα «Αποθηκευμένα» ===== */
+  (function () {
+    const grid = document.getElementById('savedGrid');
+    if (!grid) return;
+    const en = DK_PAGE_EN;
+    const empty = document.getElementById('savedEmpty');
+    const TRASH = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/></svg>';
+
+    function escapeHtml(s) {
+      return String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    }
+
+    function render() {
+      const list = dkRead('dk_saved', []);
+      grid.innerHTML = '';
+      if (!list.length) {
+        if (empty) empty.hidden = false;
+        grid.hidden = true;
+        return;
+      }
+      if (empty) empty.hidden = true;
+      grid.hidden = false;
+      list.forEach((it) => {
+        const meta = DK_CAT_META[it.cat] || DK_CAT_META.tips;
+        const catName = en ? meta.en : meta.el;
+        const card = document.createElement('article');
+        card.className = 'post-card saved-card';
+        card.dataset.category = it.cat;
+        card.innerHTML =
+          '<div class="post-body">' +
+            '<p class="post-meta"><span class="post-cat">' + meta.svg + catName + '</span></p>' +
+            '<h3>' + escapeHtml(it.title) + '</h3>' +
+            '<div class="saved-card-actions">' +
+              '<a class="read-more" href="' + escapeHtml(it.file) + '">' + (en ? 'Read →' : 'Διάβασε →') + '</a>' +
+              '<button class="saved-remove" type="button" data-slug="' + escapeHtml(it.slug) + '" data-lang="' + escapeHtml(it.lang) + '">' + TRASH + (en ? 'Remove' : 'Αφαίρεση') + '</button>' +
+            '</div>' +
+          '</div>';
+        grid.appendChild(card);
+      });
+    }
+
+    grid.addEventListener('click', function (e) {
+      const btn = e.target.closest('.saved-remove');
+      if (!btn) return;
+      const list = dkRead('dk_saved', []).filter((it) => !(it.slug === btn.dataset.slug && it.lang === btn.dataset.lang));
+      dkWrite('dk_saved', list);
+      render();
+    });
+
+    render();
+  })();
 
 });

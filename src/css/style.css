@@ -1431,3 +1431,189 @@ footer .accent {
     transform: translateY(-8px) rotate(-45deg);
   }
 }
+
+/* ===== Article actions (like + save) ===== */
+.article-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+
+/* Όταν ακολουθεί η μπάρα κοινοποίησης, μην διπλώνεις τη γραμμή */
+.article-actions + .share-row {
+  border-top: none;
+  margin-top: 1.2rem;
+  padding-top: 0;
+}
+
+.like-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.like-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background-color: var(--surface);
+  color: var(--text-dim);
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s, background-color 0.2s, transform 0.2s;
+}
+
+.like-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.like-btn svg {
+  width: 24px;
+  height: 24px;
+}
+
+.like-btn.liked {
+  border-color: var(--accent);
+  color: var(--accent);
+  background-color: rgba(255, 87, 34, 0.12);
+}
+
+@keyframes dk-pop {
+  0% { transform: scale(1); }
+  45% { transform: scale(1.28); }
+  100% { transform: scale(1); }
+}
+
+.like-btn.pop {
+  animation: dk-pop 0.35s ease;
+}
+
+.like-count {
+  color: var(--text-dim);
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.like-count strong {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.save-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  flex: 0 0 auto;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background-color: var(--surface);
+  color: var(--text-dim);
+  cursor: pointer;
+  font-family: "Oswald", sans-serif;
+  font-size: 0.9rem;
+  letter-spacing: 0.3px;
+  transition: color 0.2s, border-color 0.2s, transform 0.2s;
+}
+
+.save-btn:hover {
+  border-color: var(--accent);
+  color: var(--text);
+  transform: translateY(-2px);
+}
+
+.save-btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+.save-btn.saved {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.save-btn.saved svg {
+  fill: currentColor;
+}
+
+/* ===== Saved articles page ===== */
+.saved-card .post-body {
+  padding: 1.4rem;
+}
+
+.saved-card h3 {
+  color: var(--text);
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.saved-card-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+  margin-top: auto;
+}
+
+.saved-remove {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: none;
+  color: var(--text-dim);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.85rem;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.saved-remove:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.saved-remove svg {
+  width: 15px;
+  height: 15px;
+}
+
+.saved-empty {
+  text-align: center;
+  color: var(--text-dim);
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 3rem 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.saved-empty svg {
+  width: 56px;
+  height: 56px;
+  color: var(--border);
+  margin-bottom: 1rem;
+}
+
+.saved-empty p {
+  margin-bottom: 1.2rem;
+}
+
+.saved-empty .read-more {
+  color: var(--accent);
+  font-weight: 600;
+  font-family: "Oswald", sans-serif;
+}

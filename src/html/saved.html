@@ -3,18 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Επικοινωνία | Δέσε Κορδόνια</title>
-  <meta name="description" content="Επικοινώνησε μαζί μου στο Instagram — μοιραστείτε τη διαδρομή σας και ακολουθήστε την πορεία προς τον μαραθώνιο.">
+  <meta name="robots" content="noindex">
+  <title>Αποθηκευμένα | Δέσε Κορδόνια</title>
+  <meta name="description" content="Τα άρθρα που αποθήκευσες για να τα διαβάσεις αργότερα.">
 
-  <!-- Open Graph -->
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Επικοινωνία | Δέσε Κορδόνια">
-  <meta property="og:description" content="Βρες με στο Instagram και μοιράσου τη διαδρομή σου.">
-  <meta property="og:image" content="https://nikoleta06.github.io/dese-kordonia/images/hero.jpg">
-  <meta property="og:url" content="https://nikoleta06.github.io/dese-kordonia/src/html/contact.html">
-  <meta name="twitter:card" content="summary_large_image">
-
-  <link rel="canonical" href="https://nikoleta06.github.io/dese-kordonia/src/html/contact.html">
   <link rel="icon" type="image/x-icon" href="../../images/favicon.ico?v=1">
   <link rel="apple-touch-icon" href="../../images/favicon.png?v=1">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -42,27 +34,22 @@
               <li><a href="calculator.html">Υπολογιστής</a></li>
             </ul>
           </li>
-          <li><a href="contact.html" class="active">Επικοινωνία</a></li>
+          <li><a href="contact.html">Επικοινωνία</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
   <main>
-    <h2 class="section-title">Επικοινωνία</h2>
-    <p class="lead">
-      Έχεις ερώτηση, ιδέα ή θέλεις να μοιραστείς τη δική σου διαδρομή; Θα χαρώ πολύ να σε
-      ακούσω! Ο πιο εύκολος τρόπος να με βρεις είναι στο Instagram — στείλε μου μήνυμα ή
-      δες τι ανεβάζω από τις προπονήσεις και τους αγώνες μου.
-    </p>
+    <h2 class="section-title">Αποθηκευμένα</h2>
+    <p class="lead">Τα άρθρα που αποθήκευσες για να τα διαβάσεις αργότερα. Αποθηκεύονται σε αυτή τη συσκευή.</p>
 
-    <div class="contact-card">
-      <span class="contact-icon">📷</span>
-      <h3>Βρες με στο Instagram</h3>
-      <p>Καθημερινές προπονήσεις, σκέψεις από τον δρόμο και η πορεία προς τον μαραθώνιο.</p>
-      <a class="btn" href="https://instagram.com/nikol.akr" target="_blank" rel="noopener">
-        Ακολούθησέ με @nikol.akr
-      </a>
+    <div class="post-grid" id="savedGrid" hidden></div>
+
+    <div class="saved-empty" id="savedEmpty" hidden>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg>
+      <p>Δεν έχεις αποθηκεύσει κανένα άρθρο ακόμα.<br>Πάτησε το <strong>«Αποθήκευση»</strong> σε όποιο άρθρο θέλεις να κρατήσεις για αργότερα.</p>
+      <a class="read-more" href="blog.html">Δες όλα τα άρθρα →</a>
     </div>
   </main>
 
