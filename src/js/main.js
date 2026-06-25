@@ -462,9 +462,42 @@ document.addEventListener('DOMContentLoaded', function () {
       return String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
     }
 
+    /* --- Έλεγχος ταξινόμησης --- */
+    const CAT_ORDER = { champions: 0, science: 1, stories: 2, tips: 3 };
+    const SORT_OPTS = en
+      ? [['recent', 'Newest first'], ['oldest', 'Oldest first'], ['category', 'By category'], ['title', 'Title (A–Z)']]
+      : [['recent', 'Νεότερα πρώτα'], ['oldest', 'Παλαιότερα πρώτα'], ['category', 'Ανά κατηγορία'], ['title', 'Τίτλος (Α–Ω)']];
+    let sortMode = dkRead('dk_saved_sort', 'recent');
+    if (!SORT_OPTS.some((o) => o[0] === sortMode)) sortMode = 'recent';
+
+    const controls = document.createElement('div');
+    controls.className = 'saved-controls';
+    controls.innerHTML =
+      '<label class="saved-sort-label" for="savedSort">' + (en ? 'Sort:' : 'Ταξινόμηση:') + '</label>' +
+      '<select id="savedSort" class="saved-sort" aria-label="' + (en ? 'Sort saved articles' : 'Ταξινόμηση αποθηκευμένων') + '">' +
+      SORT_OPTS.map((o) => '<option value="' + o[0] + '"' + (o[0] === sortMode ? ' selected' : '') + '>' + o[1] + '</option>').join('') +
+      '</select>';
+    grid.parentNode.insertBefore(controls, grid);
+    controls.querySelector('#savedSort').addEventListener('change', function () {
+      sortMode = this.value;
+      dkWrite('dk_saved_sort', sortMode);
+      render();
+    });
+
+    function catRank(c) { return CAT_ORDER[c] === undefined ? 9 : CAT_ORDER[c]; }
+    function sortList(list) {
+      const arr = list.slice();
+      if (sortMode === 'oldest') arr.sort((a, b) => (a.savedAt || 0) - (b.savedAt || 0));
+      else if (sortMode === 'title') arr.sort((a, b) => String(a.title).localeCompare(String(b.title), en ? 'en' : 'el'));
+      else if (sortMode === 'category') arr.sort((a, b) => (catRank(a.cat) - catRank(b.cat)) || ((b.savedAt || 0) - (a.savedAt || 0)));
+      else arr.sort((a, b) => (b.savedAt || 0) - (a.savedAt || 0)); // recent (default)
+      return arr;
+    }
+
     function render() {
       const list = dkRead('dk_saved', []);
       grid.innerHTML = '';
+      controls.hidden = !list.length;
       if (!list.length) {
         if (empty) empty.hidden = false;
         grid.hidden = true;
@@ -472,7 +505,7 @@ document.addEventListener('DOMContentLoaded', function () {
       }
       if (empty) empty.hidden = true;
       grid.hidden = false;
-      list.forEach((it) => {
+      sortList(list).forEach((it) => {
         const meta = DK_CAT_META[it.cat] || DK_CAT_META.tips;
         const catName = en ? meta.en : meta.el;
         const card = document.createElement('article');

@@ -1641,3 +1641,46 @@ footer .accent {
   font-weight: 600;
   font-family: "Oswald", sans-serif;
 }
+
+/* Ταξινόμηση αποθηκευμένων */
+.saved-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 1.5rem;
+}
+
+.saved-sort-label {
+  color: var(--text-dim);
+  font-family: "Oswald", sans-serif;
+  font-size: 0.9rem;
+  letter-spacing: 0.3px;
+}
+
+.saved-sort {
+  padding: 0.5rem 2.2rem 0.5rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background-color: var(--surface);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.8rem center;
+  transition: border-color 0.2s;
+}
+
+.saved-sort:hover,
+.saved-sort:focus {
+  border-color: var(--accent);
+  outline: none;
+}
+
+.saved-sort option {
+  background-color: var(--surface);
+  color: var(--text);
+}
