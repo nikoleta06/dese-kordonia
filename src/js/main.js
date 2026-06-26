@@ -346,7 +346,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const ICON_BOOKMARK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg>';
 
     function countText(n) {
-      const num = '<strong>' + n + '</strong>';
+      const num = n; // απλό κείμενο (χρησιμοποιείται ως tooltip)
       if (inspire) {
         if (n <= 0) return en ? 'Be the first to be inspired by this article' : 'Γίνε ο πρώτος που θα εμπνευστεί από αυτό το άρθρο';
         if (n === 1) return en ? num + ' runner was inspired by this article' : num + ' δρομέας εμπνεύστηκε από αυτό το άρθρο';
@@ -396,7 +396,15 @@ document.addEventListener('DOMContentLoaded', function () {
     else article.appendChild(actions);
 
     function renderLike() {
-      countEl.innerHTML = countText(count);
+      if (count > 0) {
+        countEl.style.display = '';
+        countEl.innerHTML = '<strong>' + count + '</strong>';
+        countEl.title = countText(count); // πλήρες κείμενο ως tooltip στο hover
+      } else {
+        countEl.style.display = 'none';
+        countEl.innerHTML = '';
+        countEl.removeAttribute('title');
+      }
       likeBtn.classList.toggle('liked', liked);
       likeBtn.setAttribute('aria-pressed', liked ? 'true' : 'false');
     }
@@ -533,6 +541,96 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     render();
+  })();
+
+  /* ===== Μετρητής + ένδειξη αποθήκευσης στις κάρτες του Blog ===== */
+  (function () {
+    if (DK_FILE.indexOf('blog') !== 0) return; // μόνο στη σελίδα Blog
+    const cards = [...document.querySelectorAll('.post-grid .post-card')];
+    if (!cards.length) return;
+    const en = DK_PAGE_EN;
+    const lang = en ? 'en' : 'el';
+
+    const ICON_SHOE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 16v-2.38C4 11.5 2.97 10.5 3 8c.03-2.72 1.49-6 4.5-6C9.37 2 10 3.8 10 5.5c0 3.11-2 5.66-2 8.68V16a2 2 0 1 1-4 0Z"/><path d="M20 20v-2.38c0-2.12 1.03-3.12 1-5.62-.03-2.72-1.49-6-4.5-6C14.63 6 14 7.8 14 9.5c0 3.11 2 5.66 2 8.68V20a2 2 0 1 0 4 0Z"/><path d="M16 17h4"/><path d="M4 13h4"/></svg>';
+    const ICON_FLAME = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>';
+    const ICON_BOOKMARK = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg>';
+
+    const savedSet = new Set(dkRead('dk_saved', []).filter((it) => it.lang === lang).map((it) => it.slug));
+
+    function title(n, inspire) {
+      if (inspire) return en ? n + ' runners were inspired' : n + ' δρομείς εμπνεύστηκαν';
+      return en ? n + ' people found this useful' : n + ' άνθρωποι το βρήκαν χρήσιμο';
+    }
+    function setBadge(el, n, inspire) {
+      if (n > 0) {
+        el.style.display = '';
+        el.innerHTML = (inspire ? ICON_SHOE : ICON_FLAME) + '<span>' + n + '</span>';
+        el.setAttribute('title', title(n, inspire));
+      } else {
+        el.style.display = 'none';
+        el.innerHTML = '';
+        el.removeAttribute('title');
+      }
+    }
+
+    const badges = [];
+    cards.forEach((card) => {
+      const rm = card.querySelector('.read-more');
+      const href = (rm && rm.getAttribute('href')) || '';
+      const slug = href.replace('-en.html', '').replace('.html', '');
+      if (!slug) return;
+      const cat = card.dataset.category || DK_CAT_BY_SLUG[slug] || 'tips';
+      const inspire = (cat === 'champions' || cat === 'stories');
+
+      const foot = document.createElement('div');
+      foot.className = 'post-foot';
+      const badge = document.createElement('span');
+      badge.className = 'card-likes';
+      setBadge(badge, 0, inspire);
+      if (rm) { rm.parentNode.insertBefore(foot, rm); foot.appendChild(rm); }
+      foot.appendChild(badge);
+      badges.push({ slug: slug, badge: badge, inspire: inspire });
+
+      if (savedSet.has(slug)) {
+        const sv = document.createElement('span');
+        sv.className = 'card-saved';
+        sv.setAttribute('title', en ? 'Saved' : 'Αποθηκευμένο');
+        sv.setAttribute('aria-label', en ? 'Saved' : 'Αποθηκευμένο');
+        sv.innerHTML = ICON_BOOKMARK;
+        card.appendChild(sv);
+      }
+    });
+
+    async function loadCounts() {
+      if (DK_SUPABASE_URL && DK_SUPABASE_KEY) {
+        // 1 αίτημα για όλους τους αριθμούς (αν επιτρέπεται η ανάγνωση)
+        try {
+          const r = await fetch(DK_SUPABASE_URL + '/rest/v1/article_likes?select=slug,count', {
+            headers: { apikey: DK_SUPABASE_KEY, Authorization: 'Bearer ' + DK_SUPABASE_KEY }
+          });
+          if (r.ok) {
+            const rows = await r.json();
+            if (Array.isArray(rows) && rows.length) {
+              const m = {};
+              rows.forEach((x) => { m[x.slug] = x.count; });
+              return m;
+            }
+          }
+        } catch (e) {}
+        // Fallback: ένα RPC ανά άρθρο (δουλεύει χωρίς επιπλέον SQL)
+        const m = {};
+        await Promise.all(badges.map(async (b) => {
+          const n = await dkRpc('get_likes', { article_slug: b.slug });
+          if (typeof n === 'number') m[b.slug] = n;
+        }));
+        return m;
+      }
+      return dkRead('dk_likes_local', {});
+    }
+
+    loadCounts().then((map) => {
+      badges.forEach((b) => setBadge(b.badge, Number(map[b.slug]) || 0, b.inspire));
+    });
   })();
 
 });
