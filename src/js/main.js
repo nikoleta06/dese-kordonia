@@ -346,7 +346,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const ICON_BOOKMARK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg>';
 
     function countText(n) {
-      const num = n; // απλό κείμενο (χρησιμοποιείται ως tooltip)
+      const num = '<strong>' + n + '</strong>';
       if (inspire) {
         if (n <= 0) return en ? 'Be the first to be inspired by this article' : 'Γίνε ο πρώτος που θα εμπνευστεί από αυτό το άρθρο';
         if (n === 1) return en ? num + ' runner was inspired by this article' : num + ' δρομέας εμπνεύστηκε από αυτό το άρθρο';
@@ -396,15 +396,7 @@ document.addEventListener('DOMContentLoaded', function () {
     else article.appendChild(actions);
 
     function renderLike() {
-      if (count > 0) {
-        countEl.style.display = '';
-        countEl.innerHTML = '<strong>' + count + '</strong>';
-        countEl.title = countText(count); // πλήρες κείμενο ως tooltip στο hover
-      } else {
-        countEl.style.display = 'none';
-        countEl.innerHTML = '';
-        countEl.removeAttribute('title');
-      }
+      countEl.innerHTML = countText(count); // πλήρες κείμενο δίπλα στο εικονίδιο (CTA όταν είναι 0)
       likeBtn.classList.toggle('liked', liked);
       likeBtn.setAttribute('aria-pressed', liked ? 'true' : 'false');
     }
