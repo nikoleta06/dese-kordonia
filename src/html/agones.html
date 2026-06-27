@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Αγώνες Δρόμου στην Ελλάδα — Διαδραστικός Χάρτης | Δέσε Κορδόνια</title>
-  <meta name="description" content="Διαδραστικός χάρτης με γνωστούς αγώνες δρόμου στην Ελλάδα: Μαραθώνιος Αθήνας, Σπάρταθλον, ορεινοί αγώνες και άλλα. Δες πού γίνονται και βρες λεπτομέρειες.">
+  <meta name="description" content="Διαδραστικός χάρτης με γνωστούς αγώνες δρόμου στην Ελλάδα: Μαραθώνιος Αθήνας, Σπάρταθλον, ορεινοί αγώνες και άλλα. Φιλτράρισε ανά τύπο, δες απόσταση, μήνα και λεπτομέρειες.">
   <link rel="canonical" href="https://nikoleta06.github.io/dese-kordonia/src/html/agones.html">
   <link rel="alternate" hreflang="el" href="https://nikoleta06.github.io/dese-kordonia/src/html/agones.html">
   <link rel="alternate" hreflang="en" href="https://nikoleta06.github.io/dese-kordonia/src/html/agones-en.html">
@@ -39,6 +39,32 @@
     .leaflet-popup-content p { margin: 0 0 0.5rem; color: #333; font-size: 0.9rem; }
     .leaflet-popup-content a { color: #ff5722; font-weight: 600; }
     @media (max-width: 600px) { #race-map { height: 400px; } }
+
+    /* Φίλτρα */
+    .race-filters { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1.5rem 0 0; }
+    .rf-btn { padding: 0.5rem 1rem; border-radius: 999px; border: 1px solid var(--border); background: var(--surface); color: var(--text-dim); cursor: pointer; font-family: inherit; font-size: 0.9rem; transition: color .2s, background-color .2s, border-color .2s; }
+    .rf-btn:hover { border-color: var(--accent); color: var(--text); }
+    .rf-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+    /* Υπόμνημα */
+    .map-legend { display: flex; flex-wrap: wrap; gap: 1.2rem; margin-top: 0.8rem; font-size: 0.85rem; color: var(--text-dim); }
+    .map-legend span { display: inline-flex; align-items: center; gap: 0.45rem; }
+    .leg-dot { width: 12px; height: 12px; border-radius: 50%; display: inline-block; border: 2px solid #fff; }
+
+    /* Κάρτες αγώνων */
+    .race-list { margin-top: 2rem; }
+    .race-card .post-body { padding: 1.4rem; }
+    .race-card .post-meta { text-transform: uppercase; letter-spacing: 0.5px; font-size: 0.8rem; color: var(--text-dim); margin-bottom: 0.3rem; }
+    .race-type { font-weight: 600; }
+    .type-road { color: #ff7a50; }
+    .type-mountain { color: #3ddc84; }
+    .type-ultra { color: #ff6b6b; }
+    .race-card h3 { color: var(--text); margin: 0.2rem 0 0.4rem; font-size: 1.2rem; }
+    .race-card .race-specs { color: var(--accent-2); font-weight: 600; font-size: 0.88rem; margin-bottom: 0.6rem; }
+    .race-card .race-actions { display: flex; align-items: center; justify-content: space-between; gap: 0.6rem; margin-top: auto; flex-wrap: wrap; }
+    .show-on-map { display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.4rem 0.85rem; border-radius: 999px; border: 1px solid var(--border); background: none; color: var(--text-dim); cursor: pointer; font-family: "Oswald", sans-serif; font-size: 0.82rem; transition: color .2s, border-color .2s; }
+    .show-on-map:hover { border-color: var(--accent); color: var(--accent); }
+    .race-card .read-more { color: var(--accent); font-weight: 600; font-family: "Oswald", sans-serif; font-size: 0.85rem; }
   </style>
 </head>
 <body>
@@ -71,11 +97,142 @@
     <h2 class="section-title">Αγώνες Δρόμου στην Ελλάδα</h2>
     <p class="lead">
       Από τον ιστορικό Μαραθώνιο της Αθήνας μέχρι τους ορεινούς αγώνες στα βουνά — η Ελλάδα
-      είναι γεμάτη διαδρομές. Κάνε κλικ σε κάθε σημάδι στον χάρτη για να δεις τον αγώνα και να
-      βρεις λεπτομέρειες.
+      είναι γεμάτη διαδρομές. Φιλτράρισε ανά τύπο, κάνε κλικ σε ένα σημάδι ή πάτησε
+      «Δες στον χάρτη» σε μια κάρτα για να εστιάσεις στον αγώνα.
     </p>
 
+    <div class="race-filters" role="group" aria-label="Φίλτρα αγώνων">
+      <button class="rf-btn active" data-filter="all" type="button">Όλοι</button>
+      <button class="rf-btn" data-filter="road" type="button">Δρόμου</button>
+      <button class="rf-btn" data-filter="mountain" type="button">Ορεινοί</button>
+      <button class="rf-btn" data-filter="ultra" type="button">Υπερμαραθώνιοι</button>
+    </div>
+
     <div id="race-map"></div>
+    <div class="map-legend">
+      <span><i class="leg-dot" style="background:#ff5722"></i>Δρόμου</span>
+      <span><i class="leg-dot" style="background:#2ecc71"></i>Ορεινός</span>
+      <span><i class="leg-dot" style="background:#e24b4a"></i>Υπερμαραθώνιος</span>
+    </div>
+
+    <div class="race-list post-grid">
+      <article class="post-card race-card" data-type="road" data-lat="38.155" data-lng="23.965">
+        <div class="post-body">
+          <p class="post-meta"><span class="race-type type-road">Δρόμου</span> · Νοέμβριος</p>
+          <h3>Αυθεντικός Μαραθώνιος Αθήνας</h3>
+          <p class="race-specs">42,2 χλμ · Άσφαλτος</p>
+          <p>Ο ιστορικός μαραθώνιος, από τον Μαραθώνα στο Καλλιμάρμαρο — η διαδρομή που γέννησε τον θεσμό.</p>
+          <div class="race-actions">
+            <button class="show-on-map" type="button">Δες στον χάρτη</button>
+            <a class="read-more" href="https://www.athensauthenticmarathon.gr/" target="_blank" rel="noopener">Επίσημη σελίδα →</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="post-card race-card" data-type="ultra" data-lat="37.075" data-lng="22.43">
+        <div class="post-body">
+          <p class="post-meta"><span class="race-type type-ultra">Υπερμαραθώνιος</span> · Σεπτέμβριος</p>
+          <h3>Σπάρταθλον</h3>
+          <p class="race-specs">246 χλμ · Υπερμαραθώνιος</p>
+          <p>Θρυλικός υπερμαραθώνιος: Αθήνα → Σπάρτη, στα χνάρια του Φειδιππίδη. Ένας από τους πιο σκληρούς αγώνες στον κόσμο.</p>
+          <div class="race-actions">
+            <button class="show-on-map" type="button">Δες στον χάρτη</button>
+            <a class="read-more" href="https://www.spartathlon.gr/" target="_blank" rel="noopener">Επίσημη σελίδα →</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="post-card race-card" data-type="mountain" data-lat="40.088" data-lng="22.50">
+        <div class="post-body">
+          <p class="post-meta"><span class="race-type type-mountain">Ορεινός</span> · Ιούνιος</p>
+          <h3>Olympus Marathon</h3>
+          <p class="race-specs">44 χλμ · Ορεινός</p>
+          <p>Απαιτητικός ορεινός αγώνας στον μυθικό Όλυμπο, με τερματισμό στους Πρίονια.</p>
+          <div class="race-actions">
+            <button class="show-on-map" type="button">Δες στον χάρτη</button>
+            <a class="read-more" href="https://olympus-marathon.com/" target="_blank" rel="noopener">Επίσημη σελίδα →</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="post-card race-card" data-type="mountain" data-lat="39.88" data-lng="20.75">
+        <div class="post-body">
+          <p class="post-meta"><span class="race-type type-mountain">Ορεινός</span> · Ιούλιος</p>
+          <h3>Zagori Mountain Running</h3>
+          <p class="race-specs">10–80 χλμ · Ορεινός</p>
+          <p>Ορεινό τρέξιμο στα μαγευτικά Ζαγοροχώρια, με διαδρομές για κάθε επίπεδο.</p>
+          <div class="race-actions">
+            <button class="show-on-map" type="button">Δες στον χάρτη</button>
+            <a class="read-more" href="https://www.google.com/search?q=Zagori+Mountain+Running" target="_blank" rel="noopener">Πληροφορίες →</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="post-card race-card" data-type="road" data-lat="40.626" data-lng="22.948">
+        <div class="post-body">
+          <p class="post-meta"><span class="race-type type-road">Δρόμου</span> · Απρίλιος</p>
+          <h3>Μαραθώνιος Θεσσαλονίκης «Μέγας Αλέξανδρος»</h3>
+          <p class="race-specs">42,2 χλμ · Άσφαλτος</p>
+          <p>Μαραθώνιος στη συμπρωτεύουσα, αφιερωμένος στον Μέγα Αλέξανδρο.</p>
+          <div class="race-actions">
+            <button class="show-on-map" type="button">Δες στον χάρτη</button>
+            <a class="read-more" href="https://www.google.com/search?q=Μαραθώνιος+Θεσσαλονίκης+Μέγας+Αλέξανδρος" target="_blank" rel="noopener">Πληροφορίες →</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="post-card race-card" data-type="road" data-lat="39.667" data-lng="20.85">
+        <div class="post-body">
+          <p class="post-meta"><span class="race-type type-road">Δρόμου</span> · Μάρτιος</p>
+          <h3>Γύρος Λίμνης Ιωαννίνων</h3>
+          <p class="race-specs">30 χλμ · Άσφαλτος</p>
+          <p>Δημοφιλής αγώνας γύρω από τη λίμνη Παμβώτιδα, με υπέροχη θέα.</p>
+          <div class="race-actions">
+            <button class="show-on-map" type="button">Δες στον χάρτη</button>
+            <a class="read-more" href="https://www.google.com/search?q=Γύρος+Λίμνης+Ιωαννίνων+αγώνας" target="_blank" rel="noopener">Πληροφορίες →</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="post-card race-card" data-type="road" data-lat="36.43" data-lng="28.22">
+        <div class="post-body">
+          <p class="post-meta"><span class="race-type type-road">Δρόμου</span> · Απρίλιος</p>
+          <h3>Διεθνής Μαραθώνιος Ρόδου</h3>
+          <p class="race-specs">42,2 χλμ &amp; μικρότερες · Άσφαλτος</p>
+          <p>Μαραθώνιος με φόντο τη μεσαιωνική πόλη της Ρόδου και τη θάλασσα.</p>
+          <div class="race-actions">
+            <button class="show-on-map" type="button">Δες στον χάρτη</button>
+            <a class="read-more" href="https://www.google.com/search?q=Διεθνής+Μαραθώνιος+Ρόδου" target="_blank" rel="noopener">Πληροφορίες →</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="post-card race-card" data-type="road" data-lat="36.92" data-lng="21.70">
+        <div class="post-body">
+          <p class="post-meta"><span class="race-type type-road">Δρόμου</span> · Οκτώβριος</p>
+          <h3>Navarino Challenge</h3>
+          <p class="race-specs">5 &amp; 10 χλμ · Παραλία / Άσφαλτος</p>
+          <p>Αθλητικό event ευεξίας στη Μεσσηνία (Costa Navarino), με δράσεις για όλη την οικογένεια.</p>
+          <div class="race-actions">
+            <button class="show-on-map" type="button">Δες στον χάρτη</button>
+            <a class="read-more" href="https://www.google.com/search?q=Navarino+Challenge" target="_blank" rel="noopener">Πληροφορίες →</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="post-card race-card" data-type="road" data-lat="35.366" data-lng="24.474">
+        <div class="post-body">
+          <p class="post-meta"><span class="race-type type-road">Δρόμου</span> · Άνοιξη</p>
+          <h3>Run Crete (Ρέθυμνο)</h3>
+          <p class="race-specs">Ποικίλες αποστάσεις · Άσφαλτος</p>
+          <p>Αγώνες δρόμου με φόντο την κρητική φύση και τη θάλασσα.</p>
+          <div class="race-actions">
+            <button class="show-on-map" type="button">Δες στον χάρτη</button>
+            <a class="read-more" href="https://www.google.com/search?q=Run+Crete+Ρέθυμνο+αγώνας" target="_blank" rel="noopener">Πληροφορίες →</a>
+          </div>
+        </div>
+      </article>
+    </div>
 
     <p class="plan-note" style="margin-top:1.5rem;">
       ℹ️ Οι ημερομηνίες και οι εγγραφές αλλάζουν κάθε χρόνο — οι σύνδεσμοι σε οδηγούν στις
@@ -98,26 +255,56 @@
   <script>
     (function () {
       if (typeof L === 'undefined') return;
-      var map = L.map('race-map').setView([38.8, 23.5], 6);
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 18,
-        attribution: '© OpenStreetMap'
+      var COLORS = { road: '#ff5722', mountain: '#2ecc71', ultra: '#e24b4a' };
+      var map = L.map('race-map', { scrollWheelZoom: false }).setView([38.7, 23.5], 6);
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+        maxZoom: 19,
+        attribution: '© OpenStreetMap, © CARTO'
       }).addTo(map);
 
-      var races = [
-        { n: 'Αυθεντικός Μαραθώνιος Αθήνας', c: [38.155, 23.965], d: 'Ο ιστορικός μαραθώνιος, από τον Μαραθώνα στο Καλλιμάρμαρο.', q: 'Αυθεντικός Μαραθώνιος Αθήνας' },
-        { n: 'Σπάρταθλον', c: [37.075, 22.43], d: 'Θρυλικός υπερμαραθώνιος 246 χλμ: Αθήνα → Σπάρτη.', q: 'Spartathlon Σπάρταθλον' },
-        { n: 'Διεθνής Μαραθώνιος Θεσσαλονίκης', c: [40.626, 22.948], d: '«Μέγας Αλέξανδρος» — μαραθώνιος στη Θεσσαλονίκη.', q: 'Διεθνής Μαραθώνιος Θεσσαλονίκης Μέγας Αλέξανδρος' },
-        { n: 'Olympus Marathon', c: [40.088, 22.50], d: 'Απαιτητικός ορεινός αγώνας στον μυθικό Όλυμπο.', q: 'Olympus Marathon' },
-        { n: 'Zagori Mountain Running', c: [39.88, 20.75], d: 'Ορεινό τρέξιμο στα μαγευτικά Ζαγοροχώρια.', q: 'Zagori Mountain Running' },
-        { n: 'Run Crete (Ρέθυμνο)', c: [35.366, 24.474], d: 'Αγώνες δρόμου με φόντο την κρητική φύση.', q: 'Run Crete Ρέθυμνο αγώνας δρόμου' }
-      ];
+      // Εξασφάλισε σωστό render όλων των markers μόλις κουμπώσει το layout
+      map.whenReady(function () { setTimeout(function () { map.invalidateSize(); }, 250); });
 
-      races.forEach(function (r) {
-        var link = 'https://www.google.com/search?q=' + encodeURIComponent(r.q);
-        var html = '<h4>' + r.n + '</h4><p>' + r.d + '</p>' +
-          '<a href="' + link + '" target="_blank" rel="noopener">Δες λεπτομέρειες →</a>';
-        L.marker(r.c).addTo(map).bindPopup(html);
+      var cards = Array.prototype.slice.call(document.querySelectorAll('.race-card'));
+      var entries = [];
+
+      cards.forEach(function (card) {
+        var lat = parseFloat(card.dataset.lat), lng = parseFloat(card.dataset.lng);
+        if (isNaN(lat) || isNaN(lng)) return;
+        var type = card.dataset.type || 'road';
+        var name = (card.querySelector('h3') || {}).textContent || '';
+        var specs = (card.querySelector('.race-specs') || {}).textContent || '';
+        var linkEl = card.querySelector('.read-more');
+        var linkHtml = linkEl ? '<a href="' + linkEl.href + '" target="_blank" rel="noopener">' + linkEl.textContent + '</a>' : '';
+        var popup = '<h4>' + name + '</h4><p>' + specs + '</p>' + linkHtml;
+
+        var marker = L.circleMarker([lat, lng], {
+          radius: 9, color: '#fff', weight: 2,
+          fillColor: COLORS[type] || '#ff5722', fillOpacity: 0.95
+        }).bindPopup(popup).addTo(map);
+
+        entries.push({ card: card, marker: marker, type: type, lat: lat, lng: lng });
+
+        var btn = card.querySelector('.show-on-map');
+        if (btn) btn.addEventListener('click', function () {
+          map.flyTo([lat, lng], 11, { duration: 0.8 });
+          marker.openPopup();
+          document.getElementById('race-map').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
+      });
+
+      var fbtns = Array.prototype.slice.call(document.querySelectorAll('.rf-btn'));
+      fbtns.forEach(function (b) {
+        b.addEventListener('click', function () {
+          fbtns.forEach(function (x) { x.classList.remove('active'); });
+          b.classList.add('active');
+          var f = b.dataset.filter;
+          entries.forEach(function (e) {
+            var show = (f === 'all' || e.type === f);
+            e.card.style.display = show ? '' : 'none';
+            if (show) { e.marker.addTo(map); } else { map.removeLayer(e.marker); }
+          });
+        });
       });
     })();
   </script>
