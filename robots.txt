@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://nikoleta06.github.io/dese-kordonia/sitemap.xml
