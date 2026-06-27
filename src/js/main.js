@@ -32,6 +32,20 @@ document.addEventListener('DOMContentLoaded', function () {
     tips: { el: 'Πρακτικές', en: 'Practical', svg: '<svg ' + ICO + ' viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5.76.76 1.23 1.52 1.41 2.5"/></svg>' }
   };
 
+  /* --- Μητρώο άρθρων (για «Διάβασε επίσης») --- */
+  const DK_CAT_IMG = { champions: 'cat-champions.jpg', science: 'cat-science.jpg', stories: 'cat-stories.jpg', tips: 'cat-tips.jpg' };
+  const DK_POSTS = [
+    { slug: 'post-vo2max', cat: 'science', el: 'Τι είναι το VO₂max', en: 'What is VO₂max' },
+    { slug: 'post-lactate-threshold', cat: 'science', el: 'Τι είναι το lactate threshold', en: 'What is lactate threshold' },
+    { slug: 'post-easy-running', cat: 'science', el: 'Γιατί οι ελίτ δρομείς τρέχουν αργά', en: 'Why elite runners run slow' },
+    { slug: 'post-kipchoge', cat: 'champions', el: 'Η φιλοσοφία του Eliud Kipchoge', en: 'The philosophy of Eliud Kipchoge' },
+    { slug: 'post-ingebrigtsen', cat: 'champions', el: '7 μαθήματα από τον Jakob Ingebrigtsen', en: '7 lessons from Jakob Ingebrigtsen' },
+    { slug: 'post-sifan-hassan', cat: 'champions', el: 'Τι μας μαθαίνει η Sifan Hassan για την επιμονή', en: 'What Sifan Hassan teaches us about resilience' },
+    { slug: 'post-trexsimo-imikranies', cat: 'stories', el: 'Πώς το τρέξιμο με βοήθησε με τις ημικρανίες', en: 'How running helped me with migraines' },
+    { slug: 'post-diatrofi-trexsimo', cat: 'tips', el: 'Τι να τρώω πριν και μετά το τρέξιμο', en: 'What to eat before and after running' },
+    { slug: 'post-arxarios-trexsimo', cat: 'tips', el: '6 συμβουλές για να ξεκινήσεις τρέξιμο ως αρχάριος', en: '6 tips to start running from scratch' }
+  ];
+
   const DK_PAGE_EN = document.documentElement.lang === 'en';
   const DK_FILE = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
   const DK_SLUG = DK_FILE.replace('-en.html', '').replace('.html', '');
@@ -623,6 +637,59 @@ document.addEventListener('DOMContentLoaded', function () {
     loadCounts().then((map) => {
       badges.forEach((b) => setBadge(b.badge, Number(map[b.slug]) || 0, b.inspire));
     });
+  })();
+
+  /* ===== «Διάβασε επίσης» στο τέλος των άρθρων ===== */
+  (function () {
+    const article = document.querySelector('.article');
+    if (!article) return;
+    const cur = DK_POSTS.find((p) => p.slug === DK_SLUG);
+    if (!cur) return;
+    const en = DK_PAGE_EN;
+    const ext = en ? '-en.html' : '.html';
+
+    const same = DK_POSTS.filter((p) => p.slug !== cur.slug && p.cat === cur.cat);
+    const others = DK_POSTS.filter((p) => p.slug !== cur.slug && p.cat !== cur.cat);
+    const picks = same.concat(others).slice(0, 3);
+    if (!picks.length) return;
+
+    const sec = document.createElement('section');
+    sec.className = 'related';
+    let html = '<h3 class="related-title">' + (en ? 'Read also' : 'Διάβασε επίσης') + '</h3><div class="related-grid post-grid">';
+    picks.forEach((p) => {
+      const meta = DK_CAT_META[p.cat] || DK_CAT_META.tips;
+      const catName = en ? meta.en : meta.el;
+      const img = DK_CAT_IMG[p.cat] || 'cat-running.jpg';
+      const title = en ? p.en : p.el;
+      const alt = title.replace(/"/g, '&quot;');
+      html +=
+        '<article class="post-card" data-category="' + p.cat + '">' +
+          '<img src="../../images/' + img + '?v=1" alt="' + alt + '" loading="lazy" decoding="async" width="400" height="180">' +
+          '<div class="post-body">' +
+            '<p class="post-meta"><span class="post-cat">' + meta.svg + catName + '</span></p>' +
+            '<h3>' + title + '</h3>' +
+            '<a class="read-more" href="' + p.slug + ext + '">' + (en ? 'Read the article →' : 'Διάβασε το άρθρο →') + '</a>' +
+          '</div>' +
+        '</article>';
+    });
+    html += '</div>';
+    sec.innerHTML = html;
+
+    const back = article.querySelector('.back-link');
+    if (back) article.insertBefore(sec, back); else article.appendChild(sec);
+  })();
+
+  /* ===== Analytics (GoatCounter) =====
+     Privacy-friendly, χωρίς cookies. Συμπλήρωσε με τον δικό σου κωδικό.
+     Οδηγίες: SETUP-ANALYTICS.md. Αν μείνει κενό, δεν φορτώνει τίποτα. */
+  (function () {
+    const GC = ''; // π.χ. 'https://desekordonia.goatcounter.com/count'
+    if (!GC) return;
+    const s = document.createElement('script');
+    s.async = true;
+    s.src = '//gc.zgo.at/count.js';
+    s.setAttribute('data-goatcounter', GC);
+    document.body.appendChild(s);
   })();
 
 });
