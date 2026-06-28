@@ -683,7 +683,7 @@ document.addEventListener('DOMContentLoaded', function () {
      Privacy-friendly, χωρίς cookies. Συμπλήρωσε με τον δικό σου κωδικό.
      Οδηγίες: SETUP-ANALYTICS.md. Αν μείνει κενό, δεν φορτώνει τίποτα. */
   (function () {
-    const GC = ''; // π.χ. 'https://desekordonia.goatcounter.com/count'
+    const GC = 'https://nikol.goatcounter.com/count';
     if (!GC) return;
     const s = document.createElement('script');
     s.async = true;
