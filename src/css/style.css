@@ -883,6 +883,32 @@ tbody tr:last-child td {
   color: var(--text);
 }
 
+.article .tldr {
+  background-color: var(--surface);
+  border: 1px solid var(--accent);
+  border-radius: 12px;
+  padding: 1.2rem 1.4rem;
+  margin: 1.5rem 0 2rem;
+}
+
+.article .tldr h4 {
+  font-family: "Oswald", sans-serif;
+  color: var(--accent);
+  margin: 0 0 0.6rem;
+  font-size: 1.05rem;
+  letter-spacing: 0.3px;
+}
+
+.article .tldr ul {
+  margin: 0;
+  padding-left: 1.1rem;
+}
+
+.article .tldr li {
+  color: var(--text-dim);
+  margin-bottom: 0.35rem;
+}
+
 .article .note {
   background-color: var(--surface-2);
   border-left: 4px solid var(--accent);
