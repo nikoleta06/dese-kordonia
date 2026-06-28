@@ -20,7 +20,8 @@ document.addEventListener('DOMContentLoaded', function () {
     'post-vo2max': 'science',
     'post-trexsimo-imikranies': 'stories',
     'post-arxarios-trexsimo': 'tips',
-    'post-diatrofi-trexsimo': 'tips'
+    'post-diatrofi-trexsimo': 'tips',
+    'post-allagi-papoutsion': 'tips'
   };
 
   /* --- Εικονίδια & ονόματα κατηγοριών (για τη σελίδα Αποθηκευμένα) --- */
@@ -43,6 +44,7 @@ document.addEventListener('DOMContentLoaded', function () {
     { slug: 'post-sifan-hassan', cat: 'champions', el: 'Τι μας μαθαίνει η Sifan Hassan για την επιμονή', en: 'What Sifan Hassan teaches us about resilience' },
     { slug: 'post-trexsimo-imikranies', cat: 'stories', el: 'Πώς το τρέξιμο με βοήθησε με τις ημικρανίες', en: 'How running helped me with migraines' },
     { slug: 'post-diatrofi-trexsimo', cat: 'tips', el: 'Τι να τρώω πριν και μετά το τρέξιμο', en: 'What to eat before and after running' },
+    { slug: 'post-allagi-papoutsion', cat: 'tips', el: 'Πότε να αλλάξεις τα παπούτσια του τρεξίματος', en: 'When to replace your running shoes' },
     { slug: 'post-arxarios-trexsimo', cat: 'tips', el: '6 συμβουλές για να ξεκινήσεις τρέξιμο ως αρχάριος', en: '6 tips to start running from scratch' }
   ];
 
