@@ -50,14 +50,19 @@
   <link rel="stylesheet" href="../css/style.css?v=48">
 
   <style>
-    .shoe-compare { margin: 2rem 0; }
-    .shoe-compare .sc-labels { display: flex; gap: 0.6rem; margin-bottom: 0.6rem; }
-    .shoe-compare .sc-label { flex: 1; text-align: center; font-family: "Oswald", sans-serif; font-size: 0.85rem; letter-spacing: 0.3px; padding: 0.4rem 0.5rem; border-radius: 8px; color: #fff; }
+    .shoe-compare { max-width: 600px; margin: 2.5rem auto; }
+    .shoe-compare .sc-labels { display: flex; gap: 0.6rem; margin-bottom: 1.1rem; }
+    .shoe-compare .sc-label { flex: 1; text-align: center; font-family: "Oswald", sans-serif; font-size: 0.85rem; letter-spacing: 0.3px; padding: 0.45rem 0.5rem; border-radius: 8px; color: #fff; }
     .shoe-compare .sc-new { background-color: #2ecc71; }
     .shoe-compare .sc-worn { background-color: #e24b4a; }
     .shoe-compare img { width: 100%; height: auto; display: block; border-radius: var(--radius); border: 1px solid var(--border); }
-    .shoe-compare .sc-notes { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 0.5rem 1rem; margin-top: 0.7rem; font-size: 0.85rem; color: var(--text-dim); }
-    .shoe-compare .sc-notes strong { color: var(--text); }
+    .shoe-compare .sc-notes { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem; margin-top: 1.3rem; }
+    .shoe-compare .sc-note { display: flex; gap: 0.55rem; align-items: flex-start; }
+    .shoe-compare .sc-note svg { width: 20px; height: 20px; color: var(--accent); flex: 0 0 auto; margin-top: 1px; }
+    .shoe-compare .sc-note strong { display: block; color: var(--text); font-family: "Oswald", sans-serif; letter-spacing: 0.2px; }
+    .shoe-compare .sc-note span { color: var(--text-dim); font-size: 0.85rem; }
+    .shoe-compare .sc-conclusion { display: flex; gap: 0.5rem; align-items: flex-start; margin-top: 1.3rem; padding: 0.9rem 1.1rem; background-color: var(--surface-2); border-left: 4px solid var(--accent); border-radius: 8px; color: var(--text-dim); font-size: 0.9rem; }
+    .shoe-compare .sc-conclusion svg { width: 20px; height: 20px; color: var(--accent); flex: 0 0 auto; margin-top: 1px; }
   </style>
 </head>
 <body>
@@ -154,10 +159,11 @@
           <img src="../../images/papoutsia-compare.jpg?v=1" alt="Comparison of a new and a worn running shoe: side, sole and back view" loading="lazy" decoding="async" width="1536" height="1024">
         </a>
         <figcaption class="sc-notes">
-          <span><strong>Midsole:</strong> loses shock absorption</span>
-          <span><strong>Outsole:</strong> worn, less grip</span>
-          <span><strong>Shape:</strong> uneven wear, leans</span>
+          <div class="sc-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><div><strong>Midsole</strong><span>Loses its shock absorption.</span></div></div>
+          <div class="sc-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 16v-2.38C4 11.5 2.97 10.5 3 8c.03-2.72 1.49-6 4.5-6C9.37 2 10 3.8 10 5.5c0 3.11-2 5.66-2 8.68V16a2 2 0 1 1-4 0Z"/><path d="M20 20v-2.38c0-2.12 1.03-3.12 1-5.62-.03-2.72-1.49-6-4.5-6C14.63 6 14 7.8 14 9.5c0 3.11 2 5.66 2 8.68V20a2 2 0 1 0 4 0Z"/><path d="M16 17h4"/><path d="M4 13h4"/></svg><div><strong>Outsole</strong><span>Worn, with less grip.</span></div></div>
+          <div class="sc-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.3 8.7 8.7 21.3a1 1 0 0 1-1.4 0l-4.6-4.6a1 1 0 0 1 0-1.4L15.3 2.7a1 1 0 0 1 1.4 0l4.6 4.6a1 1 0 0 1 0 1.4Z"/><path d="m7.5 10.5 2 2"/><path d="m10.5 7.5 2 2"/><path d="m13.5 4.5 2 2"/><path d="m4.5 13.5 2 2"/></svg><div><strong>Shape</strong><span>Uneven wear, it leans.</span></div></div>
         </figcaption>
+        <p class="sc-conclusion"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5.76.76 1.23 1.52 1.41 2.5"/></svg><span>If you notice 2 or more of these signs, it may be time to replace your shoes.</span></p>
       </figure>
 
       <h3>Going by time</h3>
