@@ -48,6 +48,17 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/style.css?v=48">
+
+  <style>
+    .shoe-compare { margin: 2rem 0; }
+    .shoe-compare .sc-labels { display: flex; gap: 0.6rem; margin-bottom: 0.6rem; }
+    .shoe-compare .sc-label { flex: 1; text-align: center; font-family: "Oswald", sans-serif; font-size: 0.85rem; letter-spacing: 0.3px; padding: 0.4rem 0.5rem; border-radius: 8px; color: #fff; }
+    .shoe-compare .sc-new { background-color: #2ecc71; }
+    .shoe-compare .sc-worn { background-color: #e24b4a; }
+    .shoe-compare img { width: 100%; height: auto; display: block; border-radius: var(--radius); border: 1px solid var(--border); }
+    .shoe-compare .sc-notes { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 0.5rem 1rem; margin-top: 0.7rem; font-size: 0.85rem; color: var(--text-dim); }
+    .shoe-compare .sc-notes strong { color: var(--text); }
+  </style>
 </head>
 <body>
   <header>
@@ -134,6 +145,21 @@
         τον τρόπο που πατάς, την <strong>επιφάνεια</strong> (άσφαλτος, χώμα, διάδρομος) και το
         υλικό της σόλας. Γι' αυτό ο πιο αξιόπιστος τρόπος είναι να παρακολουθείς τα δικά σου χιλιόμετρα.
       </p>
+
+      <figure class="shoe-compare">
+        <div class="sc-labels">
+          <span class="sc-label sc-new">Καινούργιο</span>
+          <span class="sc-label sc-worn">Φθαρμένο · 700+ χλμ</span>
+        </div>
+        <a href="../../images/papoutsia-compare.jpg?v=1" target="_blank" rel="noopener">
+          <img src="../../images/papoutsia-compare.jpg?v=1" alt="Σύγκριση καινούργιου και φθαρμένου παπουτσιού τρεξίματος: πλάι, σόλα και πίσω όψη" loading="lazy" decoding="async" width="1536" height="1024">
+        </a>
+        <figcaption class="sc-notes">
+          <span><strong>Μεσαία σόλα:</strong> χάνει την απορρόφηση κραδασμών</span>
+          <span><strong>Εξώσολα:</strong> φθαρμένη, μειωμένη πρόσφυση</span>
+          <span><strong>Σχήμα:</strong> ανομοιόμορφη φθορά, «γέρνει»</span>
+        </figcaption>
+      </figure>
 
       <h3>Με βάση τον χρόνο</h3>
       <p>
