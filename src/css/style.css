@@ -530,6 +530,10 @@ table {
   width: 100%;
   border-collapse: collapse;
   background-color: var(--surface);
+}
+
+/* Μόνο οι πίνακες περιεχομένου (άρθρα) θέλουν min-width + οριζόντια κύλιση */
+.table-wrap table {
   min-width: 480px;
 }
 
@@ -1102,12 +1106,18 @@ tbody tr:last-child td {
 .calc-result table {
   width: 100%;
   border-collapse: collapse;
+  table-layout: fixed;
 }
 
 .calc-result td {
   padding: 0.6rem 0.5rem;
   border-bottom: 1px solid var(--border);
   color: var(--text-dim);
+  word-break: break-word;
+}
+
+.calc-result td:first-child {
+  width: 60%;
 }
 
 .calc-result td:last-child {
@@ -1115,6 +1125,7 @@ tbody tr:last-child td {
   color: var(--text);
   font-family: "Oswald", sans-serif;
   font-size: 1.1rem;
+  white-space: nowrap;
 }
 
 .calc-result tr:last-child td {
