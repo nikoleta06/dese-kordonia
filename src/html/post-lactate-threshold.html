@@ -46,6 +46,48 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/style.css?v=48">
+
+  <style>
+    .ig { max-width: 580px; margin: 2.4rem auto; }
+    .ig-caption { text-align: center; color: var(--text-dim); font-size: 0.88rem; margin-top: 0.9rem; }
+    .ig-caption strong { color: var(--accent-2); }
+    .ig-title { text-align: center; font-family: "Oswald", sans-serif; color: var(--text); font-size: 0.95rem; letter-spacing: 0.3px; margin: 0 0 0.9rem; }
+    /* Flow chain */
+    .ig-flow { display: flex; flex-direction: column; }
+    .ig-step { display: flex; align-items: center; gap: 0.9rem; background-color: var(--surface-2); border: 1px solid var(--border); border-radius: 12px; padding: 0.7rem 1rem; }
+    .ig-step.ig-final { background-color: rgba(255, 87, 34, 0.12); border-color: var(--accent); }
+    .ig-step .ig-ic { width: 42px; height: 42px; flex: 0 0 auto; border-radius: 50%; background-color: var(--surface); display: grid; place-items: center; color: var(--accent); }
+    .ig-step .ig-ic svg { width: 22px; height: 22px; }
+    .ig-step strong { display: block; color: var(--text); font-family: "Oswald", sans-serif; letter-spacing: 0.2px; }
+    .ig-step span { color: var(--text-dim); font-size: 0.85rem; }
+    .ig-conn { display: flex; justify-content: center; color: var(--accent); padding: 0.4rem 0; }
+    .ig-conn svg { width: 28px; height: 28px; }
+    /* Side-by-side cards */
+    .ig-vs { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+    .ig-card { background-color: var(--surface-2); border: 1px solid var(--border); border-radius: 12px; padding: 1.1rem 1rem; text-align: center; }
+    .ig-card .ig-ic { width: 46px; height: 46px; margin: 0 auto 0.6rem; border-radius: 50%; background-color: var(--surface); display: grid; place-items: center; color: var(--accent); }
+    .ig-card .ig-ic svg { width: 24px; height: 24px; }
+    .ig-card strong { display: block; color: var(--text); font-family: "Oswald", sans-serif; letter-spacing: 0.3px; }
+    .ig-card span { color: var(--text-dim); font-size: 0.85rem; }
+    .ig-card .ig-quote { display: block; color: var(--text); font-style: italic; margin: 0.35rem 0; font-size: 0.92rem; }
+    .ig-card .ig-stat { display: block; font-size: 0.82rem; margin-top: 0.15rem; }
+    .ig-card .ig-stat b { color: var(--text); font-family: "Oswald", sans-serif; }
+    .ig-card .ig-pace { display: block; font-family: "Oswald", sans-serif; font-size: 1.55rem; color: var(--accent); margin-top: 0.5rem; }
+    /* Talk test = 3 cards */
+    .ig-talk { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.7rem; }
+    .ig-talk .ig-card { padding: 1rem 0.7rem; }
+    /* Lactate balance: production vs clearance */
+    .ig-bal { display: flex; flex-direction: column; gap: 0.7rem; }
+    .ig-bal-row { background-color: var(--surface-2); border: 1px solid var(--border); border-left: 4px solid var(--accent); border-radius: 12px; padding: 0.85rem 1rem; }
+    .ig-bal-head { display: flex; justify-content: space-between; align-items: center; gap: 0.6rem; margin-bottom: 0.55rem; flex-wrap: wrap; }
+    .ig-bal-head strong { font-family: "Oswald", sans-serif; color: var(--text); letter-spacing: 0.3px; }
+    .ig-verdict { font-family: "Oswald", sans-serif; font-size: 0.72rem; letter-spacing: 0.2px; padding: 0.18rem 0.6rem; border-radius: 999px; }
+    .ig-bar-line { display: flex; align-items: center; gap: 0.6rem; margin: 0.32rem 0; }
+    .ig-bar-line label { flex: 0 0 96px; font-size: 0.78rem; color: var(--text-dim); }
+    .ig-bar { flex: 1; height: 10px; background-color: var(--surface); border-radius: 999px; overflow: hidden; }
+    .ig-bar i { display: block; height: 100%; border-radius: 999px; }
+    @media (max-width: 520px) { .ig-talk { grid-template-columns: 1fr; } }
+  </style>
 </head>
 <body>
   <header>
@@ -96,6 +138,28 @@
         αποβληθεί.
       </p>
 
+      <figure class="ig">
+        <p class="ig-title">Πώς λειτουργεί το κατώφλι: παραγωγή vs απομάκρυνση γαλακτικού</p>
+        <div class="ig-bal">
+          <div class="ig-bal-row" style="border-left-color:#2ecc71;">
+            <div class="ig-bal-head"><strong>Χαμηλή ένταση</strong><span class="ig-verdict" style="background-color:rgba(46,204,113,0.18);color:#2ecc71;">Ισορροπία · τρέχεις για ώρες</span></div>
+            <div class="ig-bar-line"><label>Παραγωγή</label><div class="ig-bar"><i style="width:22%;background-color:#e24b4a;"></i></div></div>
+            <div class="ig-bar-line"><label>Απομάκρυνση</label><div class="ig-bar"><i style="width:75%;background-color:#2ecc71;"></i></div></div>
+          </div>
+          <div class="ig-bal-row" style="border-left-color:#ff9800;">
+            <div class="ig-bal-head"><strong>Στο κατώφλι</strong><span class="ig-verdict" style="background-color:rgba(255,152,0,0.18);color:#ff9800;">Παραγωγή = Απομάκρυνση</span></div>
+            <div class="ig-bar-line"><label>Παραγωγή</label><div class="ig-bar"><i style="width:55%;background-color:#e24b4a;"></i></div></div>
+            <div class="ig-bar-line"><label>Απομάκρυνση</label><div class="ig-bar"><i style="width:55%;background-color:#2ecc71;"></i></div></div>
+          </div>
+          <div class="ig-bal-row" style="border-left-color:#e24b4a;">
+            <div class="ig-bal-head"><strong>Πάνω από το κατώφλι</strong><span class="ig-verdict" style="background-color:rgba(226,75,74,0.18);color:#e24b4a;">Συσσώρευση → κόπωση</span></div>
+            <div class="ig-bar-line"><label>Παραγωγή</label><div class="ig-bar"><i style="width:90%;background-color:#e24b4a;"></i></div></div>
+            <div class="ig-bar-line"><label>Απομάκρυνση</label><div class="ig-bar"><i style="width:40%;background-color:#2ecc71;"></i></div></div>
+          </div>
+        </div>
+        <figcaption class="ig-caption">Όσο ανεβαίνει η ένταση, η <strong>παραγωγή</strong> γαλακτικού ξεπερνά την <strong>απομάκρυνση</strong>. Το σημείο ισορροπίας είναι το <strong>threshold</strong>.</figcaption>
+      </figure>
+
       <h3>Το κατώφλι (threshold)</h3>
       <p>
         Αυτό ακριβώς το σημείο είναι το <strong>lactate threshold</strong>: η μέγιστη ένταση
@@ -106,9 +170,33 @@
 
       <div class="note">
         💡 <strong>Πρακτικά:</strong> Το threshold είναι περίπου ο ρυθμός που θα μπορούσες να
-        κρατήσεις σε έναν αγώνα της 1 ώρας. Είναι ένας ρυθμός «άβολα άνετος» — μπορείς να πεις
-        λίγες λέξεις, αλλά όχι να κάνεις κουβέντα.
+        κρατήσεις σε έναν αγώνα της 1 ώρας. Ένας ρυθμός «άβολα άνετος».
       </div>
+
+      <figure class="ig">
+        <p class="ig-title">Το «Talk Test»: αναγνώρισε την ένταση από την ομιλία σου</p>
+        <div class="ig-talk">
+          <div class="ig-card">
+            <span class="ig-ic" style="color:#2ecc71;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg></span>
+            <strong>Easy</strong>
+            <span class="ig-quote">«Πάμε για καφέ μετά;»</span>
+            <span>Μιλάς άνετα, ολόκληρες προτάσεις</span>
+          </div>
+          <div class="ig-card" style="border-color:#ff9800;">
+            <span class="ig-ic" style="color:#ff9800;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg></span>
+            <strong>Threshold</strong>
+            <span class="ig-quote">«Ναι… πάμε…»</span>
+            <span>Μόνο λίγες λέξεις κάθε φορά</span>
+          </div>
+          <div class="ig-card" style="border-color:#e24b4a;">
+            <span class="ig-ic" style="color:#e24b4a;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m4.9 4.9 14.2 14.2"/></svg></span>
+            <strong>Intervals</strong>
+            <span class="ig-quote">«…»</span>
+            <span>Δεν μπορείς να μιλήσεις</span>
+          </div>
+        </div>
+        <figcaption class="ig-caption">Δεν χρειάζεσαι ρολόι: στο <strong>threshold</strong> λες λίγες λέξεις — όχι ολόκληρη κουβέντα.</figcaption>
+      </figure>
 
       <h3>Γιατί έχει σημασία;</h3>
       <p>
@@ -116,6 +204,27 @@
         πριν κουραστείς. Δύο δρομείς με ίδιο VO₂ max μπορεί να έχουν πολύ διαφορετική απόδοση —
         και συχνά η διαφορά είναι ακριβώς εδώ.
       </p>
+
+      <figure class="ig">
+        <p class="ig-title">Ίδιο VO₂max — διαφορετικό threshold</p>
+        <div class="ig-vs">
+          <div class="ig-card">
+            <span class="ig-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="5" r="1"/><path d="m9 20 3-6 3 6"/><path d="m6 8 6 2 6-2"/><path d="M12 10v4"/></svg></span>
+            <strong>Δρομέας Α</strong>
+            <span class="ig-stat">VO₂max <b>55</b></span>
+            <span class="ig-stat">Threshold <b>80%</b></span>
+            <span class="ig-pace">4:45 /km</span>
+          </div>
+          <div class="ig-card" style="border-color:var(--accent);background-color:rgba(255,87,34,0.10);">
+            <span class="ig-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="5" r="1"/><path d="m9 20 3-6 3 6"/><path d="m6 8 6 2 6-2"/><path d="M12 10v4"/></svg></span>
+            <strong>Δρομέας Β</strong>
+            <span class="ig-stat">VO₂max <b>55</b></span>
+            <span class="ig-stat">Threshold <b>90%</b></span>
+            <span class="ig-pace">4:20 /km</span>
+          </div>
+        </div>
+        <figcaption class="ig-caption">Ίδιος «κινητήρας», αλλά ο <strong>Δρομέας Β</strong> κρατά υψηλότερο ρυθμό για ώρα — χάρη στο ψηλότερο threshold.</figcaption>
+      </figure>
 
       <h3>Γιατί οι κορυφαίοι δρομείς δίνουν τόση σημασία στο threshold;</h3>
       <p>
@@ -139,6 +248,19 @@
         ένταση για 20–40 λεπτά (συνεχόμενα ή σε επαναλήψεις). Με τον καιρό, το σώμα μαθαίνει να
         διαχειρίζεται καλύτερα το γαλακτικό, και το κατώφλι ανεβαίνει.
       </p>
+
+      <figure class="ig">
+        <div class="ig-flow">
+          <div class="ig-step"><span class="ig-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="10" x2="14" y1="2" y2="2"/><line x1="12" x2="15" y1="14" y2="11"/><circle cx="12" cy="14" r="8"/></svg></span><div><strong>Tempo / Threshold run</strong><span>20–40 λεπτά στην «άβολα άνετη» ένταση</span></div></div>
+          <div class="ig-conn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></div>
+          <div class="ig-step"><span class="ig-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M3 21v-5h5"/></svg></span><div><strong>Το σώμα προσαρμόζεται</strong><span>Μαθαίνει να διαχειρίζεται καλύτερα το γαλακτικό</span></div></div>
+          <div class="ig-conn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></div>
+          <div class="ig-step"><span class="ig-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 7h6v6"/><path d="m22 7-8.5 8.5-5-5L2 17"/></svg></span><div><strong>Ανεβαίνει το κατώφλι</strong><span>Παράγεις λιγότερο γαλακτικό στον ίδιο ρυθμό</span></div></div>
+          <div class="ig-conn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></div>
+          <div class="ig-step ig-final"><span class="ig-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" x2="4" y1="22" y2="15"/></svg></span><div><strong>Γρηγορότεροι αγώνες</strong><span>Ίδια προσπάθεια · μεγαλύτερη ταχύτητα</span></div></div>
+        </div>
+        <figcaption class="ig-caption">Οι <strong>tempo</strong> προπονήσεις σπρώχνουν το κατώφλι ψηλότερα — κι εκεί κρύβεται η μεγαλύτερη βελτίωση στην αντοχή.</figcaption>
+      </figure>
       <p>
         Προσοχή όμως: το threshold είναι μόνο ένα κομμάτι. Χρειάζεσαι και τις easy μέρες για
         βάση — θυμήσου τον κανόνα 80/20. Η ισορροπία είναι το μυστικό.
