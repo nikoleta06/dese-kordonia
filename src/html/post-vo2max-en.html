@@ -78,6 +78,9 @@
     .ig-scale .ig-seg { flex: 1; text-align: center; padding: 0.6rem 0.3rem; color: #fff; }
     .ig-scale .ig-seg b { display: block; font-family: "Oswald", sans-serif; font-size: 1.05rem; }
     .ig-scale .ig-seg small { font-size: 0.68rem; opacity: 0.95; line-height: 1.2; }
+    .ig-title { text-align: center; font-family: "Oswald", sans-serif; color: var(--text); font-size: 0.95rem; letter-spacing: 0.3px; margin: 0 0 0.7rem; }
+    .ig-myth { display: flex; flex-direction: column; gap: 1.1rem; }
+    .ig-myth-l { display: block; }
   </style>
 </head>
 <body>
@@ -137,7 +140,7 @@
           <div class="ig-conn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></div>
           <div class="ig-step"><span class="ig-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></span><div><strong>Muscles</strong><span>"Burn" the oxygen for energy</span></div></div>
           <div class="ig-conn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></div>
-          <div class="ig-step ig-final"><span class="ig-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 16v-2.38C4 11.5 2.97 10.5 3 8c.03-2.72 1.49-6 4.5-6C9.37 2 10 3.8 10 5.5c0 3.11-2 5.66-2 8.68V16a2 2 0 1 1-4 0Z"/><path d="M20 20v-2.38c0-2.12 1.03-3.12 1-5.62-.03-2.72-1.49-6-4.5-6C14.63 6 14 7.8 14 9.5c0 3.11 2 5.66 2 8.68V20a2 2 0 1 0 4 0Z"/><path d="M16 17h4"/><path d="M4 13h4"/></svg></span><div><strong>Energy to run</strong><span>Harder, for longer</span></div></div>
+          <div class="ig-step ig-final"><span class="ig-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 16v-2.38C4 11.5 2.97 10.5 3 8c.03-2.72 1.49-6 4.5-6C9.37 2 10 3.8 10 5.5c0 3.11-2 5.66-2 8.68V16a2 2 0 1 1-4 0Z"/><path d="M20 20v-2.38c0-2.12 1.03-3.12 1-5.62-.03-2.72-1.49-6-4.5-6C14.63 6 14 7.8 14 9.5c0 3.11 2 5.66 2 8.68V20a2 2 0 1 0 4 0Z"/><path d="M16 17h4"/><path d="M4 13h4"/></svg></span><div><strong>Running performance</strong><span>Faster • stronger • more endurance</span></div></div>
         </div>
         <figcaption class="ig-caption"><strong>VO₂max</strong> = how efficiently this whole chain works.</figcaption>
       </figure>
@@ -172,6 +175,7 @@
       </div>
 
       <figure class="ig">
+        <p class="ig-title">Where do you roughly stand?</p>
         <div class="ig-scale">
           <div class="ig-seg" style="background-color:#7bc96f;"><b>30</b><small>Moderate</small></div>
           <div class="ig-seg" style="background-color:#2ecc71;"><b>40</b><small>Good</small></div>
@@ -197,22 +201,21 @@
 
       <figure class="ig">
         <div class="ig-pyramid">
-          <div class="ig-tier" style="width:46%; background-color:#e24b4a;">Intervals<small>VO₂max · ~20% of training</small></div>
+          <div class="ig-tier" style="width:46%; background-color:#e24b4a; padding:0.4rem 0.5rem;">Intervals<small>VO₂max · ~20% of training</small></div>
           <div class="ig-tier" style="width:70%; background-color:#ff9800;">Tempo / Threshold<small>moderate intensity</small></div>
           <div class="ig-tier" style="width:100%; background-color:#2ecc71;">Easy running<small>aerobic base · 80% of training</small></div>
         </div>
         <figcaption class="ig-caption">Build a big <strong>base</strong> of easy miles — a little targeted intensity at the top.</figcaption>
       </figure>
 
-      <div class="note">
-        ❌ <strong>Myth:</strong> If my VO₂max is low, I can't become a good runner.<br><br>
-        ✅ <strong>Truth:</strong> VO₂max is only one factor. Your lactate threshold, running economy
-        and proper training matter just as much.
+      <div class="note ig-myth">
+        <span class="ig-myth-l">❌ <strong>Myth:</strong> If my VO₂max is low, I can't become a good runner.</span>
+        <span class="ig-myth-l">✅ <strong>Truth:</strong> VO₂max is only one factor. Your lactate threshold, running economy and proper training matter just as much.</span>
       </div>
 
       <figure class="ig">
         <div class="ig-vs">
-          <div class="ig-card ig-est"><span class="ig-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="6"/><path d="M12 10v2l1 1"/><path d="m16.13 7.66-.81-4.05a2 2 0 0 0-2-1.61h-2.68a2 2 0 0 0-2 1.61l-.78 4.05"/><path d="m7.88 16.36.8 4a2 2 0 0 0 2 1.61h2.72a2 2 0 0 0 2-1.61l.81-4.05"/></svg></span><strong>Your watch</strong><span>Estimate (from heart rate &amp; pace)</span><span class="ig-res ig-res-est">≈ VO₂max</span></div>
+          <div class="ig-card ig-est"><span class="ig-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="6"/><path d="M12 10v2l1 1"/><path d="m16.13 7.66-.81-4.05a2 2 0 0 0-2-1.61h-2.68a2 2 0 0 0-2 1.61l-.78 4.05"/><path d="m7.88 16.36.8 4a2 2 0 0 0 2 1.61h2.72a2 2 0 0 0 2-1.61l.81-4.05"/></svg></span><strong>Your watch</strong><span>Estimate (from heart rate &amp; pace)</span><span class="ig-res ig-res-est">≈ Estimated VO₂max</span></div>
           <div class="ig-card"><span class="ig-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 2v7.31"/><path d="M14 9.3V1.99"/><path d="M8.5 2h7"/><path d="M14 9.3a6.5 6.5 0 1 1-4 0"/><path d="M5.52 16h12.96"/></svg></span><strong>Lab test</strong><span>Direct measurement</span><span class="ig-res ig-res-real">✓ Real VO₂max</span></div>
         </div>
         <figcaption class="ig-caption">A watch doesn't <strong>measure</strong> VO₂max — it <strong>estimates</strong> it. Useful for the trend, not for an exact number.</figcaption>
