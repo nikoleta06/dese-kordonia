@@ -59,8 +59,8 @@
     .ig-step .ig-ic svg { width: 22px; height: 22px; }
     .ig-step strong { display: block; color: var(--text); font-family: "Oswald", sans-serif; letter-spacing: 0.2px; }
     .ig-step span { color: var(--text-dim); font-size: 0.85rem; }
-    .ig-conn { display: flex; justify-content: center; color: var(--accent); padding: 0.2rem 0; }
-    .ig-conn svg { width: 18px; height: 18px; }
+    .ig-conn { display: flex; justify-content: center; color: var(--accent); padding: 0.4rem 0; }
+    .ig-conn svg { width: 28px; height: 28px; }
     /* Pyramid */
     .ig-pyramid { display: flex; flex-direction: column; align-items: center; gap: 0.4rem; }
     .ig-tier { color: #fff; font-family: "Oswald", sans-serif; font-size: 0.92rem; letter-spacing: 0.3px; text-align: center; padding: 0.7rem 0.5rem; border-radius: 8px; }
@@ -74,6 +74,14 @@
     .ig-card span { color: var(--text-dim); font-size: 0.85rem; }
     .ig-card.ig-est { border-color: #4aa3ff; }
     .ig-card.ig-est .ig-ic { color: #4aa3ff; }
+    .ig-card .ig-res { display: inline-block; margin-top: 0.55rem; font-family: "Oswald", sans-serif; font-size: 0.78rem; letter-spacing: 0.2px; padding: 0.2rem 0.65rem; border-radius: 999px; }
+    .ig-card .ig-res-est { background-color: rgba(74, 163, 255, 0.16); color: #4aa3ff; }
+    .ig-card .ig-res-real { background-color: rgba(46, 204, 113, 0.18); color: #2ecc71; }
+    /* VO2max scale */
+    .ig-scale { display: flex; border-radius: 10px; overflow: hidden; }
+    .ig-scale .ig-seg { flex: 1; text-align: center; padding: 0.6rem 0.3rem; color: #fff; }
+    .ig-scale .ig-seg b { display: block; font-family: "Oswald", sans-serif; font-size: 1.05rem; }
+    .ig-scale .ig-seg small { font-size: 0.68rem; opacity: 0.95; line-height: 1.2; }
   </style>
 </head>
 <body>
@@ -168,6 +176,17 @@
         </table>
       </div>
 
+      <figure class="ig">
+        <div class="ig-scale">
+          <div class="ig-seg" style="background-color:#7bc96f;"><b>30</b><small>Μέτριο</small></div>
+          <div class="ig-seg" style="background-color:#2ecc71;"><b>40</b><small>Καλό</small></div>
+          <div class="ig-seg" style="background-color:#4aa3ff;"><b>50</b><small>Πολύ καλό</small></div>
+          <div class="ig-seg" style="background-color:#9b59b6;"><b>60</b><small>Εξαιρετικό</small></div>
+          <div class="ig-seg" style="background-color:#e6a817;"><b>70+</b><small>Elite</small></div>
+        </div>
+        <figcaption class="ig-caption">Κατά προσέγγιση κλίμακα VO₂max (ml/kg/min) — κοίτα κυρίως τη <strong>δική σου</strong> πρόοδο.</figcaption>
+      </figure>
+
       <h3>Πώς το αυξάνεις</h3>
       <p>
         Ο πιο αποτελεσματικός τρόπος είναι οι <strong>διαλειμματικές προπονήσεις (intervals)</strong>
@@ -183,9 +202,9 @@
 
       <figure class="ig">
         <div class="ig-pyramid">
-          <div class="ig-tier" style="width:46%; background-color:#e24b4a;">Intervals<small>VO₂max · λίγο &amp; στοχευμένο</small></div>
+          <div class="ig-tier" style="width:46%; background-color:#e24b4a;">Intervals<small>VO₂max · ~20% της προπόνησης</small></div>
           <div class="ig-tier" style="width:70%; background-color:#ff9800;">Tempo / Threshold<small>μέτρια ένταση</small></div>
-          <div class="ig-tier" style="width:100%; background-color:#2ecc71;">Easy running<small>αερόβια βάση · ο όγκος της προπόνησης</small></div>
+          <div class="ig-tier" style="width:100%; background-color:#2ecc71;">Easy running<small>αερόβια βάση · 80% της προπόνησης</small></div>
         </div>
         <figcaption class="ig-caption">Χτίσε μεγάλη <strong>βάση</strong> από easy μίλια — λίγη, στοχευμένη ένταση στην κορυφή.</figcaption>
       </figure>
@@ -198,8 +217,8 @@
 
       <figure class="ig">
         <div class="ig-vs">
-          <div class="ig-card ig-est"><span class="ig-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="6"/><path d="M12 10v2l1 1"/><path d="m16.13 7.66-.81-4.05a2 2 0 0 0-2-1.61h-2.68a2 2 0 0 0-2 1.61l-.78 4.05"/><path d="m7.88 16.36.8 4a2 2 0 0 0 2 1.61h2.72a2 2 0 0 0 2-1.61l.81-4.05"/></svg></span><strong>Το ρολόι σου</strong><span>Εκτίμηση (από παλμούς &amp; ρυθμό)</span></div>
-          <div class="ig-card"><span class="ig-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 2v7.31"/><path d="M14 9.3V1.99"/><path d="M8.5 2h7"/><path d="M14 9.3a6.5 6.5 0 1 1-4 0"/><path d="M5.52 16h12.96"/></svg></span><strong>Εργαστηριακό τεστ</strong><span>Πραγματική μέτρηση</span></div>
+          <div class="ig-card ig-est"><span class="ig-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="6"/><path d="M12 10v2l1 1"/><path d="m16.13 7.66-.81-4.05a2 2 0 0 0-2-1.61h-2.68a2 2 0 0 0-2 1.61l-.78 4.05"/><path d="m7.88 16.36.8 4a2 2 0 0 0 2 1.61h2.72a2 2 0 0 0 2-1.61l.81-4.05"/></svg></span><strong>Το ρολόι σου</strong><span>Εκτίμηση (από παλμούς &amp; ρυθμό)</span><span class="ig-res ig-res-est">≈ VO₂max</span></div>
+          <div class="ig-card"><span class="ig-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 2v7.31"/><path d="M14 9.3V1.99"/><path d="M8.5 2h7"/><path d="M14 9.3a6.5 6.5 0 1 1-4 0"/><path d="M5.52 16h12.96"/></svg></span><strong>Εργαστηριακό τεστ</strong><span>Άμεση μέτρηση</span><span class="ig-res ig-res-real">✓ Πραγματικό VO₂max</span></div>
         </div>
         <figcaption class="ig-caption">Το ρολόι δεν <strong>μετρά</strong> το VO₂max — το <strong>υπολογίζει</strong>. Χρήσιμο για την τάση, όχι για ακριβές νούμερο.</figcaption>
       </figure>
