@@ -53,6 +53,14 @@
     .ig-card, .ig-step, .ig-bal-row { transition: transform .22s ease, border-color .22s ease, box-shadow .22s ease; }
     .ig-card:hover { transform: translateY(-3px); border-color: var(--accent); box-shadow: 0 8px 22px rgba(0, 0, 0, 0.22); }
     .ig-step:hover, .ig-bal-row:hover { border-color: var(--accent); }
+    /* "What to remember" recap box */
+    .recap { max-width: 580px; margin: 2.4rem auto 0; background-color: var(--surface-2); border: 1px solid var(--border); border-left: 4px solid var(--accent); border-radius: 12px; padding: 1.2rem 1.35rem; }
+    .recap h4 { display: flex; align-items: center; gap: 0.55rem; margin: 0 0 0.8rem; font-family: "Oswald", sans-serif; color: var(--text); font-size: 1.08rem; letter-spacing: 0.3px; }
+    .recap h4 svg { width: 1.25em; height: 1.25em; color: var(--accent); flex: 0 0 auto; }
+    .recap ul { list-style: none; margin: 0; padding: 0; }
+    .recap li { display: flex; align-items: flex-start; gap: 0.6rem; margin: 0.55rem 0; color: var(--text-dim); line-height: 1.5; }
+    .recap li svg { width: 1.05em; height: 1.05em; color: #2ecc71; flex: 0 0 auto; margin-top: 0.2em; }
+    .recap li strong { color: var(--text); }
     .ig-caption { text-align: center; color: var(--text-dim); font-size: 0.88rem; margin-top: 0.9rem; }
     .ig-caption strong { color: var(--accent-2); }
     .ig-title { text-align: center; font-family: "Oswald", sans-serif; color: var(--text); font-size: 0.95rem; letter-spacing: 0.3px; margin: 0 0 0.9rem; }
@@ -274,6 +282,15 @@
         You don't need a lab to improve. You need consistency, patience and a few targeted tempo
         workouts. Your body takes care of the rest. 🏃‍♀️
       </p>
+
+      <div class="recap">
+        <h4><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>3 things to remember</h4>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Threshold is the intensity you can hold for <strong>~1 hour</strong> before lactate builds up.</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>It often matters <strong>more than VO₂max</strong> for your real-world speed.</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>You raise it with <strong>20–40 min tempo runs</strong> at a "comfortably hard" effort.</li>
+        </ul>
+      </div>
 
       <a class="back-link" href="blog-en.html">← Back to Blog</a>
     </article>

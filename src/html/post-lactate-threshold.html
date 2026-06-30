@@ -53,6 +53,14 @@
     .ig-card, .ig-step, .ig-bal-row { transition: transform .22s ease, border-color .22s ease, box-shadow .22s ease; }
     .ig-card:hover { transform: translateY(-3px); border-color: var(--accent); box-shadow: 0 8px 22px rgba(0, 0, 0, 0.22); }
     .ig-step:hover, .ig-bal-row:hover { border-color: var(--accent); }
+    /* "Τι να θυμάσαι" recap box */
+    .recap { max-width: 580px; margin: 2.4rem auto 0; background-color: var(--surface-2); border: 1px solid var(--border); border-left: 4px solid var(--accent); border-radius: 12px; padding: 1.2rem 1.35rem; }
+    .recap h4 { display: flex; align-items: center; gap: 0.55rem; margin: 0 0 0.8rem; font-family: "Oswald", sans-serif; color: var(--text); font-size: 1.08rem; letter-spacing: 0.3px; }
+    .recap h4 svg { width: 1.25em; height: 1.25em; color: var(--accent); flex: 0 0 auto; }
+    .recap ul { list-style: none; margin: 0; padding: 0; }
+    .recap li { display: flex; align-items: flex-start; gap: 0.6rem; margin: 0.55rem 0; color: var(--text-dim); line-height: 1.5; }
+    .recap li svg { width: 1.05em; height: 1.05em; color: #2ecc71; flex: 0 0 auto; margin-top: 0.2em; }
+    .recap li strong { color: var(--text); }
     .ig-caption { text-align: center; color: var(--text-dim); font-size: 0.88rem; margin-top: 0.9rem; }
     .ig-caption strong { color: var(--accent-2); }
     .ig-title { text-align: center; font-family: "Oswald", sans-serif; color: var(--text); font-size: 0.95rem; letter-spacing: 0.3px; margin: 0 0 0.9rem; }
@@ -276,6 +284,15 @@
         Δεν χρειάζεται εργαστήριο για να βελτιωθείς. Χρειάζεσαι συνέπεια, υπομονή και μερικές
         στοχευμένες tempo προπονήσεις. Το σώμα σου αναλαμβάνει τα υπόλοιπα. 🏃‍♀️
       </p>
+
+      <div class="recap">
+        <h4><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>3 πράγματα να θυμάσαι</h4>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Το threshold είναι η ένταση που κρατάς <strong>~1 ώρα</strong> πριν συσσωρευτεί το γαλακτικό.</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Συχνά μετράει <strong>πιο πολύ από το VO₂max</strong> για την πραγματική σου ταχύτητα.</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Το ανεβάζεις με <strong>tempo προπονήσεις</strong> 20–40' στην «άβολα άνετη» ένταση.</li>
+        </ul>
+      </div>
 
       <a class="back-link" href="blog.html">← Πίσω στο Blog</a>
     </article>
