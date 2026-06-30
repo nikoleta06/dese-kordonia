@@ -49,6 +49,10 @@
 
   <style>
     .ig { max-width: 580px; margin: 2.4rem auto; }
+    /* --- Polish: hover micro-interactions (scroll-reveal handled by inline script, reusing .reveal) --- */
+    .ig-card, .ig-step, .ig-bal-row { transition: transform .22s ease, border-color .22s ease, box-shadow .22s ease; }
+    .ig-card:hover { transform: translateY(-3px); border-color: var(--accent); box-shadow: 0 8px 22px rgba(0, 0, 0, 0.22); }
+    .ig-step:hover, .ig-bal-row:hover { border-color: var(--accent); }
     .ig-caption { text-align: center; color: var(--text-dim); font-size: 0.88rem; margin-top: 0.9rem; }
     .ig-caption strong { color: var(--accent-2); }
     .ig-title { text-align: center; font-family: "Oswald", sans-serif; color: var(--text); font-size: 0.95rem; letter-spacing: 0.3px; margin: 0 0 0.9rem; }
@@ -288,5 +292,19 @@
   </footer>
 
   <script src="../js/main.js?v=22" defer></script>
+  <script>
+    /* Scroll-reveal για τα infographics (επαναχρησιμοποιεί τις global .reveal/.up/.is-visible) */
+    (function () {
+      var figs = document.querySelectorAll('figure.ig');
+      if (!('IntersectionObserver' in window) || !figs.length) return;
+      figs.forEach(function (f) { f.classList.add('reveal', 'up'); });
+      var io = new IntersectionObserver(function (entries, obs) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add('is-visible'); obs.unobserve(e.target); }
+        });
+      }, { threshold: 0.12 });
+      figs.forEach(function (f) { io.observe(f); });
+    })();
+  </script>
 </body>
 </html>
