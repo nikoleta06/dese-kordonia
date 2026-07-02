@@ -45,59 +45,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/style.css?v=48">
-
-  <style>
-    .ig { max-width: 580px; margin: 2.4rem auto; }
-    /* --- Polish: hover micro-interactions (scroll-reveal handled by inline script, reusing .reveal) --- */
-    .ig-card, .ig-step, .ig-bal-row { transition: transform .22s ease, border-color .22s ease, box-shadow .22s ease; }
-    .ig-card:hover { transform: translateY(-3px); border-color: var(--accent); box-shadow: 0 8px 22px rgba(0, 0, 0, 0.22); }
-    .ig-step:hover, .ig-bal-row:hover { border-color: var(--accent); }
-    /* "Τι να θυμάσαι" recap box */
-    .recap { max-width: 580px; margin: 2.4rem auto 0; background-color: var(--surface-2); border: 1px solid var(--border); border-left: 4px solid var(--accent); border-radius: 12px; padding: 1.2rem 1.35rem; }
-    .recap h4 { display: flex; align-items: center; gap: 0.55rem; margin: 0 0 0.8rem; font-family: "Oswald", sans-serif; color: var(--text); font-size: 1.08rem; letter-spacing: 0.3px; }
-    .recap h4 svg { width: 1.25em; height: 1.25em; color: var(--accent); flex: 0 0 auto; }
-    .recap ul { list-style: none; margin: 0; padding: 0; }
-    .recap li { display: flex; align-items: flex-start; gap: 0.6rem; margin: 0.55rem 0; color: var(--text-dim); line-height: 1.5; }
-    .recap li svg { width: 1.05em; height: 1.05em; color: #2ecc71; flex: 0 0 auto; margin-top: 0.2em; }
-    .recap li strong { color: var(--text); }
-    .ig-caption { text-align: center; color: var(--text-dim); font-size: 0.88rem; margin-top: 0.9rem; }
-    .ig-caption strong { color: var(--accent-2); }
-    /* Flow */
-    .ig-flow { display: flex; flex-direction: column; }
-    .ig-step { display: flex; align-items: center; gap: 0.9rem; background-color: var(--surface-2); border: 1px solid var(--border); border-radius: 12px; padding: 0.7rem 1rem; }
-    .ig-step.ig-final { background-color: rgba(255, 87, 34, 0.12); border-color: var(--accent); }
-    .ig-step .ig-ic { width: 42px; height: 42px; flex: 0 0 auto; border-radius: 50%; background-color: var(--surface); display: grid; place-items: center; color: var(--accent); }
-    .ig-step .ig-ic svg { width: 22px; height: 22px; }
-    .ig-step strong { display: block; color: var(--text); font-family: "Oswald", sans-serif; letter-spacing: 0.2px; }
-    .ig-step span { color: var(--text-dim); font-size: 0.85rem; }
-    .ig-conn { display: flex; justify-content: center; color: var(--accent); padding: 0.4rem 0; }
-    .ig-conn svg { width: 28px; height: 28px; }
-    /* Pyramid */
-    .ig-pyramid { display: flex; flex-direction: column; align-items: center; gap: 0.4rem; }
-    .ig-tier { color: #fff; font-family: "Oswald", sans-serif; font-size: 0.92rem; letter-spacing: 0.3px; text-align: center; padding: 0.7rem 0.5rem; border-radius: 8px; }
-    .ig-tier small { display: block; font-family: "Inter", sans-serif; font-weight: 400; font-size: 0.72rem; letter-spacing: 0; opacity: 0.95; }
-    /* Watch vs Lab */
-    .ig-vs { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
-    .ig-card { background-color: var(--surface-2); border: 1px solid var(--border); border-radius: 12px; padding: 1.1rem 1rem; text-align: center; }
-    .ig-card .ig-ic { width: 46px; height: 46px; margin: 0 auto 0.6rem; border-radius: 50%; background-color: var(--surface); display: grid; place-items: center; color: var(--accent); }
-    .ig-card .ig-ic svg { width: 24px; height: 24px; }
-    .ig-card strong { display: block; color: var(--text); font-family: "Oswald", sans-serif; }
-    .ig-card span { color: var(--text-dim); font-size: 0.85rem; }
-    .ig-card.ig-est { border-color: #4aa3ff; }
-    .ig-card.ig-est .ig-ic { color: #4aa3ff; }
-    .ig-card .ig-res { display: inline-block; margin-top: 0.55rem; font-family: "Oswald", sans-serif; font-size: 0.78rem; letter-spacing: 0.2px; padding: 0.2rem 0.65rem; border-radius: 999px; }
-    .ig-card .ig-res-est { background-color: rgba(74, 163, 255, 0.16); color: #4aa3ff; }
-    .ig-card .ig-res-real { background-color: rgba(46, 204, 113, 0.18); color: #2ecc71; }
-    /* VO2max scale */
-    .ig-scale { display: flex; border-radius: 10px; overflow: hidden; }
-    .ig-scale .ig-seg { flex: 1; text-align: center; padding: 0.6rem 0.3rem; color: #fff; }
-    .ig-scale .ig-seg b { display: block; font-family: "Oswald", sans-serif; font-size: 1.05rem; }
-    .ig-scale .ig-seg small { font-size: 0.68rem; opacity: 0.95; line-height: 1.2; }
-    .ig-title { text-align: center; font-family: "Oswald", sans-serif; color: var(--text); font-size: 0.95rem; letter-spacing: 0.3px; margin: 0 0 0.7rem; }
-    .ig-myth { display: flex; flex-direction: column; gap: 1.1rem; }
-    .ig-myth-l { display: block; }
-  </style>
+  <link rel="stylesheet" href="../css/style.css?v=51">
 </head>
 <body>
   <header>
@@ -266,7 +214,7 @@
     <p class="footer-copy">© 2026 <span class="accent">Δέσε Κορδόνια</span></p>
   </footer>
 
-  <script src="../js/main.js?v=22" defer></script>
+  <script src="../js/main.js?v=23" defer></script>
   <script>
     /* Scroll-reveal για τα infographics (επαναχρησιμοποιεί τις global .reveal/.up/.is-visible) */
     (function () {
