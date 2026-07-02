@@ -518,6 +518,34 @@ main {
   margin-top: 0.4rem;
 }
 
+/* Κεντράρει την τελευταία (ημιτελή) γραμμή καρτών σε desktop πλάτη, χωρίς να αλλάζει
+   το πλάτος τους ή τη συμπεριφορά σε mobile/tablet (εκεί παραμένει το κανονικό grid) */
+@media (min-width: 900px) {
+  .cards.cards-centered {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .cards.cards-centered .card {
+    flex: 0 1 245px;
+  }
+}
+
+.card-source {
+  display: inline-block;
+  margin-top: 1.1rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--border);
+  color: var(--accent);
+  font-size: 0.78rem;
+  font-weight: 500;
+}
+
+.card-source:hover {
+  text-decoration: underline;
+}
+
 /* ===== Timeline ("Τι κερδίζεις μετά από...") ===== */
 .timeline {
   position: relative;
