@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', function () {
     'post-easy-running': 'science',
     'post-lactate-threshold': 'science',
     'post-vo2max': 'science',
+    'post-zones-palmon': 'science',
     'post-trexsimo-imikranies': 'stories',
     'post-arxarios-trexsimo': 'tips',
     'post-diatrofi-trexsimo': 'tips',
@@ -36,6 +37,7 @@ document.addEventListener('DOMContentLoaded', function () {
   /* --- Μητρώο άρθρων (για «Διάβασε επίσης») --- */
   const DK_CAT_IMG = { champions: 'cat-champions.jpg', science: 'cat-science.jpg', stories: 'cat-stories.jpg', tips: 'cat-tips.jpg' };
   const DK_POSTS = [
+    { slug: 'post-zones-palmon', cat: 'science', el: 'Οι 5 Ζώνες Καρδιακών Παλμών, εξηγημένες απλά', en: 'The 5 Heart-Rate Zones, explained simply' },
     { slug: 'post-vo2max', cat: 'science', el: 'Τι είναι το VO₂max', en: 'What is VO₂max' },
     { slug: 'post-lactate-threshold', cat: 'science', el: 'Τι είναι το lactate threshold', en: 'What is lactate threshold' },
     { slug: 'post-easy-running', cat: 'science', el: 'Γιατί οι ελίτ δρομείς τρέχουν αργά', en: 'Why elite runners run slow' },
