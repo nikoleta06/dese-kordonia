@@ -484,23 +484,78 @@ main {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 1.8rem;
-  transition: transform 0.2s, border-color 0.2s;
+  transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
 }
 
 .card:hover {
   transform: translateY(-4px);
   border-color: var(--accent);
+  box-shadow: 0 12px 28px rgba(255, 87, 34, 0.18);
 }
 
 .card .icon {
   margin-bottom: 0.9rem;
   line-height: 0;
   color: var(--accent);
+  transition: transform 0.2s;
+}
+
+.card:hover .icon {
+  transform: scale(1.05);
 }
 
 .card .icon svg {
   width: 44px;
   height: 44px;
+}
+
+/* Κεφαλίδα κάρτας: εικονίδιο + στατιστικό, δίπλα-δίπλα */
+.card-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.6rem;
+  margin-bottom: 0.3rem;
+}
+
+.card-head .icon {
+  margin-bottom: 0;
+}
+
+.card-stat {
+  text-align: right;
+  flex: 0 0 auto;
+}
+
+.card-stat .num {
+  display: block;
+  font-family: "Oswald", sans-serif;
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: var(--accent-2);
+  line-height: 1.1;
+}
+
+.card-stat .cap {
+  display: block;
+  max-width: 92px;
+  font-size: 0.65rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  line-height: 1.25;
+}
+
+.card-link {
+  display: inline-block;
+  margin-top: 0.6rem;
+  color: var(--accent-2);
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.card-link:hover {
+  text-decoration: underline;
 }
 
 .card h3 {
@@ -574,12 +629,13 @@ main {
   border-radius: var(--radius);
   padding: 1.6rem 1.3rem 1.4rem;
   text-align: center;
-  transition: transform 0.2s, border-color 0.2s;
+  transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
 }
 
 .timeline-item:hover {
   transform: translateY(-4px);
   border-color: var(--accent);
+  box-shadow: 0 12px 28px rgba(255, 87, 34, 0.18);
 }
 
 .timeline-item .timeline-icon {
@@ -592,11 +648,64 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: transform 0.2s;
+}
+
+.timeline-item:hover .timeline-icon {
+  transform: scale(1.05);
 }
 
 .timeline-item .timeline-icon svg {
   width: 24px;
   height: 24px;
+}
+
+/* --- Διαδραστικό timeline: κουμπί ανοίγματος + κρυφή λεπτομέρεια --- */
+.timeline-toggle {
+  display: block;
+  width: 100%;
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  padding: 0;
+}
+
+.timeline-chevron {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.6rem;
+  color: var(--accent-2);
+  transition: transform 0.2s;
+}
+
+.timeline-chevron svg {
+  width: 16px;
+  height: 16px;
+}
+
+.timeline-toggle[aria-expanded="true"] .timeline-chevron {
+  transform: rotate(180deg);
+}
+
+.timeline-more {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.25s ease, margin-top 0.25s ease;
+}
+
+.timeline-toggle[aria-expanded="true"] + .timeline-more {
+  max-height: 200px;
+  margin-top: 0.8rem;
+}
+
+.timeline-more p {
+  text-align: left;
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  border-top: 1px solid var(--border);
+  padding-top: 0.8rem;
 }
 
 .timeline-item h3 {
@@ -685,6 +794,152 @@ main {
 .fact-card p {
   color: var(--text-dim);
   font-size: 0.92rem;
+}
+
+/* ===== Body map (hero illustration, σελίδα Ευεξία) ===== */
+.body-map {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  aspect-ratio: 1 / 1;
+  margin: 2rem auto 1rem;
+}
+
+.body-map-lines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.body-map-lines line {
+  stroke: var(--border);
+  stroke-width: 0.6;
+}
+
+.body-map-center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 92px;
+  height: 92px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 30px rgba(255, 87, 34, 0.35);
+}
+
+.body-map-center svg {
+  width: 46px;
+  height: 46px;
+}
+
+.body-map-node {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  width: 78px;
+  transition: transform 0.2s;
+}
+
+.body-map-node:hover {
+  transform: translate(-50%, -50%) scale(1.08);
+}
+
+.body-map-node .node-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.body-map-node .node-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.body-map-node .node-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-align: center;
+  color: var(--text-dim);
+}
+
+@media (max-width: 600px) {
+  .body-map {
+    max-width: 320px;
+  }
+  .body-map-center {
+    width: 68px;
+    height: 68px;
+  }
+  .body-map-center svg {
+    width: 34px;
+    height: 34px;
+  }
+  .body-map-node {
+    width: 58px;
+  }
+  .body-map-node .node-icon {
+    width: 40px;
+    height: 40px;
+  }
+  .body-map-node .node-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+  .body-map-node .node-label {
+    font-size: 0.62rem;
+  }
+}
+
+/* ===== Τελικό CTA ===== */
+.final-cta {
+  text-align: center;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 3rem 1.5rem;
+  margin-top: 4rem;
+}
+
+.final-cta h2 {
+  margin-bottom: 0.7rem;
+}
+
+.final-cta p {
+  color: var(--text-dim);
+  max-width: 480px;
+  margin: 0 auto 1.6rem;
+}
+
+.btn-alt {
+  display: inline-block;
+  padding: 0.85rem 2rem;
+  border-radius: 999px;
+  border: 2px solid var(--accent);
+  color: var(--accent);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  background: transparent;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.btn-alt:hover {
+  background-color: var(--accent);
+  color: #fff;
 }
 
 /* ===== Table ===== */
