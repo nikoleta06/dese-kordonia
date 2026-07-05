@@ -10,6 +10,11 @@ document.addEventListener('DOMContentLoaded', function () {
   const DK_SUPABASE_URL = 'https://kblnwbcyhkgnuwrgzmdt.supabase.co';
   const DK_SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtibG53YmN5aGtnbnV3cmd6bWR0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIzMzQ0MDAsImV4cCI6MjA5NzkxMDQwMH0.U0u-gQfZkotPPVU-rM5-RqiuiSu_aMSOrerTjPHH5eo';
 
+  /* --- Backend API (δεσε-κορδονια-backend): τοπικό Docker για dev, Render για live --- */
+  const DK_API_URL = (location.hostname === 'localhost')
+    ? 'http://localhost:4000'
+    : 'https://dese-kordonia-backend.onrender.com';
+
   /* --- Κατηγορία ανά άρθρο (slug → κατηγορία) --- */
   const DK_CAT_BY_SLUG = {
     'post-kipchoge': 'champions',
@@ -101,6 +106,37 @@ document.addEventListener('DOMContentLoaded', function () {
     if (DK_FILE === href) a.classList.add('active');
     li.appendChild(a);
     menu.appendChild(li);
+  })();
+
+  /* --- Σύνδεσμος «Σύνδεση» / «Ο λογαριασμός μου» στο μενού --- */
+  (function () {
+    const menu = document.querySelector('.menu');
+    if (!menu) return;
+    if (menu.querySelector('.account-link')) return;
+
+    const li = document.createElement('li');
+    const a = document.createElement('a');
+    a.className = 'saved-link account-link';
+    a.innerHTML =
+      '<svg class="saved-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg>' +
+      '<span class="saved-text"></span>';
+    li.appendChild(a);
+    menu.appendChild(li);
+
+    function paint(loggedIn) {
+      const href = loggedIn ? (DK_PAGE_EN ? 'account-en.html' : 'account.html') : (DK_PAGE_EN ? 'login-en.html' : 'login.html');
+      const label = loggedIn ? (DK_PAGE_EN ? 'My account' : 'Ο λογαριασμός μου') : (DK_PAGE_EN ? 'Sign in' : 'Σύνδεση');
+      a.href = href;
+      a.setAttribute('aria-label', label);
+      a.setAttribute('title', label);
+      a.querySelector('.saved-text').textContent = label;
+      a.classList.toggle('active', DK_FILE === href);
+    }
+
+    paint(false);
+    fetch(DK_API_URL + '/api/auth/me', { credentials: 'include' })
+      .then((r) => paint(r.ok))
+      .catch(() => {});
   })();
 
   /* --- Scroll reveal animations --- */

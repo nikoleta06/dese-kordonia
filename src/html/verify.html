@@ -3,10 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Επαλήθευση σύνδεσης | Δέσε Κορδόνια</title>
+  <meta name="description" content="Επαλήθευση του συνδέσμου σύνδεσης.">
   <meta name="robots" content="noindex">
-  <title>Αποθηκευμένα | Δέσε Κορδόνια</title>
-  <meta name="description" content="Τα άρθρα που αποθήκευσες για να τα διαβάσεις αργότερα.">
 
+  <link rel="canonical" href="https://nikoleta06.github.io/dese-kordonia/src/html/verify.html">
   <link rel="icon" type="image/x-icon" href="../../images/favicon.ico?v=1">
   <link rel="apple-touch-icon" href="../../images/favicon.png?v=1">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -42,15 +43,10 @@
   </header>
 
   <main>
-    <h2 class="section-title">Αποθηκευμένα</h2>
-    <p class="lead">Τα άρθρα που αποθήκευσες για να τα διαβάσεις αργότερα. Αποθηκεύονται σε αυτή τη συσκευή.</p>
-
-    <div class="post-grid" id="savedGrid" hidden></div>
-
-    <div class="saved-empty" id="savedEmpty" hidden>
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg>
-      <p>Δεν έχεις αποθηκεύσει κανένα άρθρο ακόμα.<br>Πάτησε το <strong>«Αποθήκευση»</strong> σε όποιο άρθρο θέλεις να κρατήσεις για αργότερα.</p>
-      <a class="read-more" href="blog.html">Δες όλα τα άρθρα →</a>
+    <h2 class="section-title">Επαλήθευση σύνδεσης</h2>
+    <div class="calc">
+      <p id="status">Έλεγχος του συνδέσμου...</p>
+      <a class="btn calc-hidden" id="loginLink" href="login.html">Πίσω στη σύνδεση</a>
     </div>
   </main>
 
@@ -65,5 +61,38 @@
   </footer>
 
   <script src="../js/main.js?v=26" defer></script>
+
+  <script>
+    (function () {
+      const $ = (id) => document.getElementById(id);
+      const API = (location.hostname === 'localhost') ? 'http://localhost:4000' : 'https://dese-kordonia-backend.onrender.com';
+
+      async function verify() {
+        const token = new URLSearchParams(location.search).get('token');
+        if (!token) {
+          $('status').textContent = 'Λείπει το token επαλήθευσης.';
+          $('loginLink').classList.remove('calc-hidden');
+          return;
+        }
+        try {
+          const r = await fetch(API + '/api/auth/verify?token=' + encodeURIComponent(token), {
+            credentials: 'include'
+          });
+          if (r.ok) {
+            $('status').textContent = 'Συνδέθηκες! Μεταφέρεσαι στον λογαριασμό σου...';
+            setTimeout(() => { location.href = 'account.html'; }, 1200);
+          } else {
+            $('status').textContent = 'Ο σύνδεσμος έληξε ή δεν είναι έγκυρος.';
+            $('loginLink').classList.remove('calc-hidden');
+          }
+        } catch (e) {
+          $('status').textContent = "Δεν μπόρεσα να συνδεθώ με τον server. Τρέχει τοπικά;";
+          $('loginLink').classList.remove('calc-hidden');
+        }
+      }
+
+      verify();
+    })();
+  </script>
 </body>
 </html>

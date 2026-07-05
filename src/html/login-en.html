@@ -3,9 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign in | Δέσε Κορδόνια</title>
+  <meta name="description" content="Sign in to Δέσε Κορδόνια with your email — no password needed.">
   <meta name="robots" content="noindex">
-  <title>Saved | Δέσε Κορδόνια</title>
-  <meta name="description" content="The articles you saved to read later.">
+  <link rel="canonical" href="https://nikoleta06.github.io/dese-kordonia/src/html/login-en.html">
+  <link rel="alternate" hreflang="el" href="https://nikoleta06.github.io/dese-kordonia/src/html/login.html">
+  <link rel="alternate" hreflang="en" href="https://nikoleta06.github.io/dese-kordonia/src/html/login-en.html">
 
   <link rel="icon" type="image/x-icon" href="../../images/favicon.ico?v=1">
   <link rel="apple-touch-icon" href="../../images/favicon.png?v=1">
@@ -42,15 +45,20 @@
   </header>
 
   <main>
-    <h2 class="section-title">Saved</h2>
-    <p class="lead">The articles you saved to read later. They are stored on this device.</p>
+    <h2 class="section-title">Sign in</h2>
+    <p class="lead">
+      Enter your email and we'll send you a sign-in link — no password needed.
+    </p>
 
-    <div class="post-grid" id="savedGrid" hidden></div>
+    <div class="calc">
+      <div class="field">
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="you@example.com">
+      </div>
 
-    <div class="saved-empty" id="savedEmpty" hidden>
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg>
-      <p>You haven't saved any articles yet.<br>Tap <strong>"Save"</strong> on any article you want to keep for later.</p>
-      <a class="read-more" href="blog-en.html">Browse all articles →</a>
+      <button class="btn" id="sendBtn" type="button">Send me a link</button>
+
+      <div class="calc-result calc-hidden" id="result"></div>
     </div>
   </main>
 
@@ -65,5 +73,46 @@
   </footer>
 
   <script src="../js/main.js?v=26" defer></script>
+
+  <script>
+    (function () {
+      const $ = (id) => document.getElementById(id);
+      const API = (location.hostname === 'localhost') ? 'http://localhost:4000' : 'https://dese-kordonia-backend.onrender.com';
+
+      function showResult(text, isError) {
+        const el = $('result');
+        el.textContent = text;
+        el.classList.remove('calc-hidden');
+        el.style.color = isError ? 'var(--accent-2)' : '';
+      }
+
+      async function requestLink() {
+        const email = $('email').value.trim();
+        if (!email || !email.includes('@')) {
+          showResult('Enter a valid email.', true);
+          return;
+        }
+        $('sendBtn').disabled = true;
+        try {
+          const r = await fetch(API + '/api/auth/request-link', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: email })
+          });
+          if (r.ok) {
+            showResult('Check your email for the sign-in link (valid for 15 minutes).', false);
+          } else {
+            showResult('Something went wrong. Please try again.', true);
+          }
+        } catch (e) {
+          showResult("Couldn't reach the server. Is it running locally?", true);
+        }
+        $('sendBtn').disabled = false;
+      }
+
+      $('sendBtn').addEventListener('click', requestLink);
+      $('email').addEventListener('keydown', (e) => { if (e.key === 'Enter') requestLink(); });
+    })();
+  </script>
 </body>
 </html>
