@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Running Races in Greece — Interactive Map | Δέσε Κορδόνια</title>
+  <meta name="description" content="Interactive map of well-known running races in Greece: Athens Marathon, Spartathlon, mountain races and more. Filter by type, see distance, month and details.">
+  <link rel="canonical" href="https://desekordonia.com/agones-en.html">
+  <link rel="alternate" hreflang="el" href="https://desekordonia.com/agones.html">
+  <link rel="alternate" hreflang="en" href="https://desekordonia.com/agones-en.html">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Running Races in Greece — Interactive Map">
+  <meta property="og:description" content="Interactive map of well-known running races in Greece.">
+  <meta property="og:image" content="https://desekordonia.com/images/cat-champions.jpg">
+  <meta property="og:url" content="https://desekordonia.com/agones-en.html">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" type="image/x-icon" href="images/favicon.ico?v=1">
+  <link rel="apple-touch-icon" href="images/favicon.png?v=1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=54">
+
+  <!-- Leaflet (interactive map) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <style>
+    #race-map {
+      height: 520px;
+      width: 100%;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      margin-top: 1.5rem;
+      z-index: 1;
+    }
+    .leaflet-popup-content { font-family: "Inter", sans-serif; }
+    .leaflet-popup-content h4 { font-family: "Oswald", sans-serif; margin: 0 0 0.3rem; color: #0f1115; }
+    .leaflet-popup-content p { margin: 0 0 0.5rem; color: #333; font-size: 0.9rem; }
+    .leaflet-popup-content a { color: #ff5722; font-weight: 600; }
+    @media (max-width: 600px) { #race-map { height: 400px; } }
+
+    /* Filters */
+    .race-filters { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1.5rem 0 0; }
+    .rf-btn { padding: 0.5rem 1rem; border-radius: 999px; border: 1px solid var(--border); background: var(--surface); color: var(--text-dim); cursor: pointer; font-family: inherit; font-size: 0.9rem; transition: color .2s, background-color .2s, border-color .2s; }
+    .rf-btn:hover { border-color: var(--accent); color: var(--text); }
+    .rf-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+    /* Legend */
+    .map-legend { display: flex; flex-wrap: wrap; gap: 1.2rem; margin-top: 0.8rem; font-size: 0.85rem; color: var(--text-dim); }
+    .map-legend span { display: inline-flex; align-items: center; gap: 0.45rem; }
+    .leg-dot { width: 12px; height: 12px; border-radius: 50%; display: inline-block; border: 2px solid #fff; }
+
+    /* Race cards */
+    .race-list { margin-top: 2rem; }
+    .race-card .post-body { padding: 1.4rem; }
+    .race-card .post-meta { text-transform: uppercase; letter-spacing: 0.5px; font-size: 0.8rem; color: var(--text-dim); margin-bottom: 0.3rem; }
+    .race-type { font-weight: 600; }
+    .type-road { color: #ff7a50; }
+    .type-mountain { color: #3ddc84; }
+    .type-ultra { color: #ff6b6b; }
+    .race-card h3 { color: var(--text); margin: 0.2rem 0 0.4rem; font-size: 1.2rem; }
+    .race-card .race-specs { color: var(--accent-2); font-weight: 600; font-size: 0.88rem; margin-bottom: 0.6rem; }
+    .race-card .race-actions { display: flex; align-items: center; justify-content: space-between; gap: 0.6rem; margin-top: auto; flex-wrap: wrap; }
+    .show-on-map { display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.4rem 0.85rem; border-radius: 999px; border: 1px solid var(--border); background: none; color: var(--text-dim); cursor: pointer; font-family: "Oswald", sans-serif; font-size: 0.82rem; transition: color .2s, border-color .2s; }
+    .show-on-map:hover { border-color: var(--accent); color: var(--accent); }
+    .race-card .read-more { color: var(--accent); font-weight: 600; font-family: "Oswald", sans-serif; font-size: 0.85rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav-inner">
+      <a class="brand" href="index-en.html">
+        <img src="images/logo.png?v=2" alt="Δέσε Κορδόνια logo" class="logo">
+        Δέσε<span class="dot">.</span>Κορδόνια
+      </a>
+      <nav>
+        <ul class="menu">
+          <li><a href="index-en.html">Home</a></li>
+          <li><a href="healthy-en.html">Wellness &amp; Benefits</a></li>
+          <li><a href="blog-en.html">Blog</a></li>
+          <li><a href="agones-en.html" class="active">Races</a></li>
+          <li class="dropdown">
+            <button type="button" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">Tools <span class="caret">▾</span></button>
+            <ul class="dropdown-menu">
+              <li><a href="programma-5k-en.html">5K Plan</a></li>
+              <li><a href="calculator-en.html">Calculator</a></li>
+              <li><a href="zones-palmon-en.html">Heart-Rate Zones</a></li>
+            </ul>
+          </li>
+          <li><a href="contact-en.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <h2 class="section-title">Running Races in Greece</h2>
+    <p class="lead">
+      From the historic Athens Marathon to mountain races in the highlands — Greece is full of
+      routes. Filter by type, click a marker or press "Show on map" on a card to focus on a race.
+    </p>
+
+    <div class="race-filters" role="group" aria-label="Race filters">
+      <button class="rf-btn active" data-filter="all" type="button">All</button>
+      <button class="rf-btn" data-filter="road" type="button">Road</button>
+      <button class="rf-btn" data-filter="mountain" type="button">Mountain</button>
+      <button class="rf-btn" data-filter="ultra" type="button">Ultra</button>
+    </div>
+
+    <div id="race-map"></div>
+    <div class="map-legend">
+      <span><i class="leg-dot" style="background:#ff5722"></i>Road</span>
+      <span><i class="leg-dot" style="background:#2ecc71"></i>Mountain</span>
+      <span><i class="leg-dot" style="background:#e24b4a"></i>Ultra</span>
+    </div>
+
+    <div class="race-list post-grid">
+      <article class="post-card race-card" data-type="road" data-lat="38.155" data-lng="23.965">
+        <div class="post-body">
+          <p class="post-meta"><span class="race-type type-road">Road</span> · November</p>
+          <h3>Athens Authentic Marathon</h3>
+          <p class="race-specs">42.2 km · Road</p>
+          <p>The historic marathon, from Marathon to the Panathenaic Stadium — the route that started it all.</p>
+          <div class="race-actions">
+            <button class="show-on-map" type="button">Show on map</button>
+            <a class="read-more" href="https://www.athensauthenticmarathon.gr/" target="_blank" rel="noopener">Official site →</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="post-card race-card" data-type="ultra" data-lat="37.075" data-lng="22.43">
+        <div class="post-body">
+          <p class="post-meta"><span class="race-type type-ultra">Ultra</span> · September</p>
+          <h3>Spartathlon</h3>
+          <p class="race-specs">246 km · Ultramarathon</p>
+          <p>Legendary ultramarathon: Athens → Sparta, following the footsteps of Pheidippides. One of the toughest races in the world.</p>
+          <div class="race-actions">
+            <button class="show-on-map" type="button">Show on map</button>
+            <a class="read-more" href="https://www.spartathlon.gr/" target="_blank" rel="noopener">Official site →</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="post-card race-card" data-type="mountain" data-lat="40.088" data-lng="22.50">
+        <div class="post-body">
+          <p class="post-meta"><span class="race-type type-mountain">Mountain</span> · June</p>
+          <h3>Olympus Marathon</h3>
+          <p class="race-specs">44 km · Mountain</p>
+          <p>A demanding mountain race on mythical Mount Olympus, finishing at Prionia.</p>
+          <div class="race-actions">
+            <button class="show-on-map" type="button">Show on map</button>
+            <a class="read-more" href="https://olympus-marathon.com/" target="_blank" rel="noopener">Official site →</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="post-card race-card" data-type="mountain" data-lat="39.88" data-lng="20.75">
+        <div class="post-body">
+          <p class="post-meta"><span class="race-type type-mountain">Mountain</span> · July</p>
+          <h3>Zagori Mountain Running</h3>
+          <p class="race-specs">10–80 km · Mountain</p>
+          <p>Trail running in the stunning Zagori villages, with routes for every level.</p>
+          <div class="race-actions">
+            <button class="show-on-map" type="button">Show on map</button>
+            <a class="read-more" href="https://www.google.com/search?q=Zagori+Mountain+Running" target="_blank" rel="noopener">Info →</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="post-card race-card" data-type="road" data-lat="40.626" data-lng="22.948">
+        <div class="post-body">
+          <p class="post-meta"><span class="race-type type-road">Road</span> · April</p>
+          <h3>Thessaloniki Marathon "Alexander the Great"</h3>
+          <p class="race-specs">42.2 km · Road</p>
+          <p>A marathon in Thessaloniki, dedicated to Alexander the Great.</p>
+          <div class="race-actions">
+            <button class="show-on-map" type="button">Show on map</button>
+            <a class="read-more" href="https://www.google.com/search?q=Thessaloniki+Marathon+Alexander+the+Great" target="_blank" rel="noopener">Info →</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="post-card race-card" data-type="road" data-lat="39.667" data-lng="20.85">
+        <div class="post-body">
+          <p class="post-meta"><span class="race-type type-road">Road</span> · March</p>
+          <h3>Ioannina Lake Run</h3>
+          <p class="race-specs">30 km · Road</p>
+          <p>A popular race around Lake Pamvotida, with beautiful views.</p>
+          <div class="race-actions">
+            <button class="show-on-map" type="button">Show on map</button>
+            <a class="read-more" href="https://www.google.com/search?q=Ioannina+Lake+Run" target="_blank" rel="noopener">Info →</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="post-card race-card" data-type="road" data-lat="36.43" data-lng="28.22">
+        <div class="post-body">
+          <p class="post-meta"><span class="race-type type-road">Road</span> · April</p>
+          <h3>Rhodes International Marathon</h3>
+          <p class="race-specs">42.2 km &amp; shorter · Road</p>
+          <p>A marathon against the backdrop of Rhodes' medieval old town and the sea.</p>
+          <div class="race-actions">
+            <button class="show-on-map" type="button">Show on map</button>
+            <a class="read-more" href="https://www.google.com/search?q=Rhodes+International+Marathon" target="_blank" rel="noopener">Info →</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="post-card race-card" data-type="road" data-lat="36.92" data-lng="21.70">
+        <div class="post-body">
+          <p class="post-meta"><span class="race-type type-road">Road</span> · October</p>
+          <h3>Navarino Challenge</h3>
+          <p class="race-specs">5 &amp; 10 km · Beach / Road</p>
+          <p>A sports &amp; wellness event in Messinia (Costa Navarino), with activities for the whole family.</p>
+          <div class="race-actions">
+            <button class="show-on-map" type="button">Show on map</button>
+            <a class="read-more" href="https://www.google.com/search?q=Navarino+Challenge" target="_blank" rel="noopener">Info →</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="post-card race-card" data-type="road" data-lat="35.366" data-lng="24.474">
+        <div class="post-body">
+          <p class="post-meta"><span class="race-type type-road">Road</span> · Spring</p>
+          <h3>Run Crete (Rethymno)</h3>
+          <p class="race-specs">Various distances · Road</p>
+          <p>Road races against the backdrop of Cretan nature and the sea.</p>
+          <div class="race-actions">
+            <button class="show-on-map" type="button">Show on map</button>
+            <a class="read-more" href="https://www.google.com/search?q=Run+Crete+Rethymno+race" target="_blank" rel="noopener">Info →</a>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <p class="plan-note" style="margin-top:1.5rem;">
+      <svg style="width:1em;height:1em;vertical-align:-0.15em;margin-right:0.3em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>Dates and registration change every year — the links take you to the official/up-to-date
+      information for each race.
+    </p>
+  </main>
+
+  <footer>
+    <img src="images/logo-footer.png?v=2" alt="Δέσε Κορδόνια" class="footer-logo">
+    <div class="footer-social">
+      <a href="https://instagram.com/nikol.akr" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+      </a>
+    </div>
+    <p class="footer-copy">© 2026 <span class="accent">Δέσε Κορδόνια</span></p>
+  </footer>
+
+  <script src="js/main.js?v=26" defer></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    (function () {
+      if (typeof L === 'undefined') return;
+      var COLORS = { road: '#ff5722', mountain: '#2ecc71', ultra: '#e24b4a' };
+      var map = L.map('race-map', { scrollWheelZoom: false }).setView([38.7, 23.5], 6);
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+        maxZoom: 19,
+        attribution: '© OpenStreetMap, © CARTO'
+      }).addTo(map);
+
+      // Ensure all markers render once layout settles
+      map.whenReady(function () { setTimeout(function () { map.invalidateSize(); }, 250); });
+
+      var cards = Array.prototype.slice.call(document.querySelectorAll('.race-card'));
+      var entries = [];
+
+      cards.forEach(function (card) {
+        var lat = parseFloat(card.dataset.lat), lng = parseFloat(card.dataset.lng);
+        if (isNaN(lat) || isNaN(lng)) return;
+        var type = card.dataset.type || 'road';
+        var name = (card.querySelector('h3') || {}).textContent || '';
+        var specs = (card.querySelector('.race-specs') || {}).textContent || '';
+        var linkEl = card.querySelector('.read-more');
+        var linkHtml = linkEl ? '<a href="' + linkEl.href + '" target="_blank" rel="noopener">' + linkEl.textContent + '</a>' : '';
+        var popup = '<h4>' + name + '</h4><p>' + specs + '</p>' + linkHtml;
+
+        var marker = L.circleMarker([lat, lng], {
+          radius: 9, color: '#fff', weight: 2,
+          fillColor: COLORS[type] || '#ff5722', fillOpacity: 0.95
+        }).bindPopup(popup).addTo(map);
+
+        entries.push({ card: card, marker: marker, type: type, lat: lat, lng: lng });
+
+        var btn = card.querySelector('.show-on-map');
+        if (btn) btn.addEventListener('click', function () {
+          map.flyTo([lat, lng], 11, { duration: 0.8 });
+          marker.openPopup();
+          document.getElementById('race-map').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
+      });
+
+      var fbtns = Array.prototype.slice.call(document.querySelectorAll('.rf-btn'));
+      fbtns.forEach(function (b) {
+        b.addEventListener('click', function () {
+          fbtns.forEach(function (x) { x.classList.remove('active'); });
+          b.classList.add('active');
+          var f = b.dataset.filter;
+          entries.forEach(function (e) {
+            var show = (f === 'all' || e.type === f);
+            e.card.style.display = show ? '' : 'none';
+            if (show) { e.marker.addTo(map); } else { map.removeLayer(e.marker); }
+          });
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

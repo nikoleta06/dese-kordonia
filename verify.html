@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Επαλήθευση σύνδεσης | Δέσε Κορδόνια</title>
+  <meta name="description" content="Επαλήθευση του συνδέσμου σύνδεσης.">
+  <meta name="robots" content="noindex">
+
+  <link rel="canonical" href="https://desekordonia.com/verify.html">
+  <link rel="icon" type="image/x-icon" href="images/favicon.ico?v=1">
+  <link rel="apple-touch-icon" href="images/favicon.png?v=1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=54">
+</head>
+<body>
+  <header>
+    <div class="nav-inner">
+      <a class="brand" href="index.html">
+        <img src="images/logo.png?v=2" alt="Λογότυπο Δέσε Κορδόνια" class="logo">
+        Δέσε<span class="dot">.</span>Κορδόνια
+      </a>
+      <nav>
+        <ul class="menu">
+          <li><a href="index.html">Αρχική</a></li>
+          <li><a href="healthy.html">Ευεξία &amp; Οφέλη</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="agones.html">Αγώνες</a></li>
+          <li class="dropdown">
+            <button type="button" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">Εργαλεία <span class="caret">▾</span></button>
+            <ul class="dropdown-menu">
+              <li><a href="programma-5k.html">Πρόγραμμα 5K</a></li>
+              <li><a href="calculator.html">Υπολογιστής</a></li>
+              <li><a href="zones-palmon.html">Ζώνες Παλμών</a></li>
+            </ul>
+          </li>
+          <li><a href="contact.html">Επικοινωνία</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <h2 class="section-title">Επαλήθευση σύνδεσης</h2>
+    <div class="calc">
+      <p id="status">Έλεγχος του συνδέσμου...</p>
+      <a class="btn calc-hidden" id="loginLink" href="login.html">Πίσω στη σύνδεση</a>
+    </div>
+  </main>
+
+  <footer>
+    <img src="images/logo-footer.png?v=2" alt="Δέσε Κορδόνια" class="footer-logo">
+    <div class="footer-social">
+      <a href="https://instagram.com/nikol.akr" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+      </a>
+    </div>
+    <p class="footer-copy">© 2026 <span class="accent">Δέσε Κορδόνια</span></p>
+  </footer>
+
+  <script src="js/main.js?v=26" defer></script>
+
+  <script>
+    (function () {
+      const $ = (id) => document.getElementById(id);
+      const API = (location.hostname === 'localhost') ? 'http://localhost:4000' : 'https://dese-kordonia-backend.onrender.com';
+
+      async function verify() {
+        const token = new URLSearchParams(location.search).get('token');
+        if (!token) {
+          $('status').textContent = 'Λείπει το token επαλήθευσης.';
+          $('loginLink').classList.remove('calc-hidden');
+          return;
+        }
+        try {
+          const r = await fetch(API + '/api/auth/verify?token=' + encodeURIComponent(token), {
+            credentials: 'include'
+          });
+          if (r.ok) {
+            $('status').textContent = 'Συνδέθηκες! Μεταφέρεσαι στον λογαριασμό σου...';
+            setTimeout(() => { location.href = 'account.html'; }, 1200);
+          } else {
+            $('status').textContent = 'Ο σύνδεσμος έληξε ή δεν είναι έγκυρος.';
+            $('loginLink').classList.remove('calc-hidden');
+          }
+        } catch (e) {
+          $('status').textContent = "Δεν μπόρεσα να συνδεθώ με τον server. Τρέχει τοπικά;";
+          $('loginLink').classList.remove('calc-hidden');
+        }
+      }
+
+      verify();
+    })();
+  </script>
+</body>
+</html>
