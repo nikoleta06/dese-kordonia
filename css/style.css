@@ -1897,6 +1897,20 @@ footer .footer-copy {
   font-size: 0.85rem;
 }
 
+footer .footer-links {
+  font-size: 0.8rem;
+  margin-top: 0.5rem;
+}
+
+footer .footer-links a {
+  color: var(--text-dim);
+  text-decoration: underline;
+}
+
+footer .footer-links a:hover {
+  color: var(--accent);
+}
+
 footer .accent {
   color: var(--accent);
 }

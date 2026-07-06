@@ -139,6 +139,18 @@ document.addEventListener('DOMContentLoaded', function () {
       .catch(() => {});
   })();
 
+  /* --- Σύνδεσμος «Απόρρητο» στο footer --- */
+  (function () {
+    const copy = document.querySelector('footer .footer-copy');
+    if (!copy || document.querySelector('footer .footer-links')) return;
+    const href = DK_PAGE_EN ? 'privacy-en.html' : 'privacy.html';
+    const label = DK_PAGE_EN ? 'Privacy' : 'Απόρρητο';
+    const p = document.createElement('p');
+    p.className = 'footer-links';
+    p.innerHTML = '<a href="' + href + '">' + label + '</a>';
+    copy.insertAdjacentElement('afterend', p);
+  })();
+
   /* --- Scroll reveal animations --- */
   const revealSelectors = [
     '.card', '.section-title', '.lead', '.story', '.tips',
