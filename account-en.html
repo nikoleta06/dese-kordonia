@@ -67,6 +67,7 @@
 
       <button class="btn" id="saveBtn" type="button">Save</button>
       <button class="btn" id="logoutBtn" type="button" style="background:transparent;color:var(--text-dim);box-shadow:none;">Sign out</button>
+      <button class="btn" id="deleteBtn" type="button" style="background:transparent;color:#e57373;box-shadow:none;">Delete account</button>
 
       <div class="calc-result calc-hidden" id="result"></div>
     </div>
@@ -84,7 +85,7 @@
     <p class="footer-copy">© 2026 <span class="accent">Δέσε Κορδόνια</span></p>
   </footer>
 
-  <script src="js/main.js?v=26" defer></script>
+  <script src="js/main.js?v=27" defer></script>
 
   <script>
     (function () {
@@ -145,8 +146,18 @@
         location.href = 'index-en.html';
       }
 
+      async function deleteAccount() {
+        if (!confirm('Are you sure you want to delete your account? All your data will be erased and this cannot be undone.')) return;
+        $('deleteBtn').disabled = true;
+        try {
+          await fetch(API + '/api/profile', { method: 'DELETE', credentials: 'include' });
+        } catch (e) {}
+        location.href = 'index-en.html';
+      }
+
       $('saveBtn').addEventListener('click', save);
       $('logoutBtn').addEventListener('click', logout);
+      $('deleteBtn').addEventListener('click', deleteAccount);
       load();
     })();
   </script>

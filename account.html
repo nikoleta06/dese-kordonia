@@ -65,6 +65,7 @@
 
       <button class="btn" id="saveBtn" type="button">Αποθήκευση</button>
       <button class="btn" id="logoutBtn" type="button" style="background:transparent;color:var(--text-dim);box-shadow:none;">Αποσύνδεση</button>
+      <button class="btn" id="deleteBtn" type="button" style="background:transparent;color:#e57373;box-shadow:none;">Διαγραφή λογαριασμού</button>
 
       <div class="calc-result calc-hidden" id="result"></div>
     </div>
@@ -82,7 +83,7 @@
     <p class="footer-copy">© 2026 <span class="accent">Δέσε Κορδόνια</span></p>
   </footer>
 
-  <script src="js/main.js?v=26" defer></script>
+  <script src="js/main.js?v=27" defer></script>
 
   <script>
     (function () {
@@ -143,8 +144,18 @@
         location.href = 'index.html';
       }
 
+      async function deleteAccount() {
+        if (!confirm('Σίγουρα θέλεις να διαγράψεις τον λογαριασμό σου; Θα σβηστούν όλα τα στοιχεία σου και η ενέργεια δεν αναιρείται.')) return;
+        $('deleteBtn').disabled = true;
+        try {
+          await fetch(API + '/api/profile', { method: 'DELETE', credentials: 'include' });
+        } catch (e) {}
+        location.href = 'index.html';
+      }
+
       $('saveBtn').addEventListener('click', save);
       $('logoutBtn').addEventListener('click', logout);
+      $('deleteBtn').addEventListener('click', deleteAccount);
       load();
     })();
   </script>
