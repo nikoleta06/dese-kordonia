@@ -5,3 +5,7 @@ desktop.ini
 *.tmp
 served_check.jpg
 images/_originals/
+
+# Eleventy build
+node_modules/
+_site/
