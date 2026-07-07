@@ -1,0 +1,35 @@
+---
+permalink: "saved.html"
+lang: "el"
+title: "Αποθηκευμένα | Δέσε Κορδόνια"
+description: "Τα άρθρα που αποθήκευσες για να τα διαβάσεις αργότερα."
+---
+
+{% extends "base.njk" %}
+
+{% block head_extra0 %}
+  <meta name="robots" content="noindex">
+{% endblock %}
+
+{% block head_extra %}{% endblock %}
+
+{% block head_extra2 %}{% endblock %}
+
+{% block content %}
+  <main>
+    <h2 class="section-title">Αποθηκευμένα</h2>
+    <p class="lead">Τα άρθρα που αποθήκευσες για να τα διαβάσεις αργότερα. Αποθηκεύονται σε αυτή τη συσκευή.</p>
+
+    <div class="post-grid" id="savedGrid" hidden></div>
+
+    <div class="saved-empty" id="savedEmpty" hidden>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg>
+      <p>Δεν έχεις αποθηκεύσει κανένα άρθρο ακόμα.<br>Πάτησε το <strong>«Αποθήκευση»</strong> σε όποιο άρθρο θέλεις να κρατήσεις για αργότερα.</p>
+      <a class="read-more" href="blog.html">Δες όλα τα άρθρα →</a>
+    </div>
+  </main>
+{% endblock %}
+
+{% block body_extra %}{% endblock %}
+
+{% block scripts_extra %}{% endblock %}

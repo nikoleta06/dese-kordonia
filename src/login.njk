@@ -1,0 +1,83 @@
+---
+permalink: "login.html"
+lang: "el"
+title: "Σύνδεση | Δέσε Κορδόνια"
+description: "Συνδέσου στο Δέσε Κορδόνια με το email σου — χωρίς κωδικό."
+---
+
+{% extends "base.njk" %}
+
+{% block head_extra0 %}{% endblock %}
+
+{% block head_extra %}
+  <meta name="robots" content="noindex">
+
+  <link rel="canonical" href="https://desekordonia.com/login.html">
+{% endblock %}
+
+{% block head_extra2 %}{% endblock %}
+
+{% block content %}
+  <main>
+    <h2 class="section-title">Σύνδεση</h2>
+    <p class="lead">
+      Βάλε το email σου και θα σου στείλουμε έναν σύνδεσμο σύνδεσης — δεν χρειάζεσαι κωδικό.
+    </p>
+
+    <div class="calc">
+      <div class="field">
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="you@example.com">
+      </div>
+
+      <button class="btn" id="sendBtn" type="button">Στείλε μου σύνδεσμο</button>
+
+      <div class="calc-result calc-hidden" id="result"></div>
+    </div>
+  </main>
+{% endblock %}
+
+{% block body_extra %}{% endblock %}
+
+{% block scripts_extra %}
+  <script>
+    (function () {
+      const $ = (id) => document.getElementById(id);
+      const API = (location.hostname === 'localhost') ? 'http://localhost:4000' : 'https://dese-kordonia-backend.onrender.com';
+
+      function showResult(text, isError) {
+        const el = $('result');
+        el.textContent = text;
+        el.classList.remove('calc-hidden');
+        el.style.color = isError ? 'var(--accent-2)' : '';
+      }
+
+      async function requestLink() {
+        const email = $('email').value.trim();
+        if (!email || !email.includes('@')) {
+          showResult('Βάλε ένα έγκυρο email.', true);
+          return;
+        }
+        $('sendBtn').disabled = true;
+        try {
+          const r = await fetch(API + '/api/auth/request-link', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: email })
+          });
+          if (r.ok) {
+            showResult('Έλεγξε το email σου για τον σύνδεσμο σύνδεσης (ισχύει 15 λεπτά).', false);
+          } else {
+            showResult('Κάτι πήγε στραβά. Δοκίμασε ξανά.', true);
+          }
+        } catch (e) {
+          showResult('Δεν μπόρεσα να συνδεθώ με τον server. Τρέχει τοπικά;', true);
+        }
+        $('sendBtn').disabled = false;
+      }
+
+      $('sendBtn').addEventListener('click', requestLink);
+      $('email').addEventListener('keydown', (e) => { if (e.key === 'Enter') requestLink(); });
+    })();
+  </script>
+{% endblock %}

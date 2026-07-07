@@ -1,0 +1,123 @@
+---
+permalink: "zones-palmon-en.html"
+lang: "en"
+title: "Heart-Rate Zones Calculator | Δέσε Κορδόνια"
+description: "Free heart-rate training zones calculator for running: enter your age (and optionally resting heart rate) to see your 5 training zones with the heart-rate range of each."
+activeNav: "zones-palmon"
+---
+
+{% extends "base.njk" %}
+
+{% block head_extra0 %}{% endblock %}
+
+{% block head_extra %}
+  <link rel="canonical" href="https://desekordonia.com/zones-palmon-en.html">
+  <link rel="alternate" hreflang="el" href="https://desekordonia.com/zones-palmon.html">
+  <link rel="alternate" hreflang="en" href="https://desekordonia.com/zones-palmon-en.html">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Heart-Rate Zones Calculator">
+  <meta property="og:description" content="Enter your age to see your 5 training zones with the heart-rate range of each.">
+  <meta property="og:image" content="https://desekordonia.com/images/cat-science.jpg">
+  <meta property="og:url" content="https://desekordonia.com/zones-palmon-en.html">
+  <meta name="twitter:card" content="summary_large_image">
+{% endblock %}
+
+{% block head_extra2 %}
+  <style>
+    .zones { margin-top: 1.2rem; display: flex; flex-direction: column; gap: 0.7rem; }
+    .zone { background: var(--surface-2); border-left: 4px solid var(--accent); border-radius: 8px; padding: 0.8rem 1rem; }
+    .zone .z-head { display: flex; align-items: baseline; justify-content: space-between; gap: 0.8rem; flex-wrap: wrap; }
+    .zone .z-name { font-family: "Oswald", sans-serif; color: var(--text); font-size: 1.02rem; letter-spacing: 0.3px; }
+    .zone .z-bpm { font-family: "Oswald", sans-serif; color: var(--accent-2); font-weight: 600; white-space: nowrap; }
+    .zone .z-desc { color: var(--text-dim); font-size: 0.9rem; margin: 0.35rem 0 0; }
+    .zone.z1 { border-left-color: #4aa3ff; }
+    .zone.z2 { border-left-color: #2ecc71; }
+    .zone.z3 { border-left-color: #f1c40f; }
+    .zone.z4 { border-left-color: #ff9800; }
+    .zone.z5 { border-left-color: #e24b4a; }
+    .maxhr-line { margin-top: 0.5rem; color: var(--text-dim); }
+    .maxhr-line strong { color: var(--accent); font-size: 1.15rem; }
+  </style>
+{% endblock %}
+
+{% block content %}
+  <main>
+    <h2 class="section-title">Heart-Rate Zones</h2>
+    <p class="lead">
+      Heart-rate zones help you train smart: sometimes easy for endurance, sometimes hard for
+      speed. Enter your age (and optionally your resting heart rate for a more accurate result)
+      and see your 5 zones.
+    </p>
+
+    <div class="calc">
+      <div class="field">
+        <label for="age">Age</label>
+        <input type="number" id="age" min="5" max="120" step="1" placeholder="e.g. 30">
+      </div>
+
+      <div class="field">
+        <label for="resting">Resting heart rate <span style="color:var(--text-dim); font-weight:400;">(optional)</span></label>
+        <input type="number" id="resting" min="30" max="120" step="1" placeholder="e.g. 60">
+        <small>Measure it in the morning, rested, before getting out of bed.</small>
+      </div>
+
+      <button class="btn" id="calcBtn" type="button">Calculate</button>
+
+      <div class="calc-result calc-hidden" id="result">
+        <p class="maxhr-line">Estimated max heart rate: <strong id="maxhrVal">--</strong> bpm <span id="method" style="font-size:0.85rem;"></span></p>
+        <div class="zones" id="zones"></div>
+        <p class="image-credit" style="margin-top:1rem;">* Indicative calculation. Not a substitute for medical advice — if you have a health condition, consult a doctor.</p>
+      </div>
+    </div>
+  </main>
+{% endblock %}
+
+{% block body_extra %}{% endblock %}
+
+{% block scripts_extra %}
+  <script>
+    (function () {
+      const $ = (id) => document.getElementById(id);
+
+      function calculate() {
+        const age = parseInt($('age').value);
+        const rest = parseInt($('resting').value) || 0;
+        if (!age || age < 5 || age > 120) {
+          alert('Enter a valid age (5–120).');
+          return;
+        }
+        const maxHR = Math.round(208 - 0.7 * age); // Tanaka formula
+        const useHRR = rest > 0 && rest < maxHR;
+        $('maxhrVal').textContent = maxHR;
+        $('method').textContent = useHRR ? '(Karvonen method)' : '(% of max heart rate)';
+
+        const zones = [
+          { n: 'Zone 1 · Recovery', lo: 0.50, hi: 0.60, d: 'Very easy. Warm-up, cool-down and active recovery.' },
+          { n: 'Zone 2 · Aerobic base', lo: 0.60, hi: 0.70, d: 'Comfortable running where you can talk. This is where endurance is built — most of your runs.' },
+          { n: 'Zone 3 · Tempo', lo: 0.70, hi: 0.80, d: 'Moderate to hard effort. Improves aerobic capacity.' },
+          { n: 'Zone 4 · Threshold', lo: 0.80, hi: 0.90, d: 'Hard effort near your lactate threshold. Raises your sustainable speed.' },
+          { n: 'Zone 5 · Maximum', lo: 0.90, hi: 1.00, d: 'Very hard, short intervals. Improves VO₂max and speed.' }
+        ];
+
+        const hr = (p) => useHRR ? Math.round(rest + p * (maxHR - rest)) : Math.round(p * maxHR);
+
+        $('zones').innerHTML = zones.map((z, i) =>
+          '<div class="zone z' + (i + 1) + '">' +
+            '<div class="z-head"><span class="z-name">' + z.n + '</span>' +
+            '<span class="z-bpm">' + hr(z.lo) + '–' + hr(z.hi) + ' bpm</span></div>' +
+            '<p class="z-desc">' + z.d + '</p>' +
+          '</div>'
+        ).join('');
+
+        $('result').classList.remove('calc-hidden');
+      }
+
+      $('calcBtn').addEventListener('click', calculate);
+      ['age', 'resting'].forEach((id) =>
+        $(id).addEventListener('keydown', (e) => { if (e.key === 'Enter') calculate(); })
+      );
+    })();
+  </script>
+{% endblock %}

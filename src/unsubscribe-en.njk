@@ -1,0 +1,57 @@
+---
+permalink: "unsubscribe-en.html"
+lang: "en"
+title: "Unsubscribe | Δέσε Κορδόνια"
+description: "Unsubscribe from the Δέσε Κορδόνια newsletter."
+---
+
+{% extends "base.njk" %}
+
+{% block head_extra0 %}{% endblock %}
+
+{% block head_extra %}
+  <meta name="robots" content="noindex">
+  <link rel="canonical" href="https://desekordonia.com/unsubscribe-en.html">
+  <link rel="alternate" hreflang="el" href="https://desekordonia.com/unsubscribe.html">
+  <link rel="alternate" hreflang="en" href="https://desekordonia.com/unsubscribe-en.html">
+{% endblock %}
+
+{% block head_extra2 %}{% endblock %}
+
+{% block content %}
+  <main>
+    <h2 class="section-title">Unsubscribe</h2>
+    <div class="calc">
+      <p id="status">Processing...</p>
+    </div>
+  </main>
+{% endblock %}
+
+{% block body_extra %}{% endblock %}
+
+{% block scripts_extra %}
+  <script>
+    (function () {
+      const $ = (id) => document.getElementById(id);
+      const API = (location.hostname === 'localhost') ? 'http://localhost:4000' : 'https://dese-kordonia-backend.onrender.com';
+
+      async function run() {
+        const token = new URLSearchParams(location.search).get('token');
+        if (!token) {
+          $('status').textContent = 'Missing unsubscribe token.';
+          return;
+        }
+        try {
+          const r = await fetch(API + '/api/newsletter/unsubscribe/' + encodeURIComponent(token));
+          $('status').textContent = r.ok
+            ? "Done! You won't receive the newsletter anymore."
+            : 'This link is invalid or has already been used.';
+        } catch (e) {
+          $('status').textContent = "Couldn't reach the server. Is it running locally?";
+        }
+      }
+
+      run();
+    })();
+  </script>
+{% endblock %}

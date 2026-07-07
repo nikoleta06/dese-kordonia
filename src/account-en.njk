@@ -1,0 +1,131 @@
+---
+permalink: "account-en.html"
+lang: "en"
+title: "My account | Δέσε Κορδόνια"
+description: "Your profile on Δέσε Κορδόνια."
+---
+
+{% extends "base.njk" %}
+
+{% block head_extra0 %}{% endblock %}
+
+{% block head_extra %}
+  <meta name="robots" content="noindex">
+  <link rel="canonical" href="https://desekordonia.com/account-en.html">
+  <link rel="alternate" hreflang="el" href="https://desekordonia.com/account.html">
+  <link rel="alternate" hreflang="en" href="https://desekordonia.com/account-en.html">
+{% endblock %}
+
+{% block head_extra2 %}{% endblock %}
+
+{% block content %}
+  <main>
+    <h2 class="section-title">My account</h2>
+    <p class="lead calc-hidden" id="intro">Your profile.</p>
+
+    <div class="calc calc-hidden" id="form">
+      <div class="field">
+        <label>Email</label>
+        <input type="text" id="email" disabled>
+      </div>
+      <div class="field">
+        <label for="name">Name</label>
+        <input type="text" id="name" placeholder="Your name">
+      </div>
+      <div class="field">
+        <label for="bio">A few words about you</label>
+        <input type="text" id="bio" placeholder="e.g. Running since 2023">
+      </div>
+      <div class="field">
+        <label><input type="checkbox" id="newsletter"> I want to receive the newsletter</label>
+      </div>
+
+      <button class="btn" id="saveBtn" type="button">Save</button>
+      <button class="btn" id="logoutBtn" type="button" style="background:transparent;color:var(--text-dim);box-shadow:none;">Sign out</button>
+      <button class="btn" id="deleteBtn" type="button" style="background:transparent;color:#e57373;box-shadow:none;">Delete account</button>
+
+      <div class="calc-result calc-hidden" id="result"></div>
+    </div>
+
+    <p id="status">Checking your session...</p>
+  </main>
+{% endblock %}
+
+{% block body_extra %}{% endblock %}
+
+{% block scripts_extra %}
+  <script>
+    (function () {
+      const $ = (id) => document.getElementById(id);
+      const API = (location.hostname === 'localhost') ? 'http://localhost:4000' : 'https://dese-kordonia-backend.onrender.com';
+
+      function fill(user) {
+        $('email').value = user.email;
+        $('name').value = user.name || '';
+        $('bio').value = user.bio || '';
+        $('newsletter').checked = !!user.newsletter_subscribed;
+        $('status').classList.add('calc-hidden');
+        $('intro').classList.remove('calc-hidden');
+        $('form').classList.remove('calc-hidden');
+      }
+
+      async function load() {
+        try {
+          const r = await fetch(API + '/api/auth/me', { credentials: 'include' });
+          if (!r.ok) {
+            location.href = 'login-en.html';
+            return;
+          }
+          fill(await r.json());
+        } catch (e) {
+          $('status').textContent = "Couldn't reach the server. Is it running locally?";
+        }
+      }
+
+      async function save() {
+        $('saveBtn').disabled = true;
+        try {
+          const r = await fetch(API + '/api/profile', {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
+            body: JSON.stringify({
+              name: $('name').value.trim(),
+              bio: $('bio').value.trim(),
+              newsletter_subscribed: $('newsletter').checked
+            })
+          });
+          const result = $('result');
+          result.classList.remove('calc-hidden');
+          result.textContent = r.ok ? 'Saved!' : 'Something went wrong.';
+        } catch (e) {
+          const result = $('result');
+          result.classList.remove('calc-hidden');
+          result.textContent = "Couldn't reach the server.";
+        }
+        $('saveBtn').disabled = false;
+      }
+
+      async function logout() {
+        try {
+          await fetch(API + '/api/auth/logout', { method: 'POST', credentials: 'include' });
+        } catch (e) {}
+        location.href = 'index-en.html';
+      }
+
+      async function deleteAccount() {
+        if (!confirm('Are you sure you want to delete your account? All your data will be erased and this cannot be undone.')) return;
+        $('deleteBtn').disabled = true;
+        try {
+          await fetch(API + '/api/profile', { method: 'DELETE', credentials: 'include' });
+        } catch (e) {}
+        location.href = 'index-en.html';
+      }
+
+      $('saveBtn').addEventListener('click', save);
+      $('logoutBtn').addEventListener('click', logout);
+      $('deleteBtn').addEventListener('click', deleteAccount);
+      load();
+    })();
+  </script>
+{% endblock %}

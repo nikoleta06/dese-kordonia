@@ -1,0 +1,129 @@
+---
+permalink: "calculator-en.html"
+lang: "en"
+title: "Running Pace Calculator | Δέσε Κορδόνια"
+description: "Free running pace calculator: enter your distance and time to see your pace per kilometre and estimated times for 5K, 10K, half marathon and marathon."
+activeNav: "calculator"
+---
+
+{% extends "base.njk" %}
+
+{% block head_extra0 %}{% endblock %}
+
+{% block head_extra %}
+  <link rel="canonical" href="https://desekordonia.com/calculator-en.html">
+  <link rel="alternate" hreflang="el" href="https://desekordonia.com/calculator.html">
+  <link rel="alternate" hreflang="en" href="https://desekordonia.com/calculator-en.html">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Running Pace Calculator | Δέσε Κορδόνια">
+  <meta property="og:description" content="Enter your distance and time to see your pace and estimated race times.">
+  <meta property="og:image" content="https://desekordonia.com/images/hero-runner.jpg">
+  <meta property="og:url" content="https://desekordonia.com/calculator-en.html">
+  <meta name="twitter:card" content="summary_large_image">
+{% endblock %}
+
+{% block head_extra2 %}{% endblock %}
+
+{% block content %}
+  <main>
+    <h2 class="section-title">Pace Calculator</h2>
+    <p class="lead">
+      Enter your distance and time to see your pace per kilometre — along with estimated times for
+      the classic distances. Perfect for setting goals!
+    </p>
+
+    <div class="calc">
+      <div class="field">
+        <label for="distance">Distance (kilometres)</label>
+        <input type="number" id="distance" min="0" step="0.1" placeholder="e.g. 5">
+      </div>
+
+      <div class="field">
+        <label>Time</label>
+        <div class="time-inputs">
+          <div>
+            <input type="number" id="hours" min="0" placeholder="0">
+            <small>hours</small>
+          </div>
+          <div>
+            <input type="number" id="minutes" min="0" max="59" placeholder="30">
+            <small>min</small>
+          </div>
+          <div>
+            <input type="number" id="seconds" min="0" max="59" placeholder="0">
+            <small>sec</small>
+          </div>
+        </div>
+      </div>
+
+      <button class="btn" id="calcBtn" type="button">Calculate</button>
+
+      <div class="calc-result calc-hidden" id="result">
+        <div class="pace">
+          <span class="big" id="paceValue">--:--</span>
+          <span class="label">pace per kilometre</span>
+        </div>
+        <table>
+          <tbody id="predictions"></tbody>
+        </table>
+        <p class="image-credit" style="margin-top:1rem;">* Estimates are based on your steady pace and are indicative.</p>
+      </div>
+    </div>
+  </main>
+{% endblock %}
+
+{% block body_extra %}{% endblock %}
+
+{% block scripts_extra %}
+  <script>
+    (function () {
+      const $ = (id) => document.getElementById(id);
+
+      function fmt(totalSeconds, withHours) {
+        totalSeconds = Math.round(totalSeconds);
+        const h = Math.floor(totalSeconds / 3600);
+        const m = Math.floor((totalSeconds % 3600) / 60);
+        const s = totalSeconds % 60;
+        const pad = (n) => String(n).padStart(2, '0');
+        if (withHours || h > 0) return h + ':' + pad(m) + ':' + pad(s);
+        return pad(m) + ':' + pad(s);
+      }
+
+      function calculate() {
+        const distance = parseFloat($('distance').value);
+        const h = parseInt($('hours').value) || 0;
+        const m = parseInt($('minutes').value) || 0;
+        const s = parseInt($('seconds').value) || 0;
+        const totalSeconds = h * 3600 + m * 60 + s;
+
+        if (!distance || distance <= 0 || totalSeconds <= 0) {
+          alert('Please enter a valid distance and time.');
+          return;
+        }
+
+        const paceSecPerKm = totalSeconds / distance;
+        $('paceValue').textContent = fmt(paceSecPerKm, false) + ' /km';
+
+        const targets = [
+          { label: '5 km', km: 5 },
+          { label: '10 km', km: 10 },
+          { label: 'Half Marathon (21.1 km)', km: 21.0975 },
+          { label: 'Marathon (42.2 km)', km: 42.195 }
+        ];
+
+        $('predictions').innerHTML = targets.map((t) =>
+          '<tr><td>' + t.label + '</td><td>' + fmt(paceSecPerKm * t.km, true) + '</td></tr>'
+        ).join('');
+
+        $('result').classList.remove('calc-hidden');
+      }
+
+      $('calcBtn').addEventListener('click', calculate);
+      ['distance', 'hours', 'minutes', 'seconds'].forEach((id) =>
+        $(id).addEventListener('keydown', (e) => { if (e.key === 'Enter') calculate(); })
+      );
+    })();
+  </script>
+{% endblock %}

@@ -1,0 +1,66 @@
+---
+permalink: "verify-en.html"
+lang: "en"
+title: "Verifying sign-in | Δέσε Κορδόνια"
+description: "Verifying your sign-in link."
+---
+
+{% extends "base.njk" %}
+
+{% block head_extra0 %}{% endblock %}
+
+{% block head_extra %}
+  <meta name="robots" content="noindex">
+  <link rel="canonical" href="https://desekordonia.com/verify-en.html">
+  <link rel="alternate" hreflang="el" href="https://desekordonia.com/verify.html">
+  <link rel="alternate" hreflang="en" href="https://desekordonia.com/verify-en.html">
+{% endblock %}
+
+{% block head_extra2 %}{% endblock %}
+
+{% block content %}
+  <main>
+    <h2 class="section-title">Verifying sign-in</h2>
+    <div class="calc">
+      <p id="status">Checking your link...</p>
+      <a class="btn calc-hidden" id="loginLink" href="login-en.html">Back to sign in</a>
+    </div>
+  </main>
+{% endblock %}
+
+{% block body_extra %}{% endblock %}
+
+{% block scripts_extra %}
+  <script>
+    (function () {
+      const $ = (id) => document.getElementById(id);
+      const API = (location.hostname === 'localhost') ? 'http://localhost:4000' : 'https://dese-kordonia-backend.onrender.com';
+
+      async function verify() {
+        const token = new URLSearchParams(location.search).get('token');
+        if (!token) {
+          $('status').textContent = 'Missing verification token.';
+          $('loginLink').classList.remove('calc-hidden');
+          return;
+        }
+        try {
+          const r = await fetch(API + '/api/auth/verify?token=' + encodeURIComponent(token), {
+            credentials: 'include'
+          });
+          if (r.ok) {
+            $('status').textContent = "You're signed in! Redirecting to your account...";
+            setTimeout(() => { location.href = 'account-en.html'; }, 1200);
+          } else {
+            $('status').textContent = 'This link has expired or is invalid.';
+            $('loginLink').classList.remove('calc-hidden');
+          }
+        } catch (e) {
+          $('status').textContent = "Couldn't reach the server. Is it running locally?";
+          $('loginLink').classList.remove('calc-hidden');
+        }
+      }
+
+      verify();
+    })();
+  </script>
+{% endblock %}

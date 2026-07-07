@@ -1,0 +1,65 @@
+---
+permalink: "verify.html"
+lang: "el"
+title: "Επαλήθευση σύνδεσης | Δέσε Κορδόνια"
+description: "Επαλήθευση του συνδέσμου σύνδεσης."
+---
+
+{% extends "base.njk" %}
+
+{% block head_extra0 %}{% endblock %}
+
+{% block head_extra %}
+  <meta name="robots" content="noindex">
+
+  <link rel="canonical" href="https://desekordonia.com/verify.html">
+{% endblock %}
+
+{% block head_extra2 %}{% endblock %}
+
+{% block content %}
+  <main>
+    <h2 class="section-title">Επαλήθευση σύνδεσης</h2>
+    <div class="calc">
+      <p id="status">Έλεγχος του συνδέσμου...</p>
+      <a class="btn calc-hidden" id="loginLink" href="login.html">Πίσω στη σύνδεση</a>
+    </div>
+  </main>
+{% endblock %}
+
+{% block body_extra %}{% endblock %}
+
+{% block scripts_extra %}
+  <script>
+    (function () {
+      const $ = (id) => document.getElementById(id);
+      const API = (location.hostname === 'localhost') ? 'http://localhost:4000' : 'https://dese-kordonia-backend.onrender.com';
+
+      async function verify() {
+        const token = new URLSearchParams(location.search).get('token');
+        if (!token) {
+          $('status').textContent = 'Λείπει το token επαλήθευσης.';
+          $('loginLink').classList.remove('calc-hidden');
+          return;
+        }
+        try {
+          const r = await fetch(API + '/api/auth/verify?token=' + encodeURIComponent(token), {
+            credentials: 'include'
+          });
+          if (r.ok) {
+            $('status').textContent = 'Συνδέθηκες! Μεταφέρεσαι στον λογαριασμό σου...';
+            setTimeout(() => { location.href = 'account.html'; }, 1200);
+          } else {
+            $('status').textContent = 'Ο σύνδεσμος έληξε ή δεν είναι έγκυρος.';
+            $('loginLink').classList.remove('calc-hidden');
+          }
+        } catch (e) {
+          $('status').textContent = "Δεν μπόρεσα να συνδεθώ με τον server. Τρέχει τοπικά;";
+          $('loginLink').classList.remove('calc-hidden');
+        }
+      }
+
+      verify();
+    })();
+  </script>
+{% endblock %}

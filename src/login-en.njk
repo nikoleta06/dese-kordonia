@@ -1,0 +1,84 @@
+---
+permalink: "login-en.html"
+lang: "en"
+title: "Sign in | Δέσε Κορδόνια"
+description: "Sign in to Δέσε Κορδόνια with your email — no password needed."
+---
+
+{% extends "base.njk" %}
+
+{% block head_extra0 %}{% endblock %}
+
+{% block head_extra %}
+  <meta name="robots" content="noindex">
+  <link rel="canonical" href="https://desekordonia.com/login-en.html">
+  <link rel="alternate" hreflang="el" href="https://desekordonia.com/login.html">
+  <link rel="alternate" hreflang="en" href="https://desekordonia.com/login-en.html">
+{% endblock %}
+
+{% block head_extra2 %}{% endblock %}
+
+{% block content %}
+  <main>
+    <h2 class="section-title">Sign in</h2>
+    <p class="lead">
+      Enter your email and we'll send you a sign-in link — no password needed.
+    </p>
+
+    <div class="calc">
+      <div class="field">
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="you@example.com">
+      </div>
+
+      <button class="btn" id="sendBtn" type="button">Send me a link</button>
+
+      <div class="calc-result calc-hidden" id="result"></div>
+    </div>
+  </main>
+{% endblock %}
+
+{% block body_extra %}{% endblock %}
+
+{% block scripts_extra %}
+  <script>
+    (function () {
+      const $ = (id) => document.getElementById(id);
+      const API = (location.hostname === 'localhost') ? 'http://localhost:4000' : 'https://dese-kordonia-backend.onrender.com';
+
+      function showResult(text, isError) {
+        const el = $('result');
+        el.textContent = text;
+        el.classList.remove('calc-hidden');
+        el.style.color = isError ? 'var(--accent-2)' : '';
+      }
+
+      async function requestLink() {
+        const email = $('email').value.trim();
+        if (!email || !email.includes('@')) {
+          showResult('Enter a valid email.', true);
+          return;
+        }
+        $('sendBtn').disabled = true;
+        try {
+          const r = await fetch(API + '/api/auth/request-link', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: email })
+          });
+          if (r.ok) {
+            showResult('Check your email for the sign-in link (valid for 15 minutes).', false);
+          } else {
+            showResult('Something went wrong. Please try again.', true);
+          }
+        } catch (e) {
+          showResult("Couldn't reach the server. Is it running locally?", true);
+        }
+        $('sendBtn').disabled = false;
+      }
+
+      $('sendBtn').addEventListener('click', requestLink);
+      $('email').addEventListener('keydown', (e) => { if (e.key === 'Enter') requestLink(); });
+    })();
+  </script>
+{% endblock %}

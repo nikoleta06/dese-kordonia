@@ -1,0 +1,174 @@
+---
+permalink: "index.html"
+lang: "el"
+title: "Δέσε Κορδόνια | Έμπνευση & συμβουλές για το τρέξιμο"
+description: "Προσωπική σελίδα για το τρέξιμο: έμπνευση, πρακτικές συμβουλές και η ιστορία μου, από το πρώτο χιλιόμετρο μέχρι τον μαραθώνιο."
+activeNav: "home"
+bodyDataPage: "home"
+---
+
+{% extends "base.njk" %}
+
+{% block head_extra0 %}{% endblock %}
+
+{% block head_extra %}
+  <!-- Open Graph (preview για Instagram / Facebook / WhatsApp) -->
+  <meta property="og:site_name" content="Δέσε Κορδόνια">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Δέσε Κορδόνια | Έμπνευση & συμβουλές για το τρέξιμο">
+  <meta property="og:description" content="Έμπνευση, πρακτικές συμβουλές και η ιστορία μου, από το πρώτο χιλιόμετρο μέχρι τον μαραθώνιο.">
+  <meta property="og:image" content="https://desekordonia.com/images/hero-runner.jpg">
+  <meta property="og:url" content="https://desekordonia.com/">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Structured Data (Schema.org WebSite) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Δέσε Κορδόνια",
+    "url": "https://desekordonia.com/",
+    "description": "Προσωπική σελίδα για το τρέξιμο: έμπνευση, πρακτικές συμβουλές και η ιστορία μου, από το πρώτο χιλιόμετρο μέχρι τον μαραθώνιο.",
+    "inLanguage": "el",
+    "author": {
+      "@type": "Person",
+      "name": "Νικολέτα"
+    }
+  }
+  </script>
+
+  <link rel="canonical" href="https://desekordonia.com/">
+{% endblock %}
+
+{% block head_extra2 %}{% endblock %}
+
+{% block content %}
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Δέσε <span class="accent">Κορδόνια</span></h1>
+      <p>
+        Γιατί κάθε χιλιόμετρο κρύβει μια ιστορία.
+      </p>
+      <div class="hero-buttons">
+        <a class="btn" href="programma-5k.html">Ξεκίνα το ταξίδι</a>
+        <a class="btn-outline" href="blog.html">Διάβασε τα άρθρα</a>
+      </div>
+      <button class="why-link" id="whyOpen" type="button">Γιατί τρέχεις;</button>
+    </div>
+  </section>
+
+  <main>
+    <!-- Προτεινόμενο άρθρο -->
+    <h2 class="section-title featured-heading"><svg style="width:0.9em;height:0.9em;vertical-align:-0.05em;margin-right:0.3em;color:var(--accent-2)" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.26 6.88.56-5.2 4.52 1.56 6.7L12 17.27 5.86 20.54l1.56-6.7-5.2-4.52 6.88-.56z"/></svg>Προτεινόμενο άρθρο</h2>
+    <article class="featured">
+      <img src="images/cat-champions.jpg?v=1" alt="Τι μας διδάσκει ο Jakob Ingebrigtsen" loading="lazy" decoding="async">
+      <div class="featured-body">
+        <p class="featured-tag">Τι μας διδάσκουν οι πρωταθλητές</p>
+        <h3>7 μαθήματα από τον Jakob Ingebrigtsen</h3>
+        <p>«Δεν μπορείς να τραβήξεις το καρότο από το έδαφος για να δεις αν μεγαλώνει.» Μαθήματα συνέπειας και υπομονής από έναν Ολυμπιονίκη.</p>
+        <a class="btn" href="post-ingebrigtsen.html">Διάβασε το άρθρο</a>
+      </div>
+    </article>
+
+    <h2 class="section-title" style="margin-top:4rem;">Γιατί να αρχίσεις σήμερα</h2>
+    <p class="lead">Το τρέξιμο δεν χρειάζεται εξοπλισμό, συνδρομές ή εμπειρία. Μόνο εσένα και τον δρόμο.</p>
+
+    <div class="cards">
+      <article class="card">
+        <div class="icon">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.49 5.48c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm-3.6 13.9l1-4.4 2.1 2v6h2v-7.5l-2.1-2 .6-3c1.3 1.5 3.3 2.5 5.5 2.5v-2c-1.9 0-3.5-1-4.3-2.4l-1-1.6c-.4-.6-1-1-1.7-1-.3 0-.5.1-.8.1l-5.2 2.2v4.7h2v-3.4l1.8-.7-1.6 8.1-4.9-1-.4 2 7 1.4z"/></svg>
+        </div>
+        <h3>Ξεκίνα απλά</h3>
+        <p>Δεν χρειάζεσαι τίποτα παραπάνω από ένα ζευγάρι παπούτσια και τη διάθεση να βγεις έξω. Τα υπόλοιπα έρχονται με τον δρόμο.</p>
+      </article>
+      <article class="card">
+        <div class="icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        </div>
+        <h3>Νιώσε καλύτερα</h3>
+        <p>Περισσότερη ενέργεια, καλύτερος ύπνος και ξεκάθαρο μυαλό. Το σώμα δυναμώνει και το κεφάλι ηρεμεί.</p>
+      </article>
+      <article class="card">
+        <div class="icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+        </div>
+        <h3>Βάλε στόχο</h3>
+        <p>Από τα πρώτα 5 χλμ μέχρι τον μαραθώνιο — κάθε στόχος ξεκινά με ένα απλό «δέσε κορδόνια».</p>
+      </article>
+    </div>
+
+    <!-- Προσωπική ιστορία -->
+    <section class="story">
+      <div>
+        <h2 class="section-title">Πώς Ξεκίνησα το Τρέξιμο</h2>
+        <p>
+          Η πρώτη φορά που φόρεσα αθλητικά, έδεσα τα κορδόνια μου και βγήκα έξω να τρέξω,
+          ήταν 2 μήνες μετά τις πανελλαδικές εξετάσεις. Αντιμετώπιζα ένα θέμα υγείας με
+          ημικρανίες εκείνη την περίοδο και είχα βγει με τον αδερφό μου, ο οποίος θα έκανε
+          την καθημερινή του προπόνηση, με σκοπό να του κάνω παρέα στο περπάτημα μέχρι το γήπεδο.
+        </p>
+        <p>
+          Από περιέργεια, μόλις μπήκε στον ρυθμό του τρεξίματος, μπήκα και εγώ μαζί του.
+          Κάπως έτσι, εκείνη τη μέρα, έτρεξα για πρώτη φορά το πρώτο μου χιλιόμετρο χωρίς να
+          σταματήσω, και παρά τη δυσκολία μου στις ανάσες και τον πόνο στα πόδια μου,
+          συνειδητοποίησα ότι με ανακούφισε από τον πονοκέφαλο που είχα.
+        </p>
+        <p>
+          Από εκείνη τη μέρα μπήκε το τρέξιμο στην καθημερινή μου ζωή και έχω φτάσει σε
+          τέτοιο επίπεδο που κάνω <strong>15 χιλιόμετρα ασταμάτητα</strong> — και σήμερα
+          προπονούμαι για τα 41,8 χλμ του <strong>μαραθωνίου</strong>.
+        </p>
+        <p>
+          Μέσα από το τρέξιμο, έμαθα να πειθαρχώ τον εαυτό μου και με κάθε ανάσα μου να
+          κοιτάω μπροστά.
+        </p>
+      </div>
+      <img src="images/cat-desekordonia.jpg?v=1" alt="Κοπέλα δένει τα κορδόνια της στον στίβο το ηλιοβασίλεμα" loading="lazy" decoding="async">
+    </section>
+
+    <!-- Γρήγορες συμβουλές -->
+    <h2 class="section-title" style="margin-top:4rem;">3 συμβουλές για να ξεκινήσεις σωστά</h2>
+    <ul class="tips">
+      <li>
+        <strong>Ξεκίνα αργά — πιο αργά απ' όσο νομίζεις</strong>
+        Αν μπορείς να μιλάς ενώ τρέχεις, πας στον σωστό ρυθμό. Η ταχύτητα έρχεται μόνη της.
+      </li>
+      <li>
+        <strong>Συνέπεια πάνω από ένταση</strong>
+        Τρία χαλαρά τρεξίματα την εβδομάδα χτίζουν περισσότερα από ένα εξαντλητικό.
+      </li>
+      <li>
+        <strong>Άκου το σώμα σου</strong>
+        Ο πόνος δεν είναι «αδυναμία» — είναι πληροφορία. Η ξεκούραση είναι κι αυτή προπόνηση.
+      </li>
+    </ul>
+
+    <!-- Quote -->
+    <div class="quote">
+      <blockquote>
+        «Δεν τρέχω για να ξεφύγω από τη ζωή. Τρέχω για να την <span class="accent">νιώσω</span> πιο έντονα.»
+      </blockquote>
+      <cite>— Δέσε Κορδόνια</cite>
+    </div>
+  </main>
+{% endblock %}
+
+{% block body_extra %}
+  <!-- "Γιατί τρέχεις;" modal -->
+  <div class="modal-overlay" id="whyModal" role="dialog" aria-modal="true" aria-label="Γιατί τρέχεις;">
+    <div class="modal">
+      <div id="whyBody">
+        <h3>Γιατί τρέχεις;</h3>
+        <div class="why-options">
+          <button type="button">Ψυχική ηρεμία</button>
+          <button type="button">Καθαρό μυαλό</button>
+          <button type="button">Να χάσω κιλά</button>
+          <button type="button">Να βελτιώσω τις αντοχές μου</button>
+        </div>
+        <button class="modal-close" id="whyClose">Κλείσιμο</button>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block scripts_extra %}{% endblock %}
