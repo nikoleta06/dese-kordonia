@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="{{ lang }}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% block head_extra0 %}{% endblock %}
+  <title>{{ title | safe }}</title>
+  <meta name="description" content="{{ description | safe }}">
+
+  {% block head_extra %}{% endblock %}
+
+  <link rel="icon" type="image/x-icon" href="images/favicon.ico?v=1">
+  <link rel="apple-touch-icon" href="images/favicon.png?v=1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v={{ site.cssVersion }}">
+
+  {% block head_extra2 %}{% endblock %}
+</head>
+<body{% if bodyDataPage %} data-page="{{ bodyDataPage }}"{% endif %}>
+  <header>
+    <div class="nav-inner">
+      <a class="brand" href="{{ nav.main[0].file | navHref(lang) }}">
+        <img src="images/logo.png?v=2" alt="{% if lang == 'en' %}Δέσε Κορδόνια logo{% else %}Λογότυπο Δέσε Κορδόνια{% endif %}" class="logo">
+        Δέσε<span class="dot">.</span>Κορδόνια
+      </a>
+      <nav>
+        <ul class="menu">
+          {% for item in nav.main %}
+          <li><a href="{{ item.file | navHref(lang) }}"{% if item.key == activeNav %} class="active"{% endif %}>{{ item[lang] | safe }}</a></li>
+          {% endfor %}
+          <li class="dropdown{% for item in nav.dropdown %}{% if item.key == activeNav %} active{% endif %}{% endfor %}">
+            <button type="button" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">{% if lang == 'en' %}Tools{% else %}Εργαλεία{% endif %} <span class="caret">▾</span></button>
+            <ul class="dropdown-menu">
+              {% for item in nav.dropdown %}
+              <li><a href="{{ item.file | navHref(lang) }}"{% if item.key == activeNav %} class="active"{% endif %}>{{ item[lang] | safe }}</a></li>
+              {% endfor %}
+            </ul>
+          </li>
+          <li><a href="{{ nav.contact.file | navHref(lang) }}"{% if nav.contact.key == activeNav %} class="active"{% endif %}>{{ nav.contact[lang] | safe }}</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  {% block content %}{% endblock %}
+
+  <footer>
+    <img src="images/logo-footer.png?v=2" alt="Δέσε Κορδόνια" class="footer-logo">
+    <div class="footer-social">
+      <a href="https://instagram.com/nikol.akr" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+      </a>
+    </div>
+    <p class="footer-copy">© 2026 <span class="accent">Δέσε Κορδόνια</span></p>
+  </footer>
+
+  {% block body_extra %}{% endblock %}
+
+  <script src="js/main.js?v={{ site.jsVersion }}" defer></script>
+
+  {% block scripts_extra %}{% endblock %}
+</body>
+</html>
