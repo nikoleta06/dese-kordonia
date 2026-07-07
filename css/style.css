@@ -267,6 +267,18 @@ header nav {
     url("../images/hero-runner.jpg?v=1") center/cover no-repeat;
 }
 
+@supports (background-image: image-set(url("x.avif") type("image/avif"))) {
+  .hero {
+    background-image:
+      linear-gradient(rgba(15, 17, 21, 0.55), rgba(15, 17, 21, 0.85)),
+      image-set(
+        url("../images/hero-runner.avif?v=1") type("image/avif") 1x,
+        url("../images/hero-runner.webp?v=1") type("image/webp") 1x,
+        url("../images/hero-runner.jpg?v=1") type("image/jpeg") 1x
+      );
+  }
+}
+
 .hero-content {
   max-width: 720px;
 }
@@ -1289,11 +1301,19 @@ tbody tr:last-child td {
   color: var(--accent-2);
 }
 
-.article > img {
+.article > img,
+.article > picture {
+  display: block;
   width: 100%;
+  overflow: hidden;
   border-radius: var(--radius);
   border: 1px solid var(--border);
   margin: 1.5rem 0 2rem;
+}
+
+.article > picture > img {
+  display: block;
+  width: 100%;
 }
 
 .article h3 {

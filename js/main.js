@@ -155,7 +155,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const revealSelectors = [
     '.card', '.section-title', '.lead', '.story', '.tips',
     '.quote', '.post-card', '.calc', '.contact-card', '.article > img',
-    '.timeline-item', '.fact-card'
+    '.article > picture', '.timeline-item', '.fact-card'
   ];
   const targets = document.querySelectorAll(revealSelectors.join(','));
 
