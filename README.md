@@ -33,35 +33,39 @@
 - **Responsive** για κινητό, tablet και υπολογιστή
 
 ## Τεχνολογία
-Στατική ιστοσελίδα, **χωρίς build step**:
+Στατική ιστοσελίδα, χτισμένη με **[Eleventy](https://www.11ty.dev/)** (Nunjucks templates):
+- **Eleventy** — κοινό layout (`src/_includes/base.njk`) για head/menu/footer, ώστε μια αλλαγή στο μενού ή στο footer να μην χρειάζεται να γίνει σε δεκάδες αρχεία
 - **HTML5 & CSS** (CSS custom properties, dark/light theme)
-- **Vanilla JavaScript** (`src/js/main.js`) — theme, μενού, φίλτρα blog, like/save, σχετικά άρθρα, analytics
+- **Vanilla JavaScript** (`js/main.js`) — theme, μενού, φίλτρα blog, like/save, σχετικά άρθρα, analytics
 - **[Leaflet](https://leafletjs.com/)** — διαδραστικός χάρτης αγώνων
-- **[Supabase](https://supabase.com/)** — κοινό μέτρημα στα like (REST + RPC)
+- **[Supabase](https://supabase.com/)** — κοινό μέτρημα στα like (REST + RPC) + magic-link σύνδεση
 - **[GoatCounter](https://www.goatcounter.com/)** — στατιστικά επισκεψιμότητας
 
 ## Δομή
 ```
-index.html              # ανακατεύθυνση στην αρχική
-404.html                # branded σελίδα σφάλματος
-robots.txt
-sitemap.xml
+404.html                    # branded σελίδα σφάλματος (μένει εκτός Eleventy)
+robots.txt, sitemap.xml, CNAME
+package.json, .eleventy.js  # ρύθμιση Eleventy
 src/
-  html/                 # όλες οι σελίδες (EL & -en για EN)
-  css/style.css         # στυλ
-  js/main.js            # κοινό JavaScript
-images/                 # logo, favicon, εικόνες (originals στο images/_originals/)
-SETUP-LIKES.md          # οδηγίες Supabase (μέτρημα like)
-SETUP-ANALYTICS.md      # οδηγίες GoatCounter
+  _includes/base.njk        # το κοινό layout (head, header/nav, footer)
+  _data/nav.js, site.js     # στοιχεία μενού + εκδόσεις css/js (?v=)
+  *.njk                     # μία σελίδα ανά αρχείο (EL & -en για EN), ίδια δομή με πριν
+css/style.css               # στυλ
+js/main.js                  # κοινό JavaScript
+images/                     # logo, favicon, εικόνες (originals στο images/_originals/)
+SETUP-LIKES.md              # οδηγίες Supabase (μέτρημα like)
+SETUP-ANALYTICS.md          # οδηγίες GoatCounter
 ```
+Κάθε σελίδα (`.njk`) έχει ένα μικρό front matter (τίτλος, περιγραφή, γλώσσα) και μετά το δικό της περιεχόμενο — ό,τι ήταν πριν μέσα στο `<main>` παραμένει ακριβώς το ίδιο, απλά το header/footer/menu τα παίρνει έτοιμα από το layout.
 
 ## Τοπική προεπισκόπηση
 ```bash
-python -m http.server 8000
+npm install     # μία φορά
+npm run start   # Eleventy dev server με live reload
 ```
-Άνοιξε: http://localhost:8000/
+Άνοιξε: http://localhost:8080/
 
 ## Deployment
-Φιλοξενείται στο **GitHub Pages** (από το branch `main`). Το root `index.html` ανακατευθύνει στο `src/html/index.html`. Κάθε push ενημερώνει αυτόματα το live site.
+Φιλοξενείται στο **GitHub Pages** μέσω GitHub Actions ([.github/workflows/pages.yml](.github/workflows/pages.yml)): σε κάθε push στο `main`, το Action τρέχει `npm ci` + `npx eleventy` και ανεβάζει τον φάκελο `_site/`. Ο φάκελος `_site/` δεν μπαίνει ποτέ στο git (build artifact).
 
-> Σημείωση: τα στατικά αρχεία (CSS/JS) φορτώνονται με `?v=` παράμετρο για cache-busting — ανέβασέ την όταν αλλάζεις `style.css` ή `main.js`.
+> Σημείωση: τα στατικά αρχεία (CSS/JS) φορτώνονται με `?v=` παράμετρο για cache-busting — άλλαξέ το σε `src/_data/site.js` (`cssVersion`/`jsVersion`) όταν αλλάζεις `style.css` ή `main.js` — ενημερώνεται αυτόματα σε όλες τις σελίδες.
