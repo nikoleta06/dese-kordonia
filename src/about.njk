@@ -1,0 +1,115 @@
+---
+permalink: "about.html"
+lang: "el"
+title: "Σχετικά με εμένα | Δέσε Κορδόνια"
+description: "Είμαι η Νικολέτα — ένας άνθρωπος που τρέχει, διαβάζει, ερευνά και μοιράζεται όσα μαθαίνει. Γιατί έφτιαξα το Δέσε Κορδόνια."
+activeNav: "about"
+---
+
+{% extends "base.njk" %}
+
+{% block head_extra0 %}{% endblock %}
+
+{% block head_extra %}
+  <link rel="alternate" hreflang="el" href="https://desekordonia.com/about.html">
+  <link rel="alternate" hreflang="en" href="https://desekordonia.com/about-en.html">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Σχετικά με εμένα | Δέσε Κορδόνια">
+  <meta property="og:description" content="Γιατί έφτιαξα το Δέσε Κορδόνια — το τρέξιμο μου άλλαξε τη ζωή και θέλω να το μοιραστώ.">
+  <meta property="og:image" content="https://desekordonia.com/images/cat-desekordonia.jpg">
+  <meta property="og:url" content="https://desekordonia.com/about.html">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="canonical" href="https://desekordonia.com/about.html">
+{% endblock %}
+
+{% block head_extra2 %}
+  <style>
+    .about-recap p { margin: 0; color: var(--text-dim); line-height: 1.6; }
+    .about-recap p + p { margin-top: 0.7rem; font-size: 0.92rem; }
+    main .contact-card { max-width: 580px; margin: 1.5rem auto 0; }
+    .about-closing { max-width: 580px; margin: 2.2rem auto 0; text-align: center; font-style: italic; color: var(--text-dim); line-height: 1.6; }
+  </style>
+{% endblock %}
+
+{% block content %}
+  <main>
+    <h2 class="section-title">Σχετικά με εμένα</h2>
+    <p class="lead">
+      Γεια σου! Είμαι η Νικολέτα και δημιούργησα το «Δέσε Κορδόνια» για όσους
+      αγαπούν το τρέξιμο ή θέλουν να το βάλουν στη ζωή τους.
+    </p>
+
+    <section class="story">
+      <div>
+        <h2 class="section-title">Γιατί έφτιαξα το Δέσε Κορδόνια</h2>
+        <p>
+          Το τρέξιμο μπήκε στη ζωή μου σχεδόν τυχαία — και από τότε δεν το άφησα ποτέ.
+        </p>
+        <p>
+          Δεν είμαι επαγγελματίας προπονήτρια ούτε διατροφολόγος. Είμαι ένας άνθρωπος
+          που τρέχει, διαβάζει, ερευνά και μοιράζεται όσα μαθαίνει. Την προπονητική
+          την είχα σκεφτεί κάποτε, όμως τελικά με κέρδισε ο προγραμματισμός. Έτσι, το
+          «Δέσε Κορδόνια» έγινε ο τρόπος να ενώσω δύο πράγματα που αγαπώ:
+          <strong>την τεχνολογία και το τρέξιμο</strong>.
+        </p>
+        <p>
+          Το τρέξιμο δεν έγινε απλώς ένα χόμπι για μένα. Με βοήθησε να αλλάξω
+          συνήθειες, να αντιμετωπίσω δυσκολίες — ανάμεσά τους και
+          <a href="post-trexsimo-imikranies.html">τις ημικρανίες</a> — και να βλέπω
+          την καθημερινότητα με μεγαλύτερη αισιοδοξία. Όλο αυτό ήθελα να το μοιραστώ
+          με κάποιον τρόπο — κι έτσι γεννήθηκε αυτός ο ιστότοπος. Αν καταφέρω να
+          εμπνεύσω κάποιον έστω και λίγο μέσα από εδώ, αυτή η σελίδα έχει πετύχει τον
+          στόχο της.
+        </p>
+        <p>
+          Υπάρχει όμως και ένας ακόμη λόγος που δημιούργησα αυτή τη σελίδα. Κάποτε
+          ήμουν κι εγώ ένας άνθρωπος που έψαχνε αξιόπιστες πληροφορίες για να
+          βελτιωθεί στο τρέξιμο χωρίς να χρειάζεται να πληρώσει προπονητή. Επειδή το
+          τρέξιμο είναι για μένα χόμπι και όχι επάγγελμα, ήθελα να δημιουργήσω έναν
+          χώρο όπου αυτές οι πληροφορίες θα είναι δωρεάν και εύκολα προσβάσιμες.
+        </p>
+      </div>
+      <picture>
+        <source type="image/avif" srcset="images/cat-desekordonia.avif?v=1">
+        <source type="image/webp" srcset="images/cat-desekordonia.webp?v=1">
+        <img src="images/cat-desekordonia.jpg?v=1" alt="Κοπέλα δένει τα κορδόνια της στον στίβο το ηλιοβασίλεμα" loading="lazy" decoding="async">
+      </picture>
+    </section>
+
+    <div class="recap about-recap">
+      <h4><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg> Πώς δουλεύω</h4>
+      <p>
+        Πριν δημοσιευτεί οποιοδήποτε άρθρο, αφιερώνω χρόνο διαβάζοντας επιστημονικές
+        μελέτες, οδηγίες διεθνών οργανισμών και έγκυρες πηγές. Προσπαθώ να μετατρέψω
+        αυτές τις πληροφορίες σε κάτι απλό, κατανοητό και χρήσιμο για κάθε δρομέα.
+      </p>
+      <p>
+        Παρ' όλα αυτά, το περιεχόμενο του ιστότοπου δεν αντικαθιστά τις συμβουλές
+        ενός επαγγελματία υγείας ή προπονητή.
+      </p>
+    </div>
+
+    <div class="contact-card">
+      <span class="contact-icon"><svg style="width:2.6rem;height:2.6rem;color:var(--accent)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
+      <h3>Ας κρατήσουμε επαφή</h3>
+      <p>
+        Έχεις ερώτηση, ιδέα ή θέλεις να μοιραστείς τη δική σου διαδρομή; Θα ήθελες
+        να ανέβει άρθρο για κάποιο θέμα που σε ενδιαφέρει; Στείλε μου την ιδέα σου
+        σε αυτό το email — θα χαρώ πολύ να διαβάσω το μήνυμά σου!
+      </p>
+      <a class="btn" href="mailto:hello@desekordonia.com">hello@desekordonia.com</a>
+    </div>
+
+    <p class="about-closing">
+      Ελπίζω το «Δέσε Κορδόνια» να γίνει η αφορμή για να κάνεις κι εσύ το επόμενό
+      σου βήμα στο τρέξιμο — όποιο κι αν είναι αυτό.
+    </p>
+  </main>
+{% endblock %}
+
+{% block body_extra %}{% endblock %}
+
+{% block scripts_extra %}{% endblock %}

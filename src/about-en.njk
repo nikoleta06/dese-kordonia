@@ -1,0 +1,114 @@
+---
+permalink: "about-en.html"
+lang: "en"
+title: "About me | Δέσε Κορδόνια"
+description: "I'm Nikoleta — a person who runs, reads, researches and shares what she learns. Why I created Δέσε Κορδόνια."
+activeNav: "about"
+---
+
+{% extends "base.njk" %}
+
+{% block head_extra0 %}{% endblock %}
+
+{% block head_extra %}
+  <link rel="alternate" hreflang="el" href="https://desekordonia.com/about.html">
+  <link rel="alternate" hreflang="en" href="https://desekordonia.com/about-en.html">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="About me | Δέσε Κορδόνια">
+  <meta property="og:description" content="Why I created Δέσε Κορδόνια — running changed my life and I want to share it.">
+  <meta property="og:image" content="https://desekordonia.com/images/cat-desekordonia.jpg">
+  <meta property="og:url" content="https://desekordonia.com/about-en.html">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="canonical" href="https://desekordonia.com/about-en.html">
+{% endblock %}
+
+{% block head_extra2 %}
+  <style>
+    .about-recap p { margin: 0; color: var(--text-dim); line-height: 1.6; }
+    .about-recap p + p { margin-top: 0.7rem; font-size: 0.92rem; }
+    main .contact-card { max-width: 580px; margin: 1.5rem auto 0; }
+    .about-closing { max-width: 580px; margin: 2.2rem auto 0; text-align: center; font-style: italic; color: var(--text-dim); line-height: 1.6; }
+  </style>
+{% endblock %}
+
+{% block content %}
+  <main>
+    <h2 class="section-title">About me</h2>
+    <p class="lead">
+      Hi! I'm Nikoleta, and I created Δέσε Κορδόνια ("Tie Your Laces") for anyone
+      who loves running or wants to bring it into their life.
+    </p>
+
+    <section class="story">
+      <div>
+        <h2 class="section-title">Why I created Δέσε Κορδόνια</h2>
+        <p>
+          Running came into my life almost by accident — and I never let it go.
+        </p>
+        <p>
+          I'm not a professional coach or a nutritionist. I'm a person who runs,
+          reads, researches and shares what she learns. I did think about coaching
+          once, but in the end programming won me over. That's how Δέσε Κορδόνια
+          became my way of bringing together two things I love:
+          <strong>technology and running</strong>.
+        </p>
+        <p>
+          Running didn't just become a hobby for me. It helped me change my habits,
+          face difficulties — among them
+          <a href="post-trexsimo-imikranies-en.html">my migraines</a> — and see
+          everyday life with more optimism. I wanted to share all of that somehow —
+          and that's how this website was born. If I manage to inspire someone even a
+          little through it, this page has achieved its goal.
+        </p>
+        <p>
+          There's one more reason I created this page. I too was once a person
+          searching for reliable information to improve as a runner without having to
+          pay a coach. Since running is a hobby for me and not a profession, I wanted
+          to build a place where that information is free and easy to access.
+        </p>
+      </div>
+      <picture>
+        <source type="image/avif" srcset="images/cat-desekordonia.avif?v=1">
+        <source type="image/webp" srcset="images/cat-desekordonia.webp?v=1">
+        <img src="images/cat-desekordonia.jpg?v=1" alt="A girl tying her laces on the track at sunset" loading="lazy" decoding="async">
+      </picture>
+    </section>
+
+    <div class="recap about-recap">
+      <h4><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg> How I work</h4>
+      <p>
+        Before any article is published, I spend time reading scientific studies,
+        guidelines from international organisations and reliable sources. I try to
+        turn that information into something simple, understandable and useful for
+        every runner.
+      </p>
+      <p>
+        Still, the content of this site doesn't replace the advice of a health
+        professional or a coach.
+      </p>
+    </div>
+
+    <div class="contact-card">
+      <span class="contact-icon"><svg style="width:2.6rem;height:2.6rem;color:var(--accent)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
+      <h3>Let's keep in touch</h3>
+      <p>
+        Got a question, an idea, or want to share your own journey? Would you like
+        an article on a topic that interests you? Send me your idea at this email —
+        I'd love to read your message!
+      </p>
+      <a class="btn" href="mailto:hello@desekordonia.com">hello@desekordonia.com</a>
+    </div>
+
+    <p class="about-closing">
+      I hope Δέσε Κορδόνια becomes the nudge for you to take your own next step in
+      running — whatever that step may be.
+    </p>
+  </main>
+{% endblock %}
+
+{% block body_extra %}{% endblock %}
+
+{% block scripts_extra %}{% endblock %}
