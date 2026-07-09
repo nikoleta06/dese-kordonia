@@ -1,8 +1,8 @@
 ---
 permalink: "login.html"
 lang: "el"
-title: "Σύνδεση | Δέσε Κορδόνια"
-description: "Συνδέσου στο Δέσε Κορδόνια με το email σου — χωρίς κωδικό."
+title: "Σύνδεση & Newsletter | Δέσε Κορδόνια"
+description: "Συνδέσου στο Δέσε Κορδόνια με το email σου — χωρίς κωδικό — και εγγράψου στο newsletter."
 ---
 
 {% extends "base.njk" %}
@@ -19,10 +19,18 @@ description: "Συνδέσου στο Δέσε Κορδόνια με το email 
 
 {% block content %}
   <main>
-    <h2 class="section-title">Σύνδεση</h2>
+    <h2 class="section-title">Σύνδεση &amp; Newsletter</h2>
     <p class="lead">
-      Βάλε το email σου και θα σου στείλουμε έναν σύνδεσμο σύνδεσης — δεν χρειάζεσαι κωδικό.
+      Με τον λογαριασμό σου εγγράφεσαι στο <strong>newsletter</strong> του Δέσε Κορδόνια
+      και διαχειρίζεσαι το προφίλ σου. Βάλε το email σου και θα σου στείλουμε έναν
+      σύνδεσμο σύνδεσης — δεν χρειάζεσαι κωδικό.
     </p>
+
+    <ul class="login-perks">
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg> Λαμβάνεις το newsletter με νέα άρθρα και συμβουλές για το τρέξιμο</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg> Φτιάχνεις το προφίλ σου με το όνομά σου και λίγα λόγια για σένα</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.27"/></svg> Μπορείς να διαγραφείς από το newsletter όποτε θέλεις, με ένα κλικ</li>
+    </ul>
 
     <div class="calc">
       <div class="field">

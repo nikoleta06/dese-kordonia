@@ -1,8 +1,8 @@
 ---
 permalink: "login-en.html"
 lang: "en"
-title: "Sign in | Δέσε Κορδόνια"
-description: "Sign in to Δέσε Κορδόνια with your email — no password needed."
+title: "Sign in & Newsletter | Δέσε Κορδόνια"
+description: "Sign in to Δέσε Κορδόνια with your email — no password needed — and subscribe to the newsletter."
 ---
 
 {% extends "base.njk" %}
@@ -20,10 +20,18 @@ description: "Sign in to Δέσε Κορδόνια with your email — no passwo
 
 {% block content %}
   <main>
-    <h2 class="section-title">Sign in</h2>
+    <h2 class="section-title">Sign in &amp; Newsletter</h2>
     <p class="lead">
-      Enter your email and we'll send you a sign-in link — no password needed.
+      With your account you subscribe to the Δέσε Κορδόνια <strong>newsletter</strong>
+      and manage your profile. Enter your email and we'll send you a sign-in link —
+      no password needed.
     </p>
+
+    <ul class="login-perks">
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg> Get the newsletter with new articles and running tips</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg> Set up your profile with your name and a few words about you</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.27"/></svg> Unsubscribe from the newsletter anytime, with one click</li>
+    </ul>
 
     <div class="calc">
       <div class="field">
