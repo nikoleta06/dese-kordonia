@@ -6,6 +6,16 @@
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>https://desekordonia.com/about-en.html</loc>
+    <lastmod>2026-07-09</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://desekordonia.com/about.html</loc>
+    <lastmod>2026-07-09</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://desekordonia.com/agones-en.html</loc>
     <lastmod>2026-06-28</lastmod>
     <priority>0.7</priority>
@@ -32,16 +42,6 @@
   </url>
   <url>
     <loc>https://desekordonia.com/calculator.html</loc>
-    <lastmod>2026-06-28</lastmod>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://desekordonia.com/contact-en.html</loc>
-    <lastmod>2026-06-28</lastmod>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://desekordonia.com/contact.html</loc>
     <lastmod>2026-06-28</lastmod>
     <priority>0.8</priority>
   </url>
