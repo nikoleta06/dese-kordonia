@@ -32,7 +32,7 @@ as $$
   select coalesce((select count from public.article_likes where slug = article_slug), 0);
 $$;
 
--- Αύξηση / μείωση (delta = +1 ή -1)
+-- Αύξηση / μείωση (delta = +1 ή -1, τίποτα άλλο δεν επιτρέπεται)
 create or replace function public.increment_likes(article_slug text, delta integer)
 returns integer
 language plpgsql
@@ -42,6 +42,10 @@ as $$
 declare
   new_count integer;
 begin
+  if delta not in (-1, 1) then
+    raise exception 'invalid delta';
+  end if;
+
   insert into public.article_likes (slug, count)
   values (article_slug, greatest(0, delta))
   on conflict (slug)
