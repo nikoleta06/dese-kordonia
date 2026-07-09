@@ -21,12 +21,16 @@
 <body{% if bodyDataPage %} data-page="{{ bodyDataPage }}"{% endif %}>
   <header>
     <div class="nav-inner">
-      <a class="brand" href="{{ nav.main[0].file | navHref(lang) }}">
+      <a class="brand" href="{{ nav.home.file | navHref(lang) }}">
         <img src="images/logo.png?v=2" alt="{% if lang == 'en' %}Δέσε Κορδόνια logo{% else %}Λογότυπο Δέσε Κορδόνια{% endif %}" class="logo">
         Δέσε<span class="dot">.</span>Κορδόνια
       </a>
       <nav>
         <ul class="menu">
+          <li><a href="{{ nav.home.file | navHref(lang) }}" class="home-link{% if nav.home.key == activeNav %} active{% endif %}" aria-label="{{ nav.home[lang] | safe }}" title="{{ nav.home[lang] | safe }}">
+            <svg class="home-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            <span class="home-text">{{ nav.home[lang] | safe }}</span>
+          </a></li>
           {% for item in nav.main %}
           <li><a href="{{ item.file | navHref(lang) }}"{% if item.key == activeNav %} class="active"{% endif %}>{{ item[lang] | safe }}</a></li>
           {% endfor %}
@@ -38,7 +42,7 @@
               {% endfor %}
             </ul>
           </li>
-          <li><a href="{{ nav.contact.file | navHref(lang) }}"{% if nav.contact.key == activeNav %} class="active"{% endif %}>{{ nav.contact[lang] | safe }}</a></li>
+          <li><a href="{{ nav.about.file | navHref(lang) }}"{% if nav.about.key == activeNav %} class="active"{% endif %}>{{ nav.about[lang] | safe }}</a></li>
         </ul>
       </nav>
     </div>
@@ -48,12 +52,17 @@
 
   <footer>
     <img src="images/logo-footer.png?v=2" alt="Δέσε Κορδόνια" class="footer-logo">
-    <div class="footer-social">
-      <a href="https://instagram.com/nikol.akr" target="_blank" rel="noopener" aria-label="Instagram">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+    <div class="footer-contact">
+      <a class="footer-mail" href="mailto:hello@desekordonia.com">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        hello@desekordonia.com
       </a>
     </div>
     <p class="footer-copy">© 2026 <span class="accent">Δέσε Κορδόνια</span></p>
+    <p class="footer-links">
+      <a href="{{ nav.about.file | navHref(lang) }}">{% if lang == 'en' %}{{ nav.about.enFull }}{% else %}{{ nav.about.elFull }}{% endif %}</a> ·
+      <a href="{% if lang == 'en' %}privacy-en.html{% else %}privacy.html{% endif %}">{% if lang == 'en' %}Privacy{% else %}Απόρρητο{% endif %}</a>
+    </p>
   </footer>
 
   {% block body_extra %}{% endblock %}

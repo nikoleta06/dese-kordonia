@@ -1,6 +1,6 @@
 module.exports = {
+  home: { key: "home", file: "index", el: "Αρχική", en: "Home" },
   main: [
-    { key: "home", file: "index", el: "Αρχική", en: "Home" },
     { key: "healthy", file: "healthy", el: "Ευεξία &amp; Οφέλη", en: "Wellness &amp; Benefits" },
     { key: "blog", file: "blog", el: "Blog", en: "Blog" },
     { key: "agones", file: "agones", el: "Αγώνες", en: "Races" },
@@ -10,5 +10,5 @@ module.exports = {
     { key: "calculator", file: "calculator", el: "Υπολογιστής", en: "Calculator" },
     { key: "zones-palmon", file: "zones-palmon", el: "Ζώνες Παλμών", en: "Heart-Rate Zones" },
   ],
-  contact: { key: "contact", file: "contact", el: "Επικοινωνία", en: "Contact" },
+  about: { key: "about", file: "about", el: "Σχετικά", en: "About", elFull: "Σχετικά με εμένα", enFull: "About me" },
 };
