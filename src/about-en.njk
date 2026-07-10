@@ -2,7 +2,7 @@
 permalink: "about-en.html"
 lang: "en"
 title: "About me | Δέσε Κορδόνια"
-description: "I'm Nikoleta — a person who runs, reads, researches and shares what she learns. Why I created Δέσε Κορδόνια."
+description: "The creator of Δέσε Κορδόνια — a person who runs, reads, researches and shares what she learns. Why I created this site."
 activeNav: "about"
 ---
 
@@ -29,7 +29,11 @@ activeNav: "about"
   <style>
     .about-recap p { margin: 0; color: var(--text-dim); line-height: 1.6; }
     .about-recap p + p { margin-top: 0.7rem; font-size: 0.92rem; }
-    main .contact-card { max-width: 580px; margin: 1.5rem auto 0; }
+    main .contact-card { max-width: 460px; margin: 1.5rem auto 0; padding: 0.9rem 1.1rem; }
+    main .contact-card .contact-icon { margin-bottom: 0.3rem; }
+    main .contact-card h3 { font-family: "Inter", sans-serif; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 0.4rem; }
+    main .contact-card p { font-size: 0.84rem; margin-bottom: 0.7rem; line-height: 1.5; }
+    main .contact-card .btn { padding: 0.4rem 1rem; font-size: 0.8rem; font-family: "Oswald", sans-serif; font-weight: 500; letter-spacing: 0.8px; box-shadow: 0 4px 12px rgba(255, 87, 34, 0.25); }
     .about-closing { max-width: 580px; margin: 2.2rem auto 0; text-align: center; font-style: italic; color: var(--text-dim); line-height: 1.6; }
   </style>
 {% endblock %}
@@ -38,8 +42,9 @@ activeNav: "about"
   <main>
     <h2 class="section-title">About me</h2>
     <p class="lead">
-      Hi! I'm Nikoleta, and I created Δέσε Κορδόνια ("Tie Your Laces") for anyone
-      who loves running or wants to bring it into their life.
+      If you've found yourself on this page, you either like running or got here by
+      accident. I'm the creator of Δέσε Κορδόνια ("Tie Your Laces"), and below
+      you'll learn a few things about me.
     </p>
 
     <section class="story">
@@ -92,12 +97,11 @@ activeNav: "about"
     </div>
 
     <div class="contact-card">
-      <span class="contact-icon"><svg style="width:2.6rem;height:2.6rem;color:var(--accent)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
+      <span class="contact-icon"><svg style="width:1.5rem;height:1.5rem;color:var(--accent)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
       <h3>Let's keep in touch</h3>
       <p>
-        Got a question, an idea, or want to share your own journey? Would you like
-        an article on a topic that interests you? Send me your idea at this email —
-        I'd love to read your message!
+        A question, an idea or an article suggestion? Send me an email — I'd love
+        to read it!
       </p>
       <a class="btn" href="mailto:hello@desekordonia.com">hello@desekordonia.com</a>
     </div>

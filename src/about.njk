@@ -2,7 +2,7 @@
 permalink: "about.html"
 lang: "el"
 title: "Σχετικά με εμένα | Δέσε Κορδόνια"
-description: "Είμαι η Νικολέτα — ένας άνθρωπος που τρέχει, διαβάζει, ερευνά και μοιράζεται όσα μαθαίνει. Γιατί έφτιαξα το Δέσε Κορδόνια."
+description: "Η δημιουργός του Δέσε Κορδόνια — ένας άνθρωπος που τρέχει, διαβάζει, ερευνά και μοιράζεται όσα μαθαίνει. Γιατί έφτιαξα αυτόν τον ιστότοπο."
 activeNav: "about"
 ---
 
@@ -29,7 +29,11 @@ activeNav: "about"
   <style>
     .about-recap p { margin: 0; color: var(--text-dim); line-height: 1.6; }
     .about-recap p + p { margin-top: 0.7rem; font-size: 0.92rem; }
-    main .contact-card { max-width: 580px; margin: 1.5rem auto 0; }
+    main .contact-card { max-width: 460px; margin: 1.5rem auto 0; padding: 0.9rem 1.1rem; }
+    main .contact-card .contact-icon { margin-bottom: 0.3rem; }
+    main .contact-card h3 { font-family: "Inter", sans-serif; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 0.4rem; }
+    main .contact-card p { font-size: 0.84rem; margin-bottom: 0.7rem; line-height: 1.5; }
+    main .contact-card .btn { padding: 0.4rem 1rem; font-size: 0.8rem; font-family: "Oswald", sans-serif; font-weight: 500; letter-spacing: 0.8px; box-shadow: 0 4px 12px rgba(255, 87, 34, 0.25); }
     .about-closing { max-width: 580px; margin: 2.2rem auto 0; text-align: center; font-style: italic; color: var(--text-dim); line-height: 1.6; }
   </style>
 {% endblock %}
@@ -38,8 +42,9 @@ activeNav: "about"
   <main>
     <h2 class="section-title">Σχετικά με εμένα</h2>
     <p class="lead">
-      Γεια σου! Είμαι η Νικολέτα και δημιούργησα το «Δέσε Κορδόνια» για όσους
-      αγαπούν το τρέξιμο ή θέλουν να το βάλουν στη ζωή τους.
+      Αν βρίσκεσαι σε αυτή τη σελίδα, ή σου αρέσει το τρέξιμο ή μπήκες τυχαία.
+      Είμαι η δημιουργός του «Δέσε Κορδόνια» και παρακάτω θα μάθεις λίγα πράγματα
+      για μένα.
     </p>
 
     <section class="story">
@@ -93,12 +98,10 @@ activeNav: "about"
     </div>
 
     <div class="contact-card">
-      <span class="contact-icon"><svg style="width:2.6rem;height:2.6rem;color:var(--accent)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
+      <span class="contact-icon"><svg style="width:1.5rem;height:1.5rem;color:var(--accent)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
       <h3>Ας κρατήσουμε επαφή</h3>
       <p>
-        Έχεις ερώτηση, ιδέα ή θέλεις να μοιραστείς τη δική σου διαδρομή; Θα ήθελες
-        να ανέβει άρθρο για κάποιο θέμα που σε ενδιαφέρει; Στείλε μου την ιδέα σου
-        σε αυτό το email — θα χαρώ πολύ να διαβάσω το μήνυμά σου!
+        Ερώτηση, ιδέα ή πρόταση για άρθρο; Στείλε μου email — θα χαρώ να το διαβάσω!
       </p>
       <a class="btn" href="mailto:hello@desekordonia.com">hello@desekordonia.com</a>
     </div>
