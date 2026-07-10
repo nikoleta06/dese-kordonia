@@ -59,7 +59,7 @@ description: "Your profile on Δέσε Κορδόνια."
   <script>
     (function () {
       const $ = (id) => document.getElementById(id);
-      const API = (location.hostname === 'localhost') ? 'http://localhost:4000' : 'https://dese-kordonia-backend.onrender.com';
+      const API = (location.hostname === 'localhost') ? 'http://localhost:4000' : 'https://api.desekordonia.com';
 
       function fill(user) {
         $('email').value = user.email;

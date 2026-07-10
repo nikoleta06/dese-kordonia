@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
   /* --- Backend API (δεσε-κορδονια-backend): τοπικό Docker για dev, Render για live --- */
   const DK_API_URL = (location.hostname === 'localhost')
     ? 'http://localhost:4000'
-    : 'https://dese-kordonia-backend.onrender.com';
+    : 'https://api.desekordonia.com';
 
   /* --- Κατηγορία ανά άρθρο (slug → κατηγορία) --- */
   const DK_CAT_BY_SLUG = {

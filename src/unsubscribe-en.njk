@@ -33,7 +33,7 @@ description: "Unsubscribe from the Δέσε Κορδόνια newsletter."
   <script>
     (function () {
       const $ = (id) => document.getElementById(id);
-      const API = (location.hostname === 'localhost') ? 'http://localhost:4000' : 'https://dese-kordonia-backend.onrender.com';
+      const API = (location.hostname === 'localhost') ? 'http://localhost:4000' : 'https://api.desekordonia.com';
 
       async function run() {
         const token = new URLSearchParams(location.search).get('token');

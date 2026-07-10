@@ -52,7 +52,7 @@ description: "Sign in to Δέσε Κορδόνια with your email — no passwo
   <script>
     (function () {
       const $ = (id) => document.getElementById(id);
-      const API = (location.hostname === 'localhost') ? 'http://localhost:4000' : 'https://dese-kordonia-backend.onrender.com';
+      const API = (location.hostname === 'localhost') ? 'http://localhost:4000' : 'https://api.desekordonia.com';
 
       function showResult(text, isError) {
         const el = $('result');
