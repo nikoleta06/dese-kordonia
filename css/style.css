@@ -1943,6 +1943,116 @@ tbody tr:last-child td {
   color: var(--accent);
 }
 
+/* ===== Login card ===== */
+.login-card {
+  margin: 1.5rem auto 3rem;
+  padding-top: 1.25rem;
+}
+
+.login-card .field {
+  margin-bottom: 1.6rem;
+}
+
+.login-card input {
+  padding: 0.95rem 1rem;
+}
+
+.login-card input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(255, 87, 34, 0.28);
+}
+
+.login-card .input-wrap {
+  position: relative;
+}
+
+.login-card .input-wrap svg {
+  position: absolute;
+  left: 0.9rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 17px;
+  height: 17px;
+  color: var(--text-dim);
+  pointer-events: none;
+}
+
+.login-card .input-wrap input {
+  padding-left: 2.5rem;
+}
+
+.login-card .input-wrap:focus-within svg {
+  color: var(--accent);
+}
+
+.login-icon {
+  width: 52px;
+  height: 52px;
+  margin: 0 auto 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: var(--surface-2);
+  border: 1px solid var(--border);
+}
+
+.login-icon svg {
+  width: 24px;
+  height: 24px;
+  color: var(--accent);
+}
+
+.btn-block {
+  display: block;
+  width: 100%;
+  text-align: center;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.btn-block:hover:not(:disabled) {
+  transform: translateY(-2px) scale(1.01);
+}
+
+.btn-block:disabled {
+  opacity: 0.75;
+  cursor: default;
+  transform: none;
+  box-shadow: none;
+}
+
+.login-trust {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0.45rem;
+  margin: 1.1rem 0 0;
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  text-align: center;
+}
+
+.login-trust svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  margin-top: 0.15rem;
+  color: var(--accent);
+}
+
+.login-trust a {
+  color: var(--text);
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.login-trust a:hover {
+  color: var(--accent);
+}
+
 .newsletter-box {
   background-color: var(--surface-2);
   border: 1px solid var(--border);

@@ -1,7 +1,7 @@
 ---
 permalink: "login.html"
 lang: "el"
-title: "Σύνδεση & Newsletter | Δέσε Κορδόνια"
+title: "Σύνδεση | Δέσε Κορδόνια"
 description: "Συνδέσου στο Δέσε Κορδόνια με το email σου — χωρίς κωδικό — και εγγράψου στο newsletter."
 ---
 
@@ -19,29 +19,40 @@ description: "Συνδέσου στο Δέσε Κορδόνια με το email 
 
 {% block content %}
   <main>
-    <h2 class="section-title">Σύνδεση &amp; Newsletter</h2>
+    <h2 class="section-title">Σύνδεση στο Δέσε Κορδόνια</h2>
     <p class="lead">
-      Με τον λογαριασμό σου εγγράφεσαι στο <strong>newsletter</strong> του Δέσε Κορδόνια
-      και διαχειρίζεσαι το προφίλ σου. Βάλε το email σου και θα σου στείλουμε έναν
-      σύνδεσμο σύνδεσης — δεν χρειάζεσαι κωδικό.
+      Συνδέσου με το email σου — θα σου στείλουμε έναν ασφαλή σύνδεσμο.
+      Δεν χρειάζεται κωδικός.
     </p>
+
+    <div class="calc login-card">
+      <div class="login-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+      </div>
+
+      <div class="field">
+        <label for="email">Email</label>
+        <div class="input-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-4 8"/></svg>
+          <input type="email" id="email" placeholder="you@example.com">
+        </div>
+      </div>
+
+      <button class="btn btn-block" id="sendBtn" type="button">Στείλε μου σύνδεσμο</button>
+
+      <p class="login-trust">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        Το email σου χρησιμοποιείται μόνο για σύνδεση και το newsletter — δεν το μοιραζόμαστε ποτέ. <a href="privacy.html">Πολιτική απορρήτου</a>
+      </p>
+
+      <div class="calc-result calc-hidden" id="result"></div>
+    </div>
 
     <ul class="login-perks">
       <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg> Λαμβάνεις το newsletter με νέα άρθρα και συμβουλές για το τρέξιμο</li>
       <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg> Φτιάχνεις το προφίλ σου με το όνομά σου και λίγα λόγια για σένα</li>
       <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.27"/></svg> Μπορείς να διαγραφείς από το newsletter όποτε θέλεις, με ένα κλικ</li>
     </ul>
-
-    <div class="calc">
-      <div class="field">
-        <label for="email">Email</label>
-        <input type="email" id="email" placeholder="you@example.com">
-      </div>
-
-      <button class="btn" id="sendBtn" type="button">Στείλε μου σύνδεσμο</button>
-
-      <div class="calc-result calc-hidden" id="result"></div>
-    </div>
   </main>
 {% endblock %}
 
@@ -66,7 +77,10 @@ description: "Συνδέσου στο Δέσε Κορδόνια με το email 
           showResult('Βάλε ένα έγκυρο email.', true);
           return;
         }
-        $('sendBtn').disabled = true;
+        const btn = $('sendBtn');
+        const label = btn.textContent;
+        btn.disabled = true;
+        btn.textContent = 'Αποστολή…';
         try {
           const r = await fetch(API + '/api/auth/request-link', {
             method: 'POST',
@@ -75,13 +89,16 @@ description: "Συνδέσου στο Δέσε Κορδόνια με το email 
           });
           if (r.ok) {
             showResult('Έλεγξε το email σου για τον σύνδεσμο σύνδεσης (ισχύει 15 λεπτά).', false);
-          } else {
-            showResult('Κάτι πήγε στραβά. Δοκίμασε ξανά.', true);
+            btn.textContent = '✓ Ο σύνδεσμος στάλθηκε';
+            setTimeout(() => { btn.textContent = label; btn.disabled = false; }, 5000);
+            return;
           }
+          showResult('Κάτι πήγε στραβά. Δοκίμασε ξανά.', true);
         } catch (e) {
           showResult('Δεν μπόρεσα να συνδεθώ με τον server. Τρέχει τοπικά;', true);
         }
-        $('sendBtn').disabled = false;
+        btn.textContent = label;
+        btn.disabled = false;
       }
 
       $('sendBtn').addEventListener('click', requestLink);
