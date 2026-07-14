@@ -1,9 +1,11 @@
 module.exports = {
   home: { key: "home", file: "index", el: "Αρχική", en: "Home" },
   main: [
-    { key: "healthy", file: "healthy", el: "Ευεξία &amp; Οφέλη", en: "Wellness &amp; Benefits" },
     { key: "blog", file: "blog", el: "Blog", en: "Blog" },
     { key: "agones", file: "agones", el: "Αγώνες", en: "Races" },
+  ],
+  secondary: [
+    { key: "healthy", file: "healthy", el: "Ευεξία &amp; Οφέλη", en: "Wellness &amp; Benefits" },
   ],
   dropdown: [
     { key: "programma-5k", file: "programma-5k", el: "Πρόγραμμα 5K", en: "5K Plan" },

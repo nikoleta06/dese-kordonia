@@ -42,6 +42,9 @@
               {% endfor %}
             </ul>
           </li>
+          {% for item in nav.secondary %}
+          <li><a href="{{ item.file | navHref(lang) }}"{% if item.key == activeNav %} class="active"{% endif %}>{{ item[lang] | safe }}</a></li>
+          {% endfor %}
           <li><a href="{{ nav.about.file | navHref(lang) }}"{% if nav.about.key == activeNav %} class="active"{% endif %}>{{ nav.about[lang] | safe }}</a></li>
         </ul>
       </nav>
