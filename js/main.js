@@ -22,6 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
     'post-sifan-hassan': 'champions',
     'post-faith-kipyegon': 'champions',
     'post-easy-running': 'science',
+    'post-cadence': 'science',
     'post-lactate-threshold': 'science',
     'post-vo2max': 'science',
     'post-zones-palmon': 'science',
@@ -43,6 +44,7 @@ document.addEventListener('DOMContentLoaded', function () {
   /* --- Μητρώο άρθρων (για «Διάβασε επίσης») --- */
   const DK_CAT_IMG = { champions: 'cat-champions.jpg', science: 'cat-science.jpg', stories: 'cat-stories.jpg', tips: 'cat-tips.jpg' };
   const DK_POSTS = [
+    { slug: 'post-cadence', cat: 'science', el: 'Cadence: γιατί τα 180 βήματα δεν είναι κανόνας', en: 'Cadence: why 180 steps isn\'t a rule' },
     { slug: 'post-zones-palmon', cat: 'science', el: 'Οι 5 Ζώνες Καρδιακών Παλμών, εξηγημένες απλά', en: 'The 5 Heart-Rate Zones, explained simply' },
     { slug: 'post-vo2max', cat: 'science', el: 'Τι είναι το VO₂max', en: 'What is VO₂max' },
     { slug: 'post-lactate-threshold', cat: 'science', el: 'Τι είναι το lactate threshold', en: 'What is lactate threshold' },
