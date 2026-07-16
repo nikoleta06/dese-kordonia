@@ -64,6 +64,7 @@
     <p class="footer-copy">© 2026 <span class="accent">Δέσε Κορδόνια</span></p>
     <p class="footer-links">
       <a href="{{ nav.about.file | navHref(lang) }}">{% if lang == 'en' %}{{ nav.about.enFull }}{% else %}{{ nav.about.elFull }}{% endif %}</a> ·
+      <a href="{% if lang == 'en' %}epistimi-trexsimatos-en.html{% else %}epistimi-trexsimatos.html{% endif %}">{% if lang == 'en' %}The Science of Running{% else %}Η Επιστήμη του Τρεξίματος{% endif %}</a> ·
       <a href="{% if lang == 'en' %}privacy-en.html{% else %}privacy.html{% endif %}">{% if lang == 'en' %}Privacy{% else %}Απόρρητο{% endif %}</a>
     </p>
   </footer>
