@@ -75,7 +75,8 @@ activeNav: "agones"
     <p class="lead">
       Από τον ιστορικό Μαραθώνιο της Αθήνας μέχρι τους ορεινούς αγώνες στα βουνά — η Ελλάδα
       είναι γεμάτη διαδρομές. Φιλτράρισε ανά τύπο, κάνε κλικ σε ένα σημάδι ή πάτησε
-      «Δες στον χάρτη» σε μια κάρτα για να εστιάσεις στον αγώνα.
+      «Δες στον χάρτη» σε μια κάρτα για να εστιάσεις στον αγώνα. Οι κάρτες είναι σε
+      χρονολογική σειρά — πρώτοι οι προσεχείς αγώνες.
     </p>
 
     <div class="race-filters" role="group" aria-label="Φίλτρα αγώνων">
@@ -93,7 +94,7 @@ activeNav: "agones"
     </div>
 
     <div class="race-list post-grid">
-      <article class="post-card race-card" data-type="road" data-lat="38.155" data-lng="23.965">
+      <article class="post-card race-card" data-type="road" data-month="11" data-lat="38.155" data-lng="23.965">
         <div class="post-body">
           <p class="post-meta"><span class="race-type type-road">Δρόμου</span> · Νοέμβριος</p>
           <h3>Αυθεντικός Μαραθώνιος Αθήνας</h3>
@@ -106,7 +107,20 @@ activeNav: "agones"
         </div>
       </article>
 
-      <article class="post-card race-card" data-type="ultra" data-lat="37.075" data-lng="22.43">
+      <article class="post-card race-card" data-type="road" data-month="3" data-lat="37.9755" data-lng="23.7348">
+        <div class="post-body">
+          <p class="post-meta"><span class="race-type type-road">Δρόμου</span> · Μάρτιος</p>
+          <h3>Ημιμαραθώνιος Αθήνας</h3>
+          <p class="race-specs">21,1 &amp; 5 χλμ · Άσφαλτος</p>
+          <p>Διαδρομή μέσα στο ιστορικό κέντρο της Αθήνας, δίπλα από δεκάδες μνημεία — ιδανικό πρώτο μεγάλο βήμα πριν τον μαραθώνιο.</p>
+          <div class="race-actions">
+            <button class="show-on-map" type="button">Δες στον χάρτη</button>
+            <a class="read-more" href="https://www.athinahalfmarathon.gr/" target="_blank" rel="noopener">Επίσημη σελίδα →</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="post-card race-card" data-type="ultra" data-month="9" data-lat="37.075" data-lng="22.43">
         <div class="post-body">
           <p class="post-meta"><span class="race-type type-ultra">Υπερμαραθώνιος</span> · Σεπτέμβριος</p>
           <h3>Σπάρταθλον</h3>
@@ -119,7 +133,20 @@ activeNav: "agones"
         </div>
       </article>
 
-      <article class="post-card race-card" data-type="mountain" data-lat="40.088" data-lng="22.50">
+      <article class="post-card race-card" data-type="ultra" data-month="10" data-lat="41.30" data-lng="24.65">
+        <div class="post-body">
+          <p class="post-meta"><span class="race-type type-ultra">Υπερμαραθώνιος</span> · Οκτώβριος</p>
+          <h3>Rodopi Ultra Trail (ROUT)</h3>
+          <p class="race-specs">100 μίλια · Ορεινός υπερμαραθώνιος</p>
+          <p>Ο παλαιότερος αγώνας 100 μιλίων στην Ελλάδα, σε συνθήκες ημι-αυτονομίας μέσα στο Εθνικό Πάρκο της Οροσειράς Ροδόπης.</p>
+          <div class="race-actions">
+            <button class="show-on-map" type="button">Δες στον χάρτη</button>
+            <a class="read-more" href="https://new.rout.gr/" target="_blank" rel="noopener">Επίσημη σελίδα →</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="post-card race-card" data-type="mountain" data-month="6" data-lat="40.088" data-lng="22.50">
         <div class="post-body">
           <p class="post-meta"><span class="race-type type-mountain">Ορεινός</span> · Ιούνιος</p>
           <h3>Olympus Marathon</h3>
@@ -132,46 +159,72 @@ activeNav: "agones"
         </div>
       </article>
 
-      <article class="post-card race-card" data-type="mountain" data-lat="39.88" data-lng="20.75">
+      <article class="post-card race-card" data-type="mountain" data-month="7" data-lat="39.88" data-lng="20.75">
         <div class="post-body">
           <p class="post-meta"><span class="race-type type-mountain">Ορεινός</span> · Ιούλιος</p>
           <h3>Zagori Mountain Running</h3>
-          <p class="race-specs">10–80 χλμ · Ορεινός</p>
+          <p class="race-specs">5–80 χλμ · Ορεινός</p>
           <p>Ορεινό τρέξιμο στα μαγευτικά Ζαγοροχώρια, με διαδρομές για κάθε επίπεδο.</p>
           <div class="race-actions">
             <button class="show-on-map" type="button">Δες στον χάρτη</button>
-            <a class="read-more" href="https://www.google.com/search?q=Zagori+Mountain+Running" target="_blank" rel="noopener">Πληροφορίες →</a>
+            <a class="read-more" href="https://www.zagorirace.gr/" target="_blank" rel="noopener">Επίσημη σελίδα →</a>
           </div>
         </div>
       </article>
 
-      <article class="post-card race-card" data-type="road" data-lat="40.626" data-lng="22.948">
+      <article class="post-card race-card" data-type="mountain" data-month="5" data-lat="39.770" data-lng="21.183">
+        <div class="post-body">
+          <p class="post-meta"><span class="race-type type-mountain">Ορεινός</span> · Μάιος</p>
+          <h3>Metsovo Ursa Trail</h3>
+          <p class="race-specs">4,6–100 χλμ · Ορεινός</p>
+          <p>«Στα χνάρια της αρκούδας»: ορεινό τρέξιμο γύρω από το Μέτσοβο, από κάθετο αγώνα 4,6 χλμ μέχρι υπερμαραθώνιο 100 χλμ.</p>
+          <div class="race-actions">
+            <button class="show-on-map" type="button">Δες στον χάρτη</button>
+            <a class="read-more" href="https://www.ursatrail.gr/" target="_blank" rel="noopener">Επίσημη σελίδα →</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="post-card race-card" data-type="road" data-month="4" data-lat="40.626" data-lng="22.948">
         <div class="post-body">
           <p class="post-meta"><span class="race-type type-road">Δρόμου</span> · Απρίλιος</p>
           <h3>Μαραθώνιος Θεσσαλονίκης «Μέγας Αλέξανδρος»</h3>
           <p class="race-specs">42,2 χλμ · Άσφαλτος</p>
-          <p>Μαραθώνιος στη συμπρωτεύουσα, αφιερωμένος στον Μέγα Αλέξανδρο.</p>
+          <p>Μαραθώνιος στη συμπρωτεύουσα, αφιερωμένος στον Μέγα Αλέξανδρο — από την Πέλλα στην παραλία της Θεσσαλονίκης.</p>
           <div class="race-actions">
             <button class="show-on-map" type="button">Δες στον χάρτη</button>
-            <a class="read-more" href="https://www.google.com/search?q=Μαραθώνιος+Θεσσαλονίκης+Μέγας+Αλέξανδρος" target="_blank" rel="noopener">Πληροφορίες →</a>
+            <a class="read-more" href="https://atgm.gr/" target="_blank" rel="noopener">Επίσημη σελίδα →</a>
           </div>
         </div>
       </article>
 
-      <article class="post-card race-card" data-type="road" data-lat="39.667" data-lng="20.85">
+      <article class="post-card race-card" data-type="road" data-month="10" data-lat="40.6326" data-lng="22.9409">
         <div class="post-body">
-          <p class="post-meta"><span class="race-type type-road">Δρόμου</span> · Μάρτιος</p>
-          <h3>Γύρος Λίμνης Ιωαννίνων</h3>
-          <p class="race-specs">30 χλμ · Άσφαλτος</p>
+          <p class="post-meta"><span class="race-type type-road">Δρόμου</span> · Οκτώβριος</p>
+          <h3>Διεθνής Νυχτερινός Ημιμαραθώνιος Θεσσαλονίκης</h3>
+          <p class="race-specs">21,1 / 10 / 5 χλμ · Άσφαλτος</p>
+          <p>Νυχτερινή γιορτή δρόμου με εκκίνηση από την πλατεία Αριστοτέλους — ένας από τους πιο πολυπληθείς αγώνες της χώρας.</p>
+          <div class="race-actions">
+            <button class="show-on-map" type="button">Δες στον χάρτη</button>
+            <a class="read-more" href="https://thesshalfmarathon.org/" target="_blank" rel="noopener">Επίσημη σελίδα →</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="post-card race-card" data-type="road" data-month="9" data-lat="39.667" data-lng="20.85">
+        <div class="post-body">
+          <p class="post-meta"><span class="race-type type-road">Δρόμου</span> · Σεπτέμβριος</p>
+          <h3>Γύρος Λίμνης Ιωαννίνων (Ioannina Lake Run)</h3>
+          <p class="race-specs">30 / 10 / 5 χλμ · Άσφαλτος</p>
           <p>Δημοφιλής αγώνας γύρω από τη λίμνη Παμβώτιδα, με υπέροχη θέα.</p>
           <div class="race-actions">
             <button class="show-on-map" type="button">Δες στον χάρτη</button>
-            <a class="read-more" href="https://www.google.com/search?q=Γύρος+Λίμνης+Ιωαννίνων+αγώνας" target="_blank" rel="noopener">Πληροφορίες →</a>
+            <a class="read-more" href="https://www.ioanninalakerun.gr/" target="_blank" rel="noopener">Επίσημη σελίδα →</a>
           </div>
         </div>
       </article>
 
-      <article class="post-card race-card" data-type="road" data-lat="36.43" data-lng="28.22">
+      <article class="post-card race-card" data-type="road" data-month="4" data-lat="36.43" data-lng="28.22">
         <div class="post-body">
           <p class="post-meta"><span class="race-type type-road">Δρόμου</span> · Απρίλιος</p>
           <h3>Διεθνής Μαραθώνιος Ρόδου</h3>
@@ -179,33 +232,46 @@ activeNav: "agones"
           <p>Μαραθώνιος με φόντο τη μεσαιωνική πόλη της Ρόδου και τη θάλασσα.</p>
           <div class="race-actions">
             <button class="show-on-map" type="button">Δες στον χάρτη</button>
-            <a class="read-more" href="https://www.google.com/search?q=Διεθνής+Μαραθώνιος+Ρόδου" target="_blank" rel="noopener">Πληροφορίες →</a>
+            <a class="read-more" href="https://rhodesmarathon.gr/" target="_blank" rel="noopener">Επίσημη σελίδα →</a>
           </div>
         </div>
       </article>
 
-      <article class="post-card race-card" data-type="road" data-lat="36.92" data-lng="21.70">
+      <article class="post-card race-card" data-type="road" data-month="5" data-lat="36.92" data-lng="21.70">
+        <div class="post-body">
+          <p class="post-meta"><span class="race-type type-road">Δρόμου</span> · Μάιος</p>
+          <h3>Messinia Challenge (πρώην Navarino Challenge)</h3>
+          <p class="race-specs">21,1 / 10 / 5 χλμ · Άσφαλτος / Παραλία</p>
+          <p>Αθλητικό event ευεξίας στη Μεσσηνία (Costa Navarino &amp; Πύλος), με δράσεις για όλη την οικογένεια.</p>
+          <div class="race-actions">
+            <button class="show-on-map" type="button">Δες στον χάρτη</button>
+            <a class="read-more" href="https://messiniachallenge.com/" target="_blank" rel="noopener">Επίσημη σελίδα →</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="post-card race-card" data-type="road" data-month="4" data-lat="35.514" data-lng="24.018">
+        <div class="post-body">
+          <p class="post-meta"><span class="race-type type-road">Δρόμου</span> · Απρίλιος</p>
+          <h3>Crete Marathon (Χανιά)</h3>
+          <p class="race-specs">42,2 / 10 / 5 χλμ · Άσφαλτος</p>
+          <p>Μαραθώνιος στα Χανιά, με φόντο την κρητική φύση και τη θάλασσα.</p>
+          <div class="race-actions">
+            <button class="show-on-map" type="button">Δες στον χάρτη</button>
+            <a class="read-more" href="https://crete-marathon.gr/" target="_blank" rel="noopener">Επίσημη σελίδα →</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="post-card race-card" data-type="road" data-month="10" data-lat="37.2635" data-lng="23.159">
         <div class="post-body">
           <p class="post-meta"><span class="race-type type-road">Δρόμου</span> · Οκτώβριος</p>
-          <h3>Navarino Challenge</h3>
-          <p class="race-specs">5 &amp; 10 χλμ · Παραλία / Άσφαλτος</p>
-          <p>Αθλητικό event ευεξίας στη Μεσσηνία (Costa Navarino), με δράσεις για όλη την οικογένεια.</p>
+          <h3>Spetses Mini Marathon</h3>
+          <p class="race-specs">25 / 10 / 5 χλμ · Άσφαλτος</p>
+          <p>Αγωνιστικό τριήμερο στις Σπέτσες: ο κλασικός γύρος του νησιού στα 25 χλμ, μικρότερες αποστάσεις και κολυμβητικοί αγώνες.</p>
           <div class="race-actions">
             <button class="show-on-map" type="button">Δες στον χάρτη</button>
-            <a class="read-more" href="https://www.google.com/search?q=Navarino+Challenge" target="_blank" rel="noopener">Πληροφορίες →</a>
-          </div>
-        </div>
-      </article>
-
-      <article class="post-card race-card" data-type="road" data-lat="35.366" data-lng="24.474">
-        <div class="post-body">
-          <p class="post-meta"><span class="race-type type-road">Δρόμου</span> · Άνοιξη</p>
-          <h3>Run Crete (Ρέθυμνο)</h3>
-          <p class="race-specs">Ποικίλες αποστάσεις · Άσφαλτος</p>
-          <p>Αγώνες δρόμου με φόντο την κρητική φύση και τη θάλασσα.</p>
-          <div class="race-actions">
-            <button class="show-on-map" type="button">Δες στον χάρτη</button>
-            <a class="read-more" href="https://www.google.com/search?q=Run+Crete+Ρέθυμνο+αγώνας" target="_blank" rel="noopener">Πληροφορίες →</a>
+            <a class="read-more" href="https://spetsesmarathon.com/" target="_blank" rel="noopener">Επίσημη σελίδα →</a>
           </div>
         </div>
       </article>
@@ -237,6 +303,14 @@ activeNav: "agones"
 
       var cards = Array.prototype.slice.call(document.querySelectorAll('.race-card'));
       var entries = [];
+
+      // Χρονολογική σειρά: οι προσεχείς αγώνες πρώτοι (κυλιόμενα από τον τρέχοντα μήνα)
+      var raceList = document.querySelector('.race-list');
+      var thisMonth = new Date().getMonth() + 1;
+      cards.sort(function (a, b) {
+        return ((a.dataset.month - thisMonth + 12) % 12) - ((b.dataset.month - thisMonth + 12) % 12);
+      });
+      cards.forEach(function (c) { raceList.appendChild(c); });
 
       cards.forEach(function (card) {
         var lat = parseFloat(card.dataset.lat), lng = parseFloat(card.dataset.lng);

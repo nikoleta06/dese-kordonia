@@ -75,6 +75,7 @@ activeNav: "agones"
     <p class="lead">
       From the historic Athens Marathon to mountain races in the highlands — Greece is full of
       routes. Filter by type, click a marker or press "Show on map" on a card to focus on a race.
+      Cards are in chronological order — upcoming races first.
     </p>
 
     <div class="race-filters" role="group" aria-label="Race filters">
@@ -92,7 +93,7 @@ activeNav: "agones"
     </div>
 
     <div class="race-list post-grid">
-      <article class="post-card race-card" data-type="road" data-lat="38.155" data-lng="23.965">
+      <article class="post-card race-card" data-type="road" data-month="11" data-lat="38.155" data-lng="23.965">
         <div class="post-body">
           <p class="post-meta"><span class="race-type type-road">Road</span> · November</p>
           <h3>Athens Authentic Marathon</h3>
@@ -105,7 +106,20 @@ activeNav: "agones"
         </div>
       </article>
 
-      <article class="post-card race-card" data-type="ultra" data-lat="37.075" data-lng="22.43">
+      <article class="post-card race-card" data-type="road" data-month="3" data-lat="37.9755" data-lng="23.7348">
+        <div class="post-body">
+          <p class="post-meta"><span class="race-type type-road">Road</span> · March</p>
+          <h3>Athens Half Marathon</h3>
+          <p class="race-specs">21.1 &amp; 5 km · Road</p>
+          <p>A route through the historic centre of Athens, past dozens of monuments — an ideal first big step before the marathon.</p>
+          <div class="race-actions">
+            <button class="show-on-map" type="button">Show on map</button>
+            <a class="read-more" href="https://www.athinahalfmarathon.gr/en" target="_blank" rel="noopener">Official site →</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="post-card race-card" data-type="ultra" data-month="9" data-lat="37.075" data-lng="22.43">
         <div class="post-body">
           <p class="post-meta"><span class="race-type type-ultra">Ultra</span> · September</p>
           <h3>Spartathlon</h3>
@@ -118,7 +132,20 @@ activeNav: "agones"
         </div>
       </article>
 
-      <article class="post-card race-card" data-type="mountain" data-lat="40.088" data-lng="22.50">
+      <article class="post-card race-card" data-type="ultra" data-month="10" data-lat="41.30" data-lng="24.65">
+        <div class="post-body">
+          <p class="post-meta"><span class="race-type type-ultra">Ultra</span> · October</p>
+          <h3>Rodopi Ultra Trail (ROUT)</h3>
+          <p class="race-specs">100 miles · Mountain ultra</p>
+          <p>The oldest 100-mile race in Greece, run in semi-autonomy conditions through the Rodopi Mountains National Park.</p>
+          <div class="race-actions">
+            <button class="show-on-map" type="button">Show on map</button>
+            <a class="read-more" href="https://new.rout.gr/" target="_blank" rel="noopener">Official site →</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="post-card race-card" data-type="mountain" data-month="6" data-lat="40.088" data-lng="22.50">
         <div class="post-body">
           <p class="post-meta"><span class="race-type type-mountain">Mountain</span> · June</p>
           <h3>Olympus Marathon</h3>
@@ -131,46 +158,72 @@ activeNav: "agones"
         </div>
       </article>
 
-      <article class="post-card race-card" data-type="mountain" data-lat="39.88" data-lng="20.75">
+      <article class="post-card race-card" data-type="mountain" data-month="7" data-lat="39.88" data-lng="20.75">
         <div class="post-body">
           <p class="post-meta"><span class="race-type type-mountain">Mountain</span> · July</p>
           <h3>Zagori Mountain Running</h3>
-          <p class="race-specs">10–80 km · Mountain</p>
+          <p class="race-specs">5–80 km · Mountain</p>
           <p>Trail running in the stunning Zagori villages, with routes for every level.</p>
           <div class="race-actions">
             <button class="show-on-map" type="button">Show on map</button>
-            <a class="read-more" href="https://www.google.com/search?q=Zagori+Mountain+Running" target="_blank" rel="noopener">Info →</a>
+            <a class="read-more" href="https://www.zagorirace.gr/en/" target="_blank" rel="noopener">Official site →</a>
           </div>
         </div>
       </article>
 
-      <article class="post-card race-card" data-type="road" data-lat="40.626" data-lng="22.948">
+      <article class="post-card race-card" data-type="mountain" data-month="5" data-lat="39.770" data-lng="21.183">
+        <div class="post-body">
+          <p class="post-meta"><span class="race-type type-mountain">Mountain</span> · May</p>
+          <h3>Metsovo Ursa Trail</h3>
+          <p class="race-specs">4.6–100 km · Mountain</p>
+          <p>"On the tracks of the bear": mountain running around Metsovo, from a 4.6 km vertical race to a 100 km ultramarathon.</p>
+          <div class="race-actions">
+            <button class="show-on-map" type="button">Show on map</button>
+            <a class="read-more" href="https://www.ursatrail.gr/" target="_blank" rel="noopener">Official site →</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="post-card race-card" data-type="road" data-month="4" data-lat="40.626" data-lng="22.948">
         <div class="post-body">
           <p class="post-meta"><span class="race-type type-road">Road</span> · April</p>
           <h3>Thessaloniki Marathon "Alexander the Great"</h3>
           <p class="race-specs">42.2 km · Road</p>
-          <p>A marathon in Thessaloniki, dedicated to Alexander the Great.</p>
+          <p>A marathon in Thessaloniki, dedicated to Alexander the Great — from Pella to the city's waterfront.</p>
           <div class="race-actions">
             <button class="show-on-map" type="button">Show on map</button>
-            <a class="read-more" href="https://www.google.com/search?q=Thessaloniki+Marathon+Alexander+the+Great" target="_blank" rel="noopener">Info →</a>
+            <a class="read-more" href="https://atgm.gr/?lang=en" target="_blank" rel="noopener">Official site →</a>
           </div>
         </div>
       </article>
 
-      <article class="post-card race-card" data-type="road" data-lat="39.667" data-lng="20.85">
+      <article class="post-card race-card" data-type="road" data-month="10" data-lat="40.6326" data-lng="22.9409">
         <div class="post-body">
-          <p class="post-meta"><span class="race-type type-road">Road</span> · March</p>
+          <p class="post-meta"><span class="race-type type-road">Road</span> · October</p>
+          <h3>Thessaloniki International Night Half Marathon</h3>
+          <p class="race-specs">21.1 / 10 / 5 km · Road</p>
+          <p>A night running festival starting from Aristotelous Square — one of the biggest races in the country.</p>
+          <div class="race-actions">
+            <button class="show-on-map" type="button">Show on map</button>
+            <a class="read-more" href="https://thesshalfmarathon.org/?lang=en" target="_blank" rel="noopener">Official site →</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="post-card race-card" data-type="road" data-month="9" data-lat="39.667" data-lng="20.85">
+        <div class="post-body">
+          <p class="post-meta"><span class="race-type type-road">Road</span> · September</p>
           <h3>Ioannina Lake Run</h3>
-          <p class="race-specs">30 km · Road</p>
+          <p class="race-specs">30 / 10 / 5 km · Road</p>
           <p>A popular race around Lake Pamvotida, with beautiful views.</p>
           <div class="race-actions">
             <button class="show-on-map" type="button">Show on map</button>
-            <a class="read-more" href="https://www.google.com/search?q=Ioannina+Lake+Run" target="_blank" rel="noopener">Info →</a>
+            <a class="read-more" href="https://www.ioanninalakerun.gr/en" target="_blank" rel="noopener">Official site →</a>
           </div>
         </div>
       </article>
 
-      <article class="post-card race-card" data-type="road" data-lat="36.43" data-lng="28.22">
+      <article class="post-card race-card" data-type="road" data-month="4" data-lat="36.43" data-lng="28.22">
         <div class="post-body">
           <p class="post-meta"><span class="race-type type-road">Road</span> · April</p>
           <h3>Rhodes International Marathon</h3>
@@ -178,33 +231,46 @@ activeNav: "agones"
           <p>A marathon against the backdrop of Rhodes' medieval old town and the sea.</p>
           <div class="race-actions">
             <button class="show-on-map" type="button">Show on map</button>
-            <a class="read-more" href="https://www.google.com/search?q=Rhodes+International+Marathon" target="_blank" rel="noopener">Info →</a>
+            <a class="read-more" href="https://rhodesmarathon.gr/en/" target="_blank" rel="noopener">Official site →</a>
           </div>
         </div>
       </article>
 
-      <article class="post-card race-card" data-type="road" data-lat="36.92" data-lng="21.70">
+      <article class="post-card race-card" data-type="road" data-month="5" data-lat="36.92" data-lng="21.70">
+        <div class="post-body">
+          <p class="post-meta"><span class="race-type type-road">Road</span> · May</p>
+          <h3>Messinia Challenge (formerly Navarino Challenge)</h3>
+          <p class="race-specs">21.1 / 10 / 5 km · Road / Beach</p>
+          <p>A sports &amp; wellness event in Messinia (Costa Navarino &amp; Pylos), with activities for the whole family.</p>
+          <div class="race-actions">
+            <button class="show-on-map" type="button">Show on map</button>
+            <a class="read-more" href="https://messiniachallenge.com/" target="_blank" rel="noopener">Official site →</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="post-card race-card" data-type="road" data-month="4" data-lat="35.514" data-lng="24.018">
+        <div class="post-body">
+          <p class="post-meta"><span class="race-type type-road">Road</span> · April</p>
+          <h3>Crete Marathon (Chania)</h3>
+          <p class="race-specs">42.2 / 10 / 5 km · Road</p>
+          <p>A marathon in Chania, against the backdrop of Cretan nature and the sea.</p>
+          <div class="race-actions">
+            <button class="show-on-map" type="button">Show on map</button>
+            <a class="read-more" href="https://crete-marathon.gr/en/home/" target="_blank" rel="noopener">Official site →</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="post-card race-card" data-type="road" data-month="10" data-lat="37.2635" data-lng="23.159">
         <div class="post-body">
           <p class="post-meta"><span class="race-type type-road">Road</span> · October</p>
-          <h3>Navarino Challenge</h3>
-          <p class="race-specs">5 &amp; 10 km · Beach / Road</p>
-          <p>A sports &amp; wellness event in Messinia (Costa Navarino), with activities for the whole family.</p>
+          <h3>Spetses Mini Marathon</h3>
+          <p class="race-specs">25 / 10 / 5 km · Road</p>
+          <p>A racing weekend on Spetses: the classic 25 km loop of the island, shorter distances and swimming races.</p>
           <div class="race-actions">
             <button class="show-on-map" type="button">Show on map</button>
-            <a class="read-more" href="https://www.google.com/search?q=Navarino+Challenge" target="_blank" rel="noopener">Info →</a>
-          </div>
-        </div>
-      </article>
-
-      <article class="post-card race-card" data-type="road" data-lat="35.366" data-lng="24.474">
-        <div class="post-body">
-          <p class="post-meta"><span class="race-type type-road">Road</span> · Spring</p>
-          <h3>Run Crete (Rethymno)</h3>
-          <p class="race-specs">Various distances · Road</p>
-          <p>Road races against the backdrop of Cretan nature and the sea.</p>
-          <div class="race-actions">
-            <button class="show-on-map" type="button">Show on map</button>
-            <a class="read-more" href="https://www.google.com/search?q=Run+Crete+Rethymno+race" target="_blank" rel="noopener">Info →</a>
+            <a class="read-more" href="https://spetsesmarathon.com/en/homepage-en/" target="_blank" rel="noopener">Official site →</a>
           </div>
         </div>
       </article>
@@ -236,6 +302,14 @@ activeNav: "agones"
 
       var cards = Array.prototype.slice.call(document.querySelectorAll('.race-card'));
       var entries = [];
+
+      // Chronological order: upcoming races first (rolling from the current month)
+      var raceList = document.querySelector('.race-list');
+      var thisMonth = new Date().getMonth() + 1;
+      cards.sort(function (a, b) {
+        return ((a.dataset.month - thisMonth + 12) % 12) - ((b.dataset.month - thisMonth + 12) % 12);
+      });
+      cards.forEach(function (c) { raceList.appendChild(c); });
 
       cards.forEach(function (card) {
         var lat = parseFloat(card.dataset.lat), lng = parseFloat(card.dataset.lng);
