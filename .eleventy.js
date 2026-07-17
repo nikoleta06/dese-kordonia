@@ -14,6 +14,19 @@ module.exports = function (eleventyConfig) {
     return file + (lang === "en" ? "-en" : "") + ".html";
   });
 
+  // «Διάβασε επίσης»: 3 σχετικά άρθρα — πρώτα ίδιας κατηγορίας, μετά τα υπόλοιπα
+  // (ίδια λογική με τον παλιό JS injector του main.js, τώρα στο build)
+  const postsData = require("./src/_data/postsData.js");
+  eleventyConfig.addFilter("relatedPosts", (permalink) => {
+    const slug = String(permalink).replace("-en.html", "").replace(".html", "");
+    const posts = postsData.posts;
+    const cur = posts.find((p) => p.slug === slug);
+    if (!cur) return [];
+    const same = posts.filter((p) => p.slug !== cur.slug && p.cat === cur.cat);
+    const others = posts.filter((p) => p.slug !== cur.slug && p.cat !== cur.cat);
+    return same.concat(others).slice(0, 3);
+  });
+
   return {
     dir: {
       input: "src",

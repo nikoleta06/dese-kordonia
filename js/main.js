@@ -41,23 +41,8 @@ document.addEventListener('DOMContentLoaded', function () {
     tips: { el: 'Πρακτικές', en: 'Practical', svg: '<svg ' + ICO + ' viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5.76.76 1.23 1.52 1.41 2.5"/></svg>' }
   };
 
-  /* --- Μητρώο άρθρων (για «Διάβασε επίσης») --- */
-  const DK_CAT_IMG = { champions: 'cat-champions.jpg', science: 'cat-science.jpg', stories: 'cat-stories.jpg', tips: 'cat-tips.jpg' };
-  const DK_POSTS = [
-    { slug: 'post-cadence', cat: 'science', el: 'Cadence: γιατί τα 180 βήματα δεν είναι κανόνας', en: 'Cadence: why 180 steps isn\'t a rule' },
-    { slug: 'post-zones-palmon', cat: 'science', el: 'Οι 5 Ζώνες Καρδιακών Παλμών, εξηγημένες απλά', en: 'The 5 Heart-Rate Zones, explained simply' },
-    { slug: 'post-vo2max', cat: 'science', el: 'Τι είναι το VO₂max', en: 'What is VO₂max' },
-    { slug: 'post-lactate-threshold', cat: 'science', el: 'Τι είναι το lactate threshold', en: 'What is lactate threshold' },
-    { slug: 'post-easy-running', cat: 'science', el: 'Γιατί οι ελίτ δρομείς τρέχουν αργά', en: 'Why elite runners run slow' },
-    { slug: 'post-kipchoge', cat: 'champions', el: 'Η φιλοσοφία του Eliud Kipchoge', en: 'The philosophy of Eliud Kipchoge' },
-    { slug: 'post-ingebrigtsen', cat: 'champions', el: '7 μαθήματα από τον Jakob Ingebrigtsen', en: '7 lessons from Jakob Ingebrigtsen' },
-    { slug: 'post-sifan-hassan', cat: 'champions', el: 'Τι μας μαθαίνει η Sifan Hassan για την επιμονή', en: 'What Sifan Hassan teaches us about resilience' },
-    { slug: 'post-faith-kipyegon', cat: 'champions', el: 'Faith Kipyegon – Συνέπεια και επιστροφή στην κορυφή', en: 'Faith Kipyegon – Consistency and the return to the top' },
-    { slug: 'post-trexsimo-imikranies', cat: 'stories', el: 'Πώς το τρέξιμο με βοήθησε με τις ημικρανίες', en: 'How running helped me with migraines' },
-    { slug: 'post-diatrofi-trexsimo', cat: 'tips', el: 'Τι να τρώω πριν και μετά το τρέξιμο', en: 'What to eat before and after running' },
-    { slug: 'post-allagi-papoutsion', cat: 'tips', el: 'Πότε να αλλάξεις τα παπούτσια του τρεξίματος', en: 'When to replace your running shoes' },
-    { slug: 'post-arxarios-trexsimo', cat: 'tips', el: '6 συμβουλές για να ξεκινήσεις τρέξιμο ως αρχάριος', en: '6 tips to start running from scratch' }
-  ];
+  /* Σημ.: το μητρώο άρθρων μεταφέρθηκε στο src/_data/postsData.js —
+     το «Διάβασε επίσης» μπαίνει πλέον στο HTML κατά το build (related.njk). */
 
   const DK_PAGE_EN = document.documentElement.lang === 'en';
   const DK_FILE = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
@@ -258,8 +243,10 @@ document.addEventListener('DOMContentLoaded', function () {
       '<a class="share-btn" target="_blank" rel="noopener" aria-label="WhatsApp" href="https://wa.me/?text=' + t + '%20' + u + '">' + WA + '</a>' +
       '<button class="share-btn share-copy" type="button" aria-label="' + (en ? 'Copy link' : 'Αντιγραφή συνδέσμου') + '">' + LINK + '</button>';
 
-    const back = article.querySelector('.back-link');
-    if (back) article.insertBefore(row, back); else article.appendChild(row);
+    /* Πριν το «Διάβασε επίσης» (στατικό πλέον) ώστε η σειρά να μείνει:
+       κείμενο → like/save → κοινοποίηση → σχετικά άρθρα → πίσω στο blog */
+    const anchor = article.querySelector('.related') || article.querySelector('.back-link');
+    if (anchor) article.insertBefore(row, anchor); else article.appendChild(row);
 
     const copyBtn = row.querySelector('.share-copy');
     copyBtn.addEventListener('click', async () => {
@@ -460,10 +447,10 @@ document.addEventListener('DOMContentLoaded', function () {
     actions.appendChild(likeWrap);
     actions.appendChild(saveBtn);
 
-    const shareRow = article.querySelector('.share-row');
-    const backLink = article.querySelector('.back-link');
-    if (shareRow) article.insertBefore(actions, shareRow);
-    else if (backLink) article.insertBefore(actions, backLink);
+    const anchor = article.querySelector('.share-row') ||
+                   article.querySelector('.related') ||
+                   article.querySelector('.back-link');
+    if (anchor) article.insertBefore(actions, anchor);
     else article.appendChild(actions);
 
     function renderLike() {
@@ -694,46 +681,6 @@ document.addEventListener('DOMContentLoaded', function () {
     loadCounts().then((map) => {
       badges.forEach((b) => setBadge(b.badge, Number(map[b.slug]) || 0, b.inspire));
     });
-  })();
-
-  /* ===== «Διάβασε επίσης» στο τέλος των άρθρων ===== */
-  (function () {
-    const article = document.querySelector('.article');
-    if (!article) return;
-    const cur = DK_POSTS.find((p) => p.slug === DK_SLUG);
-    if (!cur) return;
-    const en = DK_PAGE_EN;
-    const ext = en ? '-en.html' : '.html';
-
-    const same = DK_POSTS.filter((p) => p.slug !== cur.slug && p.cat === cur.cat);
-    const others = DK_POSTS.filter((p) => p.slug !== cur.slug && p.cat !== cur.cat);
-    const picks = same.concat(others).slice(0, 3);
-    if (!picks.length) return;
-
-    const sec = document.createElement('section');
-    sec.className = 'related';
-    let html = '<h3 class="related-title">' + (en ? 'Read also' : 'Διάβασε επίσης') + '</h3><div class="related-grid post-grid">';
-    picks.forEach((p) => {
-      const meta = DK_CAT_META[p.cat] || DK_CAT_META.tips;
-      const catName = en ? meta.en : meta.el;
-      const img = DK_CAT_IMG[p.cat] || 'cat-running.jpg';
-      const title = en ? p.en : p.el;
-      const alt = title.replace(/"/g, '&quot;');
-      html +=
-        '<article class="post-card" data-category="' + p.cat + '">' +
-          '<img src="../images/' + img + '?v=1" alt="' + alt + '" loading="lazy" decoding="async" width="400" height="180">' +
-          '<div class="post-body">' +
-            '<p class="post-meta"><span class="post-cat">' + meta.svg + catName + '</span></p>' +
-            '<h3>' + title + '</h3>' +
-            '<a class="read-more" href="' + p.slug + ext + '">' + (en ? 'Read the article →' : 'Διάβασε το άρθρο →') + '</a>' +
-          '</div>' +
-        '</article>';
-    });
-    html += '</div>';
-    sec.innerHTML = html;
-
-    const back = article.querySelector('.back-link');
-    if (back) article.insertBefore(sec, back); else article.appendChild(sec);
   })();
 
   /* ===== Analytics (GoatCounter) =====
