@@ -1,8 +1,8 @@
 ---
 permalink: "agones.html"
 lang: "el"
-title: "Αγώνες Δρόμου στην Ελλάδα — Διαδραστικός Χάρτης | Δέσε Κορδόνια"
-description: "Διαδραστικός χάρτης με γνωστούς αγώνες δρόμου στην Ελλάδα: Μαραθώνιος Αθήνας, Σπάρταθλον, ορεινοί αγώνες και άλλα. Φιλτράρισε ανά τύπο, δες απόσταση, μήνα και λεπτομέρειες."
+title: "Αγώνες Τρεξίματος σε Ελλάδα & Ευρώπη — Διαδραστικός Χάρτης | Δέσε Κορδόνια"
+description: "Διαδραστικός χάρτης με αγώνες τρεξίματος σε Ελλάδα και Ευρώπη: Μαραθώνιος Αθήνας, Σπάρταθλον, ορεινοί αγώνες, καθώς και οι μεγάλοι μαραθώνιοι και ημιμαραθώνιοι της Ευρώπης. Φιλτράρισε ανά περιοχή και τύπο."
 activeNav: "agones"
 ---
 
@@ -16,8 +16,8 @@ activeNav: "agones"
   <link rel="alternate" hreflang="en" href="https://desekordonia.com/agones-en.html">
 
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Αγώνες Δρόμου στην Ελλάδα — Διαδραστικός Χάρτης">
-  <meta property="og:description" content="Διαδραστικός χάρτης με γνωστούς αγώνες δρόμου στην Ελλάδα.">
+  <meta property="og:title" content="Αγώνες Τρεξίματος σε Ελλάδα & Ευρώπη — Διαδραστικός Χάρτης">
+  <meta property="og:description" content="Διαδραστικός χάρτης με αγώνες τρεξίματος σε Ελλάδα και Ευρώπη — δρόμου, ορεινοί, υπερμαραθώνιοι.">
   <meta property="og:image" content="https://desekordonia.com/images/cat-champions.jpg">
   <meta property="og:url" content="https://desekordonia.com/agones.html">
   <meta name="twitter:card" content="summary_large_image">
@@ -43,6 +43,7 @@ activeNav: "agones"
 
     /* Φίλτρα */
     .race-filters { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1.5rem 0 0; }
+    .race-filters + .race-filters { margin-top: 0.6rem; }
     .rf-btn { padding: 0.5rem 1rem; border-radius: 999px; border: 1px solid var(--border); background: var(--surface); color: var(--text-dim); cursor: pointer; font-family: inherit; font-size: 0.9rem; transition: color .2s, background-color .2s, border-color .2s; }
     .rf-btn:hover { border-color: var(--accent); color: var(--text); }
     .rf-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
@@ -71,15 +72,20 @@ activeNav: "agones"
 
 {% block content %}
   <main>
-    <h1 class="section-title">Αγώνες Δρόμου στην Ελλάδα</h1>
+    <h1 class="section-title">Αγώνες Τρεξίματος — Ελλάδα &amp; Ευρώπη</h1>
     <p class="lead">
-      Από τον ιστορικό Μαραθώνιο της Αθήνας μέχρι τους ορεινούς αγώνες στα βουνά — η Ελλάδα
-      είναι γεμάτη διαδρομές. Φιλτράρισε ανά τύπο, κάνε κλικ σε ένα σημάδι ή πάτησε
-      «Δες στον χάρτη» σε μια κάρτα για να εστιάσεις στον αγώνα. Οι κάρτες είναι σε
-      χρονολογική σειρά — πρώτοι οι προσεχείς αγώνες.
+      Από τον ιστορικό Μαραθώνιο της Αθήνας και τους ορεινούς αγώνες στα βουνά, μέχρι τους
+      μεγάλους μαραθώνιους και ημιμαραθώνιους της Ευρώπης. Φιλτράρισε ανά περιοχή και τύπο,
+      κάνε κλικ σε ένα σημάδι ή πάτησε «Δες στον χάρτη» σε μια κάρτα για να εστιάσεις στον
+      αγώνα. Οι κάρτες είναι σε χρονολογική σειρά — πρώτοι οι προσεχείς αγώνες.
     </p>
 
-    <div class="race-filters" role="group" aria-label="Φίλτρα αγώνων">
+    <div class="race-filters" role="group" aria-label="Φίλτρο περιοχής">
+      <button class="rf-btn active" data-region="all" type="button">Όλες οι χώρες</button>
+      <button class="rf-btn" data-region="gr" type="button">Ελλάδα</button>
+      <button class="rf-btn" data-region="eu" type="button">Ευρώπη</button>
+    </div>
+    <div class="race-filters" role="group" aria-label="Φίλτρο τύπου">
       <button class="rf-btn active" data-filter="all" type="button">Όλοι</button>
       <button class="rf-btn" data-filter="road" type="button">Δρόμου</button>
       <button class="rf-btn" data-filter="mountain" type="button">Ορεινοί</button>
@@ -275,6 +281,137 @@ activeNav: "agones"
           </div>
         </div>
       </article>
+
+      <!-- Ευρωπαϊκοί μαραθώνιοι & ημιμαραθώνιοι -->
+      <article class="post-card race-card" data-type="road" data-region="eu" data-month="3" data-lat="41.9028" data-lng="12.4964">
+        <div class="post-body">
+          <p class="post-meta"><span class="race-type type-road">Δρόμου</span> · Μάρτιος · Ιταλία</p>
+          <h3>Μαραθώνιος Ρώμης</h3>
+          <p class="race-specs">42,2 χλμ · Άσφαλτος</p>
+          <p>Διαδρομή-μουσείο: εκκίνηση και τερματισμός στο Κολοσσαίο, περνώντας από Βατικανό, Πιάτσα Ναβόνα και όλη την αιώνια πόλη.</p>
+          <div class="race-actions">
+            <button class="show-on-map" type="button">Δες στον χάρτη</button>
+            <a class="read-more" href="https://www.runromethemarathon.com/" target="_blank" rel="noopener">Επίσημη σελίδα →</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="post-card race-card" data-type="road" data-region="eu" data-month="3" data-lat="38.7223" data-lng="-9.1393">
+        <div class="post-body">
+          <p class="post-meta"><span class="race-type type-road">Δρόμου</span> · Μάρτιος · Πορτογαλία</p>
+          <h3>Ημιμαραθώνιος Λισαβόνας</h3>
+          <p class="race-specs">21,1 χλμ · Άσφαλτος</p>
+          <p>Μοναδική εκκίνηση πάνω στη γέφυρα «25ης Απριλίου» με θέα τον Τάγο — από τους πιο γρήγορους ημιμαραθώνιους στον κόσμο.</p>
+          <div class="race-actions">
+            <button class="show-on-map" type="button">Δες στον χάρτη</button>
+            <a class="read-more" href="https://www.maratonaclubedeportugal.com/" target="_blank" rel="noopener">Επίσημη σελίδα →</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="post-card race-card" data-type="road" data-region="eu" data-month="4" data-lat="51.5074" data-lng="-0.1278">
+        <div class="post-body">
+          <p class="post-meta"><span class="race-type type-road">Δρόμου</span> · Απρίλιος · Ηνωμένο Βασίλειο</p>
+          <h3>Μαραθώνιος Λονδίνου</h3>
+          <p class="race-specs">42,2 χλμ · Άσφαλτος · World Marathon Major</p>
+          <p>Ένας από τους έξι World Marathon Majors: Greenwich → Tower Bridge → Buckingham Palace, με ασύγκριτη ατμόσφαιρα και κλήρωση για θέση.</p>
+          <div class="race-actions">
+            <button class="show-on-map" type="button">Δες στον χάρτη</button>
+            <a class="read-more" href="https://www.londonmarathonevents.co.uk/london-marathon" target="_blank" rel="noopener">Επίσημη σελίδα →</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="post-card race-card" data-type="road" data-region="eu" data-month="4" data-lat="48.8566" data-lng="2.3522">
+        <div class="post-body">
+          <p class="post-meta"><span class="race-type type-road">Δρόμου</span> · Απρίλιος · Γαλλία</p>
+          <h3>Μαραθώνιος Παρισιού</h3>
+          <p class="race-specs">42,2 χλμ · Άσφαλτος</p>
+          <p>Εκκίνηση στα Ηλύσια Πεδία και διαδρομή δίπλα από Λούβρο, Σηκουάνα και Πύργο του Άιφελ — από τους μεγαλύτερους μαραθώνιους της Ευρώπης.</p>
+          <div class="race-actions">
+            <button class="show-on-map" type="button">Δες στον χάρτη</button>
+            <a class="read-more" href="https://www.schneiderelectricparismarathon.com/" target="_blank" rel="noopener">Επίσημη σελίδα →</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="post-card race-card" data-type="road" data-region="eu" data-month="4" data-lat="48.2082" data-lng="16.3738">
+        <div class="post-body">
+          <p class="post-meta"><span class="race-type type-road">Δρόμου</span> · Απρίλιος · Αυστρία</p>
+          <h3>Μαραθώνιος Βιέννης</h3>
+          <p class="race-specs">42,2 / 21,1 χλμ · Άσφαλτος</p>
+          <p>Ο Vienna City Marathon περνά από Σένμπρουν, Πράτερ και Ρινγκ — μαραθώνιος και ημιμαραθώνιος με μουσική σε όλη τη διαδρομή.</p>
+          <div class="race-actions">
+            <button class="show-on-map" type="button">Δες στον χάρτη</button>
+            <a class="read-more" href="https://www.vienna-marathon.com/" target="_blank" rel="noopener">Επίσημη σελίδα →</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="post-card race-card" data-type="road" data-region="eu" data-month="5" data-lat="50.0755" data-lng="14.4378">
+        <div class="post-body">
+          <p class="post-meta"><span class="race-type type-road">Δρόμου</span> · Μάιος · Τσεχία</p>
+          <h3>Μαραθώνιος Πράγας</h3>
+          <p class="race-specs">42,2 χλμ · Άσφαλτος</p>
+          <p>Εκκίνηση στην Πλατεία της Παλιάς Πόλης και πέρασμα από τη Γέφυρα του Καρόλου — μια από τις ομορφότερες διαδρομές της Ευρώπης.</p>
+          <div class="race-actions">
+            <button class="show-on-map" type="button">Δες στον χάρτη</button>
+            <a class="read-more" href="https://www.runczech.com/" target="_blank" rel="noopener">Επίσημη σελίδα →</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="post-card race-card" data-type="road" data-region="eu" data-month="9" data-lat="52.5200" data-lng="13.4050">
+        <div class="post-body">
+          <p class="post-meta"><span class="race-type type-road">Δρόμου</span> · Σεπτέμβριος · Γερμανία</p>
+          <h3>Μαραθώνιος Βερολίνου</h3>
+          <p class="race-specs">42,2 χλμ · Άσφαλτος · World Marathon Major</p>
+          <p>Η πιο γρήγορη διαδρομή στον κόσμο — εδώ έχουν πέσει τα περισσότερα παγκόσμια ρεκόρ. Τερματισμός κάτω από την Πύλη του Βρανδεμβούργου.</p>
+          <div class="race-actions">
+            <button class="show-on-map" type="button">Δες στον χάρτη</button>
+            <a class="read-more" href="https://www.bmw-berlin-marathon.com/" target="_blank" rel="noopener">Επίσημη σελίδα →</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="post-card race-card" data-type="road" data-region="eu" data-month="9" data-lat="55.6761" data-lng="12.5683">
+        <div class="post-body">
+          <p class="post-meta"><span class="race-type type-road">Δρόμου</span> · Σεπτέμβριος · Δανία</p>
+          <h3>Ημιμαραθώνιος Κοπεγχάγης</h3>
+          <p class="race-specs">21,1 χλμ · Άσφαλτος</p>
+          <p>Επίπεδη, γρήγορη διαδρομή στο κέντρο της Κοπεγχάγης με τεράστια συμμετοχή — ιδανικός για ατομικό ρεκόρ στον ημιμαραθώνιο.</p>
+          <div class="race-actions">
+            <button class="show-on-map" type="button">Δες στον χάρτη</button>
+            <a class="read-more" href="https://cphhalf.dk/" target="_blank" rel="noopener">Επίσημη σελίδα →</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="post-card race-card" data-type="road" data-region="eu" data-month="10" data-lat="52.3676" data-lng="4.9041">
+        <div class="post-body">
+          <p class="post-meta"><span class="race-type type-road">Δρόμου</span> · Οκτώβριος · Ολλανδία</p>
+          <h3>Μαραθώνιος Άμστερνταμ</h3>
+          <p class="race-specs">42,2 / 21,1 χλμ · Άσφαλτος</p>
+          <p>Εκκίνηση και τερματισμός στο Ολυμπιακό Στάδιο του 1928, με διαδρομή δίπλα στον ποταμό Άμστελ — γρήγορος και γραφικός.</p>
+          <div class="race-actions">
+            <button class="show-on-map" type="button">Δες στον χάρτη</button>
+            <a class="read-more" href="https://www.tcsamsterdammarathon.nl/" target="_blank" rel="noopener">Επίσημη σελίδα →</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="post-card race-card" data-type="road" data-region="eu" data-month="12" data-lat="39.4699" data-lng="-0.3763">
+        <div class="post-body">
+          <p class="post-meta"><span class="race-type type-road">Δρόμου</span> · Δεκέμβριος · Ισπανία</p>
+          <h3>Μαραθώνιος Βαλένθιας</h3>
+          <p class="race-specs">42,2 χλμ · Άσφαλτος</p>
+          <p>Η «πόλη του τρεξίματος»: πανγρήγορη, επίπεδη διαδρομή με εντυπωσιακό τερματισμό πάνω στο νερό, στην Πόλη των Τεχνών και των Επιστημών.</p>
+          <div class="race-actions">
+            <button class="show-on-map" type="button">Δες στον χάρτη</button>
+            <a class="read-more" href="https://www.valenciaciudaddelrunning.com/" target="_blank" rel="noopener">Επίσημη σελίδα →</a>
+          </div>
+        </div>
+      </article>
     </div>
 
     <p class="plan-note" style="margin-top:1.5rem;">
@@ -327,7 +464,7 @@ activeNav: "agones"
           fillColor: COLORS[type] || '#ff5722', fillOpacity: 0.95
         }).bindPopup(popup).addTo(map);
 
-        entries.push({ card: card, marker: marker, type: type, lat: lat, lng: lng });
+        entries.push({ card: card, marker: marker, type: type, region: card.dataset.region || 'gr', lat: lat, lng: lng });
 
         var btn = card.querySelector('.show-on-map');
         if (btn) btn.addEventListener('click', function () {
@@ -337,19 +474,46 @@ activeNav: "agones"
         });
       });
 
-      var fbtns = Array.prototype.slice.call(document.querySelectorAll('.rf-btn'));
-      fbtns.forEach(function (b) {
+      // Συνδυαστικό φιλτράρισμα: περιοχή (Ελλάδα/Ευρώπη) + τύπος αγώνα
+      var regionBtns = Array.prototype.slice.call(document.querySelectorAll('.rf-btn[data-region]'));
+      var typeBtns = Array.prototype.slice.call(document.querySelectorAll('.rf-btn[data-filter]'));
+      var curRegion = 'all', curType = 'all';
+
+      function applyFilters(fly) {
+        var pts = [];
+        entries.forEach(function (e) {
+          var show = (curRegion === 'all' || e.region === curRegion) &&
+                     (curType === 'all' || e.type === curType);
+          e.card.style.display = show ? '' : 'none';
+          if (show) { e.marker.addTo(map); pts.push([e.lat, e.lng]); }
+          else { map.removeLayer(e.marker); }
+        });
+        if (fly && pts.length) {
+          map.flyToBounds(L.latLngBounds(pts).pad(0.15), { duration: 0.8, maxZoom: 7 });
+        }
+      }
+
+      regionBtns.forEach(function (b) {
         b.addEventListener('click', function () {
-          fbtns.forEach(function (x) { x.classList.remove('active'); });
+          regionBtns.forEach(function (x) { x.classList.remove('active'); });
           b.classList.add('active');
-          var f = b.dataset.filter;
-          entries.forEach(function (e) {
-            var show = (f === 'all' || e.type === f);
-            e.card.style.display = show ? '' : 'none';
-            if (show) { e.marker.addTo(map); } else { map.removeLayer(e.marker); }
-          });
+          curRegion = b.dataset.region;
+          applyFilters(true);
         });
       });
+      typeBtns.forEach(function (b) {
+        b.addEventListener('click', function () {
+          typeBtns.forEach(function (x) { x.classList.remove('active'); });
+          b.classList.add('active');
+          curType = b.dataset.filter;
+          applyFilters(true);
+        });
+      });
+
+      // Αρχική προβολή: όλοι οι αγώνες (Ελλάδα + Ευρώπη) στο κάδρο
+      if (entries.length) {
+        map.fitBounds(L.latLngBounds(entries.map(function (e) { return [e.lat, e.lng]; })).pad(0.1));
+      }
     })();
   </script>
 {% endblock %}

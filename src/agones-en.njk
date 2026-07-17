@@ -1,8 +1,8 @@
 ---
 permalink: "agones-en.html"
 lang: "en"
-title: "Running Races in Greece — Interactive Map | Δέσε Κορδόνια"
-description: "Interactive map of well-known running races in Greece: Athens Marathon, Spartathlon, mountain races and more. Filter by type, see distance, month and details."
+title: "Running Races in Greece & Europe — Interactive Map | Δέσε Κορδόνια"
+description: "Interactive map of running races in Greece and Europe: Athens Marathon, Spartathlon, mountain races, plus Europe's major marathons and half marathons. Filter by region and type."
 activeNav: "agones"
 ---
 
@@ -16,8 +16,8 @@ activeNav: "agones"
   <link rel="alternate" hreflang="en" href="https://desekordonia.com/agones-en.html">
 
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Running Races in Greece — Interactive Map">
-  <meta property="og:description" content="Interactive map of well-known running races in Greece.">
+  <meta property="og:title" content="Running Races in Greece & Europe — Interactive Map">
+  <meta property="og:description" content="Interactive map of running races in Greece and Europe — road, mountain, ultra.">
   <meta property="og:image" content="https://desekordonia.com/images/cat-champions.jpg">
   <meta property="og:url" content="https://desekordonia.com/agones-en.html">
   <meta name="twitter:card" content="summary_large_image">
@@ -43,6 +43,7 @@ activeNav: "agones"
 
     /* Filters */
     .race-filters { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1.5rem 0 0; }
+    .race-filters + .race-filters { margin-top: 0.6rem; }
     .rf-btn { padding: 0.5rem 1rem; border-radius: 999px; border: 1px solid var(--border); background: var(--surface); color: var(--text-dim); cursor: pointer; font-family: inherit; font-size: 0.9rem; transition: color .2s, background-color .2s, border-color .2s; }
     .rf-btn:hover { border-color: var(--accent); color: var(--text); }
     .rf-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
@@ -71,14 +72,20 @@ activeNav: "agones"
 
 {% block content %}
   <main>
-    <h1 class="section-title">Running Races in Greece</h1>
+    <h1 class="section-title">Running Races — Greece &amp; Europe</h1>
     <p class="lead">
-      From the historic Athens Marathon to mountain races in the highlands — Greece is full of
-      routes. Filter by type, click a marker or press "Show on map" on a card to focus on a race.
-      Cards are in chronological order — upcoming races first.
+      From the historic Athens Marathon and mountain races in the Greek highlands to Europe's
+      major marathons and half marathons. Filter by region and type, click a marker or press
+      "Show on map" on a card to focus on a race. Cards are in chronological order — upcoming
+      races first.
     </p>
 
-    <div class="race-filters" role="group" aria-label="Race filters">
+    <div class="race-filters" role="group" aria-label="Region filter">
+      <button class="rf-btn active" data-region="all" type="button">All countries</button>
+      <button class="rf-btn" data-region="gr" type="button">Greece</button>
+      <button class="rf-btn" data-region="eu" type="button">Europe</button>
+    </div>
+    <div class="race-filters" role="group" aria-label="Type filter">
       <button class="rf-btn active" data-filter="all" type="button">All</button>
       <button class="rf-btn" data-filter="road" type="button">Road</button>
       <button class="rf-btn" data-filter="mountain" type="button">Mountain</button>
@@ -274,6 +281,137 @@ activeNav: "agones"
           </div>
         </div>
       </article>
+
+      <!-- European marathons & half marathons -->
+      <article class="post-card race-card" data-type="road" data-region="eu" data-month="3" data-lat="41.9028" data-lng="12.4964">
+        <div class="post-body">
+          <p class="post-meta"><span class="race-type type-road">Road</span> · March · Italy</p>
+          <h3>Rome Marathon</h3>
+          <p class="race-specs">42.2 km · Road</p>
+          <p>A museum of a course: start and finish at the Colosseum, passing the Vatican, Piazza Navona and the whole Eternal City.</p>
+          <div class="race-actions">
+            <button class="show-on-map" type="button">Show on map</button>
+            <a class="read-more" href="https://www.runromethemarathon.com/" target="_blank" rel="noopener">Official site →</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="post-card race-card" data-type="road" data-region="eu" data-month="3" data-lat="38.7223" data-lng="-9.1393">
+        <div class="post-body">
+          <p class="post-meta"><span class="race-type type-road">Road</span> · March · Portugal</p>
+          <h3>Lisbon Half Marathon</h3>
+          <p class="race-specs">21.1 km · Road</p>
+          <p>A unique start on the 25 de Abril Bridge overlooking the Tagus — one of the fastest half marathons in the world.</p>
+          <div class="race-actions">
+            <button class="show-on-map" type="button">Show on map</button>
+            <a class="read-more" href="https://www.maratonaclubedeportugal.com/" target="_blank" rel="noopener">Official site →</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="post-card race-card" data-type="road" data-region="eu" data-month="4" data-lat="51.5074" data-lng="-0.1278">
+        <div class="post-body">
+          <p class="post-meta"><span class="race-type type-road">Road</span> · April · United Kingdom</p>
+          <h3>London Marathon</h3>
+          <p class="race-specs">42.2 km · Road · World Marathon Major</p>
+          <p>One of the six World Marathon Majors: Greenwich → Tower Bridge → Buckingham Palace, with an unmatched atmosphere and a ballot for entry.</p>
+          <div class="race-actions">
+            <button class="show-on-map" type="button">Show on map</button>
+            <a class="read-more" href="https://www.londonmarathonevents.co.uk/london-marathon" target="_blank" rel="noopener">Official site →</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="post-card race-card" data-type="road" data-region="eu" data-month="4" data-lat="48.8566" data-lng="2.3522">
+        <div class="post-body">
+          <p class="post-meta"><span class="race-type type-road">Road</span> · April · France</p>
+          <h3>Paris Marathon</h3>
+          <p class="race-specs">42.2 km · Road</p>
+          <p>Start on the Champs-Élysées, running past the Louvre, the Seine and the Eiffel Tower — one of Europe's biggest marathons.</p>
+          <div class="race-actions">
+            <button class="show-on-map" type="button">Show on map</button>
+            <a class="read-more" href="https://www.schneiderelectricparismarathon.com/" target="_blank" rel="noopener">Official site →</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="post-card race-card" data-type="road" data-region="eu" data-month="4" data-lat="48.2082" data-lng="16.3738">
+        <div class="post-body">
+          <p class="post-meta"><span class="race-type type-road">Road</span> · April · Austria</p>
+          <h3>Vienna City Marathon</h3>
+          <p class="race-specs">42.2 / 21.1 km · Road</p>
+          <p>Past Schönbrunn, the Prater and the Ring — marathon and half marathon with music all along the course.</p>
+          <div class="race-actions">
+            <button class="show-on-map" type="button">Show on map</button>
+            <a class="read-more" href="https://www.vienna-marathon.com/" target="_blank" rel="noopener">Official site →</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="post-card race-card" data-type="road" data-region="eu" data-month="5" data-lat="50.0755" data-lng="14.4378">
+        <div class="post-body">
+          <p class="post-meta"><span class="race-type type-road">Road</span> · May · Czechia</p>
+          <h3>Prague Marathon</h3>
+          <p class="race-specs">42.2 km · Road</p>
+          <p>Start in the Old Town Square and a crossing of Charles Bridge — one of the most beautiful courses in Europe.</p>
+          <div class="race-actions">
+            <button class="show-on-map" type="button">Show on map</button>
+            <a class="read-more" href="https://www.runczech.com/" target="_blank" rel="noopener">Official site →</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="post-card race-card" data-type="road" data-region="eu" data-month="9" data-lat="52.5200" data-lng="13.4050">
+        <div class="post-body">
+          <p class="post-meta"><span class="race-type type-road">Road</span> · September · Germany</p>
+          <h3>Berlin Marathon</h3>
+          <p class="race-specs">42.2 km · Road · World Marathon Major</p>
+          <p>The fastest course in the world — more world records have fallen here than anywhere else. Finish under the Brandenburg Gate.</p>
+          <div class="race-actions">
+            <button class="show-on-map" type="button">Show on map</button>
+            <a class="read-more" href="https://www.bmw-berlin-marathon.com/" target="_blank" rel="noopener">Official site →</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="post-card race-card" data-type="road" data-region="eu" data-month="9" data-lat="55.6761" data-lng="12.5683">
+        <div class="post-body">
+          <p class="post-meta"><span class="race-type type-road">Road</span> · September · Denmark</p>
+          <h3>Copenhagen Half Marathon</h3>
+          <p class="race-specs">21.1 km · Road</p>
+          <p>A flat, fast course through central Copenhagen with a huge field — ideal for a half marathon personal best.</p>
+          <div class="race-actions">
+            <button class="show-on-map" type="button">Show on map</button>
+            <a class="read-more" href="https://cphhalf.dk/" target="_blank" rel="noopener">Official site →</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="post-card race-card" data-type="road" data-region="eu" data-month="10" data-lat="52.3676" data-lng="4.9041">
+        <div class="post-body">
+          <p class="post-meta"><span class="race-type type-road">Road</span> · October · Netherlands</p>
+          <h3>Amsterdam Marathon</h3>
+          <p class="race-specs">42.2 / 21.1 km · Road</p>
+          <p>Start and finish in the 1928 Olympic Stadium, with a course along the Amstel river — fast and scenic.</p>
+          <div class="race-actions">
+            <button class="show-on-map" type="button">Show on map</button>
+            <a class="read-more" href="https://www.tcsamsterdammarathon.nl/" target="_blank" rel="noopener">Official site →</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="post-card race-card" data-type="road" data-region="eu" data-month="12" data-lat="39.4699" data-lng="-0.3763">
+        <div class="post-body">
+          <p class="post-meta"><span class="race-type type-road">Road</span> · December · Spain</p>
+          <h3>Valencia Marathon</h3>
+          <p class="race-specs">42.2 km · Road</p>
+          <p>The "city of running": a lightning-fast, flat course with a spectacular finish over the water at the City of Arts and Sciences.</p>
+          <div class="race-actions">
+            <button class="show-on-map" type="button">Show on map</button>
+            <a class="read-more" href="https://www.valenciaciudaddelrunning.com/" target="_blank" rel="noopener">Official site →</a>
+          </div>
+        </div>
+      </article>
     </div>
 
     <p class="plan-note" style="margin-top:1.5rem;">
@@ -326,7 +464,7 @@ activeNav: "agones"
           fillColor: COLORS[type] || '#ff5722', fillOpacity: 0.95
         }).bindPopup(popup).addTo(map);
 
-        entries.push({ card: card, marker: marker, type: type, lat: lat, lng: lng });
+        entries.push({ card: card, marker: marker, type: type, region: card.dataset.region || 'gr', lat: lat, lng: lng });
 
         var btn = card.querySelector('.show-on-map');
         if (btn) btn.addEventListener('click', function () {
@@ -336,19 +474,46 @@ activeNav: "agones"
         });
       });
 
-      var fbtns = Array.prototype.slice.call(document.querySelectorAll('.rf-btn'));
-      fbtns.forEach(function (b) {
+      // Combined filtering: region (Greece/Europe) + race type
+      var regionBtns = Array.prototype.slice.call(document.querySelectorAll('.rf-btn[data-region]'));
+      var typeBtns = Array.prototype.slice.call(document.querySelectorAll('.rf-btn[data-filter]'));
+      var curRegion = 'all', curType = 'all';
+
+      function applyFilters(fly) {
+        var pts = [];
+        entries.forEach(function (e) {
+          var show = (curRegion === 'all' || e.region === curRegion) &&
+                     (curType === 'all' || e.type === curType);
+          e.card.style.display = show ? '' : 'none';
+          if (show) { e.marker.addTo(map); pts.push([e.lat, e.lng]); }
+          else { map.removeLayer(e.marker); }
+        });
+        if (fly && pts.length) {
+          map.flyToBounds(L.latLngBounds(pts).pad(0.15), { duration: 0.8, maxZoom: 7 });
+        }
+      }
+
+      regionBtns.forEach(function (b) {
         b.addEventListener('click', function () {
-          fbtns.forEach(function (x) { x.classList.remove('active'); });
+          regionBtns.forEach(function (x) { x.classList.remove('active'); });
           b.classList.add('active');
-          var f = b.dataset.filter;
-          entries.forEach(function (e) {
-            var show = (f === 'all' || e.type === f);
-            e.card.style.display = show ? '' : 'none';
-            if (show) { e.marker.addTo(map); } else { map.removeLayer(e.marker); }
-          });
+          curRegion = b.dataset.region;
+          applyFilters(true);
         });
       });
+      typeBtns.forEach(function (b) {
+        b.addEventListener('click', function () {
+          typeBtns.forEach(function (x) { x.classList.remove('active'); });
+          b.classList.add('active');
+          curType = b.dataset.filter;
+          applyFilters(true);
+        });
+      });
+
+      // Initial view: fit all races (Greece + Europe) in frame
+      if (entries.length) {
+        map.fitBounds(L.latLngBounds(entries.map(function (e) { return [e.lat, e.lng]; })).pad(0.1));
+      }
     })();
   </script>
 {% endblock %}
