@@ -1,0 +1,18 @@
+{# Author box — ποιος γράφει τα άρθρα (E-E-A-T)· κοινό για όλα τα άρθρα, EL+EN #}
+      <div class="author-box">
+        <picture>
+          <source type="image/avif" srcset="images/cat-desekordonia.avif?v=1">
+          <source type="image/webp" srcset="images/cat-desekordonia.webp?v=1">
+          <img src="images/cat-desekordonia.jpg?v=1" alt="{% if lang == 'en' %}Illustration of the Δέσε Κορδόνια runner{% else %}Εικονογράφηση της δρομέως του Δέσε Κορδόνια{% endif %}" width="64" height="64" loading="lazy" decoding="async">
+        </picture>
+        <div class="author-info">
+          <strong class="author-name">Νικολέτα<span>{% if lang == 'en' %}creator of Δέσε Κορδόνια{% else %}δημιουργός του Δέσε Κορδόνια{% endif %}</span></strong>
+          {%- if lang == 'en' %}
+          <p>I run, read, research and share what I learn. Before publishing anything, I go through scientific studies and international guidelines — you'll find the main sources at the end of the more scientific articles.</p>
+          <a class="author-link" href="about-en.html">More about me →</a>
+          {%- else %}
+          <p>Τρέχω, διαβάζω, ερευνώ και μοιράζομαι όσα μαθαίνω. Πριν δημοσιεύσω κάτι, διαβάζω επιστημονικές μελέτες και διεθνείς οδηγίες — τις κύριες πηγές θα τις βρεις στο τέλος των πιο επιστημονικών άρθρων.</p>
+          <a class="author-link" href="about.html">Περισσότερα για εμένα →</a>
+          {%- endif %}
+        </div>
+      </div>
