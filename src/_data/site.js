@@ -1,4 +1,4 @@
 module.exports = {
-  cssVersion: 59,
+  cssVersion: 60,
   jsVersion: 30,
 };
