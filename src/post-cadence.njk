@@ -86,14 +86,6 @@ activeNav: "blog"
     /* 3 μέθοδοι */
     .ig-methods { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.7rem; }
     .ig-methods .ig-card { padding: 1rem 0.7rem; }
-    /* "Τι να θυμάσαι" recap box */
-    .recap { max-width: 580px; margin: 2.4rem auto 0; background-color: var(--surface-2); border: 1px solid var(--border); border-left: 4px solid var(--accent); border-radius: 12px; padding: 1.2rem 1.35rem; }
-    .recap h4 { display: flex; align-items: center; gap: 0.55rem; margin: 0 0 0.8rem; font-family: "Oswald", sans-serif; color: var(--text); font-size: 1.08rem; letter-spacing: 0.3px; }
-    .recap h4 svg { width: 1.25em; height: 1.25em; color: var(--accent); flex: 0 0 auto; }
-    .recap ul { list-style: none; margin: 0; padding: 0; }
-    .recap li { display: flex; align-items: flex-start; gap: 0.6rem; margin: 0.55rem 0; color: var(--text-dim); line-height: 1.5; }
-    .recap li svg { width: 1.05em; height: 1.05em; color: #2ecc71; flex: 0 0 auto; margin-top: 0.2em; }
-    .recap li strong { color: var(--text); }
     @media (max-width: 520px) { .ig-methods { grid-template-columns: 1fr; } }
   </style>
 {% endblock %}
