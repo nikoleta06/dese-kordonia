@@ -11,6 +11,7 @@ module.exports = {
     { key: "programma-5k", file: "programma-5k", el: "Πρόγραμμα 5K", en: "5K Plan" },
     { key: "calculator", file: "calculator", el: "Υπολογιστής", en: "Calculator" },
     { key: "zones-palmon", file: "zones-palmon", el: "Ζώνες Παλμών", en: "Heart-Rate Zones" },
+    { key: "provlepsi-agona", file: "provlepsi-agona", el: "Πρόβλεψη Αγώνα", en: "Race Predictor" },
   ],
   about: { key: "about", file: "about", el: "Σχετικά", en: "About", elFull: "Σχετικά με εμένα", enFull: "About me" },
 };
