@@ -1,0 +1,149 @@
+---
+permalink: "provlepsi-agona.html"
+lang: "el"
+title: "Πρόβλεψη Χρόνου Αγώνα — 5Κ, 10Κ, Ημιμαραθώνιος, Μαραθώνιος | Δέσε Κορδόνια"
+description: "Δωρεάν εργαλείο πρόβλεψης χρόνου αγώνα: βάλε μια πρόσφατη επίδοσή σου και δες τον εκτιμώμενο χρόνο σου για 5Κ, 10Κ, ημιμαραθώνιο και μαραθώνιο, με τον τύπο του Riegel."
+activeNav: "provlepsi-agona"
+---
+
+{% extends "base.njk" %}
+
+{% block head_extra0 %}{% endblock %}
+
+{% block head_extra %}
+  <link rel="canonical" href="https://desekordonia.com/provlepsi-agona.html">
+  <link rel="alternate" hreflang="el" href="https://desekordonia.com/provlepsi-agona.html">
+  <link rel="alternate" hreflang="en" href="https://desekordonia.com/provlepsi-agona-en.html">
+  <link rel="alternate" hreflang="x-default" href="https://desekordonia.com/provlepsi-agona.html">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Πρόβλεψη Χρόνου Αγώνα | Δέσε Κορδόνια">
+  <meta property="og:description" content="Βάλε μια πρόσφατη επίδοσή σου και δες τον εκτιμώμενο χρόνο σου για 5Κ, 10Κ, ημιμαραθώνιο και μαραθώνιο.">
+  <meta property="og:image" content="https://desekordonia.com/images/cat-science.jpg">
+  <meta property="og:url" content="https://desekordonia.com/provlepsi-agona.html">
+  <meta name="twitter:card" content="summary_large_image">
+{% endblock %}
+
+{% block head_extra2 %}
+  <style>
+    .calc select { width: 100%; padding: 0.8rem 1rem; background-color: var(--bg); border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-family: inherit; font-size: 1rem; }
+    .calc select:focus { outline: none; border-color: var(--accent); }
+    .preds { margin-top: 1.2rem; display: flex; flex-direction: column; gap: 0.7rem; }
+    .pred { background: var(--surface-2); border-left: 4px solid var(--accent); border-radius: 8px; padding: 0.8rem 1rem; }
+    .pred .p-head { display: flex; align-items: baseline; justify-content: space-between; gap: 0.8rem; flex-wrap: wrap; }
+    .pred .p-name { font-family: "Oswald", sans-serif; color: var(--text); font-size: 1.02rem; letter-spacing: 0.3px; }
+    .pred .p-time { font-family: "Oswald", sans-serif; color: var(--accent-2); font-weight: 600; white-space: nowrap; }
+    .pred .p-pace { color: var(--text-dim); font-size: 0.9rem; margin: 0.35rem 0 0; }
+    .pred.p-source { border-left-color: var(--border); }
+    .pred.p-source .p-time { color: var(--text-dim); }
+    .pred.p-source .p-name span { color: var(--text-dim); font-family: "Inter", sans-serif; font-size: 0.8rem; font-weight: 400; margin-left: 0.4rem; }
+  </style>
+{% endblock %}
+
+{% block content %}
+  <main>
+    <h1 class="section-title">Πρόβλεψη Χρόνου Αγώνα</h1>
+    <p class="lead">
+      Έτρεξες πρόσφατα έναν αγώνα ή ένα δυνατό τεστ; Βάλε την απόσταση και τον χρόνο σου, και
+      δες τον <strong>εκτιμώμενο χρόνο</strong> σου για τις άλλες κλασικές αποστάσεις — με τον
+      καθιερωμένο τύπο του Riegel, τον ίδιο που χρησιμοποιούν τα περισσότερα γνωστά εργαλεία
+      πρόβλεψης.
+    </p>
+
+    <div class="calc">
+      <div class="field">
+        <label for="dist">Η απόσταση της επίδοσής σου</label>
+        <select id="dist">
+          <option value="5">5 χλμ.</option>
+          <option value="10" selected>10 χλμ.</option>
+          <option value="21.0975">Ημιμαραθώνιος (21,1 χλμ.)</option>
+          <option value="42.195">Μαραθώνιος (42,2 χλμ.)</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Ο χρόνος σου</label>
+        <div class="time-inputs">
+          <div><input type="number" id="th" min="0" max="23" step="1" placeholder="0" aria-label="Ώρες"><small>Ώρες</small></div>
+          <div><input type="number" id="tm" min="0" max="59" step="1" placeholder="52" aria-label="Λεπτά"><small>Λεπτά</small></div>
+          <div><input type="number" id="ts" min="0" max="59" step="1" placeholder="30" aria-label="Δευτερόλεπτα"><small>Δευτερόλεπτα</small></div>
+        </div>
+      </div>
+
+      <button class="btn" id="calcBtn" type="button">Υπολόγισε</button>
+
+      <div class="calc-result calc-hidden" id="result">
+        <div class="preds" id="preds"></div>
+        <p class="image-credit" style="margin-top:1rem;">
+          * Εκτίμηση, όχι υπόσχεση: προϋποθέτει ότι έχεις προπονηθεί ανάλογα και για την
+          απόσταση-στόχο. Όσο μεγαλύτερο το «άλμα» απόστασης, τόσο μεγαλύτερη η αβεβαιότητα —
+          ειδικά η πρόβλεψη μαραθωνίου βγαίνει συχνά αισιόδοξη χωρίς αντίστοιχη προετοιμασία.
+        </p>
+      </div>
+    </div>
+
+    <div class="sources">
+      <h4><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Πηγές</h4>
+      <p>Η επιστημονική βάση αυτού του εργαλείου:</p>
+      <ol>
+        <li>Riegel, P. S. (1981). <cite>Athletic records and human endurance.</cite> American Scientist, 69(3), 285–290. <a href="https://pubmed.ncbi.nlm.nih.gov/7235349/" target="_blank" rel="noopener">PubMed →</a></li>
+      </ol>
+    </div>
+  </main>
+{% endblock %}
+
+{% block body_extra %}{% endblock %}
+
+{% block scripts_extra %}
+  <script>
+    (function () {
+      const $ = (id) => document.getElementById(id);
+      const DISTS = [
+        { km: 5, name: '5 χλμ.' },
+        { km: 10, name: '10 χλμ.' },
+        { km: 21.0975, name: 'Ημιμαραθώνιος' },
+        { km: 42.195, name: 'Μαραθώνιος' }
+      ];
+
+      function fmtTime(sec) {
+        sec = Math.round(sec);
+        const h = Math.floor(sec / 3600), m = Math.floor((sec % 3600) / 60), s = sec % 60;
+        const mm = String(m).padStart(2, '0'), ss = String(s).padStart(2, '0');
+        return h > 0 ? h + ':' + mm + ':' + ss : m + ':' + ss;
+      }
+      function fmtPace(secPerKm) {
+        const m = Math.floor(secPerKm / 60), s = Math.round(secPerKm % 60);
+        return m + ':' + String(s).padStart(2, '0');
+      }
+
+      function calculate() {
+        const d1 = parseFloat($('dist').value);
+        const t1 = (parseInt($('th').value) || 0) * 3600 +
+                   (parseInt($('tm').value) || 0) * 60 +
+                   (parseInt($('ts').value) || 0);
+        if (t1 < 60) { alert('Βάλε έγκυρο χρόνο (τουλάχιστον 1 λεπτό).'); return; }
+
+        $('preds').innerHTML = DISTS.map((d) => {
+          const isSource = Math.abs(d.km - d1) < 0.01;
+          const t2 = isSource ? t1 : t1 * Math.pow(d.km / d1, 1.06); /* τύπος Riegel */
+          const label = isSource
+            ? '<span class="p-name">' + d.name + '<span>— η επίδοσή σου</span></span>'
+            : '<span class="p-name">' + d.name + '</span>';
+          return '<div class="pred' + (isSource ? ' p-source' : '') + '">' +
+              '<div class="p-head">' + label +
+              '<span class="p-time">' + fmtTime(t2) + '</span></div>' +
+              '<p class="p-pace">Ρυθμός: ' + fmtPace(t2 / d.km) + ' /χλμ.</p>' +
+            '</div>';
+        }).join('');
+
+        $('result').classList.remove('calc-hidden');
+      }
+
+      $('calcBtn').addEventListener('click', calculate);
+      ['th', 'tm', 'ts'].forEach((id) =>
+        $(id).addEventListener('keydown', (e) => { if (e.key === 'Enter') calculate(); })
+      );
+    })();
+  </script>
+{% endblock %}
