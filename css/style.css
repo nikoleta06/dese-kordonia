@@ -2521,9 +2521,10 @@ footer .accent {
 .sources li a:hover { text-decoration: underline; }
 
 /* ===== Author box (ποιος γράφει — στο τέλος των άρθρων) ===== */
-.author-box { max-width: 580px; margin: 2.4rem auto 0; display: flex; gap: 1rem; align-items: flex-start; background-color: var(--surface-2); border: 1px solid var(--border); border-radius: 12px; padding: 1.1rem 1.25rem; }
+.author-eyebrow { max-width: 580px; margin: 2.4rem auto 0.55rem; font-family: "Oswald", sans-serif; font-size: 0.72rem; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-dim); }
+.author-box { max-width: 580px; margin: 0 auto; display: flex; gap: 1rem; align-items: flex-start; background-color: var(--surface-2); border: 1px solid var(--border); border-radius: 12px; padding: 0.9rem 1.1rem; }
 .author-box picture { flex: 0 0 auto; }
-.author-box img { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; display: block; }
+.author-box img { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; display: block; }
 .author-info { flex: 1; min-width: 0; }
 .author-name { display: block; font-family: "Oswald", sans-serif; color: var(--text); letter-spacing: 0.3px; margin-bottom: 0.25rem; }
 .author-name span { color: var(--text-dim); font-family: "Inter", sans-serif; font-size: 0.8rem; font-weight: 400; margin-left: 0.45rem; }
@@ -2531,6 +2532,7 @@ footer .accent {
 .author-link { color: var(--accent); font-size: 0.88rem; text-decoration: none; }
 .author-link:hover { text-decoration: underline; }
 @media (max-width: 480px) {
+  .author-eyebrow { text-align: center; }
   .author-box { flex-direction: column; align-items: center; text-align: center; }
 }
 
