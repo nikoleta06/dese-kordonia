@@ -24,6 +24,7 @@ module.exports = {
     },
   },
   posts: [
+    { slug: "post-cardiac-drift", cat: "science", el: "Cardiac drift: γιατί ανεβαίνουν οι παλμοί", en: "Cardiac drift: why your heart rate climbs" },
     { slug: "post-cadence", cat: "science", el: "Cadence: γιατί τα 180 βήματα δεν είναι κανόνας", en: "Cadence: why 180 steps isn't a rule" },
     { slug: "post-zones-palmon", cat: "science", el: "Οι 5 Ζώνες Καρδιακών Παλμών, εξηγημένες απλά", en: "The 5 Heart-Rate Zones, explained simply" },
     { slug: "post-vo2max", cat: "science", el: "Τι είναι το VO₂max", en: "What is VO₂max" },
