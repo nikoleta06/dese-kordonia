@@ -22,6 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
     'post-sifan-hassan': 'champions',
     'post-faith-kipyegon': 'champions',
     'post-easy-running': 'science',
+    'post-cardiac-drift': 'science',
     'post-cadence': 'science',
     'post-lactate-threshold': 'science',
     'post-vo2max': 'science',
