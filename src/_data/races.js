@@ -188,6 +188,54 @@ module.exports = {
       },
       url: { el: "https://spetsesmarathon.com/", en: "https://spetsesmarathon.com/en/homepage-en/" },
     },
+    {
+      id: "byzantine-race-megara",
+      type: "road", region: "gr", month: 1,
+      lat: "38.000", lng: "23.340",
+      name: { el: "Βυζαντινός Αγώνας Δρόμου", en: "Byzantine Race" },
+      specs: { el: "49,6 χλμ · Άσφαλτος", en: "49.6 km · Road" },
+      desc: {
+        el: "Αγώνας δρόμου 49,6 χλμ στα Μέγαρα, μέσα από φυστικεώνες, ελαιώνες και την ακτή Αλεποχωρίου.",
+        en: "A 49.6 km road race in Megara, running through pistachio and olive groves along the Alepochori coast.",
+      },
+      url: { el: "http://vyzantinosagwnas50km.gr/", en: "http://vyzantinosagwnas50km.gr/" },
+    },
+    {
+      id: "nafplio-marathon",
+      type: "road", region: "gr", month: 3,
+      lat: "37.567", lng: "22.807",
+      name: { el: "Μαραθώνιος Ναυπλίου", en: "Nafplio Marathon" },
+      specs: { el: "42,2 χλμ · Άσφαλτος", en: "42.2 km · Road" },
+      desc: {
+        el: "Μαραθώνιος γύρος στο Ναύπλιο, με τη διαδρομή να διανύει δύο φορές το κύκλωμα του ημιμαραθωνίου.",
+        en: "A marathon loop through Nafplio, covering the half-marathon circuit twice.",
+      },
+      url: { el: "https://www.nafplio-marathon.gr/marathonios-dromos/", en: "https://www.nafplio-marathon.gr/marathonios-dromos/" },
+    },
+    {
+      id: "dolichos-delphi-olympia",
+      type: "ultra", region: "gr", month: 4,
+      lat: "38.482", lng: "22.501",
+      name: { el: "Δόλιχος Δρόμος «Δελφοί–Ολυμπία»", en: "Dolichos Delphi–Olympia Ultra Race" },
+      specs: { el: "255 χλμ · Υπερμαραθώνιος", en: "255 km · Ultramarathon" },
+      desc: {
+        el: "Υπεραπόσταση 255 χλμ που ενώνει τους Δελφούς με την Αρχαία Ολυμπία μέσα σε 48 ώρες, διασχίζοντας τη Στερεά Ελλάδα και την Πελοπόννησο.",
+        en: "A 255 km ultra race linking Delphi to Ancient Olympia within a 48-hour limit, crossing Central Greece into the Peloponnese.",
+      },
+      url: { el: "https://www.doliho.gr/", en: "https://www.doliho.gr/en/home-english/" },
+    },
+    {
+      id: "corfu-mountain-trail",
+      type: "mountain", region: "gr", month: 5,
+      lat: "39.624", lng: "19.922",
+      name: { el: "Corfu Mountain Trail", en: "Corfu Mountain Trail" },
+      specs: { el: "12–103 χλμ · Ορεινός", en: "12–103 km · Mountain" },
+      desc: {
+        el: "Ορεινό τρέξιμο στην Κέρκυρα με τέσσερις διαδρομές, από τα 12 έως τα 103 χλμ, μέσα από ελαιώνες και ορεινά μονοπάτια του νησιού.",
+        en: "Mountain trail running on Corfu with four distances from 12 to 103 km, through olive groves and mountain paths across the island.",
+      },
+      url: { el: "https://corfumountaintrail.com/", en: "https://corfumountaintrail.com/" },
+    },
 
     // ── Ευρωπαϊκοί μαραθώνιοι & ημιμαραθώνιοι ───────────────────────────
     {
@@ -323,6 +371,45 @@ module.exports = {
         en: "The \"city of running\": a lightning-fast, flat course with a spectacular finish over the water at the City of Arts and Sciences.",
       },
       url: { el: "https://www.valenciaciudaddelrunning.com/", en: "https://www.valenciaciudaddelrunning.com/" },
+    },
+    {
+      id: "barcelona-marathon",
+      type: "road", region: "eu", month: 3,
+      lat: "41.3851", lng: "2.1734",
+      country: { el: "Ισπανία", en: "Spain" },
+      name: { el: "Μαραθώνιος Βαρκελώνης", en: "Barcelona Marathon" },
+      specs: { el: "42,2 χλμ · Άσφαλτος", en: "42.2 km · Road" },
+      desc: {
+        el: "Διαδρομή μέσα από εμβληματικά σημεία της Βαρκελώνης, από τη Sagrada Família μέχρι το Camp Nou.",
+        en: "A course through Barcelona's landmarks, from the Sagrada Família to Camp Nou.",
+      },
+      url: { el: "https://zurichmaratobarcelona.es/en/", en: "https://zurichmaratobarcelona.es/en/" },
+    },
+    {
+      id: "rotterdam-marathon",
+      type: "road", region: "eu", month: 4,
+      lat: "51.9244", lng: "4.4777",
+      country: { el: "Ολλανδία", en: "Netherlands" },
+      name: { el: "Μαραθώνιος Ρότερνταμ", en: "Rotterdam Marathon" },
+      specs: { el: "42,2 χλμ · Άσφαλτος", en: "42.2 km · Road" },
+      desc: {
+        el: "Ένας από τους ταχύτερους μαραθωνίους της Ευρώπης, γνωστός για τα πολλά ρεκόρ που έχουν σημειωθεί στους επίπεδους δρόμους του.",
+        en: "One of Europe's fastest marathon courses, known for the many records set on its flat streets.",
+      },
+      url: { el: "https://nnmarathonrotterdam.nl/en/homepage/", en: "https://nnmarathonrotterdam.nl/en/homepage/" },
+    },
+    {
+      id: "florence-marathon",
+      type: "road", region: "eu", month: 11,
+      lat: "43.7696", lng: "11.2558",
+      country: { el: "Ιταλία", en: "Italy" },
+      name: { el: "Μαραθώνιος Φλωρεντίας", en: "Florence Marathon" },
+      specs: { el: "42,2 χλμ · Άσφαλτος", en: "42.2 km · Road" },
+      desc: {
+        el: "Αφετηρία και τερματισμός στην Piazza del Duomo, με διαδρομή μέσα από το αναγεννησιακό κέντρο της Φλωρεντίας.",
+        en: "Start and finish at Piazza del Duomo, running through Florence's Renaissance city centre.",
+      },
+      url: { el: "https://www.firenzemarathon.it/", en: "https://www.firenzemarathon.it/en/marathon/" },
     },
   ],
 };
