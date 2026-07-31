@@ -2090,6 +2090,28 @@ tbody tr:last-child td {
   cursor: pointer;
 }
 
+/* .calc input stretches text fields to the full width of the card. Checkboxes
+   and radios have to keep their own size, otherwise they push the label text
+   against the right edge of the box. */
+.newsletter-box input[type="checkbox"],
+.newsletter-box input[type="radio"] {
+  width: auto;
+  flex: 0 0 auto;
+  margin: 0;
+  padding: 0;
+  accent-color: var(--accent);
+}
+
+.newsletter-box .lang-question {
+  margin: 1rem 0 0.4rem;
+}
+
+.newsletter-box .lang-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+}
+
 /* ===== Footer ===== */
 footer {
   border-top: 1px solid var(--border);
