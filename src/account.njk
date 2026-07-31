@@ -42,6 +42,9 @@ description: "Το προφίλ σου στο Δέσε Κορδόνια."
         <h4><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg> Newsletter</h4>
         <p>Νέα άρθρα και συμβουλές για το τρέξιμο, κατευθείαν στο email σου.</p>
         <label><input type="checkbox" id="newsletter"> Θέλω να λαμβάνω το newsletter</label>
+        <p style="margin-top:1rem;margin-bottom:0.4rem;">Σε ποια γλώσσα;</p>
+        <label style="margin-right:1.2rem;"><input type="radio" name="lang" id="langEl" value="el"> Ελληνικά</label>
+        <label><input type="radio" name="lang" id="langEn" value="en"> English</label>
       </div>
 
       <button class="btn" id="saveBtn" type="button">Αποθήκευση</button>
@@ -68,6 +71,7 @@ description: "Το προφίλ σου στο Δέσε Κορδόνια."
         $('name').value = user.name || '';
         $('bio').value = user.bio || '';
         $('newsletter').checked = !!user.newsletter_subscribed;
+        $(user.language === 'en' ? 'langEn' : 'langEl').checked = true;
         $('status').classList.add('calc-hidden');
         $('intro').classList.remove('calc-hidden');
         $('form').classList.remove('calc-hidden');
@@ -96,7 +100,8 @@ description: "Το προφίλ σου στο Δέσε Κορδόνια."
             body: JSON.stringify({
               name: $('name').value.trim(),
               bio: $('bio').value.trim(),
-              newsletter_subscribed: $('newsletter').checked
+              newsletter_subscribed: $('newsletter').checked,
+              language: $('langEn').checked ? 'en' : 'el'
             })
           });
           const result = $('result');

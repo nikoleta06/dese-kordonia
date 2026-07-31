@@ -88,7 +88,7 @@ description: "Συνδέσου στο Δέσε Κορδόνια με το email 
           const r = await fetch(API + '/api/auth/request-link', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email: email })
+            body: JSON.stringify({ email: email, language: 'el' })
           });
           if (r.ok) {
             showResult('Έλεγξε το email σου για τον σύνδεσμο σύνδεσης (ισχύει 15 λεπτά).', false);
