@@ -87,7 +87,7 @@ description: "Sign in to Δέσε Κορδόνια with your email — no passwo
           const r = await fetch(API + '/api/auth/request-link', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email: email })
+            body: JSON.stringify({ email: email, language: 'en' })
           });
           if (r.ok) {
             showResult('Check your email for the sign-in link (valid for 15 minutes).', false);
