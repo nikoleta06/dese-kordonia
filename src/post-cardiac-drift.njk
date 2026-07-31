@@ -1,0 +1,398 @@
+---
+permalink: "post-cardiac-drift.html"
+lang: "el"
+title: "Cardiac drift: Γιατί ανεβαίνουν οι παλμοί ενώ ο ρυθμός μένει ίδιος | Δέσε Κορδόνια"
+description: "Τι είναι το cardiac drift (καρδιαγγειακή ολίσθηση): γιατί οι καρδιακοί παλμοί ανεβαίνουν σταδιακά ενώ τρέχεις με τον ίδιο ρυθμό, πώς το μεγαλώνουν η ζέστη και η αφυδάτωση, και τι σημαίνει για την προπόνηση με ζώνες παλμών."
+activeNav: "blog"
+---
+
+{% extends "base.njk" %}
+
+{% block head_extra0 %}{% endblock %}
+
+{% block head_extra %}
+  <link rel="canonical" href="https://desekordonia.com/post-cardiac-drift.html">
+  <link rel="alternate" hreflang="el" href="https://desekordonia.com/post-cardiac-drift.html">
+  <link rel="alternate" hreflang="en" href="https://desekordonia.com/post-cardiac-drift-en.html">
+  <link rel="alternate" hreflang="x-default" href="https://desekordonia.com/post-cardiac-drift.html">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Cardiac drift: Γιατί ανεβαίνουν οι παλμοί ενώ ο ρυθμός μένει ίδιος">
+  <meta property="og:description" content="Γιατί στο δεύτερο μισό ενός μεγάλου τρεξίματος οι παλμοί σου ανεβαίνουν ενώ ο ρυθμός μένει σταθερός — και τι σημαίνει για τις ζώνες παλμών.">
+  <meta property="og:image" content="https://desekordonia.com/images/cat-science.jpg">
+  <meta property="og:url" content="https://desekordonia.com/post-cardiac-drift.html">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Structured Data (Schema.org BlogPosting) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Cardiac drift: Γιατί ανεβαίνουν οι παλμοί ενώ ο ρυθμός μένει ίδιος",
+    "description": "Τι είναι το cardiac drift, γιατί οι παλμοί ανεβαίνουν σταδιακά στον ίδιο ρυθμό, πώς επιδρούν η ζέστη και η αφυδάτωση και τι σημαίνει για την προπόνηση με ζώνες.",
+    "image": "https://desekordonia.com/images/cat-science.jpg",
+    "datePublished": "2026-07-21",
+    "dateModified": "2026-07-21",
+    "inLanguage": "el",
+    "articleSection": "Η επιστήμη του τρεξίματος",
+    "author": { "@type": "Person", "name": "Νικολέτα", "url": "https://desekordonia.com/about.html" },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Δέσε Κορδόνια",
+      "logo": { "@type": "ImageObject", "url": "https://desekordonia.com/images/logo.png" }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://desekordonia.com/post-cardiac-drift.html"
+    }
+  }
+  </script>
+{% endblock %}
+
+{% block head_extra2 %}
+  <style>
+    .ig { max-width: 580px; margin: 2.4rem auto; }
+    /* --- Polish: hover micro-interactions (scroll-reveal handled by inline script, reusing .reveal) --- */
+    .ig-card, .ig-step { transition: transform .22s ease, border-color .22s ease, box-shadow .22s ease; }
+    .ig-card:hover { transform: translateY(-3px); border-color: var(--accent); box-shadow: 0 8px 22px rgba(0, 0, 0, 0.22); }
+    .ig-step:hover { border-color: var(--accent); }
+    .ig-caption { text-align: center; color: var(--text-dim); font-size: 0.88rem; margin-top: 0.9rem; }
+    .ig-caption strong { color: var(--accent-2); }
+    .ig-title { text-align: center; font-family: "Oswald", sans-serif; color: var(--text); font-size: 0.95rem; letter-spacing: 0.3px; margin: 0 0 0.9rem; }
+    /* Flow chain */
+    .ig-flow { display: flex; flex-direction: column; }
+    .ig-step { display: flex; align-items: center; gap: 0.9rem; background-color: var(--surface-2); border: 1px solid var(--border); border-radius: 12px; padding: 0.7rem 1rem; }
+    .ig-step.ig-final { background-color: rgba(255, 87, 34, 0.12); border-color: var(--accent); }
+    .ig-step .ig-ic { width: 42px; height: 42px; flex: 0 0 auto; border-radius: 50%; background-color: var(--surface); display: grid; place-items: center; color: var(--accent); }
+    .ig-step .ig-ic svg { width: 22px; height: 22px; }
+    .ig-step strong { display: block; color: var(--text); font-family: "Oswald", sans-serif; letter-spacing: 0.2px; }
+    .ig-step span { color: var(--text-dim); font-size: 0.85rem; }
+    .ig-conn { display: flex; justify-content: center; color: var(--accent); padding: 0.4rem 0; }
+    .ig-conn svg { width: 28px; height: 28px; }
+    /* Side-by-side cards */
+    .ig-vs { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+    .ig-card { background-color: var(--surface-2); border: 1px solid var(--border); border-radius: 12px; padding: 1.1rem 1rem; text-align: center; }
+    .ig-card.ig-good { background-color: rgba(255, 87, 34, 0.12); border-color: var(--accent); }
+    .ig-card .ig-ic { width: 46px; height: 46px; margin: 0 auto 0.6rem; border-radius: 50%; background-color: var(--surface); display: grid; place-items: center; color: var(--accent); }
+    .ig-card .ig-ic svg { width: 24px; height: 24px; }
+    .ig-card strong { display: block; color: var(--text); font-family: "Oswald", sans-serif; letter-spacing: 0.3px; }
+    .ig-card span { color: var(--text-dim); font-size: 0.85rem; }
+    .ig-card .ig-stat { display: block; font-size: 0.82rem; margin-top: 0.45rem; }
+    .ig-card .ig-stat b { color: var(--text); font-family: "Oswald", sans-serif; }
+    .ig-card .ig-pace { display: block; font-family: "Oswald", sans-serif; font-size: 1.55rem; color: var(--accent); margin-top: 0.5rem; }
+    /* 3 τρόποι */
+    .ig-methods { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.7rem; }
+    .ig-methods .ig-card { padding: 1rem 0.7rem; }
+    @media (max-width: 520px) { .ig-methods { grid-template-columns: 1fr; } }
+    /* Γράφημα: παλμοί ↑ / ρυθμός σταθερός */
+    .ig-chart { display: block; width: 100%; height: auto; background-color: var(--surface-2); border: 1px solid var(--border); border-radius: 12px; }
+    .ig-chart .axis { stroke: var(--border); stroke-width: 1.5; }
+    .ig-chart .grid { stroke: var(--border); stroke-width: 1; stroke-dasharray: 4 5; }
+    .ig-chart .marker { stroke: var(--text-dim); stroke-width: 1.2; stroke-dasharray: 3 4; opacity: .8; }
+    .ig-chart .l-hr { fill: none; stroke: var(--accent); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+    .ig-chart .l-pace { fill: none; stroke: var(--text-dim); stroke-width: 3; stroke-linecap: round; }
+    .ig-chart .dot { fill: var(--accent); }
+    .ig-chart text { font-family: "Inter", sans-serif; font-size: 12px; fill: var(--text-dim); }
+    .ig-chart .lbl { font-family: "Oswald", sans-serif; font-size: 13px; fill: var(--text); }
+    .ig-chart .lbl-hr { fill: var(--accent); }
+    /* Σε μικρές οθόνες το γράφημα σμικρύνεται — μεγαλώνουμε τα γράμματα για να παραμείνουν ευανάγνωστα */
+    @media (max-width: 620px) {
+      .ig-chart text { font-size: 17px; }
+      .ig-chart .lbl { font-size: 18px; }
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+  <main>
+    <article class="article">
+      <h1 class="section-title">Cardiac drift: Γιατί ανεβαίνουν οι παλμοί ενώ ο ρυθμός μένει ίδιος</h1>
+      <p class="article-meta"><svg style="width:1em;height:1em;vertical-align:-0.15em;margin-right:0.3em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>21 Ιουλίου 2026 · <span class="accent"><svg style="width:1em;height:1em;vertical-align:-0.15em;margin-right:0.25em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5a3 3 0 0 0-3 3 2.5 2.5 0 0 0-2 4 2.5 2.5 0 0 0 1.5 4.5A2.5 2.5 0 0 0 12 19V5z"/><path d="M12 5a3 3 0 0 1 3 3 2.5 2.5 0 0 1 2 4 2.5 2.5 0 0 1-1.5 4.5A2.5 2.5 0 0 1 12 19"/></svg><a href="epistimi-trexsimatos.html" style="color:inherit;">Η επιστήμη του τρεξίματος</a></span> · 7' ανάγνωση</p>
+
+      <picture>
+        <source type="image/avif" srcset="images/cat-science.avif?v=1">
+        <source type="image/webp" srcset="images/cat-science.webp?v=1">
+        <img src="images/cat-science.jpg?v=1" alt="Δρομέας ελέγχει τους παλμούς της στο ρολόι κατά τη διάρκεια μεγάλου τρεξίματος" loading="lazy" decoding="async" width="740" height="494">
+      </picture>
+      <p>
+        Είσαι στο πεντηκοστό λεπτό ενός μεγάλου, χαλαρού τρεξίματος. Ο ρυθμός σου είναι
+        <strong>ακριβώς ο ίδιος</strong> με το δέκατο λεπτό — 5:45 λεπτά/χλμ. Η αναπνοή σου
+        είναι κανονική. Και όμως το ρολόι γράφει 162 παλμούς, ενώ στην αρχή έγραφε 145.
+      </p>
+      <p>
+        Δεν χάλασε ο αισθητήρας και δεν έχασες τη φόρμα σου μέσα σε μισή ώρα. Αυτό που βλέπεις
+        λέγεται <strong>cardiac drift</strong> (καρδιαγγειακή ολίσθηση).
+      </p>
+
+      <h3>Τι είναι το cardiac drift</h3>
+      <p>
+        Είναι η <strong>σταδιακή άνοδος των καρδιακών παλμών</strong> κατά τη διάρκεια
+        παρατεταμένης άσκησης σταθερής, μέτριας έντασης — όταν δηλαδή δεν αλλάζεις τίποτα στον
+        ρυθμό σου. Ξεκινά τυπικά μετά τα πρώτα <strong>10 με 15 λεπτά</strong> και συνεχίζεται
+        όσο συνεχίζεις να τρέχεις.
+      </p>
+      <p>
+        Το κρίσιμο σημείο είναι ότι δεν κινείται μόνο ένα νούμερο. Ταυτόχρονα με την άνοδο των
+        παλμών, ο <strong>όγκος παλμού</strong> — το αίμα που στέλνει η καρδιά σε κάθε χτύπο —
+        <strong>μειώνεται</strong>. Τα δύο πάνε μαζί, σαν δύο πλευρές του ίδιου νομίσματος.
+      </p>
+      <p>
+        Πόσο μεγάλη είναι η άνοδος; Σε ένα easy τρέξιμο μιας ώρας μπορεί να δεις τους παλμούς
+        να ανεβαίνουν <strong>αρκετούς χτύπους</strong>, χωρίς να έχει αλλάξει ο ρυθμός σου. Δεν
+        υπάρχει ένα «φυσιολογικό» νούμερο για όλους: το μέγεθος της ολίσθησης εξαρτάται από τη
+        ζέστη, την υγρασία, την ενυδάτωση, την ένταση και τον εγκλιματισμό σου.
+      </p>
+
+      <figure class="ig">
+        <p class="ig-title">Ίδιος ρυθμός, ανεβασμένοι παλμοί</p>
+        <svg class="ig-chart" viewBox="0 0 560 300" role="img" aria-label="Γράφημα: κατά τη διάρκεια 60 λεπτών τρεξίματος ο ρυθμός παραμένει σταθερός στα 5:45 λεπτά ανά χιλιόμετρο, ενώ οι καρδιακοί παλμοί ανεβαίνουν σταδιακά από 145 σε 162.">
+          <!-- Λεζάντα -->
+          <line class="l-hr" x1="60" y1="18" x2="86" y2="18"/>
+          <text class="lbl lbl-hr" x="94" y="22">Παλμοί</text>
+          <line class="l-pace" x1="170" y1="18" x2="196" y2="18"/>
+          <text class="lbl" x="204" y="22">Ρυθμός</text>
+
+          <!-- Οριζόντιες γραμμές αναφοράς -->
+          <line class="grid" x1="60" y1="209.2" x2="530" y2="209.2"/>
+          <line class="grid" x1="60" y1="147.7" x2="530" y2="147.7"/>
+          <line class="grid" x1="60" y1="86.2" x2="530" y2="86.2"/>
+          <text x="52" y="213" text-anchor="end">120</text>
+          <text x="52" y="152" text-anchor="end">140</text>
+          <text x="52" y="90" text-anchor="end">160</text>
+
+          <!-- Άξονες -->
+          <line class="axis" x1="60" y1="40" x2="60" y2="240"/>
+          <line class="axis" x1="60" y1="240" x2="530" y2="240"/>
+          <text transform="rotate(-90 18 150)" x="18" y="150" text-anchor="middle">παλμοί / λεπτό</text>
+
+          <!-- Σήμανση: εδώ ξεκινά το drift -->
+          <line class="marker" x1="138" y1="46" x2="138" y2="240"/>
+          <text x="144" y="52">από εδώ ξεκινά η ολίσθηση</text>
+
+          <!-- Γραμμή παλμών -->
+          <polyline class="l-hr" points="60,209.2 99,144.6 138,132.3 217,121.5 295,110.8 373,100 452,89.2 530,80"/>
+          <circle class="dot" cx="138" cy="132.3" r="4.5"/>
+          <circle class="dot" cx="530" cy="80" r="4.5"/>
+          <text class="lbl lbl-hr" x="146" y="126">145</text>
+          <text class="lbl lbl-hr" x="524" y="64" text-anchor="end">162</text>
+
+          <!-- Γραμμή ρυθμού -->
+          <polyline class="l-pace" points="60,225 530,225"/>
+          <text class="lbl" x="524" y="218" text-anchor="end">5:45 λεπτά/χλμ — σταθερός</text>
+
+          <!-- Άξονας χρόνου -->
+          <text x="60" y="258" text-anchor="middle">0</text>
+          <text x="177" y="258" text-anchor="middle">15</text>
+          <text x="295" y="258" text-anchor="middle">30</text>
+          <text x="412" y="258" text-anchor="middle">45</text>
+          <text x="530" y="258" text-anchor="middle">60</text>
+          <text x="295" y="280" text-anchor="middle">λεπτά τρεξίματος</text>
+        </svg>
+        <figcaption class="ig-caption">Η ταχύτητα δεν άλλαξε ούτε δευτερόλεπτο — <strong>η καρδιά όμως δουλεύει πιο γρήγορα</strong>.</figcaption>
+      </figure>
+
+      <h3>Γιατί συμβαίνει</h3>
+      <p>
+        Όσο τρέχεις, παράγεις θερμότητα. Για να μην υπερθερμανθείς, το σώμα στέλνει
+        <strong>περισσότερο αίμα προς το δέρμα</strong> και ιδρώνεις.
+      </p>
+      <p>
+        Ο ιδρώτας όμως έχει και ένα κόστος: μαζί με το νερό χάνεις και
+        <strong>όγκο πλάσματος</strong>, δηλαδή ποσότητα από το υγρό τμήμα του αίματος.
+      </p>
+      <p>
+        Αποτέλεσμα: λιγότερο αίμα επιστρέφει στην καρδιά, άρα αυτή γεμίζει λιγότερο και στέλνει
+        λιγότερο αίμα σε κάθε χτύπο. Για να αντισταθμίσει μέρος αυτής της πτώσης και να
+        συνεχίσει να τροφοδοτεί τους μυς, η καρδιά
+        <strong>αυξάνει τη συχνότητα των χτύπων της</strong>.
+      </p>
+      <p>
+        Υπάρχει και μια λεπτομέρεια που συχνά παραλείπεται. Οι Coyle και González-Alonso
+        υποστήριξαν ότι η σχέση δεν είναι μονόδρομη: η ίδια η αύξηση των παλμών αφήνει
+        <strong>λιγότερο χρόνο στην καρδιά να γεμίσει</strong> ανάμεσα στους χτύπους, κάτι που
+        με τη σειρά του ρίχνει κι άλλο τον όγκο παλμού. Οι δύο μηχανισμοί τροφοδοτούν ο ένας
+        τον άλλον.
+      </p>
+
+      <figure class="ig">
+        <p class="ig-title">Η αλυσίδα του cardiac drift</p>
+        <div class="ig-flow">
+          <div class="ig-step"><span class="ig-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4v10.54a4 4 0 1 1-4 0V4a2 2 0 0 1 4 0Z"/></svg></span><div><strong>Ανεβαίνει η θερμοκρασία σου</strong><span>Το τρέξιμο παράγει θερμότητα — το σώμα πρέπει να την αποβάλει</span></div></div>
+          <div class="ig-conn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></div>
+          <div class="ig-step"><span class="ig-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"/></svg></span><div><strong>Ιδρώνεις — χάνεις όγκο πλάσματος</strong><span>Περισσότερο αίμα κατευθύνεται και προς το δέρμα</span></div></div>
+          <div class="ig-conn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></div>
+          <div class="ig-step"><span class="ig-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 17V3"/><path d="m6 11 6 6 6-6"/><path d="M19 21H5"/></svg></span><div><strong>Πέφτει ο όγκος παλμού</strong><span>Λιγότερο αίμα σε κάθε χτύπο της καρδιάς</span></div></div>
+          <div class="ig-conn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></div>
+          <div class="ig-step ig-final"><span class="ig-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.49 4.04 3 5.5l7 7Z"/></svg></span><div><strong>Ανεβαίνουν οι παλμοί</strong><span>Πιο συχνοί χτύποι για να σταλεί το ίδιο αίμα στους μυς</span></div></div>
+        </div>
+        <figcaption class="ig-caption">Και επειδή οι πιο συχνοί χτύποι αφήνουν <strong>λιγότερο χρόνο πλήρωσης</strong>, ο κύκλος τροφοδοτεί τον εαυτό του.</figcaption>
+      </figure>
+
+      <h3>Η ζέστη το μεγαλώνει — και μάλιστα πολύ</h3>
+      <p>
+        Αν το έχεις προσέξει κυρίως τον Ιούλιο και όχι τον Ιανουάριο, δεν είναι εντύπωσή σου.
+        Μια μελέτη των Lafrenz και των συνεργατών του (2008) έβαλε τους ίδιους αθλητές να
+        κάνουν <strong>ακριβώς την ίδια προσπάθεια</strong> σε δύο διαφορετικές θερμοκρασίες
+        περιβάλλοντος, και συνέκρινε τι είχε αλλάξει ανάμεσα στο 15ο και στο 45ο λεπτό.
+      </p>
+
+      <figure class="ig">
+        <p class="ig-title">Ίδια προσπάθεια, από το 15ο στο 45ό λεπτό</p>
+        <div class="ig-vs">
+          <div class="ig-card ig-good">
+            <span class="ig-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m10 20-1.25-2.5L6 18"/><path d="M10 4 8.75 6.5 6 6"/><path d="m14 20 1.25-2.5L18 18"/><path d="m14 4 1.25 2.5L18 6"/><path d="m17 21-3-6h-4"/><path d="m17 3-3 6 1.5 3"/><path d="M2 12h6.5L10 9"/><path d="m20 10-1.5 2 1.5 2"/><path d="M22 12h-6.5L14 15"/><path d="m4 10 1.5 2L4 14"/><path d="m7 21 3-6-1.5-3"/><path d="M7 3l3 6h4"/></svg></span>
+            <strong>Δροσερό περιβάλλον — 22°C</strong>
+            <span class="ig-stat">Παλμοί <b>+2%</b> · όγκος παλμού <b>−2%</b></span>
+            <span class="ig-stat">Καμία σημαντική μεταβολή στο VO₂max</span>
+          </div>
+          <div class="ig-card">
+            <span class="ig-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg></span>
+            <strong>Ζέστη — 35°C</strong>
+            <span class="ig-stat">Παλμοί <b>+11%</b> · όγκος παλμού <b>−11%</b></span>
+            <span class="ig-stat">VO₂max <b>−15%</b></span>
+          </div>
+        </div>
+        <figcaption class="ig-caption">Το ίδιο τρέξιμο, δύο διαφορετικά καλοκαίρια — <strong>η θερμοκρασία αλλάζει την εικόνα</strong>.</figcaption>
+      </figure>
+
+      <p>
+        Το πιο ενδιαφέρον κομμάτι δεν είναι οι παλμοί. Είναι το τελευταίο νούμερο: όταν οι
+        ερευνητές μέτρησαν το <a href="post-vo2max.html" style="color:var(--accent);">VO₂max</a> αμέσως μετά, βρήκαν ότι στη
+        ζέστη είχε <strong>μειωθεί</strong>. Με άλλα λόγια, μετά από 45 λεπτά τρεξίματος στον
+        ήλιο, η «οροφή» σου εκείνη τη στιγμή είναι χαμηλότερη από ό,τι ήταν στην αρχή.
+      </p>
+      <p>
+        Και εδώ είναι το πρακτικό συμπέρασμα που έχει σημασία για σένα: αν η οροφή κατεβαίνει
+        και ο ρυθμός σου μένει ίδιος, τότε το ίδιο τρέξιμο έχει γίνει
+        <strong>μεγαλύτερο ποσοστό της τρέχουσας ικανότητάς σου</strong>. Οι παλμοί σου δεν σου
+        λένε ψέματα — σου δείχνουν ότι η ίδια ταχύτητα σού κοστίζει τώρα περισσότερο. Ένα
+        τρέξιμο που ξεκίνησε πραγματικά εύκολο μπορεί σταδιακά να γίνει πιο απαιτητικό και να
+        σε βγάλει από τη σχετική ένταση που είχες αρχικά επιλέξει, χωρίς να έχεις πατήσει
+        γκάζι.
+      </p>
+
+      <div class="note">
+        📌 <strong>Το ήξερες;</strong> Δεν φταίει μόνο η αφυδάτωση. Οι Montain και Coyle (1992)
+        έδειξαν ότι όσο μεγαλύτερη η απώλεια υγρών, τόσο μεγαλύτερη η άνοδος των παλμών — άρα
+        το να πίνεις βοηθάει. Σε μελέτη όμως με 45 λεπτά άσκησης στους 35°C, η λήψη υγρών
+        <strong>δεν εξαφάνισε</strong> την ολίσθηση: τη μειώνεις, δεν την ακυρώνεις.
+      </div>
+
+      <h3>Τι σημαίνει για την προπόνησή σου</h3>
+      <p>
+        Πρώτα το πιο σημαντικό: <strong>το cardiac drift δεν είναι σημάδι κακής φυσικής
+        κατάστασης</strong>. Συμβαίνει σε όλους — σε αρχάριους και σε ελίτ. Δεν είναι κάτι που
+        «διορθώνεις», είναι κάτι που καταλαβαίνεις.
+      </p>
+      <p>
+        Έχει όμως μία πολύ συγκεκριμένη συνέπεια: <strong>ο μέσος όρος παλμών ενός μεγάλου
+        τρεξίματος δεν είναι αξιόπιστο μέτρο σύγκρισης</strong>. Αν στο δεύτερο μισό ενός easy
+        τρεξίματος βλέπεις να μπαίνεις στη
+        <a href="post-zones-palmon.html" style="color:var(--accent);">Ζώνη 3</a>, παρότι ο ρυθμός παραμένει ίδιος και η
+        προσπάθεια εξακολουθεί να σου φαίνεται ελεγχόμενη, πιθανότατα βλέπεις ολίσθηση — όχι
+        απαραίτητα λάθος στην προπόνησή σου.
+      </p>
+      <p>
+        Ο πιο καθαρός τρόπος να συγκρίνεις τον εαυτό σου με τον εαυτό σου είναι να εξετάζεις
+        ένα <strong>σταθερό τμήμα μετά την αρχική προθέρμανση</strong> — για παράδειγμα από το
+        10ο έως το 20ό λεπτό — σε παρόμοιο ρυθμό, διαδρομή και καιρικές συνθήκες. Αν μετά από
+        μερικές εβδομάδες οι παλμοί σου είναι χαμηλότεροι στο ίδιο σταθερό τμήμα και στον ίδιο
+        ρυθμό, αυτό μπορεί να αποτελεί ένδειξη βελτίωσης.
+      </p>
+      <p>
+        Και μια δόση ρεαλισμού για τους καλοκαιρινούς μήνες: αν τον Ιούλιο τρέχεις με +10
+        παλμούς στον ίδιο ρυθμό σε σχέση με τον Μάρτιο, δεν έχεις χάσει τη φόρμα σου. Τρέχεις
+        απλώς σε δυσκολότερες συνθήκες.
+      </p>
+
+      <h3>Πώς το περιορίζεις</h3>
+
+      <figure class="ig">
+        <p class="ig-title">3 πράγματα που κάνουν πραγματικά διαφορά</p>
+        <div class="ig-methods">
+          <div class="ig-card"><span class="ig-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"/></svg></span><strong>Υγρά</strong><span>Ξεκίνα ενυδατωμένος και πίνε στα μεγάλα τρεξίματα — η απώλεια υγρών μεγαλώνει την ολίσθηση</span></div>
+          <div class="ig-card"><span class="ig-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><strong>Ώρα &amp; διαδρομή</strong><span>Νωρίς το πρωί ή αργά το απόγευμα, με σκιά — η θερμοκρασία μετράει περισσότερο από όλα</span></div>
+          <div class="ig-card"><span class="ig-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h4l3-9 4 18 3-9h4"/></svg></span><strong>Εγκλιματισμός</strong><span>Μετά από λίγες εβδομάδες συστηματικού τρεξίματος στη ζέστη, το σώμα προσαρμόζεται</span></div>
+        </div>
+        <figcaption class="ig-caption">Κανένα από τα τρία δεν εξαφανίζει την ολίσθηση — <strong>τη μικραίνουν</strong>.</figcaption>
+      </figure>
+
+      <div class="note">
+        💡 <strong>Πρακτικός κανόνας:</strong> σταδιακή άνοδος των παλμών σε ένα μεγάλο τρέξιμο
+        με ζέστη είναι αναμενόμενη. Απότομη άνοδος μαζί με ζαλάδα, ρίγος, ναυτία ή διακοπή
+        εφίδρωσης <strong>δεν είναι</strong>: εκεί σταματάς, δροσίζεσαι και πίνεις υγρά.
+      </div>
+
+      <section class="faq">
+        <h3>Συχνές ερωτήσεις για το cardiac drift</h3>
+        <div class="faq-item">
+          <h4>Είναι κακό το cardiac drift;</h4>
+          <p>Όχι. Είναι φυσιολογική απόκριση του οργανισμού στην παρατεταμένη άσκηση και συμβαίνει σε όλους τους δρομείς, ανεξάρτητα από επίπεδο. Δεν είναι ένδειξη ότι κάτι πάει στραβά με την καρδιά ή με τη φόρμα σου.</p>
+        </div>
+        <div class="faq-item">
+          <h4>Πρέπει να κόψω ρυθμό για να μείνω μέσα στη ζώνη μου;</h4>
+          <p>Εξαρτάται από τον σκοπό της προπόνησης. Επειδή η άνοδος των παλμών αντανακλά πραγματικά αυξημένη σχετική ένταση, το να επιβραδύνεις σε ένα easy τρέξιμο δεν είναι λάθος. Σε προπόνηση ή αγώνα με στόχο συγκεκριμένο ρυθμό, οδηγός είναι ο ρυθμός και η αίσθηση — όχι το νούμερο του ρολογιού.</p>
+        </div>
+        <div class="faq-item">
+          <h4>Φταίει μόνο η αφυδάτωση;</h4>
+          <p>Όχι. Η απώλεια υγρών μεγαλώνει σαφώς την ολίσθηση, αλλά η θερμοκρασία του σώματος και η ροή αίματος προς το δέρμα παίζουν τον δικό τους ρόλο. Γι' αυτό η ολίσθηση εμφανίζεται ακόμη και όταν πίνεις κανονικά υγρά.</p>
+        </div>
+        <div class="faq-item">
+          <h4>Θα σταματήσει όσο βελτιώνομαι;</h4>
+          <p>Θα μικρύνει, δεν θα εξαφανιστεί. Καλύτερη <a href="post-easy-running.html" style="color:var(--accent);">αερόβια βάση</a>, εγκλιματισμός στη ζέστη και σωστή ενυδάτωση μειώνουν το μέγεθός της, αλλά η ολίσθηση παραμένει μέρος της φυσιολογίας κάθε παρατεταμένου τρεξίματος.</p>
+        </div>
+        <div class="faq-item">
+          <h4>Πώς το βλέπω στα δεδομένα μου;</h4>
+          <p>Σύγκρινε το πρώτο με το δεύτερο μισό ενός μεγάλου τρεξίματος στον ίδιο ρυθμό: αν οι παλμοί ανέβηκαν αισθητά ενώ ο ρυθμός έμεινε σταθερός, βλέπεις ολίσθηση. Πλατφόρμες όπως το TrainingPeaks και το Intervals.icu μπορούν να υπολογίσουν την «αποσύνδεση» ρυθμού–παλμών, την οποία θα συναντήσεις ως <strong>aerobic decoupling</strong> ή <strong>Pa:Hr</strong>. Είναι χρήσιμη ένδειξη τάσης, όχι εργαστηριακή μέτρηση.</p>
+        </div>
+      </section>
+
+      <div class="recap">
+        <h4><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>3 πράγματα να θυμάσαι</h4>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Παλμοί <strong>πάνω</strong>, ρυθμός ίδιος — είναι φυσιολογικό.</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Η <strong>ζέστη</strong> και η απώλεια υγρών το μεγαλώνουν.</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Σύγκρινε το ίδιο <strong>σταθερό τμήμα</strong>, όχι μόνο τον μέσο όρο.</li>
+        </ul>
+      </div>
+
+      <div class="sources">
+        <h4><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Πηγές</h4>
+        <p>Οι κύριες επιστημονικές αναφορές πίσω από αυτό το άρθρο:</p>
+        <ol>
+          <li>Coyle, E. F., &amp; González-Alonso, J. (2001). <cite>Cardiovascular drift during prolonged exercise: new perspectives.</cite> Exercise and Sport Sciences Reviews, 29(2), 88–92. <a href="https://journals.lww.com/acsm-essr/abstract/2001/04000/cardiovascular_drift_during_prolonged_exercise_.9.aspx" target="_blank" rel="noopener">ESSR →</a></li>
+          <li>Montain, S. J., &amp; Coyle, E. F. (1992). <cite>Influence of graded dehydration on hyperthermia and cardiovascular drift during exercise.</cite> Journal of Applied Physiology, 73(4), 1340–1350. <a href="https://pubmed.ncbi.nlm.nih.gov/1447078/" target="_blank" rel="noopener">PubMed →</a></li>
+          <li>Wingo, J. E., Lafrenz, A. J., Ganio, M. S., Edwards, G. L., &amp; Cureton, K. J. (2005). <cite>Cardiovascular drift is related to reduced maximal oxygen uptake during heat stress.</cite> Medicine &amp; Science in Sports &amp; Exercise, 37(2), 248–255. <a href="https://pubmed.ncbi.nlm.nih.gov/15692320/" target="_blank" rel="noopener">PubMed →</a></li>
+          <li>Lafrenz, A. J., Wingo, J. E., Ganio, M. S., &amp; Cureton, K. J. (2008). <cite>Effect of ambient temperature on cardiovascular drift and maximal oxygen uptake.</cite> Medicine &amp; Science in Sports &amp; Exercise, 40(6), 1065–1071. <a href="https://pubmed.ncbi.nlm.nih.gov/18461000/" target="_blank" rel="noopener">PubMed →</a></li>
+          <li>Wingo, J. E., Ganio, M. S., &amp; Cureton, K. J. (2012). <cite>Cardiovascular drift during heat stress: implications for exercise prescription.</cite> Exercise and Sport Sciences Reviews, 40(2), 88–94. <a href="https://pubmed.ncbi.nlm.nih.gov/22410803/" target="_blank" rel="noopener">PubMed →</a></li>
+        </ol>
+      </div>
+
+      {% include "author-box.njk" %}
+
+      {% include "related.njk" %}
+
+      <a class="back-link" href="blog.html">← Πίσω στο Blog</a>
+    </article>
+  </main>
+{% endblock %}
+
+{% block body_extra %}{% endblock %}
+
+{% block scripts_extra %}
+  <script>
+    /* Scroll-reveal για τα infographics (επαναχρησιμοποιεί τις global .reveal/.up/.is-visible) */
+    (function () {
+      var figs = document.querySelectorAll('figure.ig');
+      if (!('IntersectionObserver' in window) || !figs.length) return;
+      figs.forEach(function (f) { f.classList.add('reveal', 'up'); });
+      var io = new IntersectionObserver(function (entries, obs) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add('is-visible'); obs.unobserve(e.target); }
+        });
+      }, { threshold: 0.12 });
+      figs.forEach(function (f) { io.observe(f); });
+    })();
+  </script>
+{% endblock %}
