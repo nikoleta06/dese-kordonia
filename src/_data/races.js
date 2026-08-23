@@ -236,6 +236,30 @@ module.exports = {
       },
       url: { el: "https://corfumountaintrail.com/", en: "https://corfumountaintrail.com/" },
     },
+    {
+      id: "olympia-marathon",
+      type: "road", region: "gr", month: 11,
+      lat: "37.6383", lng: "21.6303",
+      name: { el: "Μαραθώνιος Ολυμπίας", en: "Olympia Marathon" },
+      specs: { el: "42,2 / 21 / 10 / 3 χλμ · Άσφαλτος", en: "42.2 / 21 / 10 / 3 km · Road" },
+      desc: {
+        el: "Διεθνής αγώνας δρόμου στην Αρχαία Ολυμπία, γενέτειρα των Ολυμπιακών Αγώνων — οι δρομείς διασχίζουν τα ίδια χώματα όπου αγωνίζονταν οι αρχαίοι Ολυμπιονίκες.",
+        en: "An international road race in Ancient Olympia, birthplace of the Olympic Games — runners cross the very grounds where ancient Olympians once competed.",
+      },
+      url: { el: "https://www.olympiamarathon.gr/", en: "https://www.olympiamarathon.gr/en/" },
+    },
+    {
+      id: "faethon-skyrace",
+      type: "mountain", region: "gr", month: 7,
+      lat: "40.094", lng: "22.251",
+      name: { el: "Faethon Skyrace «Απόστολος Τσουρέκας»", en: "Faethon Skyrace" },
+      specs: { el: "14–23 χλμ · Ορεινός (έως +1.800μ)", en: "14–23 km · Mountain (up to +1,800m)" },
+      desc: {
+        el: "Ορεινός αγώνας (Skyrunning) με εκκίνηση από τον Κοκκινοπηλό Ελασσόνας, στις δυτικές πλαγιές του Ολύμπου, με υψηλότερο σημείο διαδρομής στα 2.520μ — μέλος του Πανελλήνιου Πρωταθλήματος ITRA.",
+        en: "A Skyrunning mountain race starting from Kokkinopilos, Elassona, on the western slopes of Mount Olympus, reaching 2,520m altitude — part of the Greek ITRA Championship.",
+      },
+      url: { el: "https://faethonrace.gr/", en: "https://faethonrace.gr/" },
+    },
 
     // ── Ευρωπαϊκοί μαραθώνιοι & ημιμαραθώνιοι ───────────────────────────
     {
@@ -410,6 +434,19 @@ module.exports = {
         en: "Start and finish at Piazza del Duomo, running through Florence's Renaissance city centre.",
       },
       url: { el: "https://www.firenzemarathon.it/", en: "https://www.firenzemarathon.it/en/marathon/" },
+    },
+    {
+      id: "venice-marathon",
+      type: "road", region: "eu", month: 10,
+      lat: "45.4408", lng: "12.3155",
+      country: { el: "Ιταλία", en: "Italy" },
+      name: { el: "Μαραθώνιος Βενετίας", en: "Venice Marathon" },
+      specs: { el: "42,2 / 21,1 / 10 χλμ · Άσφαλτος", en: "42.2 / 21.1 / 10 km · Road" },
+      desc: {
+        el: "Εκκίνηση από τη Villa Pisani και διαδρομή μέσα από την ενδοχώρα του Βένετο, με πέρασμα πάνω σε πλωτή γέφυρα μέχρι τον τερματισμό κοντά στην Πλατεία του Αγίου Μάρκου.",
+        en: "Starting at Villa Pisani, the course crosses the Veneto mainland and a floating pontoon bridge before finishing near St Mark's Square.",
+      },
+      url: { el: "https://www.venicemarathon.it/", en: "https://www.venicemarathon.it/en/" },
     },
   ],
 };
