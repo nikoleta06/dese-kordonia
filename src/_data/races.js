@@ -61,7 +61,7 @@ module.exports = {
       type: "ultra", region: "gr", month: 10,
       lat: "41.30", lng: "24.65",
       name: { el: "Rodopi Ultra Trail (ROUT)", en: "Rodopi Ultra Trail (ROUT)" },
-      specs: { el: "100 μίλια · Ορεινός υπερμαραθώνιος", en: "100 miles · Mountain ultra" },
+      specs: { el: "182 χλμ (100 μίλια) · Ορεινός υπερμαραθώνιος", en: "182 km (100 miles) · Mountain ultra" },
       desc: {
         el: "Ο παλαιότερος αγώνας 100 μιλίων στην Ελλάδα, σε συνθήκες ημι-αυτονομίας μέσα στο Εθνικό Πάρκο της Οροσειράς Ροδόπης.",
         en: "The oldest 100-mile race in Greece, run in semi-autonomy conditions through the Rodopi Mountains National Park.",
