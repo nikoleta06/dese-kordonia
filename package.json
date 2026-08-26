@@ -3,9 +3,12 @@
   "private": true,
   "scripts": {
     "start": "eleventy --serve",
-    "build": "eleventy"
+    "build": "eleventy",
+    "og": "node scripts/generate-og.js"
   },
   "devDependencies": {
-    "@11ty/eleventy": "^3.0.0"
+    "@11ty/eleventy": "^3.0.0",
+    "@resvg/resvg-js": "^2.6.2",
+    "satori": "^0.33.4"
   }
 }

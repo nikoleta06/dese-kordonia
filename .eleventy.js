@@ -33,6 +33,11 @@ module.exports = function (eleventyConfig) {
     return same.concat(others).slice(0, 3);
   });
 
+  // OG images: μία κάρτα κοινοποίησης ανά άρθρο, αφού γραφτεί το _site
+  eleventyConfig.on("eleventy.after", async () => {
+    await require("./scripts/generate-og.js")();
+  });
+
   return {
     dir: {
       input: "src",
