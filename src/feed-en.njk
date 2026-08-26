@@ -1,0 +1,31 @@
+---
+permalink: "feed-en.xml"
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Δέσε Κορδόνια</title>
+    <link>https://desekordonia.com/index-en.html</link>
+    <description>Running articles: the science behind training, lessons from the greatest athletes, stories and practical tips for every runner.</description>
+    <language>en</language>
+    <lastBuildDate>{{ postsData.posts[0].date | rfc822 }}</lastBuildDate>
+    <atom:link href="https://desekordonia.com/feed-en.xml" rel="self" type="application/rss+xml"/>
+    <atom:link href="https://desekordonia.com/feed.xml" rel="alternate" hreflang="el" type="application/rss+xml"/>
+    <image>
+      <url>https://desekordonia.com/images/logo.png</url>
+      <title>Δέσε Κορδόνια</title>
+      <link>https://desekordonia.com/index-en.html</link>
+    </image>
+    {%- for p in postsData.posts %}
+    <item>
+      <title>{{ p.feed.en.title }}</title>
+      <link>https://desekordonia.com/{{ p.slug }}-en.html</link>
+      <guid isPermaLink="true">https://desekordonia.com/{{ p.slug }}-en.html</guid>
+      <pubDate>{{ p.date | rfc822 }}</pubDate>
+      <category>{{ postsData.cats[p.cat].en }}</category>
+      <description>{{ p.feed.en.desc }}</description>
+    </item>
+    {%- endfor %}
+  </channel>
+</rss>

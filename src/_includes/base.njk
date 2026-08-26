@@ -17,6 +17,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css?v={{ site.cssVersion }}">
 
+  {#- RSS: επιτρέπει σε browsers και feed readers να βρουν τη ροή αυτόματα #}
+  <link rel="alternate" type="application/rss+xml" title="{% if lang == 'en' %}Δέσε Κορδόνια — Running articles{% else %}Δέσε Κορδόνια — Άρθρα για το τρέξιμο{% endif %}" href="{% if lang == 'en' %}feed-en.xml{% else %}feed.xml{% endif %}">
+
   {% block head_extra2 %}{% endblock %}
 
   {%- if permalink and permalink != "index.html" and permalink != "index-en.html" %}
@@ -85,7 +88,10 @@
     <p class="footer-links">
       <a href="{{ nav.about.file | navHref(lang) }}">{% if lang == 'en' %}{{ nav.about.enFull }}{% else %}{{ nav.about.elFull }}{% endif %}</a> ·
       <a href="{% if lang == 'en' %}epistimi-trexsimatos-en.html{% else %}epistimi-trexsimatos.html{% endif %}">{% if lang == 'en' %}The Science of Running{% else %}Η Επιστήμη του Τρεξίματος{% endif %}</a> ·
-      <a href="{% if lang == 'en' %}privacy-en.html{% else %}privacy.html{% endif %}">{% if lang == 'en' %}Privacy{% else %}Απόρρητο{% endif %}</a>
+      <a href="{% if lang == 'en' %}privacy-en.html{% else %}privacy.html{% endif %}">{% if lang == 'en' %}Privacy{% else %}Απόρρητο{% endif %}</a> ·
+      <a href="{% if lang == 'en' %}feed-en.xml{% else %}feed.xml{% endif %}" title="{% if lang == 'en' %}Follow the blog with a feed reader{% else %}Παρακολούθησε το blog με feed reader{% endif %}">
+        <svg style="width:0.9em;height:0.9em;vertical-align:-0.1em;margin-right:0.25em" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="6.18" cy="17.82" r="2.18"/><path d="M4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83c0-8.59-6.97-15.56-15.56-15.56zm0 5.66v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.47-4.43-9.9-9.9-9.9z"/></svg>RSS
+      </a>
     </p>
   </footer>
 

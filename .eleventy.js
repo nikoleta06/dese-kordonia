@@ -14,6 +14,12 @@ module.exports = function (eleventyConfig) {
     return file + (lang === "en" ? "-en" : "") + ".html";
   });
 
+  // RSS: το πρότυπο απαιτεί ημερομηνίες σε μορφή RFC-822 («Tue, 21 Jul 2026 08:00:00 GMT»),
+  // ενώ στο postsData.js τις κρατάμε ως "2026-07-21".
+  eleventyConfig.addFilter("rfc822", (isoDate) => {
+    return new Date(isoDate + "T08:00:00Z").toUTCString();
+  });
+
   // «Διάβασε επίσης»: 3 σχετικά άρθρα — πρώτα ίδιας κατηγορίας, μετά τα υπόλοιπα
   // (ίδια λογική με τον παλιό JS injector του main.js, τώρα στο build)
   const postsData = require("./src/_data/postsData.js");
