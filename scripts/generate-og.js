@@ -18,7 +18,7 @@ const { Resvg } = require("@resvg/resvg-js");
 const postsData = require("../src/_data/postsData.js");
 
 /* Αύξησε το όταν αλλάξει ο σχεδιασμός της κάρτας, ώστε να ξαναφτιαχτούν όλες. */
-const TEMPLATE_VERSION = 2;
+const TEMPLATE_VERSION = 3;
 
 const ROOT = path.join(__dirname, "..");
 const OUT_DIR = path.join(ROOT, "_site", "images", "og");
@@ -33,9 +33,11 @@ const C = {
   dim: "#aab0bb",
 };
 
+/* Ίδιες γραμματοσειρές με το site: Roboto Condensed στους τίτλους, Inter στο κείμενο. */
 const fonts = [
+  { name: "Roboto Condensed", weight: 600, style: "normal", data: fs.readFileSync(path.join(ROOT, "build/fonts/RobotoCondensed-600.ttf")) },
+  { name: "Roboto Condensed", weight: 700, style: "normal", data: fs.readFileSync(path.join(ROOT, "build/fonts/RobotoCondensed-700.ttf")) },
   { name: "Inter", weight: 400, style: "normal", data: fs.readFileSync(path.join(ROOT, "build/fonts/Inter-400.ttf")) },
-  { name: "Inter", weight: 700, style: "normal", data: fs.readFileSync(path.join(ROOT, "build/fonts/Inter-700.ttf")) },
 ];
 
 const logoDataUri =
@@ -55,16 +57,16 @@ const img = (style, src) => ({ type: "img", props: { style, src } });
 /* Μεγάλοι τίτλοι χρειάζονται μικρότερα γράμματα για να χωρέσουν σε 3–4 σειρές. */
 function titleSize(title) {
   const n = title.length;
-  if (n <= 42) return 68;
-  if (n <= 60) return 60;
-  if (n <= 85) return 50;
-  return 43;
+  if (n <= 42) return 78;
+  if (n <= 60) return 70;
+  if (n <= 85) return 60;
+  return 52;
 }
 
 function card({ title, category }) {
   return el("div", {
     display: "flex", flexDirection: "column", width: "1200px", height: "630px",
-    backgroundColor: C.bg, color: C.text, fontFamily: "Inter", position: "relative",
+    backgroundColor: C.bg, color: C.text, fontFamily: "Roboto Condensed", position: "relative",
   }, [
     /* Πορτοκαλί λωρίδα στο αριστερό άκρο — το σήμα κατατεθέν του site */
     el("div", {
@@ -83,7 +85,7 @@ function card({ title, category }) {
       /* Κεφαλίδα: λογότυπο + λεκτικό σήμα */
       el("div", { display: "flex", alignItems: "center" }, [
         img({ width: "62px", height: "58px", marginRight: "20px" }, logoDataUri),
-        el("div", { display: "flex", fontSize: "31px", fontWeight: 700, letterSpacing: "1.5px" }, [
+        el("div", { display: "flex", fontSize: "34px", fontWeight: 700, letterSpacing: "1.5px" }, [
           el("span", {}, upper("Δέσε")),
           el("span", { color: C.accent }, "."),
           el("span", {}, upper("Κορδόνια")),
@@ -103,7 +105,7 @@ function card({ title, category }) {
       /* Υποσέλιδο */
       el("div", { display: "flex", alignItems: "center" }, [
         el("div", { width: "46px", height: "3px", backgroundColor: C.accent, marginRight: "18px" }),
-        el("div", { display: "flex", fontSize: "25px", color: C.dim, letterSpacing: "0.4px" }, "desekordonia.com"),
+        el("div", { display: "flex", fontFamily: "Inter", fontSize: "24px", color: C.dim, letterSpacing: "0.4px" }, "desekordonia.com"),
       ]),
     ]),
   ]);

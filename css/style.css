@@ -45,7 +45,7 @@ body {
 }
 
 h1, h2, h3 {
-  font-family: "Oswald", "Segoe UI", sans-serif;
+  font-family: "Roboto Condensed", "Segoe UI", sans-serif;
   font-weight: 600;
   letter-spacing: 0.5px;
   line-height: 1.2;
@@ -86,7 +86,7 @@ header {
   display: flex;
   align-items: center;
   gap: 0.7rem;
-  font-family: "Oswald", sans-serif;
+  font-family: "Roboto Condensed", sans-serif;
   font-size: 1.5rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -241,7 +241,7 @@ header nav {
   border: 1px solid var(--accent);
   color: var(--accent);
   background: none;
-  font-family: "Oswald", sans-serif;
+  font-family: "Roboto Condensed", sans-serif;
   font-size: 0.8rem;
   font-weight: 600;
   letter-spacing: 0.5px;
@@ -431,7 +431,7 @@ header nav {
 
 .featured .featured-tag {
   color: var(--accent);
-  font-family: "Oswald", sans-serif;
+  font-family: "Roboto Condensed", sans-serif;
   font-weight: 600;
   letter-spacing: 0.5px;
   font-size: 0.82rem;
@@ -544,7 +544,7 @@ main {
 
 .card-stat .num {
   display: block;
-  font-family: "Oswald", sans-serif;
+  font-family: "Roboto Condensed", sans-serif;
   font-weight: 700;
   font-size: 1.3rem;
   color: var(--accent-2);
@@ -794,7 +794,7 @@ main {
   align-items: center;
   gap: 0.4rem;
   color: var(--accent-2);
-  font-family: "Oswald", sans-serif;
+  font-family: "Roboto Condensed", sans-serif;
   font-weight: 600;
   font-size: 0.95rem;
   margin-bottom: 0.4rem;
@@ -1093,7 +1093,7 @@ tbody tr:last-child td {
 }
 
 .quote blockquote {
-  font-family: "Oswald", sans-serif;
+  font-family: "Roboto Condensed", sans-serif;
   font-size: clamp(1.4rem, 3.5vw, 2rem);
   line-height: 1.4;
   color: var(--text);
@@ -1132,7 +1132,7 @@ tbody tr:last-child td {
   color: var(--accent-2);
   display: block;
   margin-bottom: 0.2rem;
-  font-family: "Oswald", sans-serif;
+  font-family: "Roboto Condensed", sans-serif;
   letter-spacing: 0.3px;
 }
 
@@ -1196,7 +1196,7 @@ tbody tr:last-child td {
   margin-top: auto;
   color: var(--accent);
   font-weight: 600;
-  font-family: "Oswald", sans-serif;
+  font-family: "Roboto Condensed", sans-serif;
   letter-spacing: 0.3px;
 }
 
@@ -1343,7 +1343,7 @@ tbody tr:last-child td {
 }
 
 .article .tldr h4 {
-  font-family: "Oswald", sans-serif;
+  font-family: "Roboto Condensed", sans-serif;
   color: var(--accent);
   margin: 0 0 0.6rem;
   font-size: 1.05rem;
@@ -1413,7 +1413,7 @@ tbody tr:last-child td {
 
 .share-label {
   color: var(--text-dim);
-  font-family: "Oswald", sans-serif;
+  font-family: "Roboto Condensed", sans-serif;
   font-size: 0.9rem;
   letter-spacing: 0.3px;
   margin-right: 0.2rem;
@@ -1535,7 +1535,7 @@ tbody tr:last-child td {
 }
 
 .calc-result .pace .big {
-  font-family: "Oswald", sans-serif;
+  font-family: "Roboto Condensed", sans-serif;
   font-size: 2.6rem;
   color: var(--accent);
   line-height: 1;
@@ -1570,7 +1570,7 @@ tbody tr:last-child td {
 .calc-result td:last-child {
   text-align: right;
   color: var(--text);
-  font-family: "Oswald", sans-serif;
+  font-family: "Roboto Condensed", sans-serif;
   font-size: 1.1rem;
   white-space: nowrap;
 }
@@ -1609,7 +1609,7 @@ tbody tr:last-child td {
 }
 
 .letter .signature {
-  font-family: "Oswald", sans-serif;
+  font-family: "Roboto Condensed", sans-serif;
   color: var(--text);
   font-style: normal;
   margin-top: 1.2rem;
@@ -1758,7 +1758,7 @@ tbody tr:last-child td {
 
 .why-result .accent {
   color: var(--accent);
-  font-family: "Oswald", sans-serif;
+  font-family: "Roboto Condensed", sans-serif;
 }
 
 .modal-close {
@@ -1871,7 +1871,7 @@ tbody tr:last-child td {
 }
 
 .plan-table td:first-child {
-  font-family: "Oswald", sans-serif;
+  font-family: "Roboto Condensed", sans-serif;
   color: var(--accent-2);
   white-space: nowrap;
   font-size: 1.05rem;
@@ -2132,7 +2132,7 @@ footer .footer-logo {
 }
 
 footer .footer-tagline {
-  font-family: "Oswald", sans-serif;
+  font-family: "Roboto Condensed", sans-serif;
   font-size: 1.1rem;
   color: var(--text);
   letter-spacing: 0.3px;
@@ -2343,7 +2343,7 @@ footer .accent {
   background-color: var(--surface);
   color: var(--text-dim);
   cursor: pointer;
-  font-family: "Oswald", sans-serif;
+  font-family: "Roboto Condensed", sans-serif;
   font-size: 0.9rem;
   letter-spacing: 0.3px;
   transition: color 0.2s, border-color 0.2s, transform 0.2s;
@@ -2437,7 +2437,7 @@ footer .accent {
 .saved-empty .read-more {
   color: var(--accent);
   font-weight: 600;
-  font-family: "Oswald", sans-serif;
+  font-family: "Roboto Condensed", sans-serif;
 }
 
 /* Ταξινόμηση αποθηκευμένων */
@@ -2450,7 +2450,7 @@ footer .accent {
 
 .saved-sort-label {
   color: var(--text-dim);
-  font-family: "Oswald", sans-serif;
+  font-family: "Roboto Condensed", sans-serif;
   font-size: 0.9rem;
   letter-spacing: 0.3px;
 }
@@ -2495,35 +2495,35 @@ footer .accent {
 .ig-step.ig-final { background-color: rgba(255, 87, 34, 0.12); border-color: var(--accent); }
 .ig-step .ig-ic { width: 42px; height: 42px; flex: 0 0 auto; border-radius: 50%; background-color: var(--surface); display: grid; place-items: center; color: var(--accent); }
 .ig-step .ig-ic svg { width: 22px; height: 22px; }
-.ig-step strong { display: block; color: var(--text); font-family: "Oswald", sans-serif; letter-spacing: 0.2px; }
+.ig-step strong { display: block; color: var(--text); font-family: "Roboto Condensed", sans-serif; letter-spacing: 0.2px; }
 .ig-step span { color: var(--text-dim); font-size: 0.85rem; }
 .ig-conn { display: flex; justify-content: center; color: var(--accent); padding: 0.4rem 0; }
 .ig-conn svg { width: 28px; height: 28px; }
 .ig-pyramid { display: flex; flex-direction: column; align-items: center; gap: 0.4rem; }
-.ig-tier { color: #fff; font-family: "Oswald", sans-serif; font-size: 0.92rem; letter-spacing: 0.3px; text-align: center; padding: 0.7rem 0.5rem; border-radius: 8px; }
+.ig-tier { color: #fff; font-family: "Roboto Condensed", sans-serif; font-size: 0.92rem; letter-spacing: 0.3px; text-align: center; padding: 0.7rem 0.5rem; border-radius: 8px; }
 .ig-tier small { display: block; font-family: "Inter", sans-serif; font-weight: 400; font-size: 0.72rem; letter-spacing: 0; opacity: 0.95; }
 .ig-vs { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
 .ig-card { background-color: var(--surface-2); border: 1px solid var(--border); border-radius: 12px; padding: 1.1rem 1rem; text-align: center; }
 .ig-card .ig-ic { width: 46px; height: 46px; margin: 0 auto 0.6rem; border-radius: 50%; background-color: var(--surface); display: grid; place-items: center; color: var(--accent); }
 .ig-card .ig-ic svg { width: 24px; height: 24px; }
-.ig-card strong { display: block; color: var(--text); font-family: "Oswald", sans-serif; }
+.ig-card strong { display: block; color: var(--text); font-family: "Roboto Condensed", sans-serif; }
 .ig-card span { color: var(--text-dim); font-size: 0.85rem; }
 .ig-card.ig-est { border-color: #4aa3ff; }
 .ig-card.ig-est .ig-ic { color: #4aa3ff; }
-.ig-card .ig-res { display: inline-block; margin-top: 0.55rem; font-family: "Oswald", sans-serif; font-size: 0.78rem; letter-spacing: 0.2px; padding: 0.2rem 0.65rem; border-radius: 999px; }
+.ig-card .ig-res { display: inline-block; margin-top: 0.55rem; font-family: "Roboto Condensed", sans-serif; font-size: 0.78rem; letter-spacing: 0.2px; padding: 0.2rem 0.65rem; border-radius: 999px; }
 .ig-card .ig-res-est { background-color: rgba(74, 163, 255, 0.16); color: #4aa3ff; }
 .ig-card .ig-res-real { background-color: rgba(46, 204, 113, 0.18); color: #2ecc71; }
 .ig-scale { display: flex; border-radius: 10px; overflow: hidden; }
 .ig-scale .ig-seg { flex: 1; text-align: center; padding: 0.6rem 0.3rem; color: #fff; }
-.ig-scale .ig-seg b { display: block; font-family: "Oswald", sans-serif; font-size: 1.05rem; }
+.ig-scale .ig-seg b { display: block; font-family: "Roboto Condensed", sans-serif; font-size: 1.05rem; }
 .ig-scale .ig-seg small { font-size: 0.68rem; opacity: 0.95; line-height: 1.2; }
-.ig-title { text-align: center; font-family: "Oswald", sans-serif; color: var(--text); font-size: 0.95rem; letter-spacing: 0.3px; margin: 0 0 0.7rem; }
+.ig-title { text-align: center; font-family: "Roboto Condensed", sans-serif; color: var(--text); font-size: 0.95rem; letter-spacing: 0.3px; margin: 0 0 0.7rem; }
 .ig-myth { display: flex; flex-direction: column; gap: 1.1rem; }
 .ig-myth-l { display: block; }
 
 /* Recap box ("Τι να θυμάσαι") — reusable */
 .recap { max-width: 580px; margin: 2.4rem auto 0; background-color: var(--surface-2); border: 1px solid var(--border); border-left: 4px solid var(--accent); border-radius: 12px; padding: 1.2rem 1.35rem; }
-.recap h4 { display: flex; align-items: center; gap: 0.55rem; margin: 0 0 0.8rem; font-family: "Oswald", sans-serif; color: var(--text); font-size: 1.08rem; letter-spacing: 0.3px; }
+.recap h4 { display: flex; align-items: center; gap: 0.55rem; margin: 0 0 0.8rem; font-family: "Roboto Condensed", sans-serif; color: var(--text); font-size: 1.08rem; letter-spacing: 0.3px; }
 .recap h4 svg { width: 1.25em; height: 1.25em; color: var(--accent); flex: 0 0 auto; }
 .recap ul { list-style: none; margin: 0; padding: 0; }
 .recap li { position: relative; padding-left: 1.65em; margin: 0.55rem 0; color: var(--text-dim); line-height: 1.5; }
@@ -2532,23 +2532,23 @@ footer .accent {
 
 /* Sources / references ("Πηγές") — reusable article footer */
 .sources { max-width: 580px; margin: 2.4rem auto 0; padding-top: 1.4rem; border-top: 1px solid var(--border); }
-.sources h4 { display: flex; align-items: center; gap: 0.55rem; margin: 0 0 0.3rem; font-family: "Oswald", sans-serif; color: var(--text); font-size: 1.08rem; letter-spacing: 0.3px; }
+.sources h4 { display: flex; align-items: center; gap: 0.55rem; margin: 0 0 0.3rem; font-family: "Roboto Condensed", sans-serif; color: var(--text); font-size: 1.08rem; letter-spacing: 0.3px; }
 .sources h4 svg { width: 1.2em; height: 1.2em; color: var(--accent); flex: 0 0 auto; }
 .sources > p { color: var(--text-dim); font-size: 0.88rem; margin: 0 0 0.9rem; }
 .sources ol { margin: 0; padding-left: 1.3rem; }
 .sources li { color: var(--text-dim); line-height: 1.55; margin: 0.6rem 0; font-size: 0.9rem; }
-.sources li::marker { color: var(--accent); font-family: "Oswald", sans-serif; }
+.sources li::marker { color: var(--accent); font-family: "Roboto Condensed", sans-serif; }
 .sources li cite { font-style: italic; color: var(--text); }
 .sources li a { color: var(--accent); text-decoration: none; white-space: nowrap; }
 .sources li a:hover { text-decoration: underline; }
 
 /* ===== Author box (ποιος γράφει — στο τέλος των άρθρων) ===== */
-.author-eyebrow { max-width: 580px; margin: 2.4rem auto 0.55rem; font-family: "Oswald", sans-serif; font-size: 0.72rem; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-dim); }
+.author-eyebrow { max-width: 580px; margin: 2.4rem auto 0.55rem; font-family: "Roboto Condensed", sans-serif; font-size: 0.72rem; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-dim); }
 .author-box { max-width: 580px; margin: 0 auto; display: flex; gap: 1rem; align-items: flex-start; background-color: var(--surface-2); border: 1px solid var(--border); border-radius: 12px; padding: 0.9rem 1.1rem; }
 .author-box picture { flex: 0 0 auto; }
 .author-box img { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; display: block; }
 .author-info { flex: 1; min-width: 0; }
-.author-name { display: block; font-family: "Oswald", sans-serif; color: var(--text); letter-spacing: 0.3px; margin-bottom: 0.25rem; }
+.author-name { display: block; font-family: "Roboto Condensed", sans-serif; color: var(--text); letter-spacing: 0.3px; margin-bottom: 0.25rem; }
 .author-name span { color: var(--text-dim); font-family: "Inter", sans-serif; font-size: 0.8rem; font-weight: 400; margin-left: 0.45rem; }
 .author-info p { color: var(--text-dim); font-size: 0.88rem; line-height: 1.55; margin: 0 0 0.5rem; }
 .author-link { color: var(--accent); font-size: 0.88rem; text-decoration: none; }
@@ -2561,5 +2561,5 @@ footer .accent {
 /* ===== FAQ (Συχνές ερωτήσεις στο τέλος άρθρων) ===== */
 .faq { margin-top: 2.4rem; }
 .faq-item { background-color: var(--surface-2); border: 1px solid var(--border); border-radius: 12px; padding: 1rem 1.2rem; margin: 0.8rem 0; }
-.faq-item h4 { margin: 0 0 0.45rem; font-family: "Oswald", sans-serif; font-size: 1.05rem; color: var(--text); letter-spacing: 0.3px; }
+.faq-item h4 { margin: 0 0 0.45rem; font-family: "Roboto Condensed", sans-serif; font-size: 1.05rem; color: var(--text); letter-spacing: 0.3px; }
 .faq-item p { margin: 0; color: var(--text-dim); font-size: 0.95rem; line-height: 1.6; }
