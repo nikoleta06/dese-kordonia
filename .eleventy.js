@@ -8,7 +8,6 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("CNAME");
   eleventyConfig.addPassthroughCopy("googlee4e046c775be8626.html");
   eleventyConfig.addPassthroughCopy("sitemap.xml");
-  eleventyConfig.addPassthroughCopy("404.html");
 
   eleventyConfig.addFilter("navHref", (file, lang) => {
     return file + (lang === "en" ? "-en" : "") + ".html";
