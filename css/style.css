@@ -2189,8 +2189,11 @@ footer .accent {
   .nav-toggle {
     display: block;
   }
-  nav {
+  /* «header nav» ώστε να υπερισχύει του flex: 1 του desktop — αλλιώς το nav
+     μένει στην ίδια γραμμή με πλάτος 0 και το μενού βγαίνει εκτός οθόνης */
+  header nav {
     order: 3;
+    flex: 0 0 100%;
     width: 100%;
   }
   .menu {
