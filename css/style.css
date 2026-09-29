@@ -2215,6 +2215,15 @@ footer .accent {
   }
   .nav-inner.nav-open .menu {
     display: flex;
+    /* Το header είναι sticky: αν το μενού ψηλώσει πάνω από την οθόνη (π.χ. με
+       ανοιχτά «Εργαλεία» σε μικρό iPhone), σκρολάρει μέσα του αντί να κόβεται */
+    max-height: calc(100vh - 8rem);
+    max-height: calc(100dvh - 8rem);
+    flex-wrap: nowrap; /* αλλιώς η στήλη σπάει σε δεύτερη στήλη αντί να σκρολάρει */
+    justify-content: flex-start; /* με flex-end η υπερχείλιση πάει προς τα πάνω, εκτός σκρολ */
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
   }
   .menu a {
     display: block;
