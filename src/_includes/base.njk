@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {#- Θέμα πριν το πρώτο paint: αλλιώς όσοι έχουν φωτεινό θέμα βλέπουν για μια
+      στιγμή τη σκούρη σελίδα, μέχρι να φορτώσει το main.js #}
+  <script>try { if (localStorage.getItem('theme') === 'light') document.documentElement.setAttribute('data-theme', 'light'); } catch (e) {}</script>
   {% block head_extra0 %}{% endblock %}
   <title>{{ title | safe }}</title>
   <meta name="description" content="{{ description | safe }}">
