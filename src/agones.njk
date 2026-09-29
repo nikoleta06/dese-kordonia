@@ -55,6 +55,9 @@ activeNav: "agones"
     /* Υπόμνημα */
     .map-legend { display: flex; flex-wrap: wrap; gap: 1.2rem; margin-top: 0.8rem; font-size: 0.85rem; color: var(--text-dim); }
     .map-legend span { display: inline-flex; align-items: center; gap: 0.45rem; }
+    /* Υπόδειξη «δύο δάχτυλα» (μόνο κινητό) */
+    .map-hint { position: absolute; inset: 0; z-index: 1000; display: flex; align-items: center; justify-content: center; padding: 1.5rem; text-align: center; background: rgba(0, 0, 0, 0.55); color: #fff; font-size: 1rem; font-weight: 500; pointer-events: none; opacity: 0; transition: opacity .25s; }
+    .map-hint.show { opacity: 1; }
     .leg-dot { width: 12px; height: 12px; border-radius: 50%; display: inline-block; border: 2px solid #fff; }
 
     /* Κάρτες αγώνων */
@@ -139,7 +142,22 @@ activeNav: "agones"
     (function () {
       if (typeof L === 'undefined') return;
       var COLORS = { road: '#ff5722', mountain: '#2ecc71', ultra: '#e24b4a' };
-      var map = L.map('race-map', { scrollWheelZoom: false }).setView([38.7, 23.5], 6);
+      // Κινητό: ένα δάχτυλο σκρολάρει τη σελίδα, δύο δάχτυλα μετακινούν/ζουμάρουν τον χάρτη
+      var map = L.map('race-map', { scrollWheelZoom: false, dragging: !L.Browser.mobile }).setView([38.7, 23.5], 6);
+      if (L.Browser.mobile) {
+        var mapEl = document.getElementById('race-map');
+        var hint = document.createElement('div');
+        hint.className = 'map-hint';
+        hint.textContent = 'Χρησιμοποίησε δύο δάχτυλα για να μετακινήσεις τον χάρτη';
+        mapEl.appendChild(hint);
+        var hintTimer;
+        mapEl.addEventListener('touchmove', function (e) {
+          if (e.touches.length !== 1) { hint.classList.remove('show'); return; }
+          hint.classList.add('show');
+          clearTimeout(hintTimer);
+          hintTimer = setTimeout(function () { hint.classList.remove('show'); }, 1200);
+        }, { passive: true });
+      }
       // OpenStreetMap: δωρεάν, χωρίς κλειδί (το CARTO ζητά πλέον API key)
       L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
