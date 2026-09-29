@@ -37,6 +37,14 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Κόβει ό,τι βγαίνει πλάγια (π.χ. animations .reveal.left/.right) ώστε να μη
+   σκρολάρει οριζόντια η σελίδα στο κινητό. «clip» (όχι «hidden») για να
+   συνεχίσει να δουλεύει το sticky header. */
+html,
+body {
+  overflow-x: clip;
+}
+
 body {
   font-family: "Inter", "Segoe UI", Tahoma, sans-serif;
   background-color: var(--bg);
