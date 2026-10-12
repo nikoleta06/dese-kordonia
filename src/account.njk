@@ -194,7 +194,7 @@ description: "Το προφίλ σου στο Δέσε Κορδόνια."
         passkeyMsg('');
         try {
           await DKPasskey.register();
-          passkeyMsg('Έτοιμο! Την επόμενη φορά πάτα «Σύνδεση με Face ID / δαχτυλικό» στη σελίδα σύνδεσης.');
+          passkeyMsg('Έτοιμο! Την επόμενη φορά πάτα «Μπες με Face ID / δαχτυλικό» στη σελίδα σύνδεσης.');
           renderPasskeys();
         } catch (e) {
           if (DKPasskey.isAlreadyRegistered(e)) passkeyMsg('Το Face ID είναι ήδη ενεργό σε αυτή τη συσκευή.');

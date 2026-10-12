@@ -1,7 +1,7 @@
 ---
 permalink: "login.html"
 lang: "el"
-title: "Σύνδεση | Δέσε Κορδόνια"
+title: "Σύνδεση ή εγγραφή | Δέσε Κορδόνια"
 description: "Συνδέσου στο Δέσε Κορδόνια με το email σου — χωρίς κωδικό — και εγγράψου στο newsletter."
 ---
 
@@ -22,24 +22,15 @@ description: "Συνδέσου στο Δέσε Κορδόνια με το email 
 
 {% block content %}
   <main>
-    <h1 class="section-title">Σύνδεση στο Δέσε Κορδόνια</h1>
+    <h1 class="section-title">Σύνδεση ή εγγραφή</h1>
     <p class="lead">
-      Συνδέσου με το email σου — θα σου στείλουμε έναν ασφαλή σύνδεσμο.
-      Δεν χρειάζεται κωδικός. Αν έχεις ενεργοποιήσει Face ID ή δαχτυλικό,
-      μπαίνεις με ένα πάτημα.
+      Γράψε το email σου και θα σου στείλουμε έναν σύνδεσμο. Αν είναι η πρώτη
+      σου φορά, έτσι γίνεται και η εγγραφή — δεν χρειάζεται κωδικός.
     </p>
 
     <div class="calc login-card">
       <div class="login-icon" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-      </div>
-
-      <div id="passkeyArea" hidden>
-        <button class="btn-passkey" id="passkeyBtn" type="button">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><path d="M9 9h.01"/><path d="M15 9h.01"/></svg>
-          Σύνδεση με Face ID / δαχτυλικό
-        </button>
-        <div class="login-divider">ή με email</div>
       </div>
 
       <div class="field">
@@ -51,6 +42,17 @@ description: "Συνδέσου στο Δέσε Κορδόνια με το email 
       </div>
 
       <button class="btn btn-block" id="sendBtn" type="button">Στείλε μου σύνδεσμο</button>
+
+      {#- Δεύτερη επιλογή, μόνο για όσους έχουν ήδη ενεργοποιήσει passkey —
+          ο νέος επισκέπτης ξεκινά πάντα από το email παραπάνω #}
+      <div id="passkeyArea" hidden>
+        <div class="login-divider">ή</div>
+        <button class="btn-passkey" id="passkeyBtn" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><path d="M9 9h.01"/><path d="M15 9h.01"/></svg>
+          Μπες με Face ID / δαχτυλικό
+        </button>
+        <p class="passkey-hint">Αν το έχεις ήδη ενεργοποιήσει σε αυτή τη συσκευή</p>
+      </div>
 
       <p class="login-trust">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
@@ -125,11 +127,11 @@ description: "Συνδέσου στο Δέσε Κορδόνια με το email 
           return;
         } catch (e) {
           if (DKPasskey.isCancel(e)) {
-            showResult('Δεν ολοκληρώθηκε η σύνδεση με Face ID. Αν δεν έχεις ενεργοποιήσει ακόμα Face ID σε αυτή τη συσκευή, συνδέσου με email.', true);
+            showResult('Δεν έχεις ενεργοποιήσει ακόμα Face ID σε αυτή τη συσκευή. Γράψε το email σου παραπάνω — μετά τη σύνδεση θα σου προτείνουμε να το ενεργοποιήσεις.', true);
           } else if (e.status === 400) {
-            showResult('Αυτό το passkey δεν είναι πια συνδεδεμένο με λογαριασμό. Συνδέσου με email και ενεργοποίησε ξανά το Face ID από τον λογαριασμό σου.', true);
+            showResult('Το Face ID αυτής της συσκευής δεν είναι πια συνδεδεμένο με λογαριασμό. Γράψε το email σου παραπάνω και ενεργοποίησέ το ξανά μετά τη σύνδεση.', true);
           } else {
-            showResult('Κάτι πήγε στραβά με τη σύνδεση. Δοκίμασε ξανά ή συνδέσου με email.', true);
+            showResult('Κάτι πήγε στραβά. Δοκίμασε ξανά ή γράψε το email σου παραπάνω.', true);
           }
           DKPasskey.prepareLogin();
         }

@@ -86,7 +86,7 @@ description: "Επαλήθευση του συνδέσμου σύνδεσης."
         try {
           await DKPasskey.register();
           $('passkeyOffer').hidden = true;
-          $('status').textContent = 'Έτοιμο! Την επόμενη φορά πάτα «Σύνδεση με Face ID / δαχτυλικό». Μεταφέρεσαι στον λογαριασμό σου...';
+          $('status').textContent = 'Έτοιμο! Την επόμενη φορά πάτα «Μπες με Face ID / δαχτυλικό» στη σελίδα σύνδεσης. Μεταφέρεσαι στον λογαριασμό σου...';
           setTimeout(() => { location.href = 'account.html'; }, 2000);
           return;
         } catch (e) {

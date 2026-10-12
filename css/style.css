@@ -2122,6 +2122,13 @@ tbody tr:last-child td {
   cursor: default;
 }
 
+.passkey-hint {
+  margin: 0.45rem 0 0;
+  text-align: center;
+  font-size: 0.82rem;
+  color: var(--text-dim);
+}
+
 /* Πρόταση για Face ID μετά τη σύνδεση με email (verify.html) */
 .passkey-offer {
   margin-top: 0.9rem;
