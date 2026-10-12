@@ -26,6 +26,15 @@ description: "Επαλήθευση του συνδέσμου σύνδεσης."
     <div class="calc">
       <p id="status">Έλεγχος του συνδέσμου...</p>
       <a class="btn calc-hidden" id="loginLink" href="login.html">Πίσω στη σύνδεση</a>
+
+      <div class="passkey-offer" id="passkeyOffer" hidden>
+        <p>Θες την επόμενη φορά να μπαίνεις κατευθείαν με <strong>Face ID ή δαχτυλικό</strong>, χωρίς να περιμένεις email;</p>
+        <button class="btn-passkey" id="passkeyYes" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><path d="M9 9h.01"/><path d="M15 9h.01"/></svg>
+          Ναι, ενεργοποίηση Face ID
+        </button>
+        <p class="login-trust"><a href="account.html">Όχι τώρα — πήγαινε στον λογαριασμό μου</a></p>
+      </div>
     </div>
   </main>
 {% endblock %}
@@ -33,6 +42,8 @@ description: "Επαλήθευση του συνδέσμου σύνδεσης."
 {% block body_extra %}{% endblock %}
 
 {% block scripts_extra %}
+  <script src="js/vendor/simplewebauthn-browser-14.0.0.umd.min.js"></script>
+  <script src="js/passkey.js?v={{ site.jsVersion }}"></script>
   <script>
     (function () {
       const $ = (id) => document.getElementById(id);
@@ -50,6 +61,13 @@ description: "Επαλήθευση του συνδέσμου σύνδεσης."
             credentials: 'include'
           });
           if (r.ok) {
+            // Πρόταση για Face ID, ώστε την επόμενη φορά να μη χρειάζεται email
+            if (DKPasskey.supported()) {
+              await DKPasskey.prepareRegister();
+              $('status').textContent = 'Συνδέθηκες!';
+              $('passkeyOffer').hidden = false;
+              return;
+            }
             $('status').textContent = 'Συνδέθηκες! Μεταφέρεσαι στον λογαριασμό σου...';
             setTimeout(() => { location.href = 'account.html'; }, 1200);
           } else {
@@ -61,6 +79,28 @@ description: "Επαλήθευση του συνδέσμου σύνδεσης."
           $('loginLink').classList.remove('calc-hidden');
         }
       }
+
+      $('passkeyYes').addEventListener('click', async () => {
+        const btn = $('passkeyYes');
+        btn.disabled = true;
+        try {
+          await DKPasskey.register();
+          $('passkeyOffer').hidden = true;
+          $('status').textContent = 'Έτοιμο! Την επόμενη φορά πάτα «Σύνδεση με Face ID / δαχτυλικό». Μεταφέρεσαι στον λογαριασμό σου...';
+          setTimeout(() => { location.href = 'account.html'; }, 2000);
+          return;
+        } catch (e) {
+          if (DKPasskey.isAlreadyRegistered(e)) {
+            $('status').textContent = 'Το Face ID είναι ήδη ενεργό σε αυτή τη συσκευή.';
+          } else if (DKPasskey.isCancel(e)) {
+            $('status').textContent = 'Η ενεργοποίηση ακυρώθηκε. Μπορείς να το κάνεις όποτε θέλεις από τον λογαριασμό σου.';
+          } else {
+            $('status').textContent = 'Δεν έγινε η ενεργοποίηση. Δοκίμασε ξανά από τον λογαριασμό σου.';
+          }
+          DKPasskey.prepareRegister();
+        }
+        btn.disabled = false;
+      });
 
       verify();
     })();

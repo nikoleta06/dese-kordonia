@@ -49,6 +49,14 @@ description: "Το προφίλ σου στο Δέσε Κορδόνια."
         </div>
       </div>
 
+      <div class="newsletter-box" id="passkeyBox" hidden>
+        <h4><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><path d="M9 9h.01"/><path d="M15 9h.01"/></svg> Σύνδεση με Face ID / δαχτυλικό</h4>
+        <p>Από τις συσκευές που έχεις ενεργοποιήσει μπαίνεις με ένα πάτημα, χωρίς email.</p>
+        <ul class="passkey-list" id="passkeyList"></ul>
+        <button class="btn-passkey" id="passkeyAdd" type="button">Ενεργοποίηση σε αυτή τη συσκευή</button>
+        <p id="passkeyMsg" hidden></p>
+      </div>
+
       <button class="btn" id="saveBtn" type="button">Αποθήκευση</button>
       <button class="btn" id="logoutBtn" type="button" style="background:transparent;color:var(--text-dim);box-shadow:none;">Αποσύνδεση</button>
       <button class="btn" id="deleteBtn" type="button" style="background:transparent;color:#e57373;box-shadow:none;">Διαγραφή λογαριασμού</button>
@@ -63,6 +71,8 @@ description: "Το προφίλ σου στο Δέσε Κορδόνια."
 {% block body_extra %}{% endblock %}
 
 {% block scripts_extra %}
+  <script src="js/vendor/simplewebauthn-browser-14.0.0.umd.min.js"></script>
+  <script src="js/passkey.js?v={{ site.jsVersion }}"></script>
   <script>
     (function () {
       const $ = (id) => document.getElementById(id);
@@ -87,6 +97,7 @@ description: "Το προφίλ σου στο Δέσε Κορδόνια."
             return;
           }
           fill(await r.json());
+          initPasskeys();
         } catch (e) {
           $('status').textContent = "Δεν μπόρεσα να συνδεθώ με τον server. Τρέχει τοπικά;";
         }
@@ -132,6 +143,67 @@ description: "Το προφίλ σου στο Δέσε Κορδόνια."
         } catch (e) {}
         location.href = 'index.html';
       }
+
+      /* --- Passkeys (Face ID / δαχτυλικό) --- */
+      function passkeyMsg(text) {
+        $('passkeyMsg').textContent = text;
+        $('passkeyMsg').hidden = !text;
+      }
+
+      function fmtDate(iso) {
+        return iso ? new Date(iso).toLocaleDateString('el-GR') : '';
+      }
+
+      async function renderPasskeys() {
+        const list = $('passkeyList');
+        let keys = [];
+        try { keys = await DKPasskey.list(); } catch (e) {}
+        list.innerHTML = '';
+        keys.forEach((k) => {
+          const li = document.createElement('li');
+          const info = document.createElement('div');
+          info.textContent = k.device_label || 'Συσκευή';
+          const meta = document.createElement('small');
+          meta.textContent = 'Προστέθηκε ' + fmtDate(k.created_at) +
+            (k.last_used_at ? ' · τελευταία σύνδεση ' + fmtDate(k.last_used_at) : '');
+          info.appendChild(meta);
+          const del = document.createElement('button');
+          del.type = 'button';
+          del.textContent = 'Αφαίρεση';
+          del.addEventListener('click', async () => {
+            if (!confirm('Να αφαιρεθεί η σύνδεση με Face ID από αυτή τη συσκευή; Θα μπορείς πάντα να μπαίνεις με email.')) return;
+            try { await DKPasskey.remove(k.id); } catch (e) {}
+            renderPasskeys();
+          });
+          li.appendChild(info);
+          li.appendChild(del);
+          list.appendChild(li);
+        });
+      }
+
+      function initPasskeys() {
+        if (!DKPasskey.supported()) return;
+        $('passkeyBox').hidden = false;
+        renderPasskeys();
+        DKPasskey.prepareRegister();
+      }
+
+      $('passkeyAdd').addEventListener('click', async () => {
+        const btn = $('passkeyAdd');
+        btn.disabled = true;
+        passkeyMsg('');
+        try {
+          await DKPasskey.register();
+          passkeyMsg('Έτοιμο! Την επόμενη φορά πάτα «Σύνδεση με Face ID / δαχτυλικό» στη σελίδα σύνδεσης.');
+          renderPasskeys();
+        } catch (e) {
+          if (DKPasskey.isAlreadyRegistered(e)) passkeyMsg('Το Face ID είναι ήδη ενεργό σε αυτή τη συσκευή.');
+          else if (DKPasskey.isCancel(e)) passkeyMsg('Η ενεργοποίηση ακυρώθηκε.');
+          else passkeyMsg('Δεν έγινε η ενεργοποίηση. Δοκίμασε ξανά.');
+        }
+        DKPasskey.prepareRegister();
+        btn.disabled = false;
+      });
 
       $('saveBtn').addEventListener('click', save);
       $('logoutBtn').addEventListener('click', logout);

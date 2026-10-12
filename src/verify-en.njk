@@ -25,6 +25,15 @@ description: "Verifying your sign-in link."
     <div class="calc">
       <p id="status">Checking your link...</p>
       <a class="btn calc-hidden" id="loginLink" href="login-en.html">Back to sign in</a>
+
+      <div class="passkey-offer" id="passkeyOffer" hidden>
+        <p>Next time, sign in straight away with <strong>Face ID or fingerprint</strong>, without waiting for an email?</p>
+        <button class="btn-passkey" id="passkeyYes" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><path d="M9 9h.01"/><path d="M15 9h.01"/></svg>
+          Yes, turn on Face ID
+        </button>
+        <p class="login-trust"><a href="account-en.html">Not now — take me to my account</a></p>
+      </div>
     </div>
   </main>
 {% endblock %}
@@ -32,6 +41,8 @@ description: "Verifying your sign-in link."
 {% block body_extra %}{% endblock %}
 
 {% block scripts_extra %}
+  <script src="js/vendor/simplewebauthn-browser-14.0.0.umd.min.js"></script>
+  <script src="js/passkey.js?v={{ site.jsVersion }}"></script>
   <script>
     (function () {
       const $ = (id) => document.getElementById(id);
@@ -49,6 +60,13 @@ description: "Verifying your sign-in link."
             credentials: 'include'
           });
           if (r.ok) {
+            // Offer Face ID so next time no email is needed
+            if (DKPasskey.supported()) {
+              await DKPasskey.prepareRegister();
+              $('status').textContent = "You're signed in!";
+              $('passkeyOffer').hidden = false;
+              return;
+            }
             $('status').textContent = "You're signed in! Redirecting to your account...";
             setTimeout(() => { location.href = 'account-en.html'; }, 1200);
           } else {
@@ -60,6 +78,28 @@ description: "Verifying your sign-in link."
           $('loginLink').classList.remove('calc-hidden');
         }
       }
+
+      $('passkeyYes').addEventListener('click', async () => {
+        const btn = $('passkeyYes');
+        btn.disabled = true;
+        try {
+          await DKPasskey.register();
+          $('passkeyOffer').hidden = true;
+          $('status').textContent = 'Done! Next time tap "Sign in with Face ID / fingerprint". Redirecting to your account...';
+          setTimeout(() => { location.href = 'account-en.html'; }, 2000);
+          return;
+        } catch (e) {
+          if (DKPasskey.isAlreadyRegistered(e)) {
+            $('status').textContent = 'Face ID is already on for this device.';
+          } else if (DKPasskey.isCancel(e)) {
+            $('status').textContent = 'Cancelled. You can turn it on any time from your account.';
+          } else {
+            $('status').textContent = "Couldn't turn it on. Try again from your account.";
+          }
+          DKPasskey.prepareRegister();
+        }
+        btn.disabled = false;
+      });
 
       verify();
     })();

@@ -48,6 +48,14 @@ description: "Your profile on Δέσε Κορδόνια."
         </div>
       </div>
 
+      <div class="newsletter-box" id="passkeyBox" hidden>
+        <h4><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><path d="M9 9h.01"/><path d="M15 9h.01"/></svg> Sign in with Face ID / fingerprint</h4>
+        <p>On the devices you've turned this on for, you're in with one tap — no email.</p>
+        <ul class="passkey-list" id="passkeyList"></ul>
+        <button class="btn-passkey" id="passkeyAdd" type="button">Turn on for this device</button>
+        <p id="passkeyMsg" hidden></p>
+      </div>
+
       <button class="btn" id="saveBtn" type="button">Save</button>
       <button class="btn" id="logoutBtn" type="button" style="background:transparent;color:var(--text-dim);box-shadow:none;">Sign out</button>
       <button class="btn" id="deleteBtn" type="button" style="background:transparent;color:#e57373;box-shadow:none;">Delete account</button>
@@ -62,6 +70,8 @@ description: "Your profile on Δέσε Κορδόνια."
 {% block body_extra %}{% endblock %}
 
 {% block scripts_extra %}
+  <script src="js/vendor/simplewebauthn-browser-14.0.0.umd.min.js"></script>
+  <script src="js/passkey.js?v={{ site.jsVersion }}"></script>
   <script>
     (function () {
       const $ = (id) => document.getElementById(id);
@@ -86,6 +96,7 @@ description: "Your profile on Δέσε Κορδόνια."
             return;
           }
           fill(await r.json());
+          initPasskeys();
         } catch (e) {
           $('status').textContent = "Couldn't reach the server. Is it running locally?";
         }
@@ -131,6 +142,67 @@ description: "Your profile on Δέσε Κορδόνια."
         } catch (e) {}
         location.href = 'index-en.html';
       }
+
+      /* --- Passkeys (Face ID / fingerprint) --- */
+      function passkeyMsg(text) {
+        $('passkeyMsg').textContent = text;
+        $('passkeyMsg').hidden = !text;
+      }
+
+      function fmtDate(iso) {
+        return iso ? new Date(iso).toLocaleDateString('en-GB') : '';
+      }
+
+      async function renderPasskeys() {
+        const list = $('passkeyList');
+        let keys = [];
+        try { keys = await DKPasskey.list(); } catch (e) {}
+        list.innerHTML = '';
+        keys.forEach((k) => {
+          const li = document.createElement('li');
+          const info = document.createElement('div');
+          info.textContent = k.device_label || 'Device';
+          const meta = document.createElement('small');
+          meta.textContent = 'Added ' + fmtDate(k.created_at) +
+            (k.last_used_at ? ' · last sign-in ' + fmtDate(k.last_used_at) : '');
+          info.appendChild(meta);
+          const del = document.createElement('button');
+          del.type = 'button';
+          del.textContent = 'Remove';
+          del.addEventListener('click', async () => {
+            if (!confirm('Remove Face ID sign-in for this device? You can always sign in with email.')) return;
+            try { await DKPasskey.remove(k.id); } catch (e) {}
+            renderPasskeys();
+          });
+          li.appendChild(info);
+          li.appendChild(del);
+          list.appendChild(li);
+        });
+      }
+
+      function initPasskeys() {
+        if (!DKPasskey.supported()) return;
+        $('passkeyBox').hidden = false;
+        renderPasskeys();
+        DKPasskey.prepareRegister();
+      }
+
+      $('passkeyAdd').addEventListener('click', async () => {
+        const btn = $('passkeyAdd');
+        btn.disabled = true;
+        passkeyMsg('');
+        try {
+          await DKPasskey.register();
+          passkeyMsg('Done! Next time tap "Sign in with Face ID / fingerprint" on the sign-in page.');
+          renderPasskeys();
+        } catch (e) {
+          if (DKPasskey.isAlreadyRegistered(e)) passkeyMsg('Face ID is already on for this device.');
+          else if (DKPasskey.isCancel(e)) passkeyMsg('Cancelled.');
+          else passkeyMsg("Couldn't turn it on. Try again.");
+        }
+        DKPasskey.prepareRegister();
+        btn.disabled = false;
+      });
 
       $('saveBtn').addEventListener('click', save);
       $('logoutBtn').addEventListener('click', logout);

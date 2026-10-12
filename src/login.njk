@@ -25,12 +25,21 @@ description: "Συνδέσου στο Δέσε Κορδόνια με το email 
     <h1 class="section-title">Σύνδεση στο Δέσε Κορδόνια</h1>
     <p class="lead">
       Συνδέσου με το email σου — θα σου στείλουμε έναν ασφαλή σύνδεσμο.
-      Δεν χρειάζεται κωδικός.
+      Δεν χρειάζεται κωδικός. Αν έχεις ενεργοποιήσει Face ID ή δαχτυλικό,
+      μπαίνεις με ένα πάτημα.
     </p>
 
     <div class="calc login-card">
       <div class="login-icon" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+      </div>
+
+      <div id="passkeyArea" hidden>
+        <button class="btn-passkey" id="passkeyBtn" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><path d="M9 9h.01"/><path d="M15 9h.01"/></svg>
+          Σύνδεση με Face ID / δαχτυλικό
+        </button>
+        <div class="login-divider">ή με email</div>
       </div>
 
       <div class="field">
@@ -62,6 +71,8 @@ description: "Συνδέσου στο Δέσε Κορδόνια με το email 
 {% block body_extra %}{% endblock %}
 
 {% block scripts_extra %}
+  <script src="js/vendor/simplewebauthn-browser-14.0.0.umd.min.js"></script>
+  <script src="js/passkey.js?v={{ site.jsVersion }}"></script>
   <script>
     (function () {
       const $ = (id) => document.getElementById(id);
@@ -102,6 +113,33 @@ description: "Συνδέσου στο Δέσε Κορδόνια με το email 
         }
         btn.textContent = label;
         btn.disabled = false;
+      }
+
+      // Passkey: μόνο αν το υποστηρίζει ο browser· οι επιλογές φορτώνονται από πριν (βλ. js/passkey.js)
+      async function passkeyLogin() {
+        const btn = $('passkeyBtn');
+        btn.disabled = true;
+        try {
+          await DKPasskey.login();
+          location.href = 'account.html';
+          return;
+        } catch (e) {
+          if (DKPasskey.isCancel(e)) {
+            showResult('Δεν ολοκληρώθηκε η σύνδεση με Face ID. Αν δεν έχεις ενεργοποιήσει ακόμα Face ID σε αυτή τη συσκευή, συνδέσου με email.', true);
+          } else if (e.status === 400) {
+            showResult('Αυτό το passkey δεν είναι πια συνδεδεμένο με λογαριασμό. Συνδέσου με email και ενεργοποίησε ξανά το Face ID από τον λογαριασμό σου.', true);
+          } else {
+            showResult('Κάτι πήγε στραβά με τη σύνδεση. Δοκίμασε ξανά ή συνδέσου με email.', true);
+          }
+          DKPasskey.prepareLogin();
+        }
+        btn.disabled = false;
+      }
+
+      if (DKPasskey.supported()) {
+        $('passkeyArea').hidden = false;
+        DKPasskey.prepareLogin();
+        $('passkeyBtn').addEventListener('click', passkeyLogin);
       }
 
       $('sendBtn').addEventListener('click', requestLink);

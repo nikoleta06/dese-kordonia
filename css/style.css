@@ -2082,6 +2082,106 @@ tbody tr:last-child td {
   color: var(--accent);
 }
 
+/* ===== Passkeys (Face ID / Touch ID) ===== */
+.btn-passkey {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  width: 100%;
+  padding: 0.85rem 1.2rem;
+  border-radius: 999px;
+  border: 2px solid var(--accent);
+  background: transparent;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.btn-passkey svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  color: var(--accent);
+}
+
+.btn-passkey:hover:not(:disabled) {
+  background-color: var(--accent);
+  color: #fff;
+}
+
+.btn-passkey:hover:not(:disabled) svg {
+  color: #fff;
+}
+
+.btn-passkey:disabled {
+  opacity: 0.7;
+  cursor: default;
+}
+
+/* Πρόταση για Face ID μετά τη σύνδεση με email (verify.html) */
+.passkey-offer {
+  margin-top: 0.9rem;
+}
+
+.passkey-offer > p:first-child {
+  margin-bottom: 1rem;
+}
+
+/* «ή» ανάμεσα στο passkey και τη φόρμα email */
+.login-divider {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin: 1.3rem 0;
+  color: var(--text-dim);
+  font-size: 0.85rem;
+}
+
+.login-divider::before,
+.login-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background-color: var(--border);
+}
+
+.passkey-list {
+  list-style: none;
+  margin: 0 0 0.8rem;
+  padding: 0;
+}
+
+.passkey-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+  padding: 0.55rem 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.9rem;
+  color: var(--text);
+}
+
+.passkey-list li small {
+  display: block;
+  color: var(--text-dim);
+  font-size: 0.8rem;
+}
+
+.passkey-list button {
+  border: none;
+  background: none;
+  color: #e57373;
+  font-family: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+  padding: 0.4rem;
+}
+
 .newsletter-box {
   background-color: var(--surface-2);
   border: 1px solid var(--border);

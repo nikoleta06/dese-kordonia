@@ -24,12 +24,21 @@ description: "Sign in to Δέσε Κορδόνια with your email — no passwo
     <h1 class="section-title">Sign in to Δέσε Κορδόνια</h1>
     <p class="lead">
       Sign in with your email — we'll send you a secure link.
-      No password needed.
+      No password needed. If you've turned on Face ID or fingerprint,
+      you're in with one tap.
     </p>
 
     <div class="calc login-card">
       <div class="login-icon" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+      </div>
+
+      <div id="passkeyArea" hidden>
+        <button class="btn-passkey" id="passkeyBtn" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><path d="M9 9h.01"/><path d="M15 9h.01"/></svg>
+          Sign in with Face ID / fingerprint
+        </button>
+        <div class="login-divider">or with email</div>
       </div>
 
       <div class="field">
@@ -61,6 +70,8 @@ description: "Sign in to Δέσε Κορδόνια with your email — no passwo
 {% block body_extra %}{% endblock %}
 
 {% block scripts_extra %}
+  <script src="js/vendor/simplewebauthn-browser-14.0.0.umd.min.js"></script>
+  <script src="js/passkey.js?v={{ site.jsVersion }}"></script>
   <script>
     (function () {
       const $ = (id) => document.getElementById(id);
@@ -101,6 +112,33 @@ description: "Sign in to Δέσε Κορδόνια with your email — no passwo
         }
         btn.textContent = label;
         btn.disabled = false;
+      }
+
+      // Passkey: only if the browser supports it; options are fetched ahead of time (see js/passkey.js)
+      async function passkeyLogin() {
+        const btn = $('passkeyBtn');
+        btn.disabled = true;
+        try {
+          await DKPasskey.login();
+          location.href = 'account-en.html';
+          return;
+        } catch (e) {
+          if (DKPasskey.isCancel(e)) {
+            showResult("Face ID sign-in didn't complete. If you haven't turned on Face ID on this device yet, sign in with email.", true);
+          } else if (e.status === 400) {
+            showResult('This passkey is no longer linked to an account. Sign in with email and turn Face ID on again from your account.', true);
+          } else {
+            showResult('Something went wrong signing in. Try again or sign in with email.', true);
+          }
+          DKPasskey.prepareLogin();
+        }
+        btn.disabled = false;
+      }
+
+      if (DKPasskey.supported()) {
+        $('passkeyArea').hidden = false;
+        DKPasskey.prepareLogin();
+        $('passkeyBtn').addEventListener('click', passkeyLogin);
       }
 
       $('sendBtn').addEventListener('click', requestLink);
