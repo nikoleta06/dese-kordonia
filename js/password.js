@@ -18,7 +18,10 @@
     });
     if (!r.ok) {
       const err = new Error('HTTP ' + r.status);
-      err.status = r.status; // 401 λάθος στοιχεία · 400 μη έγκυρος κωδικός · 429 πολλές προσπάθειες
+      // 401 λάθος στοιχεία / έληξε η σύνδεση · 403 λάθος τρέχων κωδικός ·
+      // 400 μη έγκυρος κωδικός · 429 πολλές προσπάθειες
+      err.status = r.status;
+      try { err.code = (await r.json()).code; } catch (e) {}
       throw err;
     }
     return r.json();
@@ -31,12 +34,18 @@
       return call('POST', '/login', { email: email, password: password });
     },
 
-    set: function (password) {
-      return call('PUT', '', { password: password });
+    // currentPassword: χρειάζεται μόνο αν υπάρχει κωδικός και ο χρήστης μπήκε με κωδικό
+    // (ο server το ελέγχει). Απάντηση: { otherDevicesSignedOut: true/false }
+    set: function (password, currentPassword) {
+      return call('PUT', '', { password: password, currentPassword: currentPassword || undefined });
     },
 
-    remove: function () {
-      return call('DELETE', '');
+    remove: function (currentPassword) {
+      return call('DELETE', '', { currentPassword: currentPassword || undefined });
+    },
+
+    isWrongCurrent: function (e) {
+      return !!e && e.status === 403 && e.code === 'current_password';
     },
 
     // Ματάκι μέσα στο πεδίο κωδικού (χρήσιμο στο κινητό): ανοιχτό μάτι = «δείξε

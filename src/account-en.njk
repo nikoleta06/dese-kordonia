@@ -60,6 +60,14 @@ description: "Your profile on Δέσε Κορδόνια."
       <div class="newsletter-box" id="passwordBox">
         <h4><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Sign in with a password</h4>
         <p id="pwState"></p>
+        {#- Current password: only asked when a password exists and the user signed in with it #}
+        <div class="field" id="pwCurrentField" hidden>
+          <label for="currentPassword">Current password</label>
+          <div class="input-wrap pw-wrap">
+            <input type="password" id="currentPassword" autocomplete="current-password" placeholder="Your password">
+            <button class="pw-eye" id="pwEyeCurrent" type="button" aria-pressed="false" aria-label="Show password" title="Show password"></button>
+          </div>
+        </div>
         <div class="field">
           <label for="newPassword">New password</label>
           <div class="input-wrap pw-wrap">
@@ -124,7 +132,7 @@ description: "Your profile on Δέσε Κορδόνια."
           const user = await r.json();
           fill(user);
           initPasskeys();
-          renderPassword(!!user.has_password);
+          renderPassword(!!user.has_password, user.signed_in_with);
         } catch (e) {
           $('status').textContent = "Couldn't reach the server. Is it running locally?";
         }
@@ -233,23 +241,57 @@ description: "Your profile on Δέσε Κορδόνια."
       });
 
       /* --- Password --- */
+      let hasPassword = false;
+      let needCurrent = false; // υπάρχει κωδικός και ο χρήστης μπήκε με κωδικό
+
       function pwMsg(text) {
         $('pwMsg').textContent = text;
         $('pwMsg').hidden = !text;
       }
 
-      function renderPassword(hasPassword) {
-        $('pwState').textContent = hasPassword ? 'You\'ve set a password: sign in with your email and password, no waiting for a link.' : 'No password set. Set one to sign in with email and password, no waiting for a link — works on any phone.';
-        $('pwSave').textContent = hasPassword ? 'Change password' : 'Set password';
-        $('pwRemove').hidden = !hasPassword;
+      function renderPassword(has, signedInWith) {
+        hasPassword = has;
+        needCurrent = has && signedInWith === 'password';
+        $('pwState').textContent = has ? 'You\'ve set a password: sign in with your email and password, no waiting for a link.' : 'No password set. Set one to sign in with email and password, no waiting for a link — works on any phone.';
+        $('pwSave').textContent = has ? 'Change password' : 'Set password';
+        $('pwRemove').hidden = !has;
+        $('pwCurrentField').hidden = !needCurrent;
+        $('currentPassword').value = '';
       }
 
       DKPassword.wireToggle($('newPassword'), $('pwEye'), { show: 'Show password', hide: 'Hide password' });
+      DKPassword.wireToggle($('currentPassword'), $('pwEyeCurrent'), { show: 'Show password', hide: 'Hide password' });
+
+      // Κοινός χειρισμός λαθών για αλλαγή / αφαίρεση
+      function pwError(e) {
+        if (DKPassword.isWrongCurrent(e)) {
+          pwMsg('Your current password is wrong.');
+          $('currentPassword').focus();
+        } else if (e.status === 400) {
+          pwMsg('Your password needs at least 8 characters.');
+        } else if (e.status === 401) {
+          pwMsg('Your session has expired or the password was changed on another device. Please sign in again.');
+        } else {
+          pwMsg('Couldn\'t save the password. Try again.');
+        }
+      }
+
+      function currentOrAsk() {
+        const current = $('currentPassword').value;
+        if (needCurrent && !current) {
+          pwMsg('Enter your current password first.');
+          $('currentPassword').focus();
+          return null;
+        }
+        return current;
+      }
 
       async function savePassword() {
         const btn = $('pwSave');
         const password = $('newPassword').value;
         pwMsg('');
+        const current = currentOrAsk();
+        if (current === null) return;
         if (password.length < DKPassword.MIN_LENGTH) {
           pwMsg('Your password needs at least 8 characters.');
           $('newPassword').focus();
@@ -257,26 +299,32 @@ description: "Your profile on Δέσε Κορδόνια."
         }
         btn.disabled = true;
         try {
-          await DKPassword.set(password);
+          const r = await DKPassword.set(password, current);
+          const changed = hasPassword;
           $('newPassword').value = '';
-          renderPassword(true);
-          pwMsg('Done! Next time tap "Sign in with a password" on the sign-in page.');
+          // Μετά την αλλαγή ο χρήστης έχει πάλι session «με κωδικό» μόνο αν είχε ήδη
+          renderPassword(true, needCurrent ? 'password' : null);
+          pwMsg(changed && r.otherDevicesSignedOut ? 'Password changed. Any other devices that were signed in have been signed out — you stay signed in here.' : 'Done! Next time tap "Sign in with a password" on the sign-in page.');
         } catch (e) {
-          pwMsg(e.status === 400 ? 'Your password needs at least 8 characters.' : 'Couldn\'t save the password. Try again.');
+          pwError(e);
         }
         btn.disabled = false;
       }
       $('pwSave').addEventListener('click', savePassword);
       $('newPassword').addEventListener('keydown', (e) => { if (e.key === 'Enter') savePassword(); });
+      $('currentPassword').addEventListener('keydown', (e) => { if (e.key === 'Enter') $('newPassword').focus(); });
 
       $('pwRemove').addEventListener('click', async () => {
-        if (!confirm('Remove your password? You\'ll sign in with an email link (or Face ID, if you\'ve turned it on).')) return;
+        pwMsg('');
+        const current = currentOrAsk();
+        if (current === null) return;
+        if (!confirm('Remove your password? You\'ll sign in with an email link (or Face ID, if you\'ve turned it on), and any other signed-in devices will be signed out.')) return;
         try {
-          await DKPassword.remove();
-          renderPassword(false);
-          pwMsg('Password removed.');
+          await DKPassword.remove(current);
+          renderPassword(false, null);
+          pwMsg('Password removed and other devices signed out.');
         } catch (e) {
-          pwMsg('Couldn\'t save the password. Try again.');
+          pwError(e);
         }
       });
 

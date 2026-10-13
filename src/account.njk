@@ -61,6 +61,14 @@ description: "Το προφίλ σου στο Δέσε Κορδόνια."
       <div class="newsletter-box" id="passwordBox">
         <h4><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Σύνδεση με κωδικό</h4>
         <p id="pwState"></p>
+        {#- Τρέχων κωδικός: ζητείται μόνο όταν υπάρχει κωδικός και ο χρήστης μπήκε με κωδικό #}
+        <div class="field" id="pwCurrentField" hidden>
+          <label for="currentPassword">Τρέχων κωδικός</label>
+          <div class="input-wrap pw-wrap">
+            <input type="password" id="currentPassword" autocomplete="current-password" placeholder="Ο κωδικός σου">
+            <button class="pw-eye" id="pwEyeCurrent" type="button" aria-pressed="false" aria-label="Εμφάνιση κωδικού" title="Εμφάνιση κωδικού"></button>
+          </div>
+        </div>
         <div class="field">
           <label for="newPassword">Νέος κωδικός</label>
           <div class="input-wrap pw-wrap">
@@ -125,7 +133,7 @@ description: "Το προφίλ σου στο Δέσε Κορδόνια."
           const user = await r.json();
           fill(user);
           initPasskeys();
-          renderPassword(!!user.has_password);
+          renderPassword(!!user.has_password, user.signed_in_with);
         } catch (e) {
           $('status').textContent = "Δεν μπόρεσα να συνδεθώ με τον server. Τρέχει τοπικά;";
         }
@@ -234,23 +242,57 @@ description: "Το προφίλ σου στο Δέσε Κορδόνια."
       });
 
       /* --- Κωδικός --- */
+      let hasPassword = false;
+      let needCurrent = false; // υπάρχει κωδικός και ο χρήστης μπήκε με κωδικό
+
       function pwMsg(text) {
         $('pwMsg').textContent = text;
         $('pwMsg').hidden = !text;
       }
 
-      function renderPassword(hasPassword) {
-        $('pwState').textContent = hasPassword ? 'Έχεις ορίσει κωδικό: μπαίνεις με το email και τον κωδικό σου, χωρίς να περιμένεις σύνδεσμο.' : 'Δεν έχεις ορίσει κωδικό. Όρισε έναν για να μπαίνεις με email και κωδικό, χωρίς να περιμένεις σύνδεσμο — δουλεύει σε κάθε κινητό.';
-        $('pwSave').textContent = hasPassword ? 'Αλλαγή κωδικού' : 'Ορισμός κωδικού';
-        $('pwRemove').hidden = !hasPassword;
+      function renderPassword(has, signedInWith) {
+        hasPassword = has;
+        needCurrent = has && signedInWith === 'password';
+        $('pwState').textContent = has ? 'Έχεις ορίσει κωδικό: μπαίνεις με το email και τον κωδικό σου, χωρίς να περιμένεις σύνδεσμο.' : 'Δεν έχεις ορίσει κωδικό. Όρισε έναν για να μπαίνεις με email και κωδικό, χωρίς να περιμένεις σύνδεσμο — δουλεύει σε κάθε κινητό.';
+        $('pwSave').textContent = has ? 'Αλλαγή κωδικού' : 'Ορισμός κωδικού';
+        $('pwRemove').hidden = !has;
+        $('pwCurrentField').hidden = !needCurrent;
+        $('currentPassword').value = '';
       }
 
       DKPassword.wireToggle($('newPassword'), $('pwEye'), { show: 'Εμφάνιση κωδικού', hide: 'Απόκρυψη κωδικού' });
+      DKPassword.wireToggle($('currentPassword'), $('pwEyeCurrent'), { show: 'Εμφάνιση κωδικού', hide: 'Απόκρυψη κωδικού' });
+
+      // Κοινός χειρισμός λαθών για αλλαγή / αφαίρεση
+      function pwError(e) {
+        if (DKPassword.isWrongCurrent(e)) {
+          pwMsg('Ο τρέχων κωδικός δεν είναι σωστός.');
+          $('currentPassword').focus();
+        } else if (e.status === 400) {
+          pwMsg('Ο κωδικός πρέπει να έχει τουλάχιστον 8 χαρακτήρες.');
+        } else if (e.status === 401) {
+          pwMsg('Η σύνδεσή σου έληξε ή έγινε αλλαγή κωδικού από άλλη συσκευή. Συνδέσου ξανά.');
+        } else {
+          pwMsg('Δεν αποθηκεύτηκε ο κωδικός. Δοκίμασε ξανά.');
+        }
+      }
+
+      function currentOrAsk() {
+        const current = $('currentPassword').value;
+        if (needCurrent && !current) {
+          pwMsg('Γράψε πρώτα τον τρέχοντα κωδικό σου.');
+          $('currentPassword').focus();
+          return null;
+        }
+        return current;
+      }
 
       async function savePassword() {
         const btn = $('pwSave');
         const password = $('newPassword').value;
         pwMsg('');
+        const current = currentOrAsk();
+        if (current === null) return;
         if (password.length < DKPassword.MIN_LENGTH) {
           pwMsg('Ο κωδικός πρέπει να έχει τουλάχιστον 8 χαρακτήρες.');
           $('newPassword').focus();
@@ -258,26 +300,32 @@ description: "Το προφίλ σου στο Δέσε Κορδόνια."
         }
         btn.disabled = true;
         try {
-          await DKPassword.set(password);
+          const r = await DKPassword.set(password, current);
+          const changed = hasPassword;
           $('newPassword').value = '';
-          renderPassword(true);
-          pwMsg('Έτοιμο! Την επόμενη φορά πάτα «Μπες με κωδικό» στη σελίδα σύνδεσης.');
+          // Μετά την αλλαγή ο χρήστης έχει πάλι session «με κωδικό» μόνο αν είχε ήδη
+          renderPassword(true, needCurrent ? 'password' : null);
+          pwMsg(changed && r.otherDevicesSignedOut ? 'Ο κωδικός άλλαξε. Όσες άλλες συσκευές ήταν συνδεδεμένες αποσυνδέθηκαν — εδώ παραμένεις συνδεδεμένος/η.' : 'Έτοιμο! Την επόμενη φορά πάτα «Μπες με κωδικό» στη σελίδα σύνδεσης.');
         } catch (e) {
-          pwMsg(e.status === 400 ? 'Ο κωδικός πρέπει να έχει τουλάχιστον 8 χαρακτήρες.' : 'Δεν αποθηκεύτηκε ο κωδικός. Δοκίμασε ξανά.');
+          pwError(e);
         }
         btn.disabled = false;
       }
       $('pwSave').addEventListener('click', savePassword);
       $('newPassword').addEventListener('keydown', (e) => { if (e.key === 'Enter') savePassword(); });
+      $('currentPassword').addEventListener('keydown', (e) => { if (e.key === 'Enter') $('newPassword').focus(); });
 
       $('pwRemove').addEventListener('click', async () => {
-        if (!confirm('Να αφαιρεθεί ο κωδικός; Θα μπαίνεις με σύνδεσμο στο email (ή με Face ID, αν το έχεις ενεργοποιήσει).')) return;
+        pwMsg('');
+        const current = currentOrAsk();
+        if (current === null) return;
+        if (!confirm('Να αφαιρεθεί ο κωδικός; Θα μπαίνεις με σύνδεσμο στο email (ή με Face ID, αν το έχεις ενεργοποιήσει), και όσες άλλες συσκευές είναι συνδεδεμένες θα αποσυνδεθούν.')) return;
         try {
-          await DKPassword.remove();
-          renderPassword(false);
-          pwMsg('Ο κωδικός αφαιρέθηκε.');
+          await DKPassword.remove(current);
+          renderPassword(false, null);
+          pwMsg('Ο κωδικός αφαιρέθηκε και οι άλλες συσκευές αποσυνδέθηκαν.');
         } catch (e) {
-          pwMsg('Δεν αποθηκεύτηκε ο κωδικός. Δοκίμασε ξανά.');
+          pwError(e);
         }
       });
 
