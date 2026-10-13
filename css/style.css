@@ -2129,6 +2129,36 @@ tbody tr:last-child td {
   color: var(--text-dim);
 }
 
+/* Σελίδα σύνδεσης στο κινητό: πιο «μαζεμένη», ώστε email ΚΑΙ κουμπί Face ID
+   να φαίνονται χωρίς σκρολ (αλλιώς το Face ID έπεφτε κάτω από την οθόνη) */
+@media (max-width: 600px) {
+  .login-main {
+    padding-top: 1.5rem;
+  }
+  .login-main .lead {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+  .login-main .login-card {
+    margin-top: 0.75rem;
+  }
+  .login-main .login-icon {
+    display: none;
+  }
+  .login-main .login-card .field {
+    margin-bottom: 1rem;
+  }
+  .login-main .login-divider {
+    margin: 0.9rem 0;
+  }
+  /* Σε μία γραμμή: σε 2 γραμμές ψήλωνε και έβγαινε κάτω από την οθόνη */
+  .login-main .btn-passkey {
+    padding: 0.75rem 0.9rem;
+    font-size: 0.92rem;
+    white-space: nowrap;
+  }
+}
+
 /* Πρόταση για Face ID μετά τη σύνδεση με email (verify.html) */
 .passkey-offer {
   margin-top: 0.9rem;
