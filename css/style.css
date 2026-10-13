@@ -2159,6 +2159,83 @@ tbody tr:last-child td {
   }
 }
 
+/* Πολύ στενές οθόνες: καλύτερα 2 γραμμές παρά κείμενο έξω από το κουμπί */
+@media (max-width: 350px) {
+  .login-main .btn-passkey {
+    white-space: normal;
+  }
+}
+
+/* ===== Μήνυμα σε παραθυράκι πάνω από το κουμπί (σελίδα σύνδεσης) ===== */
+.pop-anchor {
+  position: relative;
+}
+
+.dk-pop {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: calc(100% + 10px);
+  z-index: 20;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding: 0.7rem 0.6rem 0.7rem 0.9rem;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  border-left: 4px solid #3ddc84;
+  background-color: var(--surface-2);
+  color: var(--text);
+  font-size: 0.88rem;
+  line-height: 1.45;
+  text-align: left;
+  box-shadow: var(--shadow);
+  animation: dk-pop-in 0.18s ease-out;
+}
+
+.dk-pop-error {
+  border-left-color: #e57373;
+}
+
+/* βελάκι προς το κουμπί */
+.dk-pop::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -7px;
+  width: 12px;
+  height: 12px;
+  margin-left: -6px;
+  background-color: var(--surface-2);
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  transform: rotate(45deg);
+}
+
+.dk-pop span {
+  flex: 1;
+}
+
+.dk-pop-close {
+  flex-shrink: 0;
+  border: none;
+  background: none;
+  color: var(--text-dim);
+  font-size: 1.25rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0 0.2rem;
+}
+
+@keyframes dk-pop-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dk-pop { animation: none; }
+}
+
 /* Πρόταση για Face ID μετά τη σύνδεση με email (verify.html) */
 .passkey-offer {
   margin-top: 0.9rem;

@@ -24,8 +24,8 @@ description: "Συνδέσου στο Δέσε Κορδόνια με το email 
   <main class="login-main">
     <h1 class="section-title">Σύνδεση ή εγγραφή</h1>
     <p class="lead">
-      Γράψε το email σου και θα σου στείλουμε έναν σύνδεσμο. Αν είναι η πρώτη
-      σου φορά, έτσι γίνεται και η εγγραφή — δεν χρειάζεται κωδικός.
+      Πρώτη φορά εδώ; Γράψε το email σου και θα σου στείλουμε σύνδεσμο
+      για την εγγραφή — χωρίς κωδικό.
     </p>
 
     <div class="calc login-card">
@@ -41,25 +41,28 @@ description: "Συνδέσου στο Δέσε Κορδόνια με το email 
         </div>
       </div>
 
-      <button class="btn btn-block" id="sendBtn" type="button">Στείλε μου σύνδεσμο</button>
+      {#- .pop-anchor: εκεί «κολλάει» το παραθυράκι με το μήνυμα του κάθε κουμπιού #}
+      <div class="pop-anchor">
+        <button class="btn btn-block" id="sendBtn" type="button">Στείλε μου σύνδεσμο</button>
+      </div>
 
       {#- Δεύτερη επιλογή, μόνο για όσους έχουν ήδη ενεργοποιήσει passkey —
           ο νέος επισκέπτης ξεκινά πάντα από το email παραπάνω #}
       <div id="passkeyArea" hidden>
-        <div class="login-divider">ή</div>
-        <button class="btn-passkey" id="passkeyBtn" type="button">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><path d="M9 9h.01"/><path d="M15 9h.01"/></svg>
-          Μπες με Face ID / δαχτυλικό
-        </button>
-        <p class="passkey-hint">Αν το έχεις ήδη ενεργοποιήσει σε αυτή τη συσκευή</p>
+        <div class="login-divider">Έχεις ήδη λογαριασμό;</div>
+        <div class="pop-anchor">
+          <button class="btn-passkey" id="passkeyBtn" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><path d="M9 9h.01"/><path d="M15 9h.01"/></svg>
+            Μπες με Face ID / δαχτυλικό
+          </button>
+        </div>
+        <p class="passkey-hint">Δεν το έχεις ενεργοποιήσει; Συνδέσου με το email σου παραπάνω.</p>
       </div>
 
       <p class="login-trust">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
         Το email σου χρησιμοποιείται μόνο για σύνδεση και το newsletter — δεν το μοιραζόμαστε ποτέ. <a href="privacy.html">Πολιτική απορρήτου</a>
       </p>
-
-      <div class="calc-result calc-hidden" id="result"></div>
     </div>
 
     <ul class="login-perks">
@@ -80,17 +83,32 @@ description: "Συνδέσου στο Δέσε Κορδόνια με το email 
       const $ = (id) => document.getElementById(id);
       const API = (location.hostname === 'localhost') ? 'http://localhost:4000' : 'https://api.desekordonia.com';
 
-      function showResult(text, isError) {
-        const el = $('result');
-        el.textContent = text;
-        el.classList.remove('calc-hidden');
-        el.style.color = isError ? 'var(--accent-2)' : '';
+      // Μήνυμα σε παραθυράκι πάνω από το κουμπί που πατήθηκε (όχι στο τέλος της
+      // φόρμας, όπου στο κινητό συχνά δεν φαίνεται χωρίς σκρολ)
+      let popTimer;
+      function showPop(btn, text, isError) {
+        document.querySelectorAll('.dk-pop').forEach((p) => p.remove());
+        clearTimeout(popTimer);
+        const pop = document.createElement('div');
+        pop.className = 'dk-pop' + (isError ? ' dk-pop-error' : '');
+        pop.setAttribute('role', isError ? 'alert' : 'status');
+        const msg = document.createElement('span');
+        msg.textContent = text;
+        const close = document.createElement('button');
+        close.type = 'button';
+        close.className = 'dk-pop-close';
+        close.setAttribute('aria-label', 'Κλείσιμο');
+        close.textContent = '×';
+        close.addEventListener('click', () => pop.remove());
+        pop.append(msg, close);
+        btn.closest('.pop-anchor').appendChild(pop);
+        popTimer = setTimeout(() => pop.remove(), 9000);
       }
 
       async function requestLink() {
         const email = $('email').value.trim();
         if (!email || !email.includes('@')) {
-          showResult('Βάλε ένα έγκυρο email.', true);
+          showPop($('sendBtn'), 'Βάλε ένα έγκυρο email.', true);
           return;
         }
         const btn = $('sendBtn');
@@ -104,14 +122,14 @@ description: "Συνδέσου στο Δέσε Κορδόνια με το email 
             body: JSON.stringify({ email: email, language: 'el' })
           });
           if (r.ok) {
-            showResult('Έλεγξε το email σου για τον σύνδεσμο σύνδεσης (ισχύει 15 λεπτά).', false);
+            showPop(btn, 'Σου στείλαμε σύνδεσμο — άνοιξε το email σου και πάτα τον (ισχύει 15 λεπτά).', false);
             btn.textContent = '✓ Ο σύνδεσμος στάλθηκε';
             setTimeout(() => { btn.textContent = label; btn.disabled = false; }, 5000);
             return;
           }
-          showResult('Κάτι πήγε στραβά. Δοκίμασε ξανά.', true);
+          showPop(btn, 'Κάτι πήγε στραβά. Δοκίμασε ξανά.', true);
         } catch (e) {
-          showResult('Δεν μπόρεσα να συνδεθώ με τον server. Τρέχει τοπικά;', true);
+          showPop(btn, 'Δεν υπάρχει σύνδεση με τον server. Δοκίμασε ξανά σε λίγο.', true);
         }
         btn.textContent = label;
         btn.disabled = false;
@@ -127,11 +145,11 @@ description: "Συνδέσου στο Δέσε Κορδόνια με το email 
           return;
         } catch (e) {
           if (DKPasskey.isCancel(e)) {
-            showResult('Δεν έχεις ενεργοποιήσει ακόμα Face ID σε αυτή τη συσκευή. Γράψε το email σου παραπάνω — μετά τη σύνδεση θα σου προτείνουμε να το ενεργοποιήσεις.', true);
+            showPop(btn, 'Δεν έχεις ενεργοποιήσει ακόμα Face ID σε αυτή τη συσκευή. Γράψε το email σου παραπάνω — μετά τη σύνδεση θα σου προτείνουμε να το ενεργοποιήσεις.', true);
           } else if (e.status === 400) {
-            showResult('Το Face ID αυτής της συσκευής δεν είναι πια συνδεδεμένο με λογαριασμό. Γράψε το email σου παραπάνω και ενεργοποίησέ το ξανά μετά τη σύνδεση.', true);
+            showPop(btn, 'Το Face ID αυτής της συσκευής δεν είναι πια συνδεδεμένο με λογαριασμό. Γράψε το email σου παραπάνω και ενεργοποίησέ το ξανά μετά τη σύνδεση.', true);
           } else {
-            showResult('Κάτι πήγε στραβά. Δοκίμασε ξανά ή γράψε το email σου παραπάνω.', true);
+            showPop(btn, 'Κάτι πήγε στραβά. Δοκίμασε ξανά ή γράψε το email σου παραπάνω.', true);
           }
           DKPasskey.prepareLogin();
         }

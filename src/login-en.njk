@@ -23,8 +23,8 @@ description: "Sign in to Δέσε Κορδόνια with your email — no passwo
   <main class="login-main">
     <h1 class="section-title">Sign in or sign up</h1>
     <p class="lead">
-      Enter your email and we'll send you a link. If it's your first time,
-      that's also how you sign up — no password needed.
+      First time here? Enter your email and we'll send you a link
+      to sign up — no password needed.
     </p>
 
     <div class="calc login-card">
@@ -40,17 +40,22 @@ description: "Sign in to Δέσε Κορδόνια with your email — no passwo
         </div>
       </div>
 
-      <button class="btn btn-block" id="sendBtn" type="button">Send me a link</button>
+      {#- .pop-anchor: where each button's message bubble attaches #}
+      <div class="pop-anchor">
+        <button class="btn btn-block" id="sendBtn" type="button">Send me a link</button>
+      </div>
 
       {#- Second option, only for people who already turned on a passkey —
           first-time visitors always start from the email above #}
       <div id="passkeyArea" hidden>
-        <div class="login-divider">or</div>
-        <button class="btn-passkey" id="passkeyBtn" type="button">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><path d="M9 9h.01"/><path d="M15 9h.01"/></svg>
-          Sign in with Face ID / fingerprint
-        </button>
-        <p class="passkey-hint">If you've already turned it on for this device</p>
+        <div class="login-divider">Already have an account?</div>
+        <div class="pop-anchor">
+          <button class="btn-passkey" id="passkeyBtn" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><path d="M9 9h.01"/><path d="M15 9h.01"/></svg>
+            Use Face ID / fingerprint
+          </button>
+        </div>
+        <p class="passkey-hint">Haven't turned it on? Sign in with your email above.</p>
       </div>
 
       <p class="login-trust">
@@ -58,7 +63,6 @@ description: "Sign in to Δέσε Κορδόνια with your email — no passwo
         Your email is used only for sign-in and the newsletter — we never share it. <a href="privacy-en.html">Privacy policy</a>
       </p>
 
-      <div class="calc-result calc-hidden" id="result"></div>
     </div>
 
     <ul class="login-perks">
@@ -79,17 +83,32 @@ description: "Sign in to Δέσε Κορδόνια with your email — no passwo
       const $ = (id) => document.getElementById(id);
       const API = (location.hostname === 'localhost') ? 'http://localhost:4000' : 'https://api.desekordonia.com';
 
-      function showResult(text, isError) {
-        const el = $('result');
-        el.textContent = text;
-        el.classList.remove('calc-hidden');
-        el.style.color = isError ? 'var(--accent-2)' : '';
+      // Message in a bubble above the button that was tapped (not at the end of
+      // the form, which on phones is often below the fold)
+      let popTimer;
+      function showPop(btn, text, isError) {
+        document.querySelectorAll('.dk-pop').forEach((p) => p.remove());
+        clearTimeout(popTimer);
+        const pop = document.createElement('div');
+        pop.className = 'dk-pop' + (isError ? ' dk-pop-error' : '');
+        pop.setAttribute('role', isError ? 'alert' : 'status');
+        const msg = document.createElement('span');
+        msg.textContent = text;
+        const close = document.createElement('button');
+        close.type = 'button';
+        close.className = 'dk-pop-close';
+        close.setAttribute('aria-label', 'Close');
+        close.textContent = '×';
+        close.addEventListener('click', () => pop.remove());
+        pop.append(msg, close);
+        btn.closest('.pop-anchor').appendChild(pop);
+        popTimer = setTimeout(() => pop.remove(), 9000);
       }
 
       async function requestLink() {
         const email = $('email').value.trim();
         if (!email || !email.includes('@')) {
-          showResult('Enter a valid email.', true);
+          showPop($('sendBtn'), 'Enter a valid email.', true);
           return;
         }
         const btn = $('sendBtn');
@@ -103,14 +122,14 @@ description: "Sign in to Δέσε Κορδόνια with your email — no passwo
             body: JSON.stringify({ email: email, language: 'en' })
           });
           if (r.ok) {
-            showResult('Check your email for the sign-in link (valid for 15 minutes).', false);
+            showPop(btn, "We've sent you a link — open your email and tap it (valid for 15 minutes).", false);
             btn.textContent = '✓ Link sent';
             setTimeout(() => { btn.textContent = label; btn.disabled = false; }, 5000);
             return;
           }
-          showResult('Something went wrong. Please try again.', true);
+          showPop(btn, 'Something went wrong. Please try again.', true);
         } catch (e) {
-          showResult("Couldn't reach the server. Is it running locally?", true);
+          showPop(btn, "Couldn't reach the server. Try again in a moment.", true);
         }
         btn.textContent = label;
         btn.disabled = false;
@@ -126,11 +145,11 @@ description: "Sign in to Δέσε Κορδόνια with your email — no passwo
           return;
         } catch (e) {
           if (DKPasskey.isCancel(e)) {
-            showResult("You haven't turned on Face ID for this device yet. Enter your email above — after you sign in we'll offer to turn it on.", true);
+            showPop(btn, "You haven't turned on Face ID for this device yet. Enter your email above — after you sign in we'll offer to turn it on.", true);
           } else if (e.status === 400) {
-            showResult("This device's Face ID is no longer linked to an account. Enter your email above and turn it on again after you sign in.", true);
+            showPop(btn, "This device's Face ID is no longer linked to an account. Enter your email above and turn it on again after you sign in.", true);
           } else {
-            showResult('Something went wrong. Try again or enter your email above.', true);
+            showPop(btn, 'Something went wrong. Try again or enter your email above.', true);
           }
           DKPasskey.prepareLogin();
         }

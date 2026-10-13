@@ -49,7 +49,9 @@
     <div class="nav-inner">
       <a class="brand" href="{{ nav.home.file | navHref(lang) }}">
         <img src="images/logo.png?v=2" alt="{% if lang == 'en' %}Δέσε Κορδόνια logo{% else %}Λογότυπο Δέσε Κορδόνια{% endif %}" class="logo">
-        <span class="brand-name">Δέσε<span class="dot">.</span>Κορδόνια</span>
+        {#- lang="el": τα ελληνικά κεφαλαία χάνουν τους τόνους μόνο σε ελληνικό
+            κείμενο — χωρίς αυτό οι αγγλικές σελίδες έγραφαν «ΔΈΣΕ.ΚΟΡΔΌΝΙΑ» #}
+        <span class="brand-name" lang="el">Δέσε<span class="dot">.</span>Κορδόνια</span>
       </a>
       <nav>
         <ul class="menu">
