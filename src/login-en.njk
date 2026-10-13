@@ -44,6 +44,13 @@ description: "Sign in to Δέσε Κορδόνια with your email — no passwo
       <div class="pop-anchor">
         <button class="btn btn-block" id="sendBtn" type="button">Send me a link</button>
       </div>
+      {#- Shown to everyone after sending (not only new users: otherwise the page
+          would reveal whether an email is already registered) #}
+      <p class="spam-note" id="spamNote" hidden>
+        <b>First time here?</b> If you don't see our email within a few minutes, check your
+        <b>Spam / Junk</b> folder too. Δέσε Κορδόνια is a new site and your email provider
+        doesn't "know" it yet, so the first time it may land there.
+      </p>
 
       {#- Second option, only for people who already turned on a passkey —
           first-time visitors always start from the email above #}
@@ -123,6 +130,7 @@ description: "Sign in to Δέσε Κορδόνια with your email — no passwo
           });
           if (r.ok) {
             showPop(btn, "We've sent you a link — open your email and tap it (valid for 15 minutes).", false);
+            $('spamNote').hidden = false;
             btn.textContent = '✓ Link sent';
             setTimeout(() => { btn.textContent = label; btn.disabled = false; }, 5000);
             return;

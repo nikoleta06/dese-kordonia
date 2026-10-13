@@ -2169,6 +2169,20 @@ tbody tr:last-child td {
   }
 }
 
+/* Μικρή σημείωση κάτω από το «Στείλε μου σύνδεσμο» για τα Ανεπιθύμητα */
+.spam-note {
+  margin: 0.7rem 0 0;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--text-dim);
+  text-align: center;
+}
+
+.spam-note b {
+  color: var(--text);
+  font-weight: 600;
+}
+
 /* ===== Κουμπιά λογαριασμού (account.html) ===== */
 .account-actions {
   display: flex;

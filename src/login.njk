@@ -45,6 +45,13 @@ description: "Συνδέσου στο Δέσε Κορδόνια με το email 
       <div class="pop-anchor">
         <button class="btn btn-block" id="sendBtn" type="button">Στείλε μου σύνδεσμο</button>
       </div>
+      {#- Φαίνεται σε όλους μετά την αποστολή (όχι μόνο στους νέους: αλλιώς η σελίδα
+          θα αποκάλυπτε αν ένα email είναι ήδη γραμμένο στο site) #}
+      <p class="spam-note" id="spamNote" hidden>
+        <b>Πρώτη φορά εδώ;</b> Αν δεν δεις το email μας σε λίγα λεπτά, κοίτα και στα
+        <b>Ανεπιθύμητα (Spam)</b>. Το Δέσε Κορδόνια είναι καινούργιο site και ο πάροχος
+        του email σου δεν το «γνωρίζει» ακόμα, γι' αυτό την πρώτη φορά μπορεί να το βάλει εκεί.
+      </p>
 
       {#- Δεύτερη επιλογή, μόνο για όσους έχουν ήδη ενεργοποιήσει passkey —
           ο νέος επισκέπτης ξεκινά πάντα από το email παραπάνω #}
@@ -123,6 +130,7 @@ description: "Συνδέσου στο Δέσε Κορδόνια με το email 
           });
           if (r.ok) {
             showPop(btn, 'Σου στείλαμε σύνδεσμο — άνοιξε το email σου και πάτα τον (ισχύει 15 λεπτά).', false);
+            $('spamNote').hidden = false;
             btn.textContent = '✓ Ο σύνδεσμος στάλθηκε';
             setTimeout(() => { btn.textContent = label; btn.disabled = false; }, 5000);
             return;
