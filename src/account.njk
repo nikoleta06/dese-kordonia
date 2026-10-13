@@ -57,11 +57,18 @@ description: "Το προφίλ σου στο Δέσε Κορδόνια."
         <p id="passkeyMsg" hidden></p>
       </div>
 
-      <button class="btn" id="saveBtn" type="button">Αποθήκευση</button>
-      <button class="btn" id="logoutBtn" type="button" style="background:transparent;color:var(--text-dim);box-shadow:none;">Αποσύνδεση</button>
-      <button class="btn" id="deleteBtn" type="button" style="background:transparent;color:#e57373;box-shadow:none;">Διαγραφή λογαριασμού</button>
+      {#- Κύρια ενέργεια + αποσύνδεση (ίδιο ύψος· στο κινητό η μία κάτω από την άλλη) #}
+      <div class="account-actions">
+        <button class="btn" id="saveBtn" type="button">Αποθήκευση</button>
+        <button class="btn-ghost" id="logoutBtn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg> Αποσύνδεση</button>
+      </div>
 
       <div class="calc-result calc-hidden" id="result"></div>
+
+      {#- Η διαγραφή χωριστά και διακριτικά, για να μην πατιέται κατά λάθος #}
+      <div class="account-danger">
+        <button class="btn-danger-link" id="deleteBtn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/></svg> Διαγραφή λογαριασμού</button>
+      </div>
     </div>
 
     <p id="status">Έλεγχος σύνδεσης...</p>
