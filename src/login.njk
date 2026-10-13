@@ -37,7 +37,7 @@ description: "Συνδέσου στο Δέσε Κορδόνια με το email 
         <label for="email">Email</label>
         <div class="input-wrap">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-4 8"/></svg>
-          <input type="email" id="email" placeholder="you@example.com">
+          <input type="email" id="email" autocomplete="username email" placeholder="you@example.com">
         </div>
       </div>
 
@@ -53,18 +53,37 @@ description: "Συνδέσου στο Δέσε Κορδόνια με το email 
         του email σου δεν το «γνωρίζει» ακόμα, γι' αυτό την πρώτη φορά μπορεί να το βάλει εκεί.
       </p>
 
-      {#- Δεύτερη επιλογή, μόνο για όσους έχουν ήδη ενεργοποιήσει passkey —
-          ο νέος επισκέπτης ξεκινά πάντα από το email παραπάνω #}
-      <div id="passkeyArea" hidden>
-        <div class="login-divider">Είσαι ήδη μέλος;</div>
-        <div class="pop-anchor">
-          <button class="btn-passkey" id="passkeyBtn" type="button">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><path d="M9 9h.01"/><path d="M15 9h.01"/></svg>
-            Μπες με Face ID / δαχτυλικό
-          </button>
-        </div>
-        <p class="passkey-hint">Δεν το έχεις ενεργοποιήσει; Συνδέσου με το email σου παραπάνω.</p>
+      {#- Για όσους είναι ήδη μέλη: Face ID (αν το υποστηρίζει η συσκευή) ή κωδικός.
+          Ο νέος επισκέπτης ξεκινά πάντα από το email παραπάνω #}
+      <div class="login-divider">Είσαι ήδη μέλος;</div>
+      <div class="pop-anchor" id="passkeyArea" hidden>
+        <button class="btn-passkey" id="passkeyBtn" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><path d="M9 9h.01"/><path d="M15 9h.01"/></svg>
+          Μπες με Face ID / δαχτυλικό
+        </button>
       </div>
+
+      <button class="btn-ghost btn-ghost-block" id="pwToggle" type="button" aria-expanded="false" aria-controls="pwPanel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        Μπες με κωδικό
+      </button>
+      {#- Χρησιμοποιεί το email από το πεδίο παραπάνω #}
+      <div class="pw-panel" id="pwPanel" hidden>
+        <div class="field">
+          <label for="password">Κωδικός</label>
+          <div class="input-wrap pw-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            <input type="password" id="password" autocomplete="current-password" placeholder="Ο κωδικός σου">
+            <button class="pw-eye" id="pwEye" type="button" aria-pressed="false">Εμφάνιση</button>
+          </div>
+        </div>
+        <div class="pop-anchor">
+          <button class="btn btn-block" id="pwLoginBtn" type="button">Σύνδεση</button>
+        </div>
+        <p class="passkey-hint">Δεν έχεις ακόμα κωδικό ή τον ξέχασες; Πάτα «Στείλε μου σύνδεσμο», μπες, και όρισέ τον από τον λογαριασμό σου.</p>
+      </div>
+
+      <p class="passkey-hint" id="memberHint">Δεν έχεις ορίσει Face ID ή κωδικό; Συνδέσου με το email σου παραπάνω.</p>
 
       <p class="login-trust">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
@@ -85,6 +104,7 @@ description: "Συνδέσου στο Δέσε Κορδόνια με το email 
 {% block scripts_extra %}
   <script src="js/vendor/simplewebauthn-browser-14.0.0.umd.min.js"></script>
   <script src="js/passkey.js?v={{ site.jsVersion }}"></script>
+  <script src="js/password.js?v={{ site.jsVersion }}"></script>
   <script>
     (function () {
       const $ = (id) => document.getElementById(id);
@@ -169,6 +189,47 @@ description: "Συνδέσου στο Δέσε Κορδόνια με το email 
         DKPasskey.prepareLogin();
         $('passkeyBtn').addEventListener('click', passkeyLogin);
       }
+
+      /* --- Κωδικός: για όσους έχουν ορίσει (και σε παλιά κινητά χωρίς Face ID) --- */
+      $('pwToggle').addEventListener('click', () => {
+        $('pwToggle').hidden = true;
+        $('pwToggle').setAttribute('aria-expanded', 'true');
+        $('pwPanel').hidden = false;
+        $('memberHint').hidden = true;
+        ($('email').value.trim() ? $('password') : $('email')).focus();
+      });
+      DKPassword.wireToggle($('password'), $('pwEye'), { show: 'Εμφάνιση', hide: 'Απόκρυψη' });
+
+      async function passwordLogin() {
+        const btn = $('pwLoginBtn');
+        const email = $('email').value.trim();
+        const password = $('password').value;
+        if (!email || !email.includes('@')) {
+          showPop(btn, 'Γράψε το email σου στο πεδίο παραπάνω.', true);
+          return;
+        }
+        if (!password) {
+          showPop(btn, 'Γράψε τον κωδικό σου.', true);
+          return;
+        }
+        btn.disabled = true;
+        try {
+          await DKPassword.login(email, password);
+          location.href = 'account.html';
+          return;
+        } catch (e) {
+          if (e.status === 401) {
+            showPop(btn, 'Λάθος email ή κωδικός. Αν δεν έχεις ορίσει κωδικό, πάτα «Στείλε μου σύνδεσμο» παραπάνω.', true);
+          } else if (e.status === 429) {
+            showPop(btn, 'Πολλές προσπάθειες. Δοκίμασε ξανά σε 15 λεπτά ή πάτα «Στείλε μου σύνδεσμο».', true);
+          } else {
+            showPop(btn, 'Δεν υπάρχει σύνδεση με τον server. Δοκίμασε ξανά σε λίγο.', true);
+          }
+        }
+        btn.disabled = false;
+      }
+      $('pwLoginBtn').addEventListener('click', passwordLogin);
+      $('password').addEventListener('keydown', (e) => { if (e.key === 'Enter') passwordLogin(); });
 
       $('sendBtn').addEventListener('click', requestLink);
       $('email').addEventListener('keydown', (e) => { if (e.key === 'Enter') requestLink(); });

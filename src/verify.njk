@@ -27,12 +27,28 @@ description: "Επαλήθευση του συνδέσμου σύνδεσης."
       <p id="status">Έλεγχος του συνδέσμου...</p>
       <a class="btn calc-hidden" id="loginLink" href="login.html">Πίσω στη σύνδεση</a>
 
+      {#- Μετά τη σύνδεση με email: πρόταση για πιο γρήγορο τρόπο την επόμενη φορά.
+          Face ID μόνο αν το υποστηρίζει η συσκευή· ο κωδικός δουλεύει παντού (και σε παλιά κινητά) #}
       <div class="passkey-offer" id="passkeyOffer" hidden>
-        <p>Θες την επόμενη φορά να μπαίνεις κατευθείαν με <strong>Face ID ή δαχτυλικό</strong>, χωρίς να περιμένεις email;</p>
-        <button class="btn-passkey" id="passkeyYes" type="button">
+        <p>Θες την επόμενη φορά να μπαίνεις πιο γρήγορα, χωρίς να περιμένεις email; Διάλεξε τρόπο:</p>
+        <button class="btn-passkey" id="passkeyYes" type="button" hidden>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><path d="M9 9h.01"/><path d="M15 9h.01"/></svg>
-          Ναι, ενεργοποίηση Face ID
+          Με Face ID / δαχτυλικό
         </button>
+        <button class="btn-ghost btn-ghost-block" id="pwChoose" type="button" aria-expanded="false" aria-controls="pwSetPanel">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          Με κωδικό
+        </button>
+        <div class="pw-panel" id="pwSetPanel" hidden>
+          <div class="field">
+            <label for="newPassword">Νέος κωδικός</label>
+            <div class="input-wrap pw-wrap">
+              <input type="password" id="newPassword" autocomplete="new-password" minlength="8" placeholder="8+ χαρακτήρες">
+              <button class="pw-eye" id="pwEye" type="button" aria-pressed="false">Εμφάνιση</button>
+            </div>
+          </div>
+          <button class="btn btn-block" id="pwSave" type="button">Αποθήκευση κωδικού</button>
+        </div>
         <p class="login-trust"><a href="account.html">Όχι τώρα — πήγαινε στον λογαριασμό μου</a></p>
       </div>
     </div>
@@ -44,6 +60,7 @@ description: "Επαλήθευση του συνδέσμου σύνδεσης."
 {% block scripts_extra %}
   <script src="js/vendor/simplewebauthn-browser-14.0.0.umd.min.js"></script>
   <script src="js/passkey.js?v={{ site.jsVersion }}"></script>
+  <script src="js/password.js?v={{ site.jsVersion }}"></script>
   <script>
     (function () {
       const $ = (id) => document.getElementById(id);
@@ -61,15 +78,13 @@ description: "Επαλήθευση του συνδέσμου σύνδεσης."
             credentials: 'include'
           });
           if (r.ok) {
-            // Πρόταση για Face ID, ώστε την επόμενη φορά να μη χρειάζεται email
+            // Πρόταση για Face ID ή κωδικό, ώστε την επόμενη φορά να μη χρειάζεται email
+            $('status').textContent = 'Συνδέθηκες!';
             if (DKPasskey.supported()) {
               await DKPasskey.prepareRegister();
-              $('status').textContent = 'Συνδέθηκες!';
-              $('passkeyOffer').hidden = false;
-              return;
+              $('passkeyYes').hidden = false;
             }
-            $('status').textContent = 'Συνδέθηκες! Μεταφέρεσαι στον λογαριασμό σου...';
-            setTimeout(() => { location.href = 'account.html'; }, 1200);
+            $('passkeyOffer').hidden = false;
           } else {
             $('status').textContent = 'Ο σύνδεσμος έληξε ή δεν είναι έγκυρος.';
             $('loginLink').classList.remove('calc-hidden');
@@ -101,6 +116,39 @@ description: "Επαλήθευση του συνδέσμου σύνδεσης."
         }
         btn.disabled = false;
       });
+
+      $('pwChoose').addEventListener('click', () => {
+        $('pwChoose').hidden = true;
+        $('pwChoose').setAttribute('aria-expanded', 'true');
+        $('pwSetPanel').hidden = false;
+        $('newPassword').focus();
+      });
+      DKPassword.wireToggle($('newPassword'), $('pwEye'), { show: 'Εμφάνιση', hide: 'Απόκρυψη' });
+
+      async function savePassword() {
+        const btn = $('pwSave');
+        const password = $('newPassword').value;
+        if (password.length < DKPassword.MIN_LENGTH) {
+          $('status').textContent = 'Ο κωδικός πρέπει να έχει τουλάχιστον 8 χαρακτήρες.';
+          $('newPassword').focus();
+          return;
+        }
+        btn.disabled = true;
+        try {
+          await DKPassword.set(password);
+          $('passkeyOffer').hidden = true;
+          $('status').textContent = 'Έτοιμο! Την επόμενη φορά πάτα «Μπες με κωδικό» στη σελίδα σύνδεσης. Μεταφέρεσαι στον λογαριασμό σου...';
+          setTimeout(() => { location.href = 'account.html'; }, 2000);
+          return;
+        } catch (e) {
+          if (e.status === 400) $('status').textContent = 'Ο κωδικός πρέπει να έχει τουλάχιστον 8 χαρακτήρες.';
+          else if (e.status === 401) $('status').textContent = 'Η σύνδεση έληξε. Ζήτησε νέο σύνδεσμο και όρισε τον κωδικό από τον λογαριασμό σου.';
+          else $('status').textContent = 'Δεν αποθηκεύτηκε ο κωδικός. Δοκίμασε ξανά ή όρισέ τον από τον λογαριασμό σου.';
+        }
+        btn.disabled = false;
+      }
+      $('pwSave').addEventListener('click', savePassword);
+      $('newPassword').addEventListener('keydown', (e) => { if (e.key === 'Enter') savePassword(); });
 
       verify();
     })();

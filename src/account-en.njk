@@ -56,6 +56,24 @@ description: "Your profile on Δέσε Κορδόνια."
         <p id="passkeyMsg" hidden></p>
       </div>
 
+      {#- Password: optional, works on any device (older phones without Face ID too) #}
+      <div class="newsletter-box" id="passwordBox">
+        <h4><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Sign in with a password</h4>
+        <p id="pwState"></p>
+        <div class="field">
+          <label for="newPassword">New password</label>
+          <div class="input-wrap pw-wrap">
+            <input type="password" id="newPassword" autocomplete="new-password" minlength="8" placeholder="8+ characters">
+            <button class="pw-eye" id="pwEye" type="button" aria-pressed="false">Show</button>
+          </div>
+        </div>
+        <button class="btn-passkey" id="pwSave" type="button"></button>
+        <p id="pwMsg" hidden></p>
+        <div class="pw-remove-row">
+          <button class="btn-danger-link" id="pwRemove" type="button" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/></svg> Remove password</button>
+        </div>
+      </div>
+
       {#- Main action + sign out (same height; stacked on phones) #}
       <div class="account-actions">
         <button class="btn" id="saveBtn" type="button">Save</button>
@@ -79,6 +97,7 @@ description: "Your profile on Δέσε Κορδόνια."
 {% block scripts_extra %}
   <script src="js/vendor/simplewebauthn-browser-14.0.0.umd.min.js"></script>
   <script src="js/passkey.js?v={{ site.jsVersion }}"></script>
+  <script src="js/password.js?v={{ site.jsVersion }}"></script>
   <script>
     (function () {
       const $ = (id) => document.getElementById(id);
@@ -102,8 +121,10 @@ description: "Your profile on Δέσε Κορδόνια."
             location.href = 'login-en.html';
             return;
           }
-          fill(await r.json());
+          const user = await r.json();
+          fill(user);
           initPasskeys();
+          renderPassword(!!user.has_password);
         } catch (e) {
           $('status').textContent = "Couldn't reach the server. Is it running locally?";
         }
@@ -209,6 +230,54 @@ description: "Your profile on Δέσε Κορδόνια."
         }
         DKPasskey.prepareRegister();
         btn.disabled = false;
+      });
+
+      /* --- Password --- */
+      function pwMsg(text) {
+        $('pwMsg').textContent = text;
+        $('pwMsg').hidden = !text;
+      }
+
+      function renderPassword(hasPassword) {
+        $('pwState').textContent = hasPassword ? 'You\'ve set a password: sign in with your email and password, no waiting for a link.' : 'No password set. Set one to sign in with email and password, no waiting for a link — works on any phone.';
+        $('pwSave').textContent = hasPassword ? 'Change password' : 'Set password';
+        $('pwRemove').hidden = !hasPassword;
+      }
+
+      DKPassword.wireToggle($('newPassword'), $('pwEye'), { show: 'Show', hide: 'Hide' });
+
+      async function savePassword() {
+        const btn = $('pwSave');
+        const password = $('newPassword').value;
+        pwMsg('');
+        if (password.length < DKPassword.MIN_LENGTH) {
+          pwMsg('Your password needs at least 8 characters.');
+          $('newPassword').focus();
+          return;
+        }
+        btn.disabled = true;
+        try {
+          await DKPassword.set(password);
+          $('newPassword').value = '';
+          renderPassword(true);
+          pwMsg('Done! Next time tap "Sign in with a password" on the sign-in page.');
+        } catch (e) {
+          pwMsg(e.status === 400 ? 'Your password needs at least 8 characters.' : 'Couldn\'t save the password. Try again.');
+        }
+        btn.disabled = false;
+      }
+      $('pwSave').addEventListener('click', savePassword);
+      $('newPassword').addEventListener('keydown', (e) => { if (e.key === 'Enter') savePassword(); });
+
+      $('pwRemove').addEventListener('click', async () => {
+        if (!confirm('Remove your password? You\'ll sign in with an email link (or Face ID, if you\'ve turned it on).')) return;
+        try {
+          await DKPassword.remove();
+          renderPassword(false);
+          pwMsg('Password removed.');
+        } catch (e) {
+          pwMsg('Couldn\'t save the password. Try again.');
+        }
       });
 
       $('saveBtn').addEventListener('click', save);

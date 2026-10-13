@@ -69,6 +69,12 @@ img {
   display: block;
 }
 
+/* Το χαρακτηριστικό hidden να κρύβει πάντα, ακόμα κι αν μια κλάση ορίζει
+   display: flex (π.χ. κουμπιά Face ID / κωδικού που εμφανίζονται κατά περίπτωση) */
+[hidden] {
+  display: none !important;
+}
+
 /* ===== Sticky Header & Nav ===== */
 header {
   position: sticky;
@@ -2183,6 +2189,79 @@ tbody tr:last-child td {
   font-weight: 600;
 }
 
+/* ===== Σύνδεση με κωδικό ===== */
+.btn-ghost-block {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  margin-top: 0.6rem;
+  padding: 0.75rem 1rem;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-ghost-block svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+/* το κουμπί Face ID είναι από πάνω μόνο όταν το υποστηρίζει η συσκευή */
+#passkeyArea[hidden] + .btn-ghost-block {
+  margin-top: 0;
+}
+
+.pw-panel {
+  margin-top: 0.4rem;
+}
+
+/* «Εμφάνιση» τοποθετείται μέσα στο πεδίο σε κάθε σελίδα, όχι μόνο στη φόρμα σύνδεσης */
+.pw-wrap {
+  position: relative;
+}
+
+.pw-panel .field {
+  margin-bottom: 0.9rem;
+}
+
+/* «Εμφάνιση / Απόκρυψη» μέσα στο πεδίο κωδικού */
+.pw-wrap input {
+  padding-right: 5.5rem;
+}
+
+.pw-eye {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0.35rem 0.55rem;
+  border: none;
+  border-radius: 6px;
+  background: none;
+  color: var(--text-dim);
+  font-family: inherit;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.pw-eye:hover {
+  color: var(--accent);
+}
+
+/* σελίδα λογαριασμού: μήνυμα και «Αφαίρεση κωδικού» κάτω από το κουμπί */
+#pwMsg {
+  margin: 0.6rem 0 0;
+}
+
+.pw-remove-row {
+  margin-top: 0.4rem;
+  text-align: center;
+}
+
 /* ===== Κουμπιά λογαριασμού (account.html) ===== */
 .account-actions {
   display: flex;
@@ -2329,9 +2408,11 @@ tbody tr:last-child td {
   padding: 0 0.2rem;
 }
 
+/* Μόνο κίνηση, όχι διαφάνεια: αν το animation δεν τρέξει (π.χ. κινητό σε
+   εξοικονόμηση μπαταρίας), η φούσκα μένει πλήρως ορατή */
 @keyframes dk-pop-in {
-  from { opacity: 0; transform: translateY(4px); }
-  to { opacity: 1; transform: none; }
+  from { transform: translateY(4px); }
+  to { transform: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
