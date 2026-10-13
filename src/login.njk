@@ -74,7 +74,7 @@ description: "Συνδέσου στο Δέσε Κορδόνια με το email 
           <div class="input-wrap pw-wrap">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
             <input type="password" id="password" autocomplete="current-password" placeholder="Ο κωδικός σου">
-            <button class="pw-eye" id="pwEye" type="button" aria-pressed="false">Εμφάνιση</button>
+            <button class="pw-eye" id="pwEye" type="button" aria-pressed="false" aria-label="Εμφάνιση κωδικού" title="Εμφάνιση κωδικού"></button>
           </div>
         </div>
         <div class="pop-anchor">
@@ -198,7 +198,7 @@ description: "Συνδέσου στο Δέσε Κορδόνια με το email 
         $('memberHint').hidden = true;
         ($('email').value.trim() ? $('password') : $('email')).focus();
       });
-      DKPassword.wireToggle($('password'), $('pwEye'), { show: 'Εμφάνιση', hide: 'Απόκρυψη' });
+      DKPassword.wireToggle($('password'), $('pwEye'), { show: 'Εμφάνιση κωδικού', hide: 'Απόκρυψη κωδικού' });
 
       async function passwordLogin() {
         const btn = $('pwLoginBtn');

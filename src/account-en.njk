@@ -64,7 +64,7 @@ description: "Your profile on Δέσε Κορδόνια."
           <label for="newPassword">New password</label>
           <div class="input-wrap pw-wrap">
             <input type="password" id="newPassword" autocomplete="new-password" minlength="8" placeholder="8+ characters">
-            <button class="pw-eye" id="pwEye" type="button" aria-pressed="false">Show</button>
+            <button class="pw-eye" id="pwEye" type="button" aria-pressed="false" aria-label="Show password" title="Show password"></button>
           </div>
         </div>
         <button class="btn-passkey" id="pwSave" type="button"></button>
@@ -244,7 +244,7 @@ description: "Your profile on Δέσε Κορδόνια."
         $('pwRemove').hidden = !hasPassword;
       }
 
-      DKPassword.wireToggle($('newPassword'), $('pwEye'), { show: 'Show', hide: 'Hide' });
+      DKPassword.wireToggle($('newPassword'), $('pwEye'), { show: 'Show password', hide: 'Hide password' });
 
       async function savePassword() {
         const btn = $('pwSave');

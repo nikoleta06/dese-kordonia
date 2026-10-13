@@ -5,6 +5,10 @@
 (function () {
   const API = (location.hostname === 'localhost') ? 'http://localhost:4000' : 'https://api.desekordonia.com';
 
+  const SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">';
+  const EYE = SVG + '<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>';
+  const EYE_OFF = SVG + '<path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"/><path d="M10.73 5.08A10.4 10.4 0 0 1 12 5c6.5 0 10 7 10 7a13.2 13.2 0 0 1-1.67 2.68"/><path d="M6.61 6.61A13.5 13.5 0 0 0 2 12s3.5 7 10 7a9.7 9.7 0 0 0 5.39-1.61"/><line x1="2" y1="2" x2="22" y2="22"/></svg>';
+
   async function call(method, path, body) {
     const r = await fetch(API + '/api/auth/password' + path, {
       method: method,
@@ -35,13 +39,21 @@
       return call('DELETE', '');
     },
 
-    // Κουμπί «Εμφάνιση / Απόκρυψη» μέσα στο πεδίο κωδικού (χρήσιμο στο κινητό)
+    // Ματάκι μέσα στο πεδίο κωδικού (χρήσιμο στο κινητό): ανοιχτό μάτι = «δείξε
+    // τον κωδικό», μάτι με γραμμή = «κρύψε τον». Οι λέξεις μένουν ως aria-label/title
+    // για αναγνώστες οθόνης και για όποιον αφήσει το ποντίκι από πάνω.
     wireToggle: function (input, button, labels) {
+      const render = function () {
+        const visible = input.type === 'text';
+        button.innerHTML = visible ? EYE_OFF : EYE;
+        button.setAttribute('aria-label', visible ? labels.hide : labels.show);
+        button.setAttribute('title', visible ? labels.hide : labels.show);
+        button.setAttribute('aria-pressed', visible ? 'true' : 'false');
+      };
+      render();
       button.addEventListener('click', function () {
-        const show = input.type === 'password';
-        input.type = show ? 'text' : 'password';
-        button.textContent = show ? labels.hide : labels.show;
-        button.setAttribute('aria-pressed', show ? 'true' : 'false');
+        input.type = input.type === 'password' ? 'text' : 'password';
+        render();
         input.focus();
       });
     }
