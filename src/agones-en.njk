@@ -65,7 +65,7 @@ activeNav: "agones"
     .race-card .post-body { padding: 1.4rem; }
     .race-card .post-meta { text-transform: uppercase; letter-spacing: 0.5px; font-size: 0.8rem; color: var(--text-dim); margin-bottom: 0.3rem; }
     .race-type { font-weight: 600; }
-    .type-road { color: #ff7a50; }
+    .type-road { color: #4da3ff; }
     .type-mountain { color: #3ddc84; }
     .type-ultra { color: #ff6b6b; }
     .race-card h3 { color: var(--text); margin: 0.2rem 0 0.4rem; font-size: 1.2rem; }
@@ -102,7 +102,7 @@ activeNav: "agones"
 
     <div id="race-map"></div>
     <div class="map-legend">
-      <span><i class="leg-dot" style="background:#ff5722"></i>Road</span>
+      <span><i class="leg-dot" style="background:#2f80ed"></i>Road</span>
       <span><i class="leg-dot" style="background:#2ecc71"></i>Mountain</span>
       <span><i class="leg-dot" style="background:#e24b4a"></i>Ultra</span>
     </div>
@@ -141,7 +141,7 @@ activeNav: "agones"
   <script>
     (function () {
       if (typeof L === 'undefined') return;
-      var COLORS = { road: '#ff5722', mountain: '#2ecc71', ultra: '#e24b4a' };
+      var COLORS = { road: '#2f80ed', mountain: '#2ecc71', ultra: '#e24b4a' };
       // Mobile: one finger scrolls the page, two fingers pan/zoom the map
       var map = L.map('race-map', { scrollWheelZoom: false, dragging: !L.Browser.mobile }).setView([38.7, 23.5], 6);
       if (L.Browser.mobile) {
@@ -191,7 +191,7 @@ activeNav: "agones"
 
         var marker = L.circleMarker([lat, lng], {
           radius: 9, color: '#fff', weight: 2,
-          fillColor: COLORS[type] || '#ff5722', fillOpacity: 0.95
+          fillColor: COLORS[type] || '#2f80ed', fillOpacity: 0.95
         }).bindPopup(popup).addTo(map);
 
         entries.push({ card: card, marker: marker, type: type, region: card.dataset.region || 'gr', lat: lat, lng: lng });
