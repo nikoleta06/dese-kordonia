@@ -40,11 +40,11 @@ module.exports = {
       feed: {
         el: {
           title: "Cardiac drift: Γιατί ανεβαίνουν οι παλμοί ενώ ο ρυθμός μένει ίδιος",
-          desc: "Γιατί στο δεύτερο μισό ενός μεγάλου τρεξίματος οι παλμοί σου ανεβαίνουν ενώ ο ρυθμός μένει σταθερός — και τι σημαίνει για τις ζώνες παλμών.",
+          desc: "Γιατί στο δεύτερο μισό ενός μεγάλου τρεξίματος οι παλμοί σου ανεβαίνουν ενώ ο ρυθμός μένει σταθερός, και τι σημαίνει για τις ζώνες παλμών.",
         },
         en: {
           title: "Cardiac drift: why your heart rate climbs while your pace stays the same",
-          desc: "Why your heart rate rises in the second half of a long run while your pace stays flat — and what it means for your heart-rate zones.",
+          desc: "Why your heart rate rises in the second half of a long run while your pace stays flat, and what it means for your heart-rate zones.",
         },
       },
     },
@@ -65,15 +65,15 @@ module.exports = {
     },
     {
       slug: "post-faith-kipyegon", cat: "champions", date: "2026-07-07",
-      el: "Faith Kipyegon – Συνέπεια και επιστροφή στην κορυφή",
-      en: "Faith Kipyegon – Consistency and the return to the top",
+      el: "Faith Kipyegon: Συνέπεια και επιστροφή στην κορυφή",
+      en: "Faith Kipyegon: Consistency and the return to the top",
       feed: {
         el: {
-          title: "Faith Kipyegon – Συνέπεια και επιστροφή στην κορυφή",
+          title: "Faith Kipyegon: Συνέπεια και επιστροφή στην κορυφή",
           desc: "Μαθήματα συνέπειας και υπομονής από μια δρομέα που χτίστηκε σταδιακά, όχι μέσα σε μία χρονιά.",
         },
         en: {
-          title: "Faith Kipyegon – Consistency and the return to the top",
+          title: "Faith Kipyegon: Consistency and the return to the top",
           desc: "Lessons in consistency and patience from a runner built gradually, not in a single year.",
         },
       },
@@ -115,11 +115,11 @@ module.exports = {
       feed: {
         el: {
           title: "Τι είναι το VO₂max και πώς το αυξάνεις",
-          desc: "Ο «κινητήρας» της αντοχής σου, εξηγημένος απλά — και πώς τον βελτιώνεις.",
+          desc: "Ο «κινητήρας» της αντοχής σου, εξηγημένος απλά, και πώς τον βελτιώνεις.",
         },
         en: {
           title: "What is VO₂max and how to improve it",
-          desc: "The engine of your endurance, explained simply — and how to improve it.",
+          desc: "The engine of your endurance, explained simply, and how to improve it.",
         },
       },
     },
@@ -145,11 +145,11 @@ module.exports = {
       feed: {
         el: {
           title: "Τι είναι το lactate threshold και γιατί είναι το κλειδί της αντοχής",
-          desc: "Το κατώφλι γαλακτικού εξηγημένο απλά — και πώς το βελτιώνεις.",
+          desc: "Το κατώφλι γαλακτικού εξηγημένο απλά, και πώς το βελτιώνεις.",
         },
         en: {
           title: "What is lactate threshold and why it's the key to endurance",
-          desc: "Lactate threshold explained simply — and how to improve it with tempo workouts.",
+          desc: "Lactate threshold explained simply, and how to improve it with tempo workouts.",
         },
       },
     },
@@ -189,11 +189,11 @@ module.exports = {
       en: "Why elite runners run slow",
       feed: {
         el: {
-          title: "Γιατί οι ελίτ δρομείς τρέχουν αργά — και γιατί ίσως πρέπει να κάνεις το ίδιο",
+          title: "Γιατί οι ελίτ δρομείς τρέχουν αργά, και γιατί ίσως πρέπει να κάνεις το ίδιο",
           desc: "Η επιστήμη πίσω από τις easy προπονήσεις και την πολωμένη προπόνηση 80/20.",
         },
         en: {
-          title: "Why elite runners run slow — and why you maybe should too",
+          title: "Why elite runners run slow, and why you maybe should too",
           desc: "The science behind easy runs and polarized 80/20 training.",
         },
       },
