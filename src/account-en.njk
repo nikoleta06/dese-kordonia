@@ -50,7 +50,7 @@ description: "Your profile on Δέσε Κορδόνια."
 
       <div class="newsletter-box" id="passkeyBox" hidden>
         <h4><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><path d="M9 9h.01"/><path d="M15 9h.01"/></svg> Sign in with Face ID / fingerprint</h4>
-        <p>On the devices you've turned this on for, you're in with one tap — no email.</p>
+        <p>On the devices you've turned this on for, you're in with one tap, no email.</p>
         <ul class="passkey-list" id="passkeyList"></ul>
         <button class="btn-passkey" id="passkeyAdd" type="button">Turn on for this device</button>
         <p id="passkeyMsg" hidden></p>
@@ -252,7 +252,7 @@ description: "Your profile on Δέσε Κορδόνια."
       function renderPassword(has, signedInWith) {
         hasPassword = has;
         needCurrent = has && signedInWith === 'password';
-        $('pwState').textContent = has ? 'You\'ve set a password: sign in with your email and password, no waiting for a link.' : 'No password set. Set one to sign in with email and password, no waiting for a link — works on any phone.';
+        $('pwState').textContent = has ? 'You\'ve set a password: sign in with your email and password, no waiting for a link.' : 'No password set. Set one to sign in with email and password, no waiting for a link. Works on any phone.';
         $('pwSave').textContent = has ? 'Change password' : 'Set password';
         $('pwRemove').hidden = !has;
         $('pwCurrentField').hidden = !needCurrent;

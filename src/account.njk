@@ -253,7 +253,7 @@ description: "Το προφίλ σου στο Δέσε Κορδόνια."
       function renderPassword(has, signedInWith) {
         hasPassword = has;
         needCurrent = has && signedInWith === 'password';
-        $('pwState').textContent = has ? 'Έχεις ορίσει κωδικό: μπαίνεις με το email και τον κωδικό σου, χωρίς να περιμένεις σύνδεσμο.' : 'Δεν έχεις ορίσει κωδικό. Όρισε έναν για να μπαίνεις με email και κωδικό, χωρίς να περιμένεις σύνδεσμο — δουλεύει σε κάθε κινητό.';
+        $('pwState').textContent = has ? 'Έχεις ορίσει κωδικό: μπαίνεις με το email και τον κωδικό σου, χωρίς να περιμένεις σύνδεσμο.' : 'Δεν έχεις ορίσει κωδικό. Όρισε έναν για να μπαίνεις με email και κωδικό, χωρίς να περιμένεις σύνδεσμο. Δουλεύει σε κάθε κινητό.';
         $('pwSave').textContent = has ? 'Αλλαγή κωδικού' : 'Ορισμός κωδικού';
         $('pwRemove').hidden = !has;
         $('pwCurrentField').hidden = !needCurrent;

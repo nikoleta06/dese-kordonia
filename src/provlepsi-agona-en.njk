@@ -1,7 +1,7 @@
 ---
 permalink: "provlepsi-agona-en.html"
 lang: "en"
-title: "Race Time Predictor — 5K, 10K, Half Marathon, Marathon | Δέσε Κορδόνια"
+title: "Race Time Predictor: 5K, 10K, Half Marathon, Marathon | Δέσε Κορδόνια"
 description: "Free race time predictor: enter a recent race result and see your estimated time for 5K, 10K, half marathon and marathon, based on Riegel's formula."
 activeNav: "provlepsi-agona"
 ---
@@ -46,7 +46,7 @@ activeNav: "provlepsi-agona"
     <h1 class="section-title">Race Time Predictor</h1>
     <p class="lead">
       Recently raced or ran a hard test? Enter your distance and time, and see your
-      <strong>estimated time</strong> for the other classic distances — using the established
+      <strong>estimated time</strong> for the other classic distances, using the established
       Riegel formula, the same one most well-known prediction tools rely on.
     </p>
 
@@ -76,7 +76,7 @@ activeNav: "provlepsi-agona"
         <div class="preds" id="preds"></div>
         <p class="image-credit" style="margin-top:1rem;">
           * An estimate, not a promise: it assumes you've also trained appropriately for the
-          target distance. The bigger the jump in distance, the bigger the uncertainty — the
+          target distance. The bigger the jump in distance, the bigger the uncertainty: the
           marathon prediction in particular tends to be optimistic without matching preparation.
         </p>
       </div>
@@ -127,7 +127,7 @@ activeNav: "provlepsi-agona"
           const isSource = Math.abs(d.km - d1) < 0.01;
           const t2 = isSource ? t1 : t1 * Math.pow(d.km / d1, 1.06); /* Riegel formula */
           const label = isSource
-            ? '<span class="p-name">' + d.name + '<span>— your result</span></span>'
+            ? '<span class="p-name">' + d.name + '<span> (your result)</span></span>'
             : '<span class="p-name">' + d.name + '</span>';
           return '<div class="pred' + (isSource ? ' p-source' : '') + '">' +
               '<div class="p-head">' + label +
