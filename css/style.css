@@ -1530,6 +1530,12 @@ tbody tr:last-child td {
   gap: 0.7rem;
 }
 
+/* Narrower side padding so "π.χ. 30" fits inside the small time boxes on phones */
+.calc .time-inputs input {
+  padding-left: 0.6rem;
+  padding-right: 0.6rem;
+}
+
 .calc .time-inputs small {
   display: block;
   margin-top: 0.3rem;
