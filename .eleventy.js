@@ -67,7 +67,10 @@ module.exports = function (eleventyConfig) {
                 { lang: "x-default", href: urlOf(el) },
               ]
             : [];
-        return { loc: urlOf(permalink), lastmod: gitLastmod(item.inputPath), alternates };
+        // Άρθρα: η ημερομηνία «updated» του front matter (η πραγματική τελευταία αλλαγή
+        // περιεχομένου)· οι υπόλοιπες σελίδες: το τελευταίο commit που τις άλλαξε.
+        const lastmod = item.data.updated || item.data.published || gitLastmod(item.inputPath);
+        return { loc: urlOf(permalink), lastmod, alternates };
       })
       .sort((a, b) => a.loc.localeCompare(b.loc));
   });
@@ -80,6 +83,37 @@ module.exports = function (eleventyConfig) {
   // ενώ στο postsData.js τις κρατάμε ως "2026-07-21".
   eleventyConfig.addFilter("rfc822", (isoDate) => {
     return new Date(isoDate + "T08:00:00Z").toUTCString();
+  });
+
+  // ===== Άρθρα σε Markdown (src/posts/) =====
+
+  // Ημερομηνία στη γραμμή κάτω από τον τίτλο: «26 Ιουνίου 2026» / «26 June 2026»
+  const MONTHS = {
+    el: ["Ιανουαρίου", "Φεβρουαρίου", "Μαρτίου", "Απριλίου", "Μαΐου", "Ιουνίου",
+         "Ιουλίου", "Αυγούστου", "Σεπτεμβρίου", "Οκτωβρίου", "Νοεμβρίου", "Δεκεμβρίου"],
+    en: ["January", "February", "March", "April", "May", "June",
+         "July", "August", "September", "October", "November", "December"],
+  };
+  eleventyConfig.addFilter("articleDate", (iso, lang) => {
+    const [y, m, d] = String(iso).split("-").map(Number);
+    return `${d} ${MONTHS[lang === "en" ? "en" : "el"][m - 1]} ${y}`;
+  });
+
+  // Συντομεύσεις μέσα στα άρθρα, για να μη γράφεται HTML:
+  //   {% note %}💡 **Συμβουλή:** κείμενο{% endnote %}   → το πορτοκαλί πλαίσιο
+  //   {% sources %}
+  //   1. Συγγραφέας (2020). <cite>Τίτλος.</cite> Περιοδικό. <a href="…" target="_blank" rel="noopener">PubMed →</a>
+  //   {% endsources %}                                  → το πλαίσιο «Πηγές» στο τέλος
+  const md = require("markdown-it")({ html: true });
+  const isEn = (page) => page.fileSlug.endsWith("-en");
+  eleventyConfig.addPairedShortcode("note", (inner) => `<div class="note">${md.renderInline(inner.trim())}</div>`);
+  eleventyConfig.addPairedShortcode("sources", function (inner) {
+    const en = isEn(this.page);
+    const icon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>';
+    const intro = en ? "The main scientific references behind this article:" : "Οι κύριες επιστημονικές αναφορές πίσω από αυτό το άρθρο:";
+    // Μία γραμμή χωρίς κενές γραμμές: αλλιώς το Markdown γύρω του θα έκοβε το HTML
+    const list = md.render(inner.trim()).replace(/\n+/g, "");
+    return `<div class="sources"><h4>${icon}${en ? "Sources" : "Πηγές"}</h4><p>${intro}</p>${list}</div>`;
   });
 
   // «Διάβασε επίσης»: 3 σχετικά άρθρα — πρώτα ίδιας κατηγορίας, μετά τα υπόλοιπα

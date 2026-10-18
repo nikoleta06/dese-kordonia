@@ -1375,6 +1375,13 @@ tbody tr:last-child td {
   color: var(--accent-2);
 }
 
+/* Σύνδεσμοι μέσα στο κείμενο ενός άρθρου ([κείμενο](σελίδα.html) στο Markdown):
+   πορτοκαλί, όπως ήταν πριν με το inline style. Οι σύνδεσμοι με δικό τους class
+   (κάρτες, συγγραφέας, «Πίσω») ή target (πηγές) κρατούν το δικό τους στυλ. */
+.article a:not([class]):not([target]):not([style]) {
+  color: var(--accent);
+}
+
 .article > img,
 .article > picture {
   display: block;
