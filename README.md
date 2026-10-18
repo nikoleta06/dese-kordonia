@@ -32,8 +32,10 @@
 - **Αποθήκευση άρθρων** + σελίδα «Αποθηκευμένα» με ταξινόμηση
 - **Χάρτης αγώνων** (Leaflet): φίλτρα ανά τύπο, χρωματιστά pins, λίστα-κάρτες με «δες στον χάρτη»
 - **«Διάβασε επίσης»** σχετικά άρθρα στο τέλος κάθε post
+- **Αναζήτηση** σε άρθρα και εργαλεία (Pagefind), ξεχωριστά για ελληνικά και αγγλικά — εικονίδιο στο μενού, `search.html?q=…`
+- **Ομαλές μεταβάσεις** ανάμεσα στις σελίδες (View Transitions) και **prefetch** της σελίδας που πας να ανοίξεις (Speculation Rules)
 - **Analytics** (GoatCounter, privacy-friendly)
-- **SEO**: sitemap.xml, robots.txt, Open Graph, Schema.org, hreflang, custom 404
+- **SEO**: sitemap.xml (παράγεται αυτόματα, με hreflang), robots.txt, Open Graph, Schema.org, hreflang, custom 404
 - **Εικονογραφημένη ταυτότητα** (σταθερός χαρακτήρας-μασκότ σε όλες τις κατηγορίες)
 - **Responsive** για κινητό, tablet και υπολογιστή
 
@@ -41,6 +43,8 @@
 Στατική ιστοσελίδα, χτισμένη με **[Eleventy](https://www.11ty.dev/)** (Nunjucks templates):
 - **Eleventy** — κοινό layout (`src/_includes/base.njk`) για head/menu/footer, ώστε μια αλλαγή στο μενού ή στο footer να μην χρειάζεται να γίνει σε δεκάδες αρχεία
 - **HTML5 & CSS** (CSS custom properties, dark/light theme)
+- **Fonts από το ίδιο το site** (Inter, Roboto Condensed — `@fontsource`, μόνο Latin + ελληνικά), χωρίς Google Fonts
+- **[Pagefind](https://pagefind.app/)** — στατική αναζήτηση· το ευρετήριο φτιάχνεται στο τέλος κάθε build
 - **Vanilla JavaScript** (`js/main.js`) — theme, μενού, φίλτρα blog, like/save, σχετικά άρθρα, analytics
 - **[Leaflet](https://leafletjs.com/)** — διαδραστικός χάρτης αγώνων
 - **[Supabase](https://supabase.com/)** — κοινό μέτρημα στα like (`article_likes`, REST + RPC)
@@ -49,8 +53,7 @@
 
 ## Δομή
 ```
-404.html                    # branded σελίδα σφάλματος (μένει εκτός Eleventy)
-robots.txt, sitemap.xml, CNAME
+robots.txt, CNAME
 favicon.ico, favicon.png    # εικονίδιο site (και στο images/)
 package.json, .eleventy.js  # ρύθμιση Eleventy
 src/
@@ -58,18 +61,21 @@ src/
     base.njk                # το κοινό layout (head, header/nav, footer)
     author-box.njk          # πλαίσιο συγγραφέα στο τέλος των άρθρων
     related.njk             # «Διάβασε επίσης» — 3 σχετικά άρθρα
+    search-script.njk       # Pagefind UI (κοινό για search / search-en)
   _data/
     nav.js                  # στοιχεία μενού (κύριο + dropdown εργαλείων)
-    site.js                 # εκδόσεις css/js (?v=) για cache-busting
     postsData.js            # μητρώο άρθρων + κατηγορίες (τροφοδοτεί το related)
   *.njk                     # μία σελίδα ανά αρχείο (EL & -en για EN), ίδια δομή με πριν
+  404.njk                   # branded σελίδα σφάλματος (αυτόνομη, χωρίς base.njk)
+  sitemap.njk               # → sitemap.xml, από όλες τις σελίδες χωρίς «noindex: true»
 css/style.css               # στυλ
+css/fonts.css               # @font-face για τα fonts του site (αρχεία στο /fonts κατά το build)
 js/main.js                  # κοινό JavaScript
 images/                     # logo, favicon, εικόνες (originals στο images/_originals/)
 SETUP-LIKES.md              # οδηγίες Supabase (μέτρημα like)
 SETUP-ANALYTICS.md          # οδηγίες GoatCounter
 ```
-Κάθε σελίδα (`.njk`) έχει ένα μικρό front matter (τίτλος, περιγραφή, γλώσσα) και μετά το δικό της περιεχόμενο — ό,τι ήταν πριν μέσα στο `<main>` παραμένει ακριβώς το ίδιο, απλά το header/footer/menu τα παίρνει έτοιμα από το layout.
+Κάθε σελίδα (`.njk`) έχει ένα μικρό front matter (τίτλος, περιγραφή, γλώσσα) και μετά το δικό της περιεχόμενο. Με `noindex: true` μια σελίδα μένει εκτός sitemap και αναζήτησης (λογαριασμός, σύνδεση κ.λπ.)· με `nosearch: true` μόνο εκτός αναζήτησης (η λίστα του blog) — ό,τι ήταν πριν μέσα στο `<main>` παραμένει ακριβώς το ίδιο, απλά το header/footer/menu τα παίρνει έτοιμα από το layout.
 
 ## Τοπική προεπισκόπηση
 ```bash
@@ -81,4 +87,4 @@ npm run start   # Eleventy dev server με live reload
 ## Deployment
 Φιλοξενείται στο **GitHub Pages** μέσω GitHub Actions ([.github/workflows/pages.yml](.github/workflows/pages.yml)): σε κάθε push στο `main`, το Action τρέχει `npm ci` + `npx eleventy` και ανεβάζει τον φάκελο `_site/`. Ο φάκελος `_site/` δεν μπαίνει ποτέ στο git (build artifact).
 
-> Σημείωση: τα στατικά αρχεία (CSS/JS) φορτώνονται με `?v=` παράμετρο για cache-busting — άλλαξέ το σε `src/_data/site.js` (`cssVersion`/`jsVersion`) όταν αλλάζεις `style.css` ή `main.js` — ενημερώνεται αυτόματα σε όλες τις σελίδες.
+> Σημείωση: τα CSS/JS φορτώνονται με `?v=<hash του περιεχομένου>` (φίλτρο `assetHash` στο `.eleventy.js`): όταν αλλάζεις `style.css` ή `main.js`, η παράμετρος αλλάζει μόνη της στο επόμενο build και οι browsers κατεβάζουν τη νέα έκδοση — δεν χρειάζεται να ανεβάσεις κάποιον αριθμό.

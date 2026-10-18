@@ -1,5 +1,6 @@
 ---
 permalink: "verify.html"
+noindex: true
 lang: "el"
 title: "Επαλήθευση σύνδεσης | Δέσε Κορδόνια"
 description: "Επαλήθευση του συνδέσμου σύνδεσης."
@@ -59,8 +60,8 @@ description: "Επαλήθευση του συνδέσμου σύνδεσης."
 
 {% block scripts_extra %}
   <script src="js/vendor/simplewebauthn-browser-14.0.0.umd.min.js"></script>
-  <script src="js/passkey.js?v={{ site.jsVersion }}"></script>
-  <script src="js/password.js?v={{ site.jsVersion }}"></script>
+  <script src="js/passkey.js?v={{ "js/passkey.js" | assetHash }}"></script>
+  <script src="js/password.js?v={{ "js/password.js" | assetHash }}"></script>
   <script>
     (function () {
       const $ = (id) => document.getElementById(id);

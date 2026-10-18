@@ -23,6 +23,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          # Όλο το ιστορικό: το sitemap παίρνει το <lastmod> κάθε σελίδας από το git
+          fetch-depth: 0
       - name: Setup Node
         uses: actions/setup-node@v4
         with:

@@ -1,5 +1,6 @@
 ---
 permalink: "login-en.html"
+noindex: true
 lang: "en"
 title: "Newsletter: subscribe or sign in | Δέσε Κορδόνια"
 description: "Sign in to Δέσε Κορδόνια with your email (no password needed) and subscribe to the newsletter."
@@ -103,8 +104,8 @@ description: "Sign in to Δέσε Κορδόνια with your email (no password 
 
 {% block scripts_extra %}
   <script src="js/vendor/simplewebauthn-browser-14.0.0.umd.min.js"></script>
-  <script src="js/passkey.js?v={{ site.jsVersion }}"></script>
-  <script src="js/password.js?v={{ site.jsVersion }}"></script>
+  <script src="js/passkey.js?v={{ "js/passkey.js" | assetHash }}"></script>
+  <script src="js/password.js?v={{ "js/password.js" | assetHash }}"></script>
   <script>
     (function () {
       const $ = (id) => document.getElementById(id);

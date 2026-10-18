@@ -1,0 +1,17 @@
+---
+permalink: "sitemap.xml"
+eleventyExcludeFromCollections: true
+---
+{#- Παράγεται σε κάθε build από τις σελίδες του site (δες το φίλτρο sitemapPages στο .eleventy.js) -#}
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+{%- for page in collections.all | sitemapPages %}
+  <url>
+    <loc>{{ page.loc }}</loc>
+    <lastmod>{{ page.lastmod }}</lastmod>
+    {%- for alt in page.alternates %}
+    <xhtml:link rel="alternate" hreflang="{{ alt.lang }}" href="{{ alt.href }}"/>
+    {%- endfor %}
+  </url>
+{%- endfor %}
+</urlset>

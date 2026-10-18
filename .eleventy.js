@@ -1,3 +1,9 @@
+const crypto = require("crypto");
+const fs = require("fs");
+const { execFileSync } = require("child_process");
+
+const SITE_URL = "https://desekordonia.com";
+
 module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("css");
   eleventyConfig.addPassthroughCopy("js");
@@ -7,7 +13,64 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("favicon.png");
   eleventyConfig.addPassthroughCopy("CNAME");
   eleventyConfig.addPassthroughCopy("googlee4e046c775be8626.html");
-  eleventyConfig.addPassthroughCopy("sitemap.xml");
+  // Fonts (Latin + ελληνικά) από τα πακέτα @fontsource → /fonts, δες css/fonts.css
+  eleventyConfig.addPassthroughCopy({
+    "node_modules/@fontsource/inter/files/inter-{greek,latin}-{400,500,600}-normal.woff2": "fonts",
+    "node_modules/@fontsource/roboto-condensed/files/roboto-condensed-{greek,latin}-{500,600,700}-normal.woff2": "fonts",
+  });
+
+  // Cache busting: ?v=<hash του περιεχομένου> αντί για χειροκίνητο cssVersion/jsVersion.
+  // Αλλάζει μόνο όταν αλλάξει το αρχείο, οπότε οι browsers κατεβάζουν τη νέα έκδοση
+  // ακριβώς τότε — χωρίς να χρειάζεται να θυμάσαι να ανεβάσεις έναν αριθμό.
+  const hashCache = new Map();
+  eleventyConfig.on("eleventy.before", () => hashCache.clear());
+  eleventyConfig.addFilter("assetHash", (file) => {
+    if (!hashCache.has(file)) {
+      const hash = crypto.createHash("sha256").update(fs.readFileSync(file)).digest("hex").slice(0, 10);
+      hashCache.set(file, hash);
+    }
+    return hashCache.get(file);
+  });
+
+  // Sitemap (src/sitemap.njk): όλες οι δημόσιες σελίδες, με την ημερομηνία του τελευταίου
+  // commit που τις άλλαξε και τα ζεύγη ελληνικά/αγγλικά (hreflang). Νέα σελίδα = μπαίνει
+  // μόνη της· σελίδες με «noindex: true» στο front matter μένουν εκτός.
+  const lastmodCache = new Map();
+  function gitLastmod(inputPath) {
+    if (!lastmodCache.has(inputPath)) {
+      let date = "";
+      try {
+        date = execFileSync("git", ["log", "-1", "--format=%cs", "--", inputPath], { encoding: "utf8" }).trim();
+      } catch {
+        // Χωρίς git (π.χ. φάκελος από zip): η σημερινή ημερομηνία
+      }
+      lastmodCache.set(inputPath, date || new Date().toISOString().slice(0, 10));
+    }
+    return lastmodCache.get(inputPath);
+  }
+
+  eleventyConfig.addFilter("sitemapPages", (items) => {
+    const pages = items.filter((item) => !item.data.noindex && String(item.data.permalink || "").endsWith(".html"));
+    const urlOf = (permalink) => SITE_URL + "/" + (permalink === "index.html" ? "" : permalink);
+    const exists = new Set(pages.map((item) => item.data.permalink));
+    return pages
+      .map((item) => {
+        const permalink = item.data.permalink;
+        const base = permalink.replace(/(-en)?\.html$/, "");
+        const el = base + ".html";
+        const en = base + "-en.html";
+        const alternates =
+          exists.has(el) && exists.has(en)
+            ? [
+                { lang: "el", href: urlOf(el) },
+                { lang: "en", href: urlOf(en) },
+                { lang: "x-default", href: urlOf(el) },
+              ]
+            : [];
+        return { loc: urlOf(permalink), lastmod: gitLastmod(item.inputPath), alternates };
+      })
+      .sort((a, b) => a.loc.localeCompare(b.loc));
+  });
 
   eleventyConfig.addFilter("navHref", (file, lang) => {
     return file + (lang === "en" ? "-en" : "") + ".html";
@@ -32,9 +95,17 @@ module.exports = function (eleventyConfig) {
     return same.concat(others).slice(0, 3);
   });
 
-  // OG images: μία κάρτα κοινοποίησης ανά άρθρο, αφού γραφτεί το _site
+  // Μετά το build: OG images (μία κάρτα κοινοποίησης ανά άρθρο) και το ευρετήριο
+  // αναζήτησης του Pagefind (_site/pagefind), που χρησιμοποιεί η σελίδα αναζήτησης.
   eleventyConfig.on("eleventy.after", async () => {
     await require("./scripts/generate-og.js")();
+
+    const pagefind = await import("pagefind");
+    const { index } = await pagefind.createIndex({});
+    const { page_count } = await index.addDirectory({ path: "_site" });
+    await index.writeFiles({ outputPath: "_site/pagefind" });
+    await pagefind.close();
+    console.log(`[pagefind] ${page_count} σελίδες στο ευρετήριο αναζήτησης`);
   });
 
   return {

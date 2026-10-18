@@ -1,5 +1,6 @@
 ---
 permalink: "account-en.html"
+noindex: true
 lang: "en"
 title: "My account | Δέσε Κορδόνια"
 description: "Your profile on Δέσε Κορδόνια."
@@ -104,8 +105,8 @@ description: "Your profile on Δέσε Κορδόνια."
 
 {% block scripts_extra %}
   <script src="js/vendor/simplewebauthn-browser-14.0.0.umd.min.js"></script>
-  <script src="js/passkey.js?v={{ site.jsVersion }}"></script>
-  <script src="js/password.js?v={{ site.jsVersion }}"></script>
+  <script src="js/passkey.js?v={{ "js/passkey.js" | assetHash }}"></script>
+  <script src="js/password.js?v={{ "js/password.js" | assetHash }}"></script>
   <script>
     (function () {
       const $ = (id) => document.getElementById(id);
