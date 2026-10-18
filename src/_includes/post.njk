@@ -1,0 +1,105 @@
+{#- Κοινό layout όλων των άρθρων (src/posts/*.md). Ό,τι επαναλαμβανόταν σε κάθε άρθρο
+    (canonical/hreflang, Open Graph, JSON-LD, γραμμή ημερομηνίας/κατηγορίας, εικόνα,
+    συγγραφέας, «Διάβασε επίσης») φτιάχνεται εδώ από το front matter του άρθρου. -#}
+{% extends "base.njk" %}
+
+{%- set SITE = "https://desekordonia.com" %}
+{%- set cat = postsData.cats[cat] %}
+{%- set shareTitle = shareTitle or heading %}
+{%- set label = label or cat.label[lang] %}
+{%- set elUrl = SITE + "/" + slug + ".html" %}
+{%- set enUrl = SITE + "/" + slug + "-en.html" %}
+
+{% block head_extra %}
+  <link rel="canonical" href="{{ SITE }}/{{ permalink }}">
+  <link rel="alternate" hreflang="el" href="{{ elUrl }}">
+  <link rel="alternate" hreflang="en" href="{{ enUrl }}">
+  <link rel="alternate" hreflang="x-default" href="{{ elUrl }}">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="{{ shareTitle | escape }}">
+  <meta property="og:description" content="{{ summary | escape }}">
+  <meta property="og:image" content="{{ SITE }}/images/og/{{ page.fileSlug }}.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Δέσε Κορδόνια | {{ shareTitle | escape }}">
+  <meta property="og:url" content="{{ SITE }}/{{ permalink }}">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": {{ shareTitle | dump | safe }},
+    "description": {{ summary | dump | safe }},
+    "image": "{{ SITE }}/images/{{ cat.img }}.jpg",
+    "datePublished": "{{ published }}",
+    "dateModified": "{{ updated or published }}",
+    "inLanguage": "{{ lang }}",
+    "articleSection": {{ label | dump | safe }},
+    "author": { "@type": "Person", "name": "Νικολέτα", "url": "{{ SITE }}/about{% if lang == 'en' %}-en{% endif %}.html" },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Δέσε Κορδόνια",
+      "logo": { "@type": "ImageObject", "url": "{{ SITE }}/images/logo.png" }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "{{ SITE }}/{{ permalink }}"
+    }
+  }
+  </script>
+{% endblock %}
+
+{% block head_extra2 %}
+{%- if headStyle %}
+  <style>
+{{ headStyle | safe }}
+  </style>
+{%- endif %}
+{% endblock %}
+
+{% block content %}
+  <main>
+    <article class="article">
+      <h1 class="section-title">{{ heading }}</h1>
+      <p class="article-meta"><svg style="width:1em;height:1em;vertical-align:-0.15em;margin-right:0.3em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>{{ published | articleDate(lang) }} · <span class="accent">
+        {%- if cat.metaIcon %}{{ cat.svg | safe }}{% endif %}
+        {%- if cat.page %}<a href="{{ cat.page | navHref(lang) }}" style="color:inherit;">{{ label }}</a>{% else %}{{ label }}{% endif -%}
+      </span> · {{ readMinutes }}{% if lang == 'en' %} min read{% else %}' ανάγνωση{% endif %}</p>
+
+      <picture>
+        <source type="image/avif" srcset="images/{{ cat.img }}.avif?v=1">
+        <source type="image/webp" srcset="images/{{ cat.img }}.webp?v=1">
+        <img src="images/{{ cat.img }}.jpg?v=1" alt="{{ heroAlt | escape }}" loading="lazy" decoding="async" width="740" height="494">
+      </picture>
+
+{{ content | safe }}
+
+      {% include "author-box.njk" %}
+
+      {% include "related.njk" %}
+
+      <a class="back-link" href="{{ 'blog' | navHref(lang) }}">{% if lang == 'en' %}← Back to Blog{% else %}← Πίσω στο Blog{% endif %}</a>
+    </article>
+  </main>
+{% endblock %}
+
+{% block scripts_extra %}
+{%- if 'class="ig' in content %}
+  <script>
+    /* Scroll-reveal για τα infographics (επαναχρησιμοποιεί τις global .reveal/.up/.is-visible) */
+    (function () {
+      var figs = document.querySelectorAll('figure.ig');
+      if (!('IntersectionObserver' in window) || !figs.length) return;
+      figs.forEach(function (f) { f.classList.add('reveal', 'up'); });
+      var io = new IntersectionObserver(function (entries, obs) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add('is-visible'); obs.unobserve(e.target); }
+        });
+      }, { threshold: 0.12 });
+      figs.forEach(function (f) { io.observe(f); });
+    })();
+  </script>
+{%- endif %}
+{% endblock %}

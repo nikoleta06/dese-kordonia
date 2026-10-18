@@ -42,6 +42,7 @@
 ## Τεχνολογία
 Στατική ιστοσελίδα, χτισμένη με **[Eleventy](https://www.11ty.dev/)** (Nunjucks templates):
 - **Eleventy** — κοινό layout (`src/_includes/base.njk`) για head/menu/footer, ώστε μια αλλαγή στο μενού ή στο footer να μην χρειάζεται να γίνει σε δεκάδες αρχεία
+- **Άρθρα σε Markdown** (`src/posts/*.md`) με κοινό layout (`src/_includes/post.njk`): meta tags, Open Graph, JSON-LD, ημερομηνία/κατηγορία, εικόνα και «Διάβασε επίσης» φτιάχνονται από το front matter — δες [NEO-ARTHRO.md](NEO-ARTHRO.md)
 - **HTML5 & CSS** (CSS custom properties, dark/light theme)
 - **Fonts από το ίδιο το site** (Inter, Roboto Condensed — `@fontsource`, μόνο Latin + ελληνικά), χωρίς Google Fonts
 - **[Pagefind](https://pagefind.app/)** — στατική αναζήτηση· το ευρετήριο φτιάχνεται στο τέλος κάθε build
@@ -59,13 +60,16 @@ package.json, .eleventy.js  # ρύθμιση Eleventy
 src/
   _includes/
     base.njk                # το κοινό layout (head, header/nav, footer)
+    post.njk                # το layout των άρθρων (πάνω στο base.njk)
     author-box.njk          # πλαίσιο συγγραφέα στο τέλος των άρθρων
     related.njk             # «Διάβασε επίσης» — 3 σχετικά άρθρα
     search-script.njk       # Pagefind UI (κοινό για search / search-en)
   _data/
     nav.js                  # στοιχεία μενού (κύριο + dropdown εργαλείων)
-    postsData.js            # μητρώο άρθρων + κατηγορίες (τροφοδοτεί το related)
-  *.njk                     # μία σελίδα ανά αρχείο (EL & -en για EN), ίδια δομή με πριν
+    postsData.js            # κατηγορίες + λίστα άρθρων (φτιάχνεται μόνη της από το src/posts/)
+  posts/                    # τα άρθρα: post-x.md (EL) και post-x-en.md (EN)
+    posts.11tydata.js       # κοινές ρυθμίσεις άρθρων (layout, URL, γλώσσα)
+  *.njk                     # οι υπόλοιπες σελίδες, μία ανά αρχείο (EL & -en για EN)
   404.njk                   # branded σελίδα σφάλματος (αυτόνομη, χωρίς base.njk)
   sitemap.njk               # → sitemap.xml, από όλες τις σελίδες χωρίς «noindex: true»
 css/style.css               # στυλ
