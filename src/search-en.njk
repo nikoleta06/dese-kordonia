@@ -1,0 +1,37 @@
+---
+permalink: "search-en.html"
+noindex: true
+lang: "en"
+title: "Search | Δέσε Κορδόνια"
+description: "Search the articles and tools of Δέσε Κορδόνια."
+activeNav: "search"
+---
+
+{% extends "base.njk" %}
+
+{% block head_extra0 %}
+  <meta name="robots" content="noindex">
+{% endblock %}
+
+{% block head_extra %}
+  <link rel="alternate" hreflang="el" href="https://desekordonia.com/search.html">
+  <link rel="alternate" hreflang="en" href="https://desekordonia.com/search-en.html">
+  <link rel="stylesheet" href="pagefind/pagefind-ui.css">
+{% endblock %}
+
+{% block head_extra2 %}{% endblock %}
+
+{% block content %}
+  <main>
+    <h1 class="section-title">Search</h1>
+    <p class="lead">Search every article and tool on the site — e.g. “heart-rate zones”, “marathon” or “Kipchoge”.</p>
+    <div class="search-box" id="search"></div>
+  </main>
+{% endblock %}
+
+{% block body_extra %}{% endblock %}
+
+{% block scripts_extra %}
+  {% set searchLang = "en" %}
+  {% include "search-script.njk" %}
+{% endblock %}

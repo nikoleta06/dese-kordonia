@@ -1,0 +1,31 @@
+{#- Pagefind UI: το ευρετήριο (_site/pagefind) φτιάχνεται στο τέλος κάθε build από το .eleventy.js.
+    Ψάχνει μόνο στις σελίδες της γλώσσας της σελίδας (από το <html lang>). Το ?q= στο URL
+    ξεκινά αμέσως αναζήτηση, ώστε να μπορεί να γίνει και σύνδεσμος (π.χ. search.html?q=vo2max). #}
+  <script src="pagefind/pagefind-ui.js"></script>
+  <script>
+    window.addEventListener('DOMContentLoaded', function () {
+      var ui = new PagefindUI({
+        element: '#search',
+        showImages: false,
+        showSubResults: true,
+        autofocus: true,
+        {%- if searchLang == 'el' %}
+        translations: {
+          placeholder: 'Αναζήτηση στο site',
+          clear_search: 'Καθαρισμός',
+          load_more: 'Περισσότερα αποτελέσματα',
+          search_label: 'Αναζήτηση στο site',
+          filters_label: 'Φίλτρα',
+          zero_results: 'Δεν βρέθηκαν αποτελέσματα για «[SEARCH_TERM]»',
+          many_results: '[COUNT] αποτελέσματα για «[SEARCH_TERM]»',
+          one_result: '1 αποτέλεσμα για «[SEARCH_TERM]»',
+          alt_search: 'Δεν βρέθηκαν αποτελέσματα για «[SEARCH_TERM]». Αποτελέσματα για «[DIFFERENT_TERM]»',
+          search_suggestion: 'Δεν βρέθηκαν αποτελέσματα για «[SEARCH_TERM]». Δοκίμασε κάποια από τις παρακάτω αναζητήσεις:',
+          searching: 'Αναζήτηση για «[SEARCH_TERM]»…'
+        },
+        {%- endif %}
+      });
+      var q = new URLSearchParams(location.search).get('q');
+      if (q) ui.triggerSearch(q);
+    });
+  </script>

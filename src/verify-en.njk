@@ -1,5 +1,6 @@
 ---
 permalink: "verify-en.html"
+noindex: true
 lang: "en"
 title: "Verifying sign-in | Δέσε Κορδόνια"
 description: "Verifying your sign-in link."
@@ -58,8 +59,8 @@ description: "Verifying your sign-in link."
 
 {% block scripts_extra %}
   <script src="js/vendor/simplewebauthn-browser-14.0.0.umd.min.js"></script>
-  <script src="js/passkey.js?v={{ site.jsVersion }}"></script>
-  <script src="js/password.js?v={{ site.jsVersion }}"></script>
+  <script src="js/passkey.js?v={{ "js/passkey.js" | assetHash }}"></script>
+  <script src="js/password.js?v={{ "js/password.js" | assetHash }}"></script>
   <script>
     (function () {
       const $ = (id) => document.getElementById(id);

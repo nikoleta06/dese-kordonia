@@ -52,6 +52,28 @@ body {
   line-height: 1.7;
 }
 
+/* View Transitions: η μετάβαση από σελίδα σε σελίδα γίνεται με ένα απαλό fade αντί για
+   «άσπρο φλας». Το header έχει δικό του όνομα, ώστε να μένει ακίνητο και να αλλάζει
+   μόνο το περιεχόμενο. Browsers που δεν το υποστηρίζουν απλώς αλλάζουν σελίδα όπως πριν. */
+@view-transition {
+  navigation: auto;
+}
+
+header {
+  view-transition-name: site-header;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 180ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  @view-transition {
+    navigation: none;
+  }
+}
+
 h1, h2, h3 {
   font-family: "Roboto Condensed", "Segoe UI", sans-serif;
   font-weight: 600;
@@ -152,7 +174,8 @@ header nav {
   background-color: var(--accent);
 }
 
-/* Σύνδεσμοι «Αρχική» / «Αποθηκευμένα» ως εικονίδιο (desktop: μόνο εικονίδιο) */
+/* Σύνδεσμοι «Αρχική» / «Αποθηκευμένα» / «Αναζήτηση» ως εικονίδιο (desktop: μόνο εικονίδιο) */
+.menu .search-link,
 .menu .saved-link,
 .menu .home-link {
   display: inline-flex;
@@ -160,12 +183,14 @@ header nav {
   gap: 0.45rem;
 }
 
+.menu .search-link .search-ico,
 .menu .saved-link .saved-ico,
 .menu .home-link .home-ico {
   width: 20px;
   height: 20px;
 }
 
+.menu .search-link .search-text,
 .menu .saved-link .saved-text,
 .menu .home-link .home-text {
   display: none;
@@ -2707,11 +2732,13 @@ footer .accent {
     padding: 0.7rem 0.9rem;
   }
   /* Στο κινητό τα εικονίδια δείχνουν εικονίδιο + κείμενο, κεντραρισμένα */
+  .menu .search-link,
   .menu .saved-link,
   .menu .home-link {
     justify-content: center;
     padding: 0.7rem 0.9rem;
   }
+  .menu .search-link .search-text,
   .menu .saved-link .saved-text,
   .menu .home-link .home-text {
     display: inline;
@@ -3062,3 +3089,38 @@ footer .accent {
 .faq-item { background-color: var(--surface-2); border: 1px solid var(--border); border-radius: 12px; padding: 1rem 1.2rem; margin: 0.8rem 0; }
 .faq-item h4 { margin: 0 0 0.45rem; font-family: "Roboto Condensed", sans-serif; font-size: 1.05rem; color: var(--text); letter-spacing: 0.3px; }
 .faq-item p { margin: 0; color: var(--text-dim); font-size: 0.95rem; line-height: 1.6; }
+
+/* ===== Αναζήτηση (Pagefind) — στα χρώματα του site, σκούρο & φωτεινό θέμα ===== */
+.search-box {
+  --pagefind-ui-scale: 0.9;
+  --pagefind-ui-primary: var(--accent);
+  --pagefind-ui-text: var(--text);
+  --pagefind-ui-background: var(--surface);
+  --pagefind-ui-border: var(--border);
+  --pagefind-ui-tag: var(--surface);
+  --pagefind-ui-border-width: 1px;
+  --pagefind-ui-border-radius: 10px;
+  --pagefind-ui-font: "Inter", "Segoe UI", sans-serif;
+  margin-top: 1.5rem;
+}
+
+.search-box .pagefind-ui__result-link {
+  color: var(--text);
+  font-family: "Roboto Condensed", sans-serif;
+  font-weight: 600;
+}
+
+.search-box .pagefind-ui__result-link:hover {
+  color: var(--accent);
+}
+
+.search-box .pagefind-ui__result-excerpt,
+.search-box .pagefind-ui__message {
+  color: var(--text-dim);
+}
+
+.search-box mark {
+  background: transparent;
+  color: var(--accent);
+  font-weight: 600;
+}
