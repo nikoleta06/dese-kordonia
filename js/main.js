@@ -30,7 +30,8 @@ document.addEventListener('DOMContentLoaded', function () {
     'post-trexsimo-imikranies': 'stories',
     'post-arxarios-trexsimo': 'tips',
     'post-diatrofi-trexsimo': 'tips',
-    'post-allagi-papoutsion': 'tips'
+    'post-allagi-papoutsion': 'tips',
+    'post-trexsimo-xeimona': 'tips'
   };
 
   /* --- Εικονίδια & ονόματα κατηγοριών (για τη σελίδα Αποθηκευμένα) --- */
