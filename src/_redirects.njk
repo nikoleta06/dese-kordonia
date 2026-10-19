@@ -1,0 +1,17 @@
+---
+permalink: "_redirects"
+eleventyExcludeFromCollections: true
+---
+# Ανακατευθύνσεις στο Cloudflare (παράγεται σε κάθε build από τις σελίδες του site).
+
+# Η αρχική σελίδα: το «/» σερβίρει το index.html
+/ /index.html 200
+
+# Παλιοί σύνδεσμοι χωρίς .html (π.χ. desekordonia.com/post-vo2max): το GitHub Pages
+# τους σέρβιρε, οπότε μπορεί να κυκλοφορούν. Πηγαίνουν μόνιμα στη σωστή διεύθυνση.
+{%- for item in collections.all %}
+{%- set p = item.data.permalink %}
+{%- if p and p.endsWith(".html") %}
+/{{ p | replace(".html", "") }} /{{ "" if p == "index.html" else p }} 301
+{%- endif %}
+{%- endfor %}

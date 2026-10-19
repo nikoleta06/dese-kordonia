@@ -47,7 +47,7 @@
 - **Fonts από το ίδιο το site** (Inter, Roboto Condensed — `@fontsource`, μόνο Latin + ελληνικά), χωρίς Google Fonts
 - **[Pagefind](https://pagefind.app/)** — στατική αναζήτηση· το ευρετήριο φτιάχνεται στο τέλος κάθε build
 - **Vanilla JavaScript** (`js/main.js`) — theme, μενού, φίλτρα blog, like/save, σχετικά άρθρα, analytics
-- **[Leaflet](https://leafletjs.com/)** — διαδραστικός χάρτης αγώνων
+- **[Leaflet](https://leafletjs.com/)** — διαδραστικός χάρτης αγώνων (σερβίρεται από το site, `vendor/leaflet-1.9.4/`)
 - **[Supabase](https://supabase.com/)** — κοινό μέτρημα στα like (`article_likes`, REST + RPC)
 - **Custom backend API** (`api.desekordonia.com`, `localhost:4000` σε dev) — magic-link σύνδεση, προφίλ χρήστη & newsletter (`/api/auth/*`, `/api/profile`, `/api/newsletter/*`)
 - **[GoatCounter](https://www.goatcounter.com/)** — στατιστικά επισκεψιμότητας
@@ -89,6 +89,18 @@ npm run start   # Eleventy dev server με live reload
 Άνοιξε: http://localhost:8080/
 
 ## Deployment
-Φιλοξενείται στο **GitHub Pages** μέσω GitHub Actions ([.github/workflows/pages.yml](.github/workflows/pages.yml)): σε κάθε push στο `main`, το Action τρέχει `npm ci` + `npx eleventy` και ανεβάζει τον φάκελο `_site/`. Ο φάκελος `_site/` δεν μπαίνει ποτέ στο git (build artifact).
+Το build γίνεται στο GitHub Actions ([.github/workflows/deploy.yml](.github/workflows/deploy.yml)): σε κάθε push στο `main` τρέχει `npm ci` + `npx eleventy` και ο φάκελος `_site/` ανεβαίνει:
+- στο **Cloudflare Workers** (static assets) με `npx wrangler deploy` — ρυθμίσεις στο [wrangler.jsonc](wrangler.jsonc). Τα URLs μένουν ακριβώς όπως είναι (`post-x.html`)· η 404 είναι η branded σελίδα.
+- στο **GitHub Pages**, ως εφεδρεία μέχρι να περάσει οριστικά το domain στο Cloudflare.
+
+Σε κάθε pull request γίνεται build (έλεγχος) και ανεβαίνει προεπισκόπηση στο `pr-<αριθμός>-dese-kordonia.<subdomain>.workers.dev`.
+
+Για το Cloudflare χρειάζονται τα secrets `CLOUDFLARE_API_TOKEN` και `CLOUDFLARE_ACCOUNT_ID` στο GitHub (Settings → Secrets and variables → Actions)· χωρίς αυτά τα βήματα του Cloudflare παραλείπονται.
+
+- **`_headers`**: security headers (CSP, HSTS, X-Frame-Options κ.λπ.) και cache. Αν προστεθεί νέα εξωτερική υπηρεσία (script, API, εικόνες), πρέπει να μπει και στο `Content-Security-Policy`, αλλιώς ο browser θα τη μπλοκάρει.
+- **`src/_redirects.njk`** → `_redirects`: το `/` σερβίρει το `index.html`, και οι παλιοί σύνδεσμοι χωρίς `.html` πηγαίνουν (301) στη σωστή διεύθυνση.
+- Τοπική δοκιμή όπως στο Cloudflare (με headers και redirects): `npm run cf:dev` → http://localhost:8787/
+
+Ο φάκελος `_site/` δεν μπαίνει ποτέ στο git (build artifact).
 
 > Σημείωση: τα CSS/JS φορτώνονται με `?v=<hash του περιεχομένου>` (φίλτρο `assetHash` στο `.eleventy.js`): όταν αλλάζεις `style.css` ή `main.js`, η παράμετρος αλλάζει μόνη της στο επόμενο build και οι browsers κατεβάζουν τη νέα έκδοση — δεν χρειάζεται να ανεβάσεις κάποιον αριθμό.

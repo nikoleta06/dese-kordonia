@@ -26,7 +26,7 @@ activeNav: "agones"
 
 {% block head_extra2 %}
   <!-- Leaflet (interactive map) -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="vendor/leaflet-1.9.4/leaflet.css">
   <style>
     #race-map {
       height: 520px;
@@ -137,7 +137,7 @@ activeNav: "agones"
 {% block body_extra %}{% endblock %}
 
 {% block scripts_extra %}
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="vendor/leaflet-1.9.4/leaflet.js"></script>
   <script>
     (function () {
       if (typeof L === 'undefined') return;
