@@ -13,6 +13,16 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("favicon.png");
   eleventyConfig.addPassthroughCopy("CNAME");
   eleventyConfig.addPassthroughCopy("googlee4e046c775be8626.html");
+  // Cloudflare: HTTP headers (security, cache) — δες το αρχείο _headers
+  eleventyConfig.addPassthroughCopy("_headers");
+
+  // Leaflet (χάρτης αγώνων) από το ίδιο το site αντί για unpkg.com: κανένα script από τρίτους
+  // χωρίς έλεγχο, και το CSP μένει αυστηρό. Η έκδοση είναι στο όνομα του φακέλου.
+  eleventyConfig.addPassthroughCopy({
+    "node_modules/leaflet/dist/leaflet.{js,css}": "vendor/leaflet-1.9.4",
+    "node_modules/leaflet/dist/images": "vendor/leaflet-1.9.4/images",
+  });
+
   // Fonts (Latin + ελληνικά) από τα πακέτα @fontsource → /fonts, δες css/fonts.css
   eleventyConfig.addPassthroughCopy({
     "node_modules/@fontsource/inter/files/inter-{greek,latin}-{400,500,600}-normal.woff2": "fonts",

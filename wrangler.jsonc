@@ -1,0 +1,19 @@
+// Cloudflare Workers (static assets): εδώ σερβίρεται το desekordonia.com.
+// Το build γίνεται στο GitHub Actions (npx eleventy → _site/) και το deploy με
+// «npx wrangler deploy» — δες .github/workflows/pages.yml.
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "dese-kordonia",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "./_site",
+    // Τα URLs μένουν ακριβώς όπως είναι (post-vo2max.html), όπως τα canonical, το
+    // sitemap και οι σύνδεσμοι — χωρίς αυτόματες ανακατευθύνσεις σε «καθαρά» URLs.
+    "html_handling": "none",
+    // Λάθος διεύθυνση → η branded σελίδα 404.html, με status 404
+    "not_found_handling": "404-page"
+  },
+  // Προσωρινή διεύθυνση *.workers.dev για δοκιμές, και μία ανά PR (pr-<αριθμός>)
+  "workers_dev": true,
+  "preview_urls": true
+}

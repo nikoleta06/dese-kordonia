@@ -9,3 +9,6 @@ images/_originals/
 # Eleventy build
 node_modules/
 _site/
+
+# Cloudflare (wrangler dev)
+.wrangler/

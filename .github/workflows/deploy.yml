@@ -1,0 +1,74 @@
+name: Build & deploy
+
+# push στο main → build και deploy (GitHub Pages + Cloudflare)
+# pull request  → μόνο build (έλεγχος ότι δεν σπάει τίποτα) + προεπισκόπηση στο Cloudflare
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    concurrency:
+      group: build-${{ github.ref }}
+      # σε PR ακυρώνεται το παλιό build όταν έρθει νέο commit· στο main κανένα deploy δεν κόβεται στη μέση
+      cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+    env:
+      # Ορίζονται στο GitHub: Settings → Secrets and variables → Actions.
+      # Όσο λείπουν, τα βήματα του Cloudflare απλώς παραλείπονται.
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          # Όλο το ιστορικό: το sitemap παίρνει το <lastmod> κάθε σελίδας από το git
+          fetch-depth: 0
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Build site
+        run: npx eleventy
+
+      - name: Upload artifact for GitHub Pages
+        if: github.event_name != 'pull_request'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: "_site"
+
+      - name: Deploy to Cloudflare
+        if: github.event_name != 'pull_request' && env.CLOUDFLARE_API_TOKEN != ''
+        run: npx wrangler deploy
+
+      # Κάθε PR παίρνει δική του διεύθυνση: pr-<αριθμός>-dese-kordonia.<subdomain>.workers.dev
+      - name: Preview on Cloudflare
+        if: github.event_name == 'pull_request' && env.CLOUDFLARE_API_TOKEN != ''
+        run: npx wrangler versions upload --preview-alias pr-${{ github.event.number }}
+
+  # Το GitHub Pages μένει live μέχρι να περάσει το domain στο Cloudflare, ως εφεδρεία.
+  deploy-github-pages:
+    if: github.event_name != 'pull_request'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    concurrency:
+      group: "pages"
+      cancel-in-progress: false
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
