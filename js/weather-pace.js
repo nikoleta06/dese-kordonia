@@ -192,6 +192,57 @@
   }
 
   /* ---------- Τοποθεσία ---------- */
+  // Χωρίς τόνους, πεζά, ς → σ: «Κρήτης» και «κρητησ» συγκρίνονται ίδια
+  const norm = (s) => String(s).normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/ς/g, 'σ');
+
+  // Το Open-Meteo ψάχνει μόνο με το όνομα του μέρους, σε μία γλώσσα κάθε φορά. Ρωτάμε
+  // ελληνικά και αγγλικά μαζί (αλλιώς το «Heraklion» στην ελληνική σελίδα βρίσκει μόνο
+  // το αεροδρόμιο) και κρατάμε τη γλώσσα της σελίδας όπου υπάρχει.
+  async function geocode(name) {
+    const langs = EN ? ['en', 'el'] : ['el', 'en'];
+    const lists = await Promise.all(langs.map(async (lang) => {
+      const res = await fetch('https://geocoding-api.open-meteo.com/v1/search?count=10&format=json&language=' +
+        lang + '&name=' + encodeURIComponent(name));
+      if (!res.ok) throw new Error(res.status);
+      return (await res.json()).results || [];
+    }));
+    const byId = new Map();
+    lists.flat().forEach((r) => { if (!byId.has(r.id)) byId.set(r.id, r); });
+    return [...byId.values()];
+  }
+
+  // Ταιριάζει η λέξη με την περιοχή ή τη χώρα του αποτελέσματος; Συγκρίνει την αρχή της
+  // λέξης, ώστε η γενική να πιάνει την ονομαστική («Κρήτης» → «Κρήτη», «Αττικής» → «Αττική»).
+  function inRegion(r, word) {
+    const stem = word.slice(0, Math.max(3, word.length - 2));
+    return [r.admin1, r.admin2, r.admin3, r.admin4, r.country]
+      .some((a) => a && norm(a).split(/\s+/).some((part) => part.startsWith(stem)));
+  }
+
+  // «Ηράκλειο Κρήτης», «Ηράκλειο, Κρήτη», «Καλαμαριά Θεσσαλονίκη»: ψάχνει με μέρος των λέξεων
+  // ως όνομα και φιλτράρει με τις υπόλοιπες ως περιοχή. Αν δεν ταιριάξει καμία περιοχή,
+  // δείχνει ό,τι βρέθηκε για το πιο μεγάλο κομμάτι του ονόματος.
+  async function findPlaces(q) {
+    const words = q.split(/[\s,]+/).filter(Boolean).slice(0, 4);
+    const tries = [];
+    for (let n = words.length; n >= 1; n--) {
+      tries.push({ name: words.slice(0, n), rest: words.slice(n) });
+      if (n < words.length) tries.push({ name: words.slice(words.length - n), rest: words.slice(0, words.length - n) });
+    }
+    let fallback = [];
+    for (const t of tries) {
+      const found = await geocode(t.name.join(' '));
+      const rest = t.rest.map(norm);
+      const matched = found.filter((r) => rest.every((w) => inRegion(r, w)));
+      if (matched.length) return matched;
+      if (!fallback.length) fallback = found;
+    }
+    return fallback;
+  }
+
+  // Πόλεις πριν από αεροδρόμια και μικρά χωριά με το ίδιο όνομα
+  const byPopulation = (a, b) => (b.population || 0) - (a.population || 0);
+
   async function search() {
     const q = $('wpQuery').value.trim();
     if (q.length < 2) return;
@@ -199,12 +250,7 @@
     list.replaceChildren();
     status(T.searching);
     try {
-      const url = 'https://geocoding-api.open-meteo.com/v1/search?count=6&format=json&language=' +
-        (EN ? 'en' : 'el') + '&name=' + encodeURIComponent(q);
-      const res = await fetch(url);
-      if (!res.ok) throw new Error(res.status);
-      const data = await res.json();
-      const results = data.results || [];
+      const results = (await findPlaces(q)).sort(byPopulation).slice(0, 6);
       if (!results.length) { status(T.noResults, true); return; }
       status('');
       results.forEach((r) => {
