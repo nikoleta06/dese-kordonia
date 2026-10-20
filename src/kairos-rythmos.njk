@@ -1,0 +1,142 @@
+---
+permalink: "kairos-rythmos.html"
+lang: "el"
+title: "Ρυθμός και Καιρός: Πόσο να Κόψεις τον Ρυθμό στη Ζέστη | Δέσε Κορδόνια"
+description: "Δωρεάν εργαλείο: βάλε τον ρυθμό σου και την πόλη σου και δες πόσο πιο αργά να τρέξεις με τη ζέστη και την υγρασία της πρόγνωσης, και ποια είναι η πιο δροσερή ώρα για τρέξιμο τις επόμενες 7 μέρες."
+activeNav: "kairos-rythmos"
+---
+
+{% extends "base.njk" %}
+
+{% block head_extra0 %}{% endblock %}
+
+{% block head_extra %}
+  <link rel="canonical" href="https://desekordonia.com/kairos-rythmos.html">
+  <link rel="alternate" hreflang="el" href="https://desekordonia.com/kairos-rythmos.html">
+  <link rel="alternate" hreflang="en" href="https://desekordonia.com/kairos-rythmos-en.html">
+  <link rel="alternate" hreflang="x-default" href="https://desekordonia.com/kairos-rythmos.html">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Ρυθμός και Καιρός | Δέσε Κορδόνια">
+  <meta property="og:description" content="Πόσο πιο αργά να τρέξεις με τη ζέστη και την υγρασία της πρόγνωσης, και ποια είναι η πιο δροσερή ώρα για τρέξιμο τις επόμενες 7 μέρες.">
+  <meta property="og:image" content="https://desekordonia.com/images/cat-science.jpg">
+  <meta property="og:url" content="https://desekordonia.com/kairos-rythmos.html">
+  <meta name="twitter:card" content="summary_large_image">
+{% endblock %}
+
+{% block head_extra2 %}{% endblock %}
+
+{% block content %}
+  <main>
+    <h1 class="section-title">Ρυθμός και Καιρός</h1>
+    <p class="lead">
+      Με 30°C και υγρασία, ο ίδιος ρυθμός σού κοστίζει πολύ περισσότερο απ’ ό,τι ένα δροσερό
+      πρωινό. Βάλε τον ρυθμό σου και την πόλη σου, και δες <strong>πόσο πιο αργά να τρέξεις</strong>
+      με βάση την πρόγνωση, και ποια είναι η <strong>πιο δροσερή ώρα</strong> τις επόμενες 7 μέρες.
+    </p>
+    <p class="wp-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10Z"/></svg><span>Δουλεύει για κάθε πόλη, <strong>στην Ελλάδα και σε όλο τον κόσμο</strong>.</span></p>
+
+    <div class="calc wp">
+      <div class="field">
+        <label>Ο ρυθμός σου με καλό καιρό</label>
+        <div class="time-inputs wp-pace-inputs">
+          <div><input type="number" id="wpMin" min="2" max="20" step="1" placeholder="5" aria-label="Λεπτά ανά χιλιόμετρο" inputmode="numeric"><small>Λεπτά</small></div>
+          <div><input type="number" id="wpSec" min="0" max="59" step="1" placeholder="20" aria-label="Δευτερόλεπτα ανά χιλιόμετρο" inputmode="numeric"><small>Δευτερόλεπτα / χλμ.</small></div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="wpQuery">Πού θα τρέξεις;</label>
+        <div id="wpSearchBox">
+          <div class="wp-search">
+            <input type="search" id="wpQuery" placeholder="π.χ. Θεσσαλονίκη ή Λονδίνο" autocomplete="off" enterkeyhint="search">
+            <button class="btn" id="wpSearchBtn" type="button">Αναζήτηση</button>
+          </div>
+          <button class="wp-link" id="wpGeoBtn" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+            Χρησιμοποίησε τη θέση μου
+          </button>
+          <div class="wp-places" id="wpPlaces"></div>
+        </div>
+        <div class="wp-placebox calc-hidden" id="wpPlaceBox">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          <strong id="wpPlaceName"></strong>
+          <button class="wp-link" id="wpChange" type="button">Αλλαγή</button>
+        </div>
+      </div>
+
+      <p class="wp-status" id="wpStatus" role="status" aria-live="polite"></p>
+
+      <div class="calc-result calc-hidden" id="wpOut">
+        <h2 class="wp-h">Διάλεξε μέρα και ώρα</h2>
+        <div class="wp-grid" id="wpGrid"></div>
+        <ul class="wp-legend">
+          <li><span class="wp-swatch lv-good"></span>Ιδανικά</li>
+          <li><span class="wp-swatch lv-fair"></span>Λίγη ζέστη</li>
+          <li><span class="wp-swatch lv-hard"></span>Ζέστη</li>
+          <li><span class="wp-swatch lv-bad"></span>Πολύ ζέστη</li>
+          <li><span class="wp-swatch lv-extreme"></span>Επικίνδυνο</li>
+          <li><span class="wp-swatch wp-best"></span>Η πιο δροσερή ώρα</li>
+        </ul>
+
+        <div class="wp-result" aria-live="polite">
+          <p class="wp-when" id="wpWhen"></p>
+          <span class="wp-level" id="wpLevel"></span>
+          <div class="pace">
+            <div class="big" id="wpPace"></div>
+            <span class="label" id="wpPaceLabel"></span>
+          </div>
+          <p class="wp-delta" id="wpDelta"></p>
+          <table><tbody id="wpConditions"></tbody></table>
+          <ul class="wp-tips" id="wpTips"></ul>
+        </div>
+
+        <p class="image-credit" style="margin-top:1rem;">
+          * Εκτίμηση, όχι ιατρική συμβουλή. Ο καθένας αντέχει τη ζέστη διαφορετικά, και ο οργανισμός
+          προσαρμόζεται μέσα σε 10–14 μέρες προπόνησης στη ζέστη. Αν νιώσεις ζάλη, ναυτία ή σταματήσεις
+          να ιδρώνεις, σταμάτα αμέσως, βρες σκιά και πιες νερό.
+        </p>
+        <p class="image-credit">Δεδομένα καιρού: <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo.com</a> (CC BY 4.0)</p>
+      </div>
+    </div>
+
+    <section class="wp-about">
+      <h2 class="wp-h">Πώς υπολογίζεται</h2>
+      <p>
+        Η ζέστη μόνη της δεν λέει όλη την ιστορία. Αυτό που κρυώνει το σώμα όταν τρέχεις είναι η
+        εξάτμιση του ιδρώτα, και όσο περισσότερη υγρασία έχει ο αέρας τόσο πιο δύσκολα γίνεται.
+        Γι’ αυτό το εργαλείο κοιτά μαζί τη <strong>θερμοκρασία</strong> και το <strong>σημείο δρόσου</strong>,
+        που δείχνει πόσο νερό έχει πραγματικά ο αέρας.
+      </p>
+      <p>
+        Χρησιμοποιεί έναν πρακτικό κανόνα που εφαρμόζουν πολλοί προπονητές: προσθέτεις τη θερμοκρασία
+        και το σημείο δρόσου σε βαθμούς Φαρενάιτ. Μέχρι το 100 δεν αλλάζει τίποτα. Από εκεί και πάνω
+        ο ρυθμός σου κόβεται σταδιακά, μέχρι περίπου 10% όταν το άθροισμα φτάσει το 180. Πάνω από
+        αυτό, το δυνατό τρέξιμο δεν συνιστάται. Είναι κανόνας από την πράξη και όχι ακριβής τύπος,
+        αλλά συμφωνεί με τις μελέτες που δείχνουν ότι οι χρόνοι στον μαραθώνιο χειροτερεύουν σταθερά
+        όσο ανεβαίνει η θερμοκρασία, και περισσότερο στους πιο αργούς δρομείς.
+      </p>
+      <p>
+        Πιο πολλά για το τι συμβαίνει στο σώμα σου στη ζέστη θα βρεις στο άρθρο για το
+        <a href="post-cardiac-drift.html">cardiac drift</a>.
+      </p>
+    </section>
+
+    <div class="sources">
+      <h4><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Πηγές</h4>
+      <p>Η επιστημονική βάση αυτού του εργαλείου:</p>
+      <ol>
+        <li>Ely, M. R., Cheuvront, S. N., Roberts, W. O., &amp; Montain, S. J. (2007). <cite>Impact of weather on marathon-running performance.</cite> Medicine &amp; Science in Sports &amp; Exercise, 39(3), 487–493. <a href="https://pubmed.ncbi.nlm.nih.gov/?term=Impact+of+weather+on+marathon-running+performance+Ely" target="_blank" rel="noopener">PubMed →</a></li>
+        <li>Ely, M. R., Martin, D. E., Cheuvront, S. N., &amp; Montain, S. J. (2008). <cite>Effect of ambient temperature on marathon pacing is dependent on runner ability.</cite> Medicine &amp; Science in Sports &amp; Exercise, 40(9), 1675–1680. <a href="https://pubmed.ncbi.nlm.nih.gov/?term=Effect+of+ambient+temperature+on+marathon+pacing+is+dependent+on+runner+ability" target="_blank" rel="noopener">PubMed →</a></li>
+        <li>Racinais, S., et al. (2015). <cite>Consensus recommendations on training and competing in the heat.</cite> British Journal of Sports Medicine, 49(18), 1164–1173. <a href="https://pubmed.ncbi.nlm.nih.gov/?term=Consensus+recommendations+on+training+and+competing+in+the+heat" target="_blank" rel="noopener">PubMed →</a></li>
+      </ol>
+    </div>
+  </main>
+{% endblock %}
+
+{% block body_extra %}{% endblock %}
+
+{% block scripts_extra %}
+  <script src="js/weather-pace.js?v={{ "js/weather-pace.js" | assetHash }}" defer></script>
+{% endblock %}
