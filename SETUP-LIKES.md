@@ -22,6 +22,9 @@ create table if not exists public.article_likes (
 
 alter table public.article_likes enable row level security;
 
+-- Πρόσβαση μέσω API (από 30/10/2026 οι νέοι πίνακες δεν την παίρνουν αυτόματα)
+grant select on public.article_likes to anon, authenticated;
+
 -- Ανάγνωση πλήθους
 create or replace function public.get_likes(article_slug text)
 returns integer
