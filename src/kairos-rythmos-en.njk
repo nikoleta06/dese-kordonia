@@ -1,0 +1,140 @@
+---
+permalink: "kairos-rythmos-en.html"
+lang: "en"
+title: "Weather-Adjusted Pace: How Much to Slow Down in the Heat | Δέσε Κορδόνια"
+description: "Free tool: enter your pace and your city and see how much slower to run in the heat and humidity of the forecast, and which is the coolest hour to run over the next 7 days."
+activeNav: "kairos-rythmos"
+---
+
+{% extends "base.njk" %}
+
+{% block head_extra0 %}{% endblock %}
+
+{% block head_extra %}
+  <link rel="canonical" href="https://desekordonia.com/kairos-rythmos-en.html">
+  <link rel="alternate" hreflang="el" href="https://desekordonia.com/kairos-rythmos.html">
+  <link rel="alternate" hreflang="en" href="https://desekordonia.com/kairos-rythmos-en.html">
+  <link rel="alternate" hreflang="x-default" href="https://desekordonia.com/kairos-rythmos.html">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Weather-Adjusted Pace | Δέσε Κορδόνια">
+  <meta property="og:description" content="How much slower to run in the heat and humidity of the forecast, and which is the coolest hour to run over the next 7 days.">
+  <meta property="og:image" content="https://desekordonia.com/images/cat-science.jpg">
+  <meta property="og:url" content="https://desekordonia.com/kairos-rythmos-en.html">
+  <meta name="twitter:card" content="summary_large_image">
+{% endblock %}
+
+{% block head_extra2 %}{% endblock %}
+
+{% block content %}
+  <main>
+    <h1 class="section-title">Weather-Adjusted Pace</h1>
+    <p class="lead">
+      At 30°C with high humidity, the same pace costs you far more than on a cool morning. Enter
+      your pace and your city, and see <strong>how much slower to run</strong> based on the
+      forecast, and which is the <strong>coolest hour</strong> over the next 7 days.
+    </p>
+
+    <div class="calc wp">
+      <div class="field">
+        <label>Your pace in good weather</label>
+        <div class="time-inputs wp-pace-inputs">
+          <div><input type="number" id="wpMin" min="2" max="20" step="1" placeholder="5" aria-label="Minutes per kilometre" inputmode="numeric"><small>Minutes</small></div>
+          <div><input type="number" id="wpSec" min="0" max="59" step="1" placeholder="20" aria-label="Seconds per kilometre" inputmode="numeric"><small>Seconds / km</small></div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="wpQuery">Where will you run?</label>
+        <div id="wpSearchBox">
+          <div class="wp-search">
+            <input type="search" id="wpQuery" placeholder="e.g. Thessaloniki" autocomplete="off" enterkeyhint="search">
+            <button class="btn" id="wpSearchBtn" type="button">Search</button>
+          </div>
+          <button class="wp-link" id="wpGeoBtn" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+            Use my location
+          </button>
+          <div class="wp-places" id="wpPlaces"></div>
+        </div>
+        <div class="wp-placebox calc-hidden" id="wpPlaceBox">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          <strong id="wpPlaceName"></strong>
+          <button class="wp-link" id="wpChange" type="button">Change</button>
+        </div>
+      </div>
+
+      <p class="wp-status" id="wpStatus" role="status" aria-live="polite"></p>
+
+      <div class="calc-result calc-hidden" id="wpOut">
+        <h2 class="wp-h">Pick a day and time</h2>
+        <div class="wp-grid" id="wpGrid"></div>
+        <ul class="wp-legend">
+          <li><span class="wp-swatch lv-good"></span>Ideal</li>
+          <li><span class="wp-swatch lv-fair"></span>Slightly warm</li>
+          <li><span class="wp-swatch lv-hard"></span>Warm</li>
+          <li><span class="wp-swatch lv-bad"></span>Very hot</li>
+          <li><span class="wp-swatch lv-extreme"></span>Dangerous</li>
+          <li><span class="wp-swatch wp-best"></span>Coolest hour</li>
+        </ul>
+
+        <div class="wp-result" aria-live="polite">
+          <p class="wp-when" id="wpWhen"></p>
+          <span class="wp-level" id="wpLevel"></span>
+          <div class="pace">
+            <div class="big" id="wpPace"></div>
+            <span class="label" id="wpPaceLabel"></span>
+          </div>
+          <p class="wp-delta" id="wpDelta"></p>
+          <table><tbody id="wpConditions"></tbody></table>
+          <ul class="wp-tips" id="wpTips"></ul>
+        </div>
+
+        <p class="image-credit" style="margin-top:1rem;">
+          * An estimate, not medical advice. Everyone handles heat differently, and your body adapts
+          within 10–14 days of training in the heat. If you feel dizzy or nauseous, or you stop
+          sweating, stop at once, find shade and drink water.
+        </p>
+        <p class="image-credit">Weather data: <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo.com</a> (CC BY 4.0)</p>
+      </div>
+    </div>
+
+    <section class="wp-about">
+      <h2 class="wp-h">How it works</h2>
+      <p>
+        Heat alone does not tell the whole story. What cools your body while you run is sweat
+        evaporating, and the more moisture there is in the air, the harder that gets. That is why
+        this tool looks at <strong>temperature</strong> and <strong>dew point</strong> together; the
+        dew point shows how much water the air actually holds.
+      </p>
+      <p>
+        It uses a practical rule many coaches apply: add the temperature and the dew point in degrees
+        Fahrenheit. Up to 100, nothing changes. Above that, your pace slows gradually, up to about 10%
+        when the sum reaches 180. Beyond that, hard running is not recommended. It is a rule from
+        practice rather than an exact formula, but it agrees with studies showing that marathon times
+        get steadily worse as temperature rises, and more so for slower runners.
+      </p>
+      <p>
+        To learn more about what happens to your body in the heat, read the article on
+        <a href="post-cardiac-drift-en.html">cardiac drift</a>.
+      </p>
+    </section>
+
+    <div class="sources">
+      <h4><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Sources</h4>
+      <p>The science behind this tool:</p>
+      <ol>
+        <li>Ely, M. R., Cheuvront, S. N., Roberts, W. O., &amp; Montain, S. J. (2007). <cite>Impact of weather on marathon-running performance.</cite> Medicine &amp; Science in Sports &amp; Exercise, 39(3), 487–493. <a href="https://pubmed.ncbi.nlm.nih.gov/?term=Impact+of+weather+on+marathon-running+performance+Ely" target="_blank" rel="noopener">PubMed →</a></li>
+        <li>Ely, M. R., Martin, D. E., Cheuvront, S. N., &amp; Montain, S. J. (2008). <cite>Effect of ambient temperature on marathon pacing is dependent on runner ability.</cite> Medicine &amp; Science in Sports &amp; Exercise, 40(9), 1675–1680. <a href="https://pubmed.ncbi.nlm.nih.gov/?term=Effect+of+ambient+temperature+on+marathon+pacing+is+dependent+on+runner+ability" target="_blank" rel="noopener">PubMed →</a></li>
+        <li>Racinais, S., et al. (2015). <cite>Consensus recommendations on training and competing in the heat.</cite> British Journal of Sports Medicine, 49(18), 1164–1173. <a href="https://pubmed.ncbi.nlm.nih.gov/?term=Consensus+recommendations+on+training+and+competing+in+the+heat" target="_blank" rel="noopener">PubMed →</a></li>
+      </ol>
+    </div>
+  </main>
+{% endblock %}
+
+{% block body_extra %}{% endblock %}
+
+{% block scripts_extra %}
+  <script src="js/weather-pace.js?v={{ "js/weather-pace.js" | assetHash }}" defer></script>
+{% endblock %}

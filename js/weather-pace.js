@@ -1,0 +1,401 @@
+/* Ρυθμός & Καιρός: πόσο να «κόψεις» τον ρυθμό σου με βάση την πρόγνωση.
+   Κοινό για τις σελίδες kairos-rythmos.html και kairos-rythmos-en.html (η γλώσσα από το <html lang>).
+   Καιρός και αναζήτηση πόλης από το Open-Meteo (δωρεάν, χωρίς κλειδί), απευθείας από τον browser:
+   τίποτα δεν περνά από τον δικό μας server. */
+(function () {
+  'use strict';
+
+  const EN = document.documentElement.lang === 'en';
+  const LOCALE = EN ? 'en-GB' : 'el-GR';
+  const STORE_KEY = 'weatherPace';
+  const FIRST_HOUR = 5;   // το πλέγμα δείχνει τις ώρες 05:00–22:00
+  const LAST_HOUR = 22;
+  const DAYS = 7;         // μετά τις 7 μέρες η πρόγνωση γίνεται πολύ αβέβαιη
+
+  const T = EN ? {
+    searching: 'Searching…',
+    noResults: 'No place found with that name. Try another spelling, e.g. "Athens".',
+    loading: 'Loading the forecast…',
+    netError: 'Could not reach the weather service. Check your connection and try again.',
+    geoUnsupported: 'Your browser does not support location.',
+    geoDenied: 'Location access was not allowed. Search for your city instead.',
+    myLocation: 'My location',
+    noHours: 'No more hours left in the forecast for today. Pick another day.',
+    perKm: '/km',
+    yourPace: 'your pace with good weather',
+    adjusted: 'adjusted pace',
+    noPace: 'Enter your pace to see the adjusted one.',
+    slower: (pct, sec) => '+' + pct + '% (about ' + sec + ' s/km slower)',
+    none: 'No adjustment needed',
+    temp: 'Temperature', feels: 'Feels like', dew: 'Dew point', hum: 'Humidity',
+    wind: 'Wind', rain: 'Chance of rain',
+    levels: {
+      good: 'Ideal conditions',
+      fair: 'Slightly warm',
+      hard: 'Warm and humid',
+      bad: 'Very hot',
+      extreme: 'Dangerous heat'
+    },
+    tips: {
+      good: 'Good day for a hard session or a race. Run your usual pace.',
+      fair: 'Heat starts to cost a little. Drink before you go and start a bit more conservatively.',
+      hard: 'Run by effort or heart rate, not by pace. Take water with you on runs over 45 minutes and look for shade.',
+      bad: 'Keep it easy, or move your run to the early morning. Water and electrolytes are a must, and drop any hard session.',
+      extreme: 'Not a day for running hard. If you go out, keep it short and easy, close to water and shade, or move indoors.',
+      rain: 'High chance of rain: a cap helps, and watch for slippery surfaces.',
+      wind: 'Strong wind: start into the wind so it is behind you on the way back.',
+      cold: 'Cold: dress in layers and start slightly faster than feels right, you will warm up within 10 minutes.',
+      drift: 'Why your heart rate climbs in the heat: cardiac drift →'
+    },
+    best: 'coolest hour of the day',
+    cellLabel: (day, h, t, d) => day + ' ' + h + ', ' + t + '°C, dew point ' + d + '°C'
+  } : {
+    searching: 'Αναζήτηση…',
+    noResults: 'Δεν βρέθηκε μέρος με αυτό το όνομα. Δοκίμασε άλλη γραφή, π.χ. «Αθήνα».',
+    loading: 'Φορτώνει η πρόγνωση…',
+    netError: 'Δεν ήταν δυνατή η σύνδεση με την υπηρεσία καιρού. Έλεγξε τη σύνδεσή σου και δοκίμασε ξανά.',
+    geoUnsupported: 'Ο browser σου δεν υποστηρίζει τοποθεσία.',
+    geoDenied: 'Δεν δόθηκε πρόσβαση στην τοποθεσία. Αναζήτησε την πόλη σου.',
+    myLocation: 'Η θέση μου',
+    noHours: 'Δεν έχουν μείνει άλλες ώρες για σήμερα. Διάλεξε άλλη μέρα.',
+    perKm: '/χλμ.',
+    yourPace: 'ο ρυθμός σου με καλό καιρό',
+    adjusted: 'προσαρμοσμένος ρυθμός',
+    noPace: 'Βάλε τον ρυθμό σου για να δεις τον προσαρμοσμένο.',
+    slower: (pct, sec) => '+' + pct + '% (περίπου ' + sec + '" πιο αργά ανά χλμ.)',
+    none: 'Δεν χρειάζεται προσαρμογή',
+    temp: 'Θερμοκρασία', feels: 'Αίσθηση', dew: 'Σημείο δρόσου', hum: 'Υγρασία',
+    wind: 'Άνεμος', rain: 'Πιθανότητα βροχής',
+    levels: {
+      good: 'Ιδανικές συνθήκες',
+      fair: 'Λίγη ζέστη',
+      hard: 'Ζέστη και υγρασία',
+      bad: 'Πολύ ζέστη',
+      extreme: 'Επικίνδυνη ζέστη'
+    },
+    tips: {
+      good: 'Καλή μέρα για δυνατή προπόνηση ή αγώνα. Τρέξε στον κανονικό σου ρυθμό.',
+      fair: 'Η ζέστη αρχίζει να κοστίζει λίγο. Πιες νερό πριν βγεις και ξεκίνα λίγο πιο συντηρητικά.',
+      hard: 'Τρέξε με βάση την αίσθηση ή τους παλμούς, όχι τον ρυθμό. Πάρε νερό μαζί σου αν τρέξεις πάνω από 45 λεπτά και ψάξε σκιά.',
+      bad: 'Κράτα το χαλαρό ή μετάφερέ το νωρίς το πρωί. Νερό και ηλεκτρολύτες είναι απαραίτητα, και άφησε τη δυνατή προπόνηση για άλλη μέρα.',
+      extreme: 'Δεν είναι μέρα για δυνατό τρέξιμο. Αν βγεις, κράτα το σύντομο και χαλαρό, κοντά σε νερό και σκιά, ή τρέξε σε κλειστό χώρο.',
+      rain: 'Μεγάλη πιθανότητα βροχής: ένα καπέλο βοηθά, και πρόσεχε τις γλιστερές επιφάνειες.',
+      wind: 'Δυνατός άνεμος: ξεκίνα κόντρα στον αέρα, ώστε στην επιστροφή να σε σπρώχνει.',
+      cold: 'Κρύο: ντύσου σε στρώσεις και ξεκίνα με λίγο λιγότερα ρούχα απ’ όσα θέλεις, θα ζεσταθείς στα πρώτα 10 λεπτά.',
+      drift: 'Γιατί ανεβαίνουν οι παλμοί στη ζέστη: cardiac drift →'
+    },
+    best: 'η πιο δροσερή ώρα της μέρας',
+    cellLabel: (day, h, t, d) => day + ' ' + h + ', ' + t + '°C, σημείο δρόσου ' + d + '°C'
+  };
+
+  const $ = (id) => document.getElementById(id);
+
+  /* ---------- Το μοντέλο ----------
+     Πρακτικός κανόνας που χρησιμοποιούν πολλοί προπονητές: άθροισμα θερμοκρασίας και
+     σημείου δρόσου σε °F. Μέχρι 100 δεν χρειάζεται προσαρμογή· πάνω από 180 δεν
+     συνιστάται δυνατό τρέξιμο. Ανάμεσα, το ποσοστό επιβράδυνσης ανεβαίνει κλιμακωτά
+     (εδώ με γραμμική παρεμβολή μέσα σε κάθε κλίμακα, για να μην «πηδά» το αποτέλεσμα). */
+  const BANDS = [ // [άνω όριο αθροίσματος °F, % στην αρχή της κλίμακας, % στο τέλος]
+    [110, 0, 0.5],
+    [120, 0.5, 1],
+    [130, 1, 2],
+    [140, 2, 3],
+    [150, 3, 4.5],
+    [160, 4.5, 6],
+    [170, 6, 8],
+    [180, 8, 10]
+  ];
+  const toF = (c) => c * 9 / 5 + 32;
+  const heatSum = (tC, dC) => toF(tC) + toF(dC);
+
+  function slowdownPct(sum) {
+    if (sum <= 100) return 0;
+    let from = 100;
+    for (const [to, a, b] of BANDS) {
+      if (sum <= to) return a + (b - a) * (sum - from) / (to - from);
+      from = to;
+    }
+    return 10;
+  }
+
+  function levelOf(sum) {
+    if (sum <= 120) return 'good';
+    if (sum <= 140) return 'fair';
+    if (sum <= 160) return 'hard';
+    if (sum <= 180) return 'bad';
+    return 'extreme';
+  }
+
+  /* ---------- Βοηθητικά ---------- */
+  function fmtPace(sec) {
+    sec = Math.round(sec);
+    return Math.floor(sec / 60) + ':' + String(sec % 60).padStart(2, '0');
+  }
+  const hh = (h) => String(h).padStart(2, '0') + ':00';
+  // Οι ώρες του Open-Meteo είναι ήδη τοπικές για το μέρος (timezone=auto), π.χ. "2026-10-20T07:00".
+  // Τις διαβάζουμε σαν κείμενο, ώστε να μη μπλέξει η ζώνη ώρας του browser.
+  function dayName(dateStr, style) {
+    const [y, m, d] = dateStr.split('-').map(Number);
+    return new Intl.DateTimeFormat(LOCALE, { weekday: style, timeZone: 'UTC' }).format(new Date(Date.UTC(y, m - 1, d)));
+  }
+  function dayLong(dateStr) {
+    const [y, m, d] = dateStr.split('-').map(Number);
+    return new Intl.DateTimeFormat(LOCALE, { weekday: 'long', day: 'numeric', month: 'long', timeZone: 'UTC' })
+      .format(new Date(Date.UTC(y, m - 1, d)));
+  }
+  function el(tag, cls, text) {
+    const e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text != null) e.textContent = text;
+    return e;
+  }
+  function load() {
+    try { return JSON.parse(localStorage.getItem(STORE_KEY)) || {}; } catch (e) { return {}; }
+  }
+  function save(patch) {
+    try { localStorage.setItem(STORE_KEY, JSON.stringify(Object.assign(load(), patch))); } catch (e) { /* ιδιωτική περιήγηση κ.λπ. */ }
+  }
+  function status(msg, isError) {
+    const s = $('wpStatus');
+    s.textContent = msg || '';
+    s.classList.toggle('wp-error', !!isError);
+  }
+
+  /* ---------- Κατάσταση ---------- */
+  let place = null;    // { name, lat, lon }
+  let hours = [];      // [{ date, hour, t, d, rh, feels, wind, rain, sum, past }]
+  let selected = null; // στοιχείο του hours
+
+  /* ---------- Ρυθμός ---------- */
+  function paceSec() {
+    const m = parseInt($('wpMin').value, 10) || 0;
+    const s = parseInt($('wpSec').value, 10) || 0;
+    const total = m * 60 + s;
+    return total >= 120 && total <= 1200 ? total : null; // 2:00–20:00 /χλμ.
+  }
+
+  // ?pace=5:20 στο URL (για συνδέσμους από άλλα εργαλεία), αλλιώς ο τελευταίος που έβαλε ο χρήστης
+  function initPace() {
+    const fromUrl = new URLSearchParams(location.search).get('pace');
+    const match = /^(\d{1,2}):(\d{2})$/.exec(fromUrl || '');
+    const saved = load().pace;
+    let sec = match ? +match[1] * 60 + +match[2] : saved;
+    if (sec) {
+      $('wpMin').value = Math.floor(sec / 60);
+      $('wpSec').value = String(sec % 60).padStart(2, '0');
+    }
+    ['wpMin', 'wpSec'].forEach((id) => $(id).addEventListener('input', () => {
+      const p = paceSec();
+      if (p) save({ pace: p });
+      renderResult();
+    }));
+  }
+
+  /* ---------- Τοποθεσία ---------- */
+  async function search() {
+    const q = $('wpQuery').value.trim();
+    if (q.length < 2) return;
+    const list = $('wpPlaces');
+    list.replaceChildren();
+    status(T.searching);
+    try {
+      const url = 'https://geocoding-api.open-meteo.com/v1/search?count=6&format=json&language=' +
+        (EN ? 'en' : 'el') + '&name=' + encodeURIComponent(q);
+      const res = await fetch(url);
+      if (!res.ok) throw new Error(res.status);
+      const data = await res.json();
+      const results = data.results || [];
+      if (!results.length) { status(T.noResults, true); return; }
+      status('');
+      results.forEach((r) => {
+        const detail = [r.admin1, r.country].filter(Boolean).join(', ');
+        const b = el('button', 'wp-place');
+        b.type = 'button';
+        b.append(el('strong', null, r.name), el('span', null, detail));
+        b.addEventListener('click', () => {
+          list.replaceChildren();
+          choosePlace({ name: r.name + (r.country_code && r.country_code !== 'GR' ? ', ' + r.country : ''), lat: r.latitude, lon: r.longitude });
+        });
+        list.append(b);
+      });
+    } catch (e) {
+      status(T.netError, true);
+    }
+  }
+
+  function useMyLocation() {
+    if (!navigator.geolocation) { status(T.geoUnsupported, true); return; }
+    status(T.loading);
+    navigator.geolocation.getCurrentPosition(
+      (pos) => choosePlace({
+        name: T.myLocation,
+        // 2 δεκαδικά (~1 χλμ.): αρκούν για την πρόγνωση και δεν στέλνουμε την ακριβή θέση
+        lat: Math.round(pos.coords.latitude * 100) / 100,
+        lon: Math.round(pos.coords.longitude * 100) / 100
+      }),
+      () => status(T.geoDenied, true),
+      { timeout: 10000, maximumAge: 600000 }
+    );
+  }
+
+  function choosePlace(p) {
+    place = p;
+    save({ place: p });
+    $('wpPlaceName').textContent = p.name;
+    $('wpPlaceBox').classList.remove('calc-hidden');
+    $('wpSearchBox').classList.add('calc-hidden');
+    fetchForecast();
+  }
+
+  /* ---------- Πρόγνωση ---------- */
+  async function fetchForecast() {
+    status(T.loading);
+    $('wpOut').classList.add('calc-hidden');
+    try {
+      const url = 'https://api.open-meteo.com/v1/forecast?latitude=' + place.lat + '&longitude=' + place.lon +
+        '&hourly=temperature_2m,dew_point_2m,relative_humidity_2m,apparent_temperature,wind_speed_10m,precipitation_probability' +
+        '&timezone=auto&forecast_days=' + DAYS;
+      const res = await fetch(url);
+      if (!res.ok) throw new Error(res.status);
+      const data = await res.json();
+      const h = data.hourly;
+      // «Τώρα» στην ώρα του μέρους, όχι του browser
+      const nowLocal = new Date(Date.now() + data.utc_offset_seconds * 1000).toISOString().slice(0, 13);
+      hours = h.time.map((time, i) => ({
+        date: time.slice(0, 10),
+        hour: +time.slice(11, 13),
+        t: h.temperature_2m[i],
+        d: h.dew_point_2m[i],
+        rh: h.relative_humidity_2m[i],
+        feels: h.apparent_temperature[i],
+        wind: h.wind_speed_10m[i],
+        rain: h.precipitation_probability[i],
+        past: time.slice(0, 13) < nowLocal
+      })).filter((x) => x.hour >= FIRST_HOUR && x.hour <= LAST_HOUR && x.t != null && x.d != null);
+      hours.forEach((x) => { x.sum = heatSum(x.t, x.d); });
+      status('');
+      selected = hours.find((x) => !x.past) || null;
+      renderGrid();
+      renderResult();
+      $('wpOut').classList.remove('calc-hidden');
+    } catch (e) {
+      status(T.netError, true);
+    }
+  }
+
+  /* ---------- Πλέγμα ωρών ---------- */
+  function renderGrid() {
+    const grid = $('wpGrid');
+    grid.replaceChildren();
+
+    // Γραμμή με τις ώρες (ετικέτα κάθε 3 ώρες, για να χωρά στο κινητό)
+    const head = el('div', 'wp-row wp-head');
+    head.append(el('span', 'wp-day'));
+    for (let hr = FIRST_HOUR; hr <= LAST_HOUR; hr++) {
+      head.append(el('span', 'wp-hlabel', (hr - FIRST_HOUR) % 3 === 0 ? String(hr).padStart(2, '0') : ''));
+    }
+    grid.append(head);
+
+    const dates = [...new Set(hours.map((x) => x.date))];
+    dates.forEach((date) => {
+      const row = el('div', 'wp-row');
+      row.append(el('span', 'wp-day', dayName(date, 'short')));
+      const dayHours = hours.filter((x) => x.date === date);
+      const future = dayHours.filter((x) => !x.past);
+      const best = future.length ? future.reduce((a, b) => (b.sum < a.sum ? b : a)) : null;
+      for (let hr = FIRST_HOUR; hr <= LAST_HOUR; hr++) {
+        const x = dayHours.find((y) => y.hour === hr);
+        if (!x || x.past) { row.append(el('span', 'wp-cell wp-past')); continue; }
+        const b = el('button', 'wp-cell lv-' + levelOf(x.sum) + (x === best ? ' wp-best' : '') + (x === selected ? ' wp-sel' : ''));
+        b.type = 'button';
+        b.setAttribute('aria-label', T.cellLabel(dayLong(date), hh(hr), Math.round(x.t), Math.round(x.d)) + (x === best ? ' (' + T.best + ')' : ''));
+        b.setAttribute('aria-pressed', x === selected ? 'true' : 'false');
+        b.title = dayName(date, 'short') + ' ' + hh(hr) + ' · ' + Math.round(x.t) + '°C';
+        b.addEventListener('click', () => {
+          selected = x;
+          grid.querySelectorAll('.wp-sel').forEach((c) => { c.classList.remove('wp-sel'); c.setAttribute('aria-pressed', 'false'); });
+          b.classList.add('wp-sel');
+          b.setAttribute('aria-pressed', 'true');
+          renderResult();
+        });
+        row.append(b);
+      }
+      grid.append(row);
+    });
+  }
+
+  /* ---------- Αποτέλεσμα ---------- */
+  function renderResult() {
+    if (!selected) {
+      if (hours.length) status(T.noHours);
+      return;
+    }
+    const x = selected;
+    const level = levelOf(x.sum);
+    const pct = slowdownPct(x.sum);
+    const pace = paceSec();
+
+    $('wpWhen').textContent = dayLong(x.date) + ', ' + hh(x.hour) + (place ? ' · ' + place.name : '');
+
+    const badge = $('wpLevel');
+    badge.className = 'wp-level lv-' + level;
+    badge.textContent = T.levels[level];
+
+    if (pace) {
+      const adj = pace * (1 + pct / 100);
+      $('wpPace').textContent = fmtPace(adj);
+      $('wpPaceLabel').textContent = T.adjusted + ' ' + T.perKm;
+      $('wpDelta').textContent = pct < 0.25
+        ? T.none
+        : T.slower(pct.toLocaleString(LOCALE, { maximumFractionDigits: 1 }), Math.round(adj - pace)) +
+          ' · ' + fmtPace(pace) + ' ' + T.yourPace;
+    } else {
+      $('wpPace').textContent = pct < 0.25 ? '0%' : '+' + pct.toLocaleString(LOCALE, { maximumFractionDigits: 1 }) + '%';
+      $('wpPaceLabel').textContent = T.noPace;
+      $('wpDelta').textContent = pct < 0.25 ? T.none : '';
+    }
+
+    const rows = [
+      [T.temp, Math.round(x.t) + '°C'],
+      [T.feels, Math.round(x.feels) + '°C'],
+      [T.dew, Math.round(x.d) + '°C'],
+      [T.hum, Math.round(x.rh) + '%'],
+      [T.wind, Math.round(x.wind) + (EN ? ' km/h' : ' χλμ./ώρα')]
+    ];
+    if (x.rain != null) rows.push([T.rain, Math.round(x.rain) + '%']);
+    const tbody = $('wpConditions');
+    tbody.replaceChildren();
+    rows.forEach(([k, v]) => {
+      const tr = el('tr');
+      tr.append(el('td', null, k), el('td', null, v));
+      tbody.append(tr);
+    });
+
+    const tips = $('wpTips');
+    tips.replaceChildren(el('li', null, T.tips[level]));
+    if (x.rain >= 50) tips.append(el('li', null, T.tips.rain));
+    if (x.wind >= 30) tips.append(el('li', null, T.tips.wind));
+    if (x.feels <= 3) tips.append(el('li', null, T.tips.cold));
+    if (level !== 'good') {
+      const li = el('li');
+      const a = el('a', null, T.tips.drift);
+      a.href = EN ? 'post-cardiac-drift-en.html' : 'post-cardiac-drift.html';
+      li.append(a);
+      tips.append(li);
+    }
+  }
+
+  /* ---------- Εκκίνηση ---------- */
+  initPace();
+  $('wpSearchBtn').addEventListener('click', search);
+  $('wpQuery').addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); search(); } });
+  $('wpGeoBtn').addEventListener('click', useMyLocation);
+  $('wpChange').addEventListener('click', () => {
+    $('wpSearchBox').classList.remove('calc-hidden');
+    $('wpPlaceBox').classList.add('calc-hidden');
+    $('wpQuery').focus();
+  });
+
+  const saved = load().place;
+  if (saved && typeof saved.lat === 'number' && typeof saved.lon === 'number') choosePlace(saved);
+})();
