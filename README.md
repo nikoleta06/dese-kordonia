@@ -7,7 +7,7 @@
 ---
 
 ## Σελίδες
-- **Αρχική** — καλωσόρισμα, η ιστορία μου, προτεινόμενο άρθρο και γρήγορες συμβουλές
+- **Αρχική** — καλωσόρισμα, η ιστορία μου, το πιο πρόσφατο άρθρο (με ετικέτα «Νέο» για 30 μέρες) και γρήγορες συμβουλές
 - **Ευεξία & Οφέλη** — πώς το τρέξιμο δυναμώνει σώμα και μυαλό
 - **Blog** — άρθρα σε 4 κατηγορίες: Πρωταθλητές, Επιστήμη, Ιστορίες & Ψυχολογία, Πρακτικές
   - **Η Επιστήμη του Τρεξίματος** — συγκεντρωτική σελίδα με όλα τα επιστημονικά άρθρα (VO₂max, κατώφλι γαλακτικού, ζώνες παλμών, easy τρέξιμο, cadence)
@@ -17,64 +17,84 @@
   - Υπολογιστής Ρυθμού (pace + προβλέψεις χρόνων)
   - Ζώνες Καρδιακών Παλμών
   - Πρόβλεψη Χρόνου Αγώνα (5K / 10K / ημιμαραθώνιος / μαραθώνιος, με τον τύπο Riegel)
+  - Ρυθμός & Καιρός — πόσο να κόψεις τον ρυθμό με τη ζέστη και την υγρασία της πρόγνωσης, και η πιο δροσερή ώρα για τρέξιμο τις επόμενες 7 μέρες, για κάθε πόλη του κόσμου
 - **Αποθηκευμένα** — τα άρθρα που έχει σώσει ο επισκέπτης
 - **Σχετικά** — ποια είμαι και γιατί ξεκίνησα το site
-- **Λογαριασμός** — σύνδεση χωρίς κωδικό (magic link), προφίλ (όνομα, bio) και εγγραφή στο newsletter
+- **Λογαριασμός** — σύνδεση με σύνδεσμο στο email, με Face ID / δακτυλικό αποτύπωμα (passkey) ή με προαιρετικό κωδικό, προφίλ (όνομα, bio) και εγγραφή στο newsletter
+- **Απόρρητο** — τι δεδομένα κρατάει το site, πού, και ποιες εξωτερικές υπηρεσίες χρησιμοποιεί (Cloudflare, Supabase, Render, Resend, GoatCounter, Open-Meteo)
 
 Όλες οι σελίδες είναι **δίγλωσσες** (Ελληνικά / Αγγλικά).
 
 ## Χαρακτηριστικά
 - **Δίγλωσσο** (EL/EN) με εναλλαγή γλώσσας
 - **Dark / Light** θέμα (με μνήμη επιλογής)
-- **Σύνδεση χωρίς κωδικό** (magic link) + **εγγραφή στο newsletter**, με σελίδες επιβεβαίωσης (verify) και απεγγραφής (unsubscribe)
+- **Τρεις τρόποι σύνδεσης**: σύνδεσμος στο email (magic link), **passkey** (Face ID / δακτυλικό αποτύπωμα) και **προαιρετικός κωδικός**, με σελίδες επιβεβαίωσης (verify) και απεγγραφής (unsubscribe)
+- **Newsletter** με σύνδεσμο και headers απεγγραφής ενός κλικ (`List-Unsubscribe`)
 - **Προφίλ χρήστη** — όνομα & λίγα λόγια, αποθηκευμένα στον λογαριασμό
 - **Like ανά άρθρο** (διατύπωση ανά κατηγορία) με **κοινό μέτρημα** μέσω Supabase
 - **Αποθήκευση άρθρων** + σελίδα «Αποθηκευμένα» με ταξινόμηση
 - **Χάρτης αγώνων** (Leaflet): φίλτρα ανά τύπο, χρωματιστά pins, λίστα-κάρτες με «δες στον χάρτη»
 - **«Διάβασε επίσης»** σχετικά άρθρα στο τέλος κάθε post
+- **Πιο πρόσφατο άρθρο στην αρχική**, με ετικέτα «Νέο» για 30 μέρες από τη δημοσίευση
+- **Ρυθμός & Καιρός**: πρόγνωση από το Open-Meteo, πλέγμα 7 μερών × 05:00–22:00 χρωματισμένο ανάλογα με τη ζέστη, προσαρμοσμένος ρυθμός, συμβουλές, κουμπί «Καθαρισμός» και έξυπνη αναζήτηση πόλης (ελληνικά και αγγλικά, «Ηράκλειο Κρήτης», ειδοποίηση όταν γράφεις χώρα ή περιοχή)
 - **Αναζήτηση** σε άρθρα και εργαλεία (Pagefind), ξεχωριστά για ελληνικά και αγγλικά — εικονίδιο στο μενού, `search.html?q=…`
 - **Ομαλές μεταβάσεις** ανάμεσα στις σελίδες (View Transitions) και **prefetch** της σελίδας που πας να ανοίξεις (Speculation Rules)
 - **Analytics** (GoatCounter, privacy-friendly)
 - **SEO**: sitemap.xml (παράγεται αυτόματα, με hreflang), robots.txt, Open Graph, Schema.org, hreflang, custom 404
+- **Ασφάλεια**: Content-Security-Policy, HSTS και άλλα security headers μέσω Cloudflare (δες `_headers`)
 - **Εικονογραφημένη ταυτότητα** (σταθερός χαρακτήρας-μασκότ σε όλες τις κατηγορίες)
 - **Responsive** για κινητό, tablet και υπολογιστή
 
 ## Τεχνολογία
-Στατική ιστοσελίδα, χτισμένη με **[Eleventy](https://www.11ty.dev/)** (Nunjucks templates):
+Στατική ιστοσελίδα, χτισμένη με **[Eleventy](https://www.11ty.dev/)** (Nunjucks templates) σε **Node 24 LTS**:
 - **Eleventy** — κοινό layout (`src/_includes/base.njk`) για head/menu/footer, ώστε μια αλλαγή στο μενού ή στο footer να μην χρειάζεται να γίνει σε δεκάδες αρχεία
 - **Άρθρα σε Markdown** (`src/posts/*.md`) με κοινό layout (`src/_includes/post.njk`): meta tags, Open Graph, JSON-LD, ημερομηνία/κατηγορία, εικόνα και «Διάβασε επίσης» φτιάχνονται από το front matter — δες [NEO-ARTHRO.md](NEO-ARTHRO.md)
 - **HTML5 & CSS** (CSS custom properties, dark/light theme)
 - **Fonts από το ίδιο το site** (Inter, Roboto Condensed — `@fontsource`, μόνο Latin + ελληνικά), χωρίς Google Fonts
 - **[Pagefind](https://pagefind.app/)** — στατική αναζήτηση· το ευρετήριο φτιάχνεται στο τέλος κάθε build
 - **Vanilla JavaScript** (`js/main.js`) — theme, μενού, φίλτρα blog, like/save, σχετικά άρθρα, analytics
+  - `js/passkey.js` και `js/password.js` — σύνδεση με passkey και με κωδικό
+  - `js/weather-pace.js` — το εργαλείο «Ρυθμός & Καιρός» (κοινό για ελληνικά και αγγλικά)
 - **[Leaflet](https://leafletjs.com/)** — διαδραστικός χάρτης αγώνων (σερβίρεται από το site, `vendor/leaflet-1.9.4/`)
 - **[Supabase](https://supabase.com/)** — κοινό μέτρημα στα like (`article_likes`, REST + RPC)
-- **Custom backend API** (`api.desekordonia.com`, `localhost:4000` σε dev) — magic-link σύνδεση, προφίλ χρήστη & newsletter (`/api/auth/*`, `/api/profile`, `/api/newsletter/*`)
+- **Custom backend API** (`api.desekordonia.com`, `localhost:4000` σε dev) — σύνδεση (magic link, passkey, κωδικός), προφίλ χρήστη & newsletter (`/api/auth/*`, `/api/profile`, `/api/newsletter/*`)
+- **[Open-Meteo](https://open-meteo.com/)** — πρόγνωση καιρού και αναζήτηση πόλης για το «Ρυθμός & Καιρός»· δωρεάν, χωρίς κλειδί, καλείται απευθείας από τον browser
 - **[GoatCounter](https://www.goatcounter.com/)** — στατιστικά επισκεψιμότητας
+- **[Cloudflare Workers](https://developers.cloudflare.com/workers/)** — φιλοξενία του site, με security headers και redirects
 
 ## Δομή
 ```
 robots.txt, CNAME
 favicon.ico, favicon.png    # εικονίδιο site (και στο images/)
 package.json, .eleventy.js  # ρύθμιση Eleventy
+wrangler.jsonc              # ρύθμιση Cloudflare Workers
+_headers                    # security headers (CSP κ.λπ.) και cache για το Cloudflare
+.github/workflows/deploy.yml  # build + deploy (Cloudflare, GitHub Pages) και preview σε κάθε PR
+NEO-ARTHRO.md               # πώς γράφεις νέο άρθρο
 src/
   _includes/
     base.njk                # το κοινό layout (head, header/nav, footer)
     post.njk                # το layout των άρθρων (πάνω στο base.njk)
     author-box.njk          # πλαίσιο συγγραφέα στο τέλος των άρθρων
     related.njk             # «Διάβασε επίσης» — 3 σχετικά άρθρα
+    latest-post.njk         # το πιο πρόσφατο άρθρο στην αρχική (με ετικέτα «Νέο»)
     search-script.njk       # Pagefind UI (κοινό για search / search-en)
   _data/
     nav.js                  # στοιχεία μενού (κύριο + dropdown εργαλείων)
     postsData.js            # κατηγορίες + λίστα άρθρων (φτιάχνεται μόνη της από το src/posts/)
+    races.js                # οι αγώνες του χάρτη
   posts/                    # τα άρθρα: post-x.md (EL) και post-x-en.md (EN)
     posts.11tydata.js       # κοινές ρυθμίσεις άρθρων (layout, URL, γλώσσα)
   *.njk                     # οι υπόλοιπες σελίδες, μία ανά αρχείο (EL & -en για EN)
   404.njk                   # branded σελίδα σφάλματος (αυτόνομη, χωρίς base.njk)
   sitemap.njk               # → sitemap.xml, από όλες τις σελίδες χωρίς «noindex: true»
+  _redirects.njk            # → _redirects για το Cloudflare (/ και παλιοί σύνδεσμοι χωρίς .html)
+  kairos-rythmos(-en).njk   # το εργαλείο «Ρυθμός & Καιρός»
 css/style.css               # στυλ
 css/fonts.css               # @font-face για τα fonts του site (αρχεία στο /fonts κατά το build)
 js/main.js                  # κοινό JavaScript
+js/passkey.js, js/password.js  # σύνδεση με passkey / κωδικό
+js/weather-pace.js          # λογική του «Ρυθμός & Καιρός» (Open-Meteo, υπολογισμός, πλέγμα)
 images/                     # logo, favicon, εικόνες (originals στο images/_originals/)
 SETUP-LIKES.md              # οδηγίες Supabase (μέτρημα like)
 SETUP-ANALYTICS.md          # οδηγίες GoatCounter
@@ -82,11 +102,21 @@ SETUP-ANALYTICS.md          # οδηγίες GoatCounter
 Κάθε σελίδα (`.njk`) έχει ένα μικρό front matter (τίτλος, περιγραφή, γλώσσα) και μετά το δικό της περιεχόμενο. Με `noindex: true` μια σελίδα μένει εκτός sitemap και αναζήτησης (λογαριασμός, σύνδεση κ.λπ.)· με `nosearch: true` μόνο εκτός αναζήτησης (η λίστα του blog) — ό,τι ήταν πριν μέσα στο `<main>` παραμένει ακριβώς το ίδιο, απλά το header/footer/menu τα παίρνει έτοιμα από το layout.
 
 ## Τοπική προεπισκόπηση
+Χρειάζεται **Node 24** ή νεότερο.
 ```bash
 npm install     # μία φορά
 npm run start   # Eleventy dev server με live reload
 ```
 Άνοιξε: http://localhost:8080/
+
+Ο dev server του Eleventy δεν εφαρμόζει τα headers του `_headers`. Για δοκιμή όπως στο Cloudflare (CSP, redirects): `npm run cf:dev` → http://localhost:8787/
+
+## Ρυθμός & Καιρός (Open-Meteo)
+- Ο browser καλεί απευθείας δύο endpoints του Open-Meteo: `geocoding-api.open-meteo.com/v1/search` (αναζήτηση πόλης, ελληνικά και αγγλικά μαζί) και `api.open-meteo.com/v1/forecast` (ωριαία πρόγνωση 7 ημερών). Δεν υπάρχει κλειδί ή secret, και ο δικός μας server δεν μεσολαβεί.
+- Και τα δύο domains είναι στο `connect-src` του CSP (`_headers`). Το `geolocation=(self)` στο `Permissions-Policy` επιτρέπει το κουμπί «Χρησιμοποίησε τη θέση μου». Οι συντεταγμένες στρογγυλεύονται στο ~1 χλμ. πριν σταλούν.
+- Ο υπολογισμός: θερμοκρασία + σημείο δρόσου σε °F, από 0% (≤100) έως ~10% (180). Οι κλίμακες είναι στον πίνακα `BANDS` του `js/weather-pace.js`.
+- Ρυθμός και πόλη μένουν στο localStorage (`weatherPace`)· το κουμπί «Καθαρισμός» τα σβήνει. Το `kairos-rythmos.html?pace=5:20` ανοίγει με έτοιμο ρυθμό.
+- Το δωρεάν πρόγραμμα του Open-Meteo είναι για **μη εμπορική χρήση**, και η άδεια των δεδομένων (CC BY 4.0) ζητά αναφορά: η γραμμή «Δεδομένα καιρού: Open-Meteo.com» στη σελίδα πρέπει να μείνει.
 
 ## Deployment
 Το build γίνεται στο GitHub Actions ([.github/workflows/deploy.yml](.github/workflows/deploy.yml)): σε κάθε push στο `main` τρέχει `npm ci` + `npx eleventy` και ο φάκελος `_site/` ανεβαίνει:
