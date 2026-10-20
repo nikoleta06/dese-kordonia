@@ -39,10 +39,13 @@ activeNav: "kairos-rythmos"
 
     <div class="calc wp">
       <div class="field">
-        <label>Ο ρυθμός σου με καλό καιρό</label>
+        <div class="wp-label-row">
+          <label>Ο ρυθμός σου με καλό καιρό</label>
+          <button class="wp-reset" id="wpReset" type="button" aria-label="Καθαρισμός: σβήνει τον ρυθμό, την πόλη και την πρόγνωση" title="Καθαρισμός: σβήνει τον ρυθμό, την πόλη και την πρόγνωση"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg><span>Καθαρισμός</span></button>
+        </div>
         <div class="time-inputs wp-pace-inputs">
-          <div><input type="number" id="wpMin" min="2" max="20" step="1" placeholder="5" aria-label="Λεπτά ανά χιλιόμετρο" inputmode="numeric"><small>Λεπτά</small></div>
-          <div><input type="number" id="wpSec" min="0" max="59" step="1" placeholder="20" aria-label="Δευτερόλεπτα ανά χιλιόμετρο" inputmode="numeric"><small>Δευτερόλεπτα / χλμ.</small></div>
+          <div><input type="number" id="wpMin" min="2" max="20" step="1" placeholder="π.χ. 5" aria-label="Λεπτά ανά χιλιόμετρο" inputmode="numeric"><small>Λεπτά</small></div>
+          <div><input type="number" id="wpSec" min="0" max="59" step="1" placeholder="π.χ. 30" aria-label="Δευτερόλεπτα ανά χιλιόμετρο" inputmode="numeric"><small>Δευτερόλεπτα / χλμ.</small></div>
         </div>
       </div>
 

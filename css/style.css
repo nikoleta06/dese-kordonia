@@ -1722,6 +1722,45 @@ tbody tr:last-child td {
   font-weight: 600;
 }
 
+/* Ετικέτα ρυθμού και κουμπί «Καθαρισμός» στην ίδια γραμμή */
+.wp-label-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+  margin-bottom: 0.4rem;
+}
+
+.calc .wp-label-row label {
+  margin-bottom: 0;
+}
+
+.wp-reset {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  flex-shrink: 0;
+  padding: 0.3rem 0.7rem;
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--text-dim);
+  font-family: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.wp-reset:hover,
+.wp-reset:focus-visible {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.wp-reset svg {
+  width: 15px;
+  height: 15px;
+}
+
 .calc .wp-pace-inputs {
   grid-template-columns: 1fr 1fr;
   max-width: 320px;
@@ -1806,6 +1845,11 @@ tbody tr:last-child td {
 
 .wp-placebox .wp-link {
   margin: 0 0 0 auto;
+}
+
+/* Το display: flex πιο πάνω νικούσε το .calc-hidden, και η γραμμή «Αλλαγή» φαινόταν χωρίς πόλη */
+.wp-placebox.calc-hidden {
+  display: none;
 }
 
 .wp-status:empty {
@@ -2006,6 +2050,11 @@ tbody tr:last-child td {
 @media (max-width: 600px) {
   .calc.wp {
     padding: 1.4rem 1rem;
+  }
+
+  /* Κουμπί αναζήτησης κάτω από το πεδίο, ώστε να χωρά ολόκληρο το «π.χ. Θεσσαλονίκη ή Λονδίνο» */
+  .wp-search {
+    flex-direction: column;
   }
 
   .wp-row {

@@ -14,7 +14,11 @@
 
   const T = EN ? {
     searching: 'Searching…',
-    noResults: 'No place found with that name. Try another spelling, e.g. "Athens".',
+    notFoundLatin: 'No city found with that name. Check the spelling, or write it in the local language (e.g. "München").',
+    notFoundGreek: 'No city found with that name. If you entered a region or an island, enter the city or town instead. For a city outside Greece, write it in English or in Latin letters (e.g. "Milan", "Lisbon").',
+    notFoundOther: 'No city found with that name. Write it in English or in Latin letters (e.g. "Moscow", "Tokyo").',
+    isCountry: (q) => '"' + q + '" is a country. Enter a city or town, e.g. "Athens" or "London".',
+    isRegion: (q) => '"' + q + '" is a region or an island, not a city. Enter the city or town where you will run.',
     loading: 'Loading the forecast…',
     netError: 'Could not reach the weather service. Check your connection and try again.',
     geoUnsupported: 'Your browser does not support location.',
@@ -51,7 +55,11 @@
     cellLabel: (day, h, t, d) => day + ' ' + h + ', ' + t + '°C, dew point ' + d + '°C'
   } : {
     searching: 'Αναζήτηση…',
-    noResults: 'Δεν βρέθηκε μέρος με αυτό το όνομα. Δοκίμασε άλλη γραφή, π.χ. «Αθήνα».',
+    notFoundLatin: 'Δεν βρέθηκε πόλη με αυτό το όνομα. Έλεγξε την ορθογραφία ή γράψ’ τη στη γλώσσα της χώρας (π.χ. «München»).',
+    notFoundGreek: 'Δεν βρέθηκε πόλη με αυτό το όνομα. Αν έγραψες περιοχή ή νησί, γράψε την πόλη ή το χωριό. Αν είναι πόλη του εξωτερικού, γράψ’ τη στα αγγλικά ή με λατινικούς χαρακτήρες (π.χ. «Milan», «Lisbon»).',
+    notFoundOther: 'Δεν βρέθηκε πόλη με αυτό το όνομα. Γράψ’ τη στα αγγλικά ή με λατινικούς χαρακτήρες (π.χ. «Moscow», «Tokyo»).',
+    isCountry: (q) => 'Το «' + q + '» είναι χώρα. Γράψε μια πόλη ή ένα χωριό, π.χ. «Αθήνα» ή «Λονδίνο».',
+    isRegion: (q) => 'Το «' + q + '» είναι περιοχή ή νησί, όχι πόλη. Γράψε την πόλη ή το χωριό όπου θα τρέξεις.',
     loading: 'Φορτώνει η πρόγνωση…',
     netError: 'Δεν ήταν δυνατή η σύνδεση με την υπηρεσία καιρού. Έλεγξε τη σύνδεσή σου και δοκίμασε ξανά.',
     geoUnsupported: 'Ο browser σου δεν υποστηρίζει τοποθεσία.',
@@ -165,6 +173,7 @@
   let place = null;    // { name, lat, lon }
   let hours = [];      // [{ date, hour, t, d, rh, feels, wind, rain, sum, past }]
   let selected = null; // στοιχείο του hours
+  let run = 0;         // αυξάνεται με το «Καθαρισμός»: απαντήσεις που έρχονται αργότερα αγνοούνται
 
   /* ---------- Ρυθμός ---------- */
   function paceSec() {
@@ -206,8 +215,14 @@
       if (!res.ok) throw new Error(res.status);
       return (await res.json()).results || [];
     }));
+    // Κρατάμε το όνομα και στις δύο γλώσσες: το νησί «Crete» στα ελληνικά λέγεται «Nísos Kríti»,
+    // και η πόλη «Σιγκαπούρη» στα αγγλικά «Singapore»
     const byId = new Map();
-    lists.flat().forEach((r) => { if (!byId.has(r.id)) byId.set(r.id, r); });
+    lists.flat().forEach((r) => {
+      const known = byId.get(r.id);
+      if (known) known.names.push(norm(r.name));
+      else byId.set(r.id, Object.assign({}, r, { names: [norm(r.name)] }));
+    });
     return [...byId.values()];
   }
 
@@ -243,15 +258,38 @@
   // Πόλεις πριν από αεροδρόμια και μικρά χωριά με το ίδιο όνομα
   const byPopulation = (a, b) => (b.population || 0) - (a.population || 0);
 
+  // Τι λέμε όταν δεν βρέθηκε τίποτα: εξαρτάται από το αλφάβητο που έγραψε ο χρήστης.
+  // Πολλές ξένες πόλεις δεν υπάρχουν με ελληνικό όνομα (π.χ. «Μιλάνο»), αλλά βρίσκονται στα αγγλικά.
+  function notFoundMsg(q) {
+    if (/[Ͱ-Ͽἀ-῿]/.test(q)) return T.notFoundGreek;
+    if (/[^\u0000-ɏ\s.,'’-]/.test(q)) return T.notFoundOther;
+    return T.notFoundLatin;
+  }
+
+  // Κωδικοί GeoNames: PPL* = πόλη/χωριό, PCL* = χώρα, ADM*/ISL*/RGN* = περιοχή, νησί κ.λπ.
+  const isTown = (r) => !r.feature_code || r.feature_code.startsWith('PPL');
+  const isCountry = (r) => /^PCL/.test(r.feature_code || '');
+  const isRegion = (r) => /^(ADM|ISL|RGN|AREA|PEN|PRSH)/.test(r.feature_code || '');
+
   async function search() {
     const q = $('wpQuery').value.trim();
     if (q.length < 2) return;
+    const myRun = run;
     const list = $('wpPlaces');
     list.replaceChildren();
     status(T.searching);
     try {
-      const results = (await findPlaces(q)).sort(byPopulation).slice(0, 6);
-      if (!results.length) { status(T.noResults, true); return; }
+      const found = await findPlaces(q);
+      if (myRun !== run) return;
+      const sameName = (r) => r.names.includes(norm(q));
+      const towns = found.filter(isTown).sort(byPopulation);
+      // Μεγάλη πόλη με το ίδιο όνομα (Σιγκαπούρη, Λουξεμβούργο, Νέα Υόρκη): δεν είναι λάθος, τη δείχνουμε.
+      // Αλλιώς «Ελλάδα», «Germany» είναι χώρα και «Crete» νησί, όχι τα χωριά των ΗΠΑ με το ίδιο όνομα.
+      const bigTown = towns.some((r) => sameName(r) && (r.feature_code === 'PPLC' || (r.population || 0) >= 50000));
+      if (!bigTown && found.some((r) => sameName(r) && isCountry(r))) { status(T.isCountry(q), true); return; }
+      if (!bigTown && found.some((r) => sameName(r) && isRegion(r))) { status(T.isRegion(q), true); return; }
+      const results = towns.slice(0, 6);
+      if (!results.length) { status(notFoundMsg(q), true); return; }
       status('');
       results.forEach((r) => {
         const detail = [r.admin1, r.country].filter(Boolean).join(', ');
@@ -272,14 +310,15 @@
   function useMyLocation() {
     if (!navigator.geolocation) { status(T.geoUnsupported, true); return; }
     status(T.loading);
+    const myRun = run;
     navigator.geolocation.getCurrentPosition(
-      (pos) => choosePlace({
+      (pos) => myRun === run && choosePlace({
         name: T.myLocation,
         // 2 δεκαδικά (~1 χλμ.): αρκούν για την πρόγνωση και δεν στέλνουμε την ακριβή θέση
         lat: Math.round(pos.coords.latitude * 100) / 100,
         lon: Math.round(pos.coords.longitude * 100) / 100
       }),
-      () => status(T.geoDenied, true),
+      () => { if (myRun === run) status(T.geoDenied, true); },
       { timeout: 10000, maximumAge: 600000 }
     );
   }
@@ -295,6 +334,7 @@
 
   /* ---------- Πρόγνωση ---------- */
   async function fetchForecast() {
+    const myRun = run;
     status(T.loading);
     $('wpOut').classList.add('calc-hidden');
     try {
@@ -304,6 +344,7 @@
       const res = await fetch(url);
       if (!res.ok) throw new Error(res.status);
       const data = await res.json();
+      if (myRun !== run) return;
       const h = data.hourly;
       // «Τώρα» στην ώρα του μέρους, όχι του browser
       const nowLocal = new Date(Date.now() + data.utc_offset_seconds * 1000).toISOString().slice(0, 13);
@@ -325,7 +366,7 @@
       renderResult();
       $('wpOut').classList.remove('calc-hidden');
     } catch (e) {
-      status(T.netError, true);
+      if (myRun === run) status(T.netError, true);
     }
   }
 
@@ -431,7 +472,30 @@
     }
   }
 
+  /* ---------- Καθαρισμός ----------
+     Σβήνει ρυθμό, πόλη και πρόγνωση, και από τη σελίδα και από το localStorage,
+     ώστε την επόμενη φορά να ανοίγει άδειο. */
+  function reset() {
+    run++;
+    try { localStorage.removeItem(STORE_KEY); } catch (e) { /* ιδιωτική περιήγηση κ.λπ. */ }
+    if (location.search) history.replaceState(null, '', location.pathname); // αλλιώς το ?pace= θα ξαναγέμιζε τον ρυθμό
+    place = null;
+    hours = [];
+    selected = null;
+    $('wpMin').value = '';
+    $('wpSec').value = '';
+    $('wpQuery').value = '';
+    $('wpPlaces').replaceChildren();
+    $('wpGrid').replaceChildren();
+    $('wpOut').classList.add('calc-hidden');
+    $('wpPlaceBox').classList.add('calc-hidden');
+    $('wpSearchBox').classList.remove('calc-hidden');
+    status('');
+    $('wpMin').focus();
+  }
+
   /* ---------- Εκκίνηση ---------- */
+  $('wpReset').addEventListener('click', reset);
   initPace();
   $('wpSearchBtn').addEventListener('click', search);
   $('wpQuery').addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); search(); } });
