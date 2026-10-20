@@ -1696,6 +1696,32 @@ tbody tr:last-child td {
   --lv-extreme: #8e1b3a;
 }
 
+/* «Δουλεύει για κάθε πόλη…» κάτω από την εισαγωγή */
+.wp-note {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  padding: 0.5rem 0.9rem;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--text-dim);
+  font-size: 0.92rem;
+}
+
+.wp-note svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  color: var(--accent);
+}
+
+.wp-note strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
 .calc .wp-pace-inputs {
   grid-template-columns: 1fr 1fr;
   max-width: 320px;
