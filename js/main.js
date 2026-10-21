@@ -202,6 +202,10 @@ document.addEventListener('DOMContentLoaded', function () {
         });
       });
     });
+    // blog.html?cat=science (από τις κατηγορίες της αρχικής): ανοίγει με αυτό το φίλτρο
+    const cat = new URLSearchParams(location.search).get('cat');
+    const preset = cat && [...filterBtns].find((b) => b.dataset.filter === cat);
+    if (preset) preset.click();
   }
 
   /* --- Language toggle (EL / EN) --- */
