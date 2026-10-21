@@ -55,8 +55,9 @@
         </div>
       </a>
 
-      {#- Οι επόμενοι αγώνες στην Ελλάδα· φαίνονται οι 3 πρώτοι (CSS), το js/home.js
-          τους ξαναταξινομεί με τον σημερινό μήνα #}
+      {#- Οι επόμενοι αγώνες στην Ελλάδα· φαίνονται οι 3 πρώτοι (CSS). Το js/home.js τους
+          ξαναταξινομεί με τη σημερινή μέρα και, όπου υπάρχει ημερομηνία, βάζει τη μέρα και
+          αντίστροφη μέτρηση στη θέση του μήνα #}
       <div class="bento-card b-races">
         <p class="b-kicker">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></svg>
@@ -64,7 +65,7 @@
         </p>
         <ol class="b-race-list" id="homeRaces">
           {%- for r in races.list | racesFromNow("gr") %}
-          <li data-month="{{ r.month }}">
+          <li data-month="{{ r.month }}"{% if r.date %} data-date="{{ r.date }}"{% endif %}{% if r.dateEnd %} data-date-end="{{ r.dateEnd }}"{% endif %}>
             <span class="b-race-month">{{ races.monthNames[lang][r.month - 1] }}</span>
             <span class="b-race-name">{{ r.name[lang] }}</span>
             <span class="b-race-specs">{{ r.specs[lang] }}</span>

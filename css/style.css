@@ -635,6 +635,14 @@ a.bento-card:focus-visible {
   font-weight: 600;
 }
 
+.b-race-countdown {
+  display: block;
+  color: var(--text-dim);
+  font-family: "Inter", sans-serif;
+  font-size: 0.78rem;
+  font-weight: 400;
+}
+
 .b-race-name {
   color: var(--text);
   font-weight: 500;

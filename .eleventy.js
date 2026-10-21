@@ -92,13 +92,25 @@ module.exports = function (eleventyConfig) {
   // Αρχική: πόσα άρθρα έχει μια κατηγορία (για τις κατηγορίες κάτω από τα πρόσφατα άρθρα)
   eleventyConfig.addFilter("countCat", (posts, cat) => posts.filter((p) => p.cat === cat).length);
 
-  // Αρχική: οι αγώνες μιας περιοχής ταξινομημένοι από τον μήνα του build και μετά (με
-  // αναδίπλωση στον Ιανουάριο). Το js/home.js τους ξαναταξινομεί με τον σημερινό μήνα,
-  // ώστε η λίστα να μένει σωστή κι αν περάσει καιρός χωρίς νέο build.
+  // Αρχική: οι αγώνες μιας περιοχής με σειρά επόμενης διοργάνωσης, με τη μέρα του build.
+  // Ίδιος κανόνας με το js/race-dates.js, που τους ξαναταξινομεί στον browser ώστε η λίστα
+  // να μένει σωστή κι αν περάσει καιρός χωρίς νέο build: ημερομηνία που δεν πέρασε μετρά
+  // όπως είναι, ημερομηνία που πέρασε πάει ένα χρόνο μετά, χωρίς ημερομηνία ο μήνας.
   eleventyConfig.addFilter("racesFromNow", (list, region) => {
-    const now = new Date().getMonth() + 1;
-    const rank = (m) => (m - now + 12) % 12;
-    return list.filter((r) => r.region === region).sort((a, b) => rank(a.month) - rank(b.month));
+    const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    const day = (str) => new Date(str + "T00:00");
+    const key = (r) => {
+      if (r.date) {
+        const start = day(r.date);
+        if (day(r.dateEnd || r.date) >= today) return start.getTime();
+        start.setFullYear(start.getFullYear() + 1);
+        return start.getTime();
+      }
+      const year = r.month >= today.getMonth() + 1 ? today.getFullYear() : today.getFullYear() + 1;
+      return new Date(year, r.month - 1, 15).getTime();
+    };
+    return list.filter((r) => r.region === region).sort((a, b) => key(a) - key(b));
   });
 
   // RSS: το πρότυπο απαιτεί ημερομηνίες σε μορφή RFC-822 («Tue, 21 Jul 2026 08:00:00 GMT»),
