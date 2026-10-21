@@ -3,6 +3,12 @@
 // lat/lng ως strings (διατηρούν τα δεκαδικά ψηφία όπως γράφτηκαν),
 // url ανά γλώσσα (κάποια sites έχουν ξεχωριστό EN path).
 // Το προαιρετικό note εμφανίζεται ως πορτοκαλί σημείωση στην κάρτα.
+//
+// date / dateEnd (προαιρετικά, "ΕΕΕΕ-ΜΜ-ΗΗ"): η τελευταία ΓΝΩΣΤΗ διοργάνωση. Αν δεν έχει
+// περάσει, η αρχική και η σελίδα αγώνων δείχνουν τη μέρα και αντίστροφη μέτρηση· αν πέρασε,
+// ο αγώνας πάει στον ίδιο μήνα του επόμενου έτους και δείχνει μόνο τον μήνα (δες js/race-dates.js).
+// Μπαίνει μόνο ημερομηνία από το επίσημο site ή από πηγές που συμφωνούν μεταξύ τους· όταν
+// ανακοινωθεί η επόμενη διοργάνωση, αλλάζεις εδώ την ημερομηνία. Έλεγχος: 22/10/2026.
 
 module.exports = {
   typeLabels: {
@@ -22,7 +28,7 @@ module.exports = {
     // ── Ελλάδα ──────────────────────────────────────────────────────────
     {
       id: "athens-authentic-marathon",
-      type: "road", region: "gr", month: 11,
+      type: "road", region: "gr", month: 11, date: "2026-11-08",
       lat: "38.155", lng: "23.965",
       name: { el: "Αυθεντικός Μαραθώνιος Αθήνας", en: "Athens Authentic Marathon" },
       specs: { el: "42,2 χλμ · Άσφαλτος", en: "42.2 km · Road" },
@@ -34,7 +40,7 @@ module.exports = {
     },
     {
       id: "athens-half-marathon",
-      type: "road", region: "gr", month: 3,
+      type: "road", region: "gr", month: 3, date: "2026-03-08",
       lat: "37.9755", lng: "23.7348",
       name: { el: "Ημιμαραθώνιος Αθήνας", en: "Athens Half Marathon" },
       specs: { el: "21,1 & 5 χλμ · Άσφαλτος", en: "21.1 & 5 km · Road" },
@@ -46,7 +52,7 @@ module.exports = {
     },
     {
       id: "spartathlon",
-      type: "ultra", region: "gr", month: 9,
+      type: "ultra", region: "gr", month: 9, date: "2026-09-26", dateEnd: "2026-09-27",
       lat: "37.075", lng: "22.43",
       name: { el: "Σπάρταθλον", en: "Spartathlon" },
       specs: { el: "246 χλμ · Υπερμαραθώνιος", en: "246 km · Ultramarathon" },
@@ -58,7 +64,7 @@ module.exports = {
     },
     {
       id: "rodopi-ultra-trail",
-      type: "ultra", region: "gr", month: 10,
+      type: "ultra", region: "gr", month: 10, date: "2026-10-16",
       lat: "41.30", lng: "24.65",
       name: { el: "Rodopi Ultra Trail (ROUT)", en: "Rodopi Ultra Trail (ROUT)" },
       specs: { el: "182 χλμ (100 μίλια) · Ορεινός υπερμαραθώνιος", en: "182 km (100 miles) · Mountain ultra" },
@@ -82,7 +88,7 @@ module.exports = {
     },
     {
       id: "zagori-mountain-running",
-      type: "mountain", region: "gr", month: 7,
+      type: "mountain", region: "gr", month: 7, date: "2027-07-16", dateEnd: "2027-07-18",
       lat: "39.88", lng: "20.75",
       name: { el: "Zagori Mountain Running", en: "Zagori Mountain Running" },
       specs: { el: "5–80 χλμ · Ορεινός", en: "5–80 km · Mountain" },
@@ -106,7 +112,7 @@ module.exports = {
     },
     {
       id: "thessaloniki-marathon",
-      type: "road", region: "gr", month: 4,
+      type: "road", region: "gr", month: 4, date: "2026-04-26",
       lat: "40.626", lng: "22.948",
       name: { el: "Μαραθώνιος Θεσσαλονίκης «Μέγας Αλέξανδρος»", en: "Thessaloniki Marathon \"Alexander the Great\"" },
       specs: { el: "42,2 χλμ · Άσφαλτος", en: "42.2 km · Road" },
@@ -118,7 +124,7 @@ module.exports = {
     },
     {
       id: "thessaloniki-night-half-marathon",
-      type: "road", region: "gr", month: 10,
+      type: "road", region: "gr", month: 10, date: "2026-10-17",
       lat: "40.6326", lng: "22.9409",
       name: { el: "Διεθνής Νυχτερινός Ημιμαραθώνιος Θεσσαλονίκης", en: "Thessaloniki International Night Half Marathon" },
       specs: { el: "21,1 / 10 / 5 χλμ · Άσφαλτος", en: "21.1 / 10 / 5 km · Road" },
@@ -130,7 +136,7 @@ module.exports = {
     },
     {
       id: "ioannina-lake-run",
-      type: "road", region: "gr", month: 9,
+      type: "road", region: "gr", month: 9, date: "2026-09-19", dateEnd: "2026-09-20",
       lat: "39.667", lng: "20.85",
       name: { el: "Γύρος Λίμνης Ιωαννίνων (Ioannina Lake Run)", en: "Ioannina Lake Run" },
       specs: { el: "30 / 10 / 5 χλμ · Άσφαλτος", en: "30 / 10 / 5 km · Road" },
@@ -142,7 +148,7 @@ module.exports = {
     },
     {
       id: "rhodes-marathon",
-      type: "road", region: "gr", month: 4,
+      type: "road", region: "gr", month: 4, date: "2027-04-18",
       lat: "36.43", lng: "28.22",
       name: { el: "Διεθνής Μαραθώνιος Ρόδου", en: "Rhodes International Marathon" },
       specs: { el: "42,2 χλμ & μικρότερες · Άσφαλτος", en: "42.2 km & shorter · Road" },
@@ -154,7 +160,7 @@ module.exports = {
     },
     {
       id: "messinia-challenge",
-      type: "road", region: "gr", month: 5,
+      type: "road", region: "gr", month: 5, date: "2026-05-08", dateEnd: "2026-05-10",
       lat: "36.92", lng: "21.70",
       name: { el: "Messinia Challenge (πρώην Navarino Challenge)", en: "Messinia Challenge (formerly Navarino Challenge)" },
       specs: { el: "21,1 / 10 / 5 χλμ · Άσφαλτος / Παραλία", en: "21.1 / 10 / 5 km · Road / Beach" },
@@ -166,7 +172,7 @@ module.exports = {
     },
     {
       id: "crete-marathon",
-      type: "road", region: "gr", month: 4,
+      type: "road", region: "gr", month: 4, date: "2026-04-19",
       lat: "35.514", lng: "24.018",
       name: { el: "Crete Marathon (Χανιά)", en: "Crete Marathon (Chania)" },
       specs: { el: "42,2 / 10 / 5 χλμ · Άσφαλτος", en: "42.2 / 10 / 5 km · Road" },
@@ -178,7 +184,7 @@ module.exports = {
     },
     {
       id: "spetses-mini-marathon",
-      type: "road", region: "gr", month: 10,
+      type: "road", region: "gr", month: 10, date: "2026-10-02", dateEnd: "2026-10-04",
       lat: "37.2635", lng: "23.159",
       name: { el: "Spetses Mini Marathon", en: "Spetses Mini Marathon" },
       specs: { el: "25 / 10 / 5 χλμ · Άσφαλτος", en: "25 / 10 / 5 km · Road" },
@@ -190,7 +196,7 @@ module.exports = {
     },
     {
       id: "byzantine-race-megara",
-      type: "road", region: "gr", month: 1,
+      type: "road", region: "gr", month: 1, date: "2026-01-18",
       lat: "38.000", lng: "23.340",
       name: { el: "Βυζαντινός Αγώνας Δρόμου", en: "Byzantine Race" },
       specs: { el: "49,6 χλμ · Άσφαλτος", en: "49.6 km · Road" },
@@ -226,7 +232,7 @@ module.exports = {
     },
     {
       id: "corfu-mountain-trail",
-      type: "mountain", region: "gr", month: 5,
+      type: "mountain", region: "gr", month: 5, date: "2026-05-02", dateEnd: "2026-05-03",
       lat: "39.624", lng: "19.922",
       name: { el: "Corfu Mountain Trail", en: "Corfu Mountain Trail" },
       specs: { el: "12–103 χλμ · Ορεινός", en: "12–103 km · Mountain" },
@@ -238,7 +244,7 @@ module.exports = {
     },
     {
       id: "olympia-marathon",
-      type: "road", region: "gr", month: 11,
+      type: "road", region: "gr", month: 11, date: "2026-11-28", dateEnd: "2026-11-29",
       lat: "37.6383", lng: "21.6303",
       name: { el: "Μαραθώνιος Ολυμπίας", en: "Olympia Marathon" },
       specs: { el: "42,2 / 21 / 10 / 3 χλμ · Άσφαλτος", en: "42.2 / 21 / 10 / 3 km · Road" },
@@ -250,7 +256,7 @@ module.exports = {
     },
     {
       id: "faethon-skyrace",
-      type: "mountain", region: "gr", month: 7,
+      type: "mountain", region: "gr", month: 7, date: "2026-07-12",
       lat: "40.094", lng: "22.251",
       name: { el: "Faethon Skyrace «Απόστολος Τσουρέκας»", en: "Faethon Skyrace" },
       specs: { el: "14–23 χλμ · Ορεινός (έως +1.800μ)", en: "14–23 km · Mountain (up to +1,800m)" },
@@ -264,7 +270,7 @@ module.exports = {
     // ── Ευρωπαϊκοί μαραθώνιοι & ημιμαραθώνιοι ───────────────────────────
     {
       id: "rome-marathon",
-      type: "road", region: "eu", month: 3,
+      type: "road", region: "eu", month: 3, date: "2027-03-14",
       lat: "41.9028", lng: "12.4964",
       country: { el: "Ιταλία", en: "Italy" },
       name: { el: "Μαραθώνιος Ρώμης", en: "Rome Marathon" },
@@ -277,7 +283,7 @@ module.exports = {
     },
     {
       id: "lisbon-half-marathon",
-      type: "road", region: "eu", month: 3,
+      type: "road", region: "eu", month: 3, date: "2027-03-07",
       lat: "38.7223", lng: "-9.1393",
       country: { el: "Πορτογαλία", en: "Portugal" },
       name: { el: "Ημιμαραθώνιος Λισαβόνας", en: "Lisbon Half Marathon" },
@@ -290,7 +296,7 @@ module.exports = {
     },
     {
       id: "london-marathon",
-      type: "road", region: "eu", month: 4,
+      type: "road", region: "eu", month: 4, date: "2027-04-24", dateEnd: "2027-04-25",
       lat: "51.5074", lng: "-0.1278",
       country: { el: "Ηνωμένο Βασίλειο", en: "United Kingdom" },
       name: { el: "Μαραθώνιος Λονδίνου", en: "London Marathon" },
@@ -303,7 +309,7 @@ module.exports = {
     },
     {
       id: "paris-marathon",
-      type: "road", region: "eu", month: 4,
+      type: "road", region: "eu", month: 4, date: "2027-04-04",
       lat: "48.8566", lng: "2.3522",
       country: { el: "Γαλλία", en: "France" },
       name: { el: "Μαραθώνιος Παρισιού", en: "Paris Marathon" },
@@ -316,7 +322,7 @@ module.exports = {
     },
     {
       id: "vienna-city-marathon",
-      type: "road", region: "eu", month: 4,
+      type: "road", region: "eu", month: 4, date: "2027-04-18",
       lat: "48.2082", lng: "16.3738",
       country: { el: "Αυστρία", en: "Austria" },
       name: { el: "Μαραθώνιος Βιέννης", en: "Vienna City Marathon" },
@@ -329,7 +335,7 @@ module.exports = {
     },
     {
       id: "prague-marathon",
-      type: "road", region: "eu", month: 5,
+      type: "road", region: "eu", month: 5, date: "2027-05-02",
       lat: "50.0755", lng: "14.4378",
       country: { el: "Τσεχία", en: "Czechia" },
       name: { el: "Μαραθώνιος Πράγας", en: "Prague Marathon" },
@@ -342,7 +348,7 @@ module.exports = {
     },
     {
       id: "berlin-marathon",
-      type: "road", region: "eu", month: 9,
+      type: "road", region: "eu", month: 9, date: "2027-09-26",
       lat: "52.5200", lng: "13.4050",
       country: { el: "Γερμανία", en: "Germany" },
       name: { el: "Μαραθώνιος Βερολίνου", en: "Berlin Marathon" },
@@ -372,7 +378,7 @@ module.exports = {
     },
     {
       id: "amsterdam-marathon",
-      type: "road", region: "eu", month: 10,
+      type: "road", region: "eu", month: 10, date: "2026-10-18",
       lat: "52.3676", lng: "4.9041",
       country: { el: "Ολλανδία", en: "Netherlands" },
       name: { el: "Μαραθώνιος Άμστερνταμ", en: "Amsterdam Marathon" },
@@ -385,7 +391,7 @@ module.exports = {
     },
     {
       id: "valencia-marathon",
-      type: "road", region: "eu", month: 12,
+      type: "road", region: "eu", month: 12, date: "2026-12-06",
       lat: "39.4699", lng: "-0.3763",
       country: { el: "Ισπανία", en: "Spain" },
       name: { el: "Μαραθώνιος Βαλένθιας", en: "Valencia Marathon" },
@@ -398,7 +404,7 @@ module.exports = {
     },
     {
       id: "barcelona-marathon",
-      type: "road", region: "eu", month: 3,
+      type: "road", region: "eu", month: 3, date: "2027-03-14",
       lat: "41.3851", lng: "2.1734",
       country: { el: "Ισπανία", en: "Spain" },
       name: { el: "Μαραθώνιος Βαρκελώνης", en: "Barcelona Marathon" },
@@ -411,7 +417,7 @@ module.exports = {
     },
     {
       id: "rotterdam-marathon",
-      type: "road", region: "eu", month: 4,
+      type: "road", region: "eu", month: 4, date: "2027-04-11",
       lat: "51.9244", lng: "4.4777",
       country: { el: "Ολλανδία", en: "Netherlands" },
       name: { el: "Μαραθώνιος Ρότερνταμ", en: "Rotterdam Marathon" },
@@ -424,7 +430,7 @@ module.exports = {
     },
     {
       id: "florence-marathon",
-      type: "road", region: "eu", month: 11,
+      type: "road", region: "eu", month: 11, date: "2026-11-29",
       lat: "43.7696", lng: "11.2558",
       country: { el: "Ιταλία", en: "Italy" },
       name: { el: "Μαραθώνιος Φλωρεντίας", en: "Florence Marathon" },
@@ -437,7 +443,7 @@ module.exports = {
     },
     {
       id: "venice-marathon",
-      type: "road", region: "eu", month: 10,
+      type: "road", region: "eu", month: 10, date: "2026-10-25",
       lat: "45.4408", lng: "12.3155",
       country: { el: "Ιταλία", en: "Italy" },
       name: { el: "Μαραθώνιος Βενετίας", en: "Venice Marathon" },

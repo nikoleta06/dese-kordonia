@@ -109,9 +109,9 @@ activeNav: "agones"
 
     <div class="race-list post-grid">
       {%- for race in races.list %}
-      <article class="post-card race-card" data-type="{{ race.type }}"{% if race.region == "eu" %} data-region="eu"{% endif %} data-month="{{ race.month }}" data-lat="{{ race.lat }}" data-lng="{{ race.lng }}">
+      <article class="post-card race-card" data-type="{{ race.type }}"{% if race.region == "eu" %} data-region="eu"{% endif %} data-month="{{ race.month }}"{% if race.date %} data-date="{{ race.date }}"{% endif %}{% if race.dateEnd %} data-date-end="{{ race.dateEnd }}"{% endif %} data-lat="{{ race.lat }}" data-lng="{{ race.lng }}">
         <div class="post-body">
-          <p class="post-meta"><span class="race-type type-{{ race.type }}">{{ races.typeLabels[race.type].el }}</span> · {{ races.monthNames.el[race.month - 1] }}{% if race.country %} · {{ race.country.el }}{% endif %}</p>
+          <p class="post-meta"><span class="race-type type-{{ race.type }}">{{ races.typeLabels[race.type].el }}</span> · <span class="race-when">{{ races.monthNames.el[race.month - 1] }}</span>{% if race.country %} · {{ race.country.el }}{% endif %}</p>
           <h3>{{ race.name.el }}</h3>
           <p class="race-specs">{{ race.specs.el }}</p>
           <p>{{ race.desc.el }}</p>
@@ -138,6 +138,7 @@ activeNav: "agones"
 
 {% block scripts_extra %}
   <script src="vendor/leaflet-1.9.4/leaflet.js"></script>
+  <script src="js/race-dates.js?v={{ "js/race-dates.js" | assetHash }}"></script>
   <script>
     (function () {
       if (typeof L === 'undefined') return;
@@ -171,13 +172,20 @@ activeNav: "agones"
       var cards = Array.prototype.slice.call(document.querySelectorAll('.race-card'));
       var entries = [];
 
-      // Χρονολογική σειρά: οι προσεχείς αγώνες πρώτοι (κυλιόμενα από τον τρέχοντα μήνα)
+      // Χρονολογική σειρά: οι προσεχείς αγώνες πρώτοι (με την ημερομηνία ή τον μήνα της επόμενης διοργάνωσης)
       var raceList = document.querySelector('.race-list');
-      var thisMonth = new Date().getMonth() + 1;
-      cards.sort(function (a, b) {
-        return ((a.dataset.month - thisMonth + 12) % 12) - ((b.dataset.month - thisMonth + 12) % 12);
-      });
-      cards.forEach(function (c) { raceList.appendChild(c); });
+      // Με ημερομηνία που δεν πέρασε: «8 Νοεμβρίου · σε 17 μέρες» στη θέση του μήνα (js/race-dates.js)
+      var RD = window.DKRaceDates;
+      if (RD) {
+        var today = RD.today();
+        cards = RD.sort(raceList, '.race-card');
+        cards.forEach(function (c) {
+          var i = RD.info(c, today);
+          if (!i.upcoming) return;
+          var left = RD.countdown(i, 'el');
+          c.querySelector('.race-when').textContent = RD.dateText(i, 'el', 'long') + (left ? ' · ' + left : '');
+        });
+      }
 
       cards.forEach(function (card) {
         var lat = parseFloat(card.dataset.lat), lng = parseFloat(card.dataset.lng);

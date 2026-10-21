@@ -7,14 +7,26 @@
   const EN = document.documentElement.lang === 'en';
   const $ = (id) => document.getElementById(id);
 
-  /* ---------- Αγώνες: πρώτα του τρέχοντος μήνα, μετά οι επόμενοι (το CSS δείχνει 3) ---------- */
+  /* ---------- Αγώνες: με σειρά επόμενης διοργάνωσης (το CSS δείχνει 3) ----------
+     Όπου η ημερομηνία δεν έχει περάσει: «8 Νοε» και «σε 17 μέρες» στη θέση του μήνα. */
   const races = $('homeRaces');
-  if (races) {
-    const now = new Date().getMonth() + 1;
-    const rank = (m) => (m - now + 12) % 12;
-    [...races.children]
-      .sort((a, b) => rank(+a.dataset.month) - rank(+b.dataset.month))
-      .forEach((li) => races.append(li));
+  const RD = window.DKRaceDates;
+  if (races && RD) {
+    const lang = EN ? 'en' : 'el';
+    const now = RD.today();
+    RD.sort(races, 'li').forEach((li) => {
+      const i = RD.info(li, now);
+      if (!i.upcoming) return;
+      const month = li.querySelector('.b-race-month');
+      month.textContent = RD.dateText(i, lang, 'short');
+      const left = RD.countdown(i, lang);
+      if (left) {
+        const small = document.createElement('small');
+        small.className = 'b-race-countdown';
+        small.textContent = left;
+        month.append(small);
+      }
+    });
   }
 
   /* ---------- Καιρός ---------- */
