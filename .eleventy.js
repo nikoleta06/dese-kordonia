@@ -89,6 +89,18 @@ module.exports = function (eleventyConfig) {
     return file + (lang === "en" ? "-en" : "") + ".html";
   });
 
+  // Αρχική: πόσα άρθρα έχει μια κατηγορία (για τις κατηγορίες κάτω από τα πρόσφατα άρθρα)
+  eleventyConfig.addFilter("countCat", (posts, cat) => posts.filter((p) => p.cat === cat).length);
+
+  // Αρχική: οι αγώνες μιας περιοχής ταξινομημένοι από τον μήνα του build και μετά (με
+  // αναδίπλωση στον Ιανουάριο). Το js/home.js τους ξαναταξινομεί με τον σημερινό μήνα,
+  // ώστε η λίστα να μένει σωστή κι αν περάσει καιρός χωρίς νέο build.
+  eleventyConfig.addFilter("racesFromNow", (list, region) => {
+    const now = new Date().getMonth() + 1;
+    const rank = (m) => (m - now + 12) % 12;
+    return list.filter((r) => r.region === region).sort((a, b) => rank(a.month) - rank(b.month));
+  });
+
   // RSS: το πρότυπο απαιτεί ημερομηνίες σε μορφή RFC-822 («Tue, 21 Jul 2026 08:00:00 GMT»),
   // ενώ στο postsData.js τις κρατάμε ως "2026-07-21".
   eleventyConfig.addFilter("rfc822", (isoDate) => {
