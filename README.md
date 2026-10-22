@@ -129,7 +129,7 @@ npm run start   # Eleventy dev server με live reload
 
 Για το Cloudflare χρειάζονται τα secrets `CLOUDFLARE_API_TOKEN` και `CLOUDFLARE_ACCOUNT_ID` στο GitHub (Settings → Secrets and variables → Actions)· χωρίς αυτά τα βήματα του Cloudflare παραλείπονται.
 
-- **`_headers`**: security headers (CSP, HSTS, X-Frame-Options κ.λπ.) και cache. Αν προστεθεί νέα εξωτερική υπηρεσία (script, API, εικόνες), πρέπει να μπει και στο `Content-Security-Policy`, αλλιώς ο browser θα τη μπλοκάρει.
+- **`_headers`**: security headers (CSP, HSTS, X-Frame-Options κ.λπ.) και cache. Αν προστεθεί νέα εξωτερική υπηρεσία (script, API, εικόνες), πρέπει να μπει και στο `Content-Security-Policy`, αλλιώς ο browser θα τη μπλοκάρει. Τα inline scripts επιτρέπονται μόνο με hash: το `.eleventy.js` (`cspScriptHashes`) βάζει σε κάθε σελίδα ένα `<meta>` CSP με το hash κάθε script, οπότε **όχι** `onclick="…"` ή `javascript:`. Όλη η πολιτική και οι κανόνες: [docs/adr/0002](docs/adr/0002-politiki-asfaleias-headers-csp.md).
 - **`src/_redirects.njk`** → `_redirects`: το `/` σερβίρει το `index.html`, και οι παλιοί σύνδεσμοι χωρίς `.html` πηγαίνουν (301) στη σωστή διεύθυνση.
 - Τοπική δοκιμή όπως στο Cloudflare (με headers και redirects): `npm run cf:dev` → http://localhost:8787/
 

@@ -42,6 +42,27 @@ module.exports = function (eleventyConfig) {
     return hashCache.get(file);
   });
 
+  // CSP χωρίς 'unsafe-inline' για τα scripts (δες docs/adr/0002 και _headers).
+  // Σε κάθε σελίδα: ένα hash SHA-256 για κάθε inline <script> (και speculation rules) και
+  // ένα <meta http-equiv="Content-Security-Policy"> στην αρχή του <head> που επιτρέπει μόνο
+  // αυτά. Ο browser εφαρμόζει και την πολιτική του _headers και αυτή, οπότε ένα script πρέπει
+  // να περνά και τις δύο: τρέχουν μόνο τα scripts που γράψαμε εμείς. Αλλάζεις ένα script →
+  // το hash ξαναϋπολογίζεται μόνο του. Τα JSON-LD δεν εκτελούνται, άρα δεν χρειάζονται hash.
+  // Οι πηγές πρέπει να ταιριάζουν με το script-src του _headers (χωρίς το 'unsafe-inline').
+  const SCRIPT_SOURCES = "'self' 'wasm-unsafe-eval' https://gc.zgo.at";
+  eleventyConfig.addTransform("cspScriptHashes", function (content) {
+    const out = this.page.outputPath;
+    if (typeof out !== "string" || !out.endsWith(".html") || !content.includes("<head>")) return content;
+    const hashes = new Set();
+    for (const m of content.matchAll(/<script(?:\s+type="speculationrules")?\s*>([\s\S]*?)<\/script>/g)) {
+      // Ο browser διαβάζει τα \r\n (αρχεία Windows) ως \n πριν υπολογίσει το hash· κάνουμε το ίδιο
+      const text = m[1].replace(/\r\n?/g, "\n");
+      hashes.add("'sha256-" + crypto.createHash("sha256").update(text, "utf8").digest("base64") + "'");
+    }
+    const policy = ["script-src", SCRIPT_SOURCES, ...hashes].join(" ");
+    return content.replace("<head>", () => '<head>\n  <meta http-equiv="Content-Security-Policy" content="' + policy + '">');
+  });
+
   // Sitemap (src/sitemap.njk): όλες οι δημόσιες σελίδες, με την ημερομηνία του τελευταίου
   // commit που τις άλλαξε και τα ζεύγη ελληνικά/αγγλικά (hreflang). Νέα σελίδα = μπαίνει
   // μόνη της· σελίδες με «noindex: true» στο front matter μένουν εκτός.
