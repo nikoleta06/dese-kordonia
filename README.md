@@ -113,6 +113,19 @@ npm run start   # Eleventy dev server με live reload
 
 Ο dev server του Eleventy δεν εφαρμόζει τα headers του `_headers`. Για δοκιμή όπως στο Cloudflare (CSP, redirects): `npm run cf:dev` → http://localhost:8787/
 
+## Τεστ
+```bash
+npm run build   # το τεστ του CSP διαβάζει τις έτοιμες σελίδες στο _site
+npm test        # node --test tests/*.test.js
+```
+Τα τεστ (`tests/`, με το ενσωματωμένο `node:test`, χωρίς εξαρτήσεις):
+- `weather-model.test.js`: ο υπολογισμός ζέστης/επιβράδυνσης του «Ρυθμός & Καιρός».
+- `race-dates.test.js`: σειρά αγώνων, αντίστροφη μέτρηση, αγώνες που πέρασαν ή δεν έχουν ημερομηνία.
+- `races-data.test.js`: τα στοιχεία κάθε αγώνα στο `races.js` (μοναδικό id, πεδία και στις δύο γλώσσες, ημερομηνία στον σωστό μήνα).
+- `csp.test.js`: σε κάθε σελίδα του `_site`, το `<meta>` CSP πρώτο στο `<head>`, σωστό hash για κάθε inline script, κανένα `onclick`/`javascript:`.
+
+Στο GitHub Actions τρέχουν μετά το build σε κάθε PR και πριν από κάθε deploy: αν αποτύχει ένα τεστ, το PR βγαίνει κόκκινο και το `main` δεν ανεβαίνει.
+
 ## Ρυθμός & Καιρός (Open-Meteo)
 - Ο browser καλεί απευθείας δύο endpoints του Open-Meteo: `geocoding-api.open-meteo.com/v1/search` (αναζήτηση πόλης, ελληνικά και αγγλικά μαζί) και `api.open-meteo.com/v1/forecast` (ωριαία πρόγνωση 7 ημερών). Δεν υπάρχει κλειδί ή secret, και ο δικός μας server δεν μεσολαβεί.
 - Και τα δύο domains είναι στο `connect-src` του CSP (`_headers`). Το `geolocation=(self)` στο `Permissions-Policy` επιτρέπει το κουμπί «Χρησιμοποίησε τη θέση μου». Οι συντεταγμένες στρογγυλεύονται στο ~1 χλμ. πριν σταλούν.
