@@ -1,8 +1,8 @@
 ---
 permalink: "agones.html"
 lang: "el"
-title: "Αγώνες Τρεξίματος σε Ελλάδα & Ευρώπη: Διαδραστικός Χάρτης | Δέσε Κορδόνια"
-description: "Διαδραστικός χάρτης με αγώνες τρεξίματος σε Ελλάδα και Ευρώπη: Μαραθώνιος Αθήνας, Σπάρταθλον, ορεινοί αγώνες, καθώς και οι μεγάλοι μαραθώνιοι και ημιμαραθώνιοι της Ευρώπης. Φιλτράρισε ανά περιοχή και τύπο."
+title: "Αγώνες Τρεξίματος σε Ελλάδα & Ευρώπη: Ημερολόγιο και Χάρτης | Δέσε Κορδόνια"
+description: "Ημερολόγιο και χάρτης με αγώνες τρεξίματος σε Ελλάδα και Ευρώπη: Μαραθώνιος Αθήνας, Σπάρταθλον, ορεινοί αγώνες, καθώς και οι μεγάλοι μαραθώνιοι και ημιμαραθώνιοι της Ευρώπης. Δες ποιοι αγώνες γίνονται κάθε μήνα και φιλτράρισε ανά περιοχή και τύπο."
 activeNav: "agones"
 ---
 
@@ -17,8 +17,8 @@ activeNav: "agones"
   <link rel="alternate" hreflang="x-default" href="https://desekordonia.com/agones.html">
 
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Αγώνες Τρεξίματος σε Ελλάδα & Ευρώπη: Διαδραστικός Χάρτης">
-  <meta property="og:description" content="Διαδραστικός χάρτης με αγώνες τρεξίματος σε Ελλάδα και Ευρώπη: δρόμου, ορεινοί, υπερμαραθώνιοι.">
+  <meta property="og:title" content="Αγώνες Τρεξίματος σε Ελλάδα & Ευρώπη: Ημερολόγιο και Χάρτης">
+  <meta property="og:description" content="Ημερολόγιο και χάρτης με αγώνες τρεξίματος σε Ελλάδα και Ευρώπη: δρόμου, ορεινοί, υπερμαραθώνιοι.">
   <meta property="og:image" content="https://desekordonia.com/images/cat-champions.jpg">
   <meta property="og:url" content="https://desekordonia.com/agones.html">
   <meta name="twitter:card" content="summary_large_image">
@@ -50,6 +50,11 @@ activeNav: "agones"
     /* Φίλτρα */
     .race-filters { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1.5rem 0 0; }
     .race-filters + .race-filters { margin-top: 0.6rem; }
+    /* «Χάρτης ↓»: για όποιον θέλει κατευθείαν τον χάρτη, κάτω από το ημερολόγιο */
+    .rf-jump { margin: 0.8rem 0 0; font-size: 0.9rem; }
+    .rf-jump a { color: var(--text-dim); }
+    .rf-jump a:hover { color: var(--accent); }
+    #race-map { scroll-margin-top: 90px; }
     .rf-btn { padding: 0.5rem 1rem; border-radius: 999px; border: 1px solid var(--border); background: var(--surface); color: var(--text-dim); cursor: pointer; font-family: inherit; font-size: 0.9rem; transition: color .2s, background-color .2s, border-color .2s; }
     .rf-btn:hover { border-color: var(--accent); color: var(--text); }
     .rf-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
@@ -105,6 +110,8 @@ activeNav: "agones"
       <button class="rf-btn" data-filter="mountain" type="button">Ορεινοί</button>
       <button class="rf-btn" data-filter="ultra" type="button">Υπερμαραθώνιοι</button>
     </div>
+
+    <p class="rf-jump"><a href="#race-map" aria-label="Μετάβαση στον χάρτη">Χάρτης ↓</a></p>
 
     <section class="rc" id="raceCal" aria-labelledby="rcHeading" hidden>
       <h2 class="rc-h" id="rcHeading">Ημερολόγιο αγώνων</h2>
