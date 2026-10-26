@@ -8,7 +8,7 @@
 // περάσει, η αρχική και η σελίδα αγώνων δείχνουν τη μέρα και αντίστροφη μέτρηση· αν πέρασε,
 // ο αγώνας πάει στον ίδιο μήνα του επόμενου έτους και δείχνει μόνο τον μήνα (δες js/race-dates.js).
 // Μπαίνει μόνο ημερομηνία από το επίσημο site ή από πηγές που συμφωνούν μεταξύ τους· όταν
-// ανακοινωθεί η επόμενη διοργάνωση, αλλάζεις εδώ την ημερομηνία. Έλεγχος: 22/10/2026.
+// ανακοινωθεί η επόμενη διοργάνωση, αλλάζεις εδώ την ημερομηνία. Έλεγχος: 26/10/2026.
 
 module.exports = {
   typeLabels: {
@@ -100,7 +100,7 @@ module.exports = {
     },
     {
       id: "metsovo-ursa-trail",
-      type: "mountain", region: "gr", month: 5,
+      type: "mountain", region: "gr", month: 5, date: "2027-05-28", dateEnd: "2027-05-30",
       lat: "39.770", lng: "21.183",
       name: { el: "Metsovo Ursa Trail", en: "Metsovo Ursa Trail" },
       specs: { el: "4,6–100 χλμ · Ορεινός", en: "4.6–100 km · Mountain" },
@@ -136,7 +136,7 @@ module.exports = {
     },
     {
       id: "ioannina-lake-run",
-      type: "road", region: "gr", month: 9, date: "2026-09-19", dateEnd: "2026-09-20",
+      type: "road", region: "gr", month: 9, date: "2027-09-18", dateEnd: "2027-09-19",
       lat: "39.667", lng: "20.85",
       name: { el: "Γύρος Λίμνης Ιωαννίνων (Ioannina Lake Run)", en: "Ioannina Lake Run" },
       specs: { el: "30 / 10 / 5 χλμ · Άσφαλτος", en: "30 / 10 / 5 km · Road" },
@@ -172,7 +172,7 @@ module.exports = {
     },
     {
       id: "crete-marathon",
-      type: "road", region: "gr", month: 4, date: "2026-04-19",
+      type: "road", region: "gr", month: 4, date: "2027-04-11",
       lat: "35.514", lng: "24.018",
       name: { el: "Crete Marathon (Χανιά)", en: "Crete Marathon (Chania)" },
       specs: { el: "42,2 / 10 / 5 χλμ · Άσφαλτος", en: "42.2 / 10 / 5 km · Road" },
@@ -208,7 +208,7 @@ module.exports = {
     },
     {
       id: "nafplio-marathon",
-      type: "road", region: "gr", month: 3,
+      type: "road", region: "gr", month: 3, date: "2026-03-29",
       lat: "37.567", lng: "22.807",
       name: { el: "Μαραθώνιος Ναυπλίου", en: "Nafplio Marathon" },
       specs: { el: "42,2 χλμ · Άσφαλτος", en: "42.2 km · Road" },
@@ -220,7 +220,7 @@ module.exports = {
     },
     {
       id: "dolichos-delphi-olympia",
-      type: "ultra", region: "gr", month: 4,
+      type: "ultra", region: "gr", month: 4, date: "2026-04-17", dateEnd: "2026-04-19",
       lat: "38.482", lng: "22.501",
       name: { el: "Δόλιχος Δρόμος «Δελφοί–Ολυμπία»", en: "Dolichos Delphi–Olympia Ultra Race" },
       specs: { el: "255 χλμ · Υπερμαραθώνιος", en: "255 km · Ultramarathon" },
@@ -232,7 +232,7 @@ module.exports = {
     },
     {
       id: "corfu-mountain-trail",
-      type: "mountain", region: "gr", month: 5, date: "2026-05-02", dateEnd: "2026-05-03",
+      type: "mountain", region: "gr", month: 5, date: "2027-05-08", dateEnd: "2027-05-09",
       lat: "39.624", lng: "19.922",
       name: { el: "Corfu Mountain Trail", en: "Corfu Mountain Trail" },
       specs: { el: "12–103 χλμ · Ορεινός", en: "12–103 km · Mountain" },
@@ -361,7 +361,7 @@ module.exports = {
     },
     {
       id: "copenhagen-half-marathon",
-      type: "road", region: "eu", month: 9,
+      type: "road", region: "eu", month: 9, date: "2027-09-19",
       lat: "55.6761", lng: "12.5683",
       country: { el: "Δανία", en: "Denmark" },
       name: { el: "Ημιμαραθώνιος Κοπεγχάγης", en: "Copenhagen Half Marathon" },

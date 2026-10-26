@@ -176,16 +176,18 @@ activeNav: "agones"
 
       // Chronological order: upcoming races first (by the date, or month, of the next edition)
       var raceList = document.querySelector('.race-list');
-      // Με ημερομηνία που δεν πέρασε: «8 Νοεμβρίου · σε 17 μέρες» στη θέση του μήνα (js/race-dates.js)
+      // Με ημερομηνία που δεν πέρασε: «8 Νοεμβρίου · σε 17 μέρες» στη θέση του μήνα· χωρίς ανακοινωμένη
+      // ημερομηνία: «Μάρτιος 2027 · η ημερομηνία δεν έχει ανακοινωθεί ακόμα (2026: 29 Μαρτίου)» (js/race-dates.js)
       var RD = window.DKRaceDates;
       if (RD) {
         var today = RD.today();
         cards = RD.sort(raceList, '.race-card');
         cards.forEach(function (c) {
           var i = RD.info(c, today);
-          if (!i.upcoming) return;
+          var when = c.querySelector('.race-when');
+          if (!i.upcoming) { when.textContent = RD.pendingText(i, 'en'); return; }
           var left = RD.countdown(i, 'en');
-          c.querySelector('.race-when').textContent = RD.dateText(i, 'en', 'long') + (left ? ' · ' + left : '');
+          when.textContent = RD.dateText(i, 'en', 'long') + (left ? ' · ' + left : '');
         });
       }
 

@@ -8,7 +8,8 @@
   const $ = (id) => document.getElementById(id);
 
   /* ---------- Αγώνες: με σειρά επόμενης διοργάνωσης (το CSS δείχνει 3) ----------
-     Όπου η ημερομηνία δεν έχει περάσει: «8 Νοε» και «σε 17 μέρες» στη θέση του μήνα. */
+     Όπου η ημερομηνία δεν έχει περάσει: «8 Νοε» και «σε 17 μέρες» στη θέση του μήνα.
+     Όπου δεν έχει ανακοινωθεί: «Ιαν 2027» και «χωρίς ημερομηνία ακόμα». */
   const races = $('homeRaces');
   const RD = window.DKRaceDates;
   if (races && RD) {
@@ -16,10 +17,9 @@
     const now = RD.today();
     RD.sort(races, 'li').forEach((li) => {
       const i = RD.info(li, now);
-      if (!i.upcoming) return;
       const month = li.querySelector('.b-race-month');
-      month.textContent = RD.dateText(i, lang, 'short');
-      const left = RD.countdown(i, lang);
+      month.textContent = i.upcoming ? RD.dateText(i, lang, 'short') : RD.monthText(i, lang, 'short');
+      const left = i.upcoming ? RD.countdown(i, lang) : (EN ? 'date TBA' : 'χωρίς ημερομηνία ακόμα');
       if (left) {
         const small = document.createElement('small');
         small.className = 'b-race-countdown';

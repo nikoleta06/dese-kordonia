@@ -5,7 +5,7 @@ const path = require('node:path');
 
 globalThis.window = globalThis.window || {};
 require(path.join(__dirname, '..', 'js', 'race-dates.js'));
-const { info, dateText, countdown } = window.DKRaceDates;
+const { info, dateText, countdown, monthText, lastText, pendingText } = window.DKRaceDates;
 
 // Στη σελίδα, κάθε αγώνας είναι ένα στοιχείο HTML με data-month / data-date / data-date-end.
 // Το info() διαβάζει μόνο το .dataset, οπότε αρκεί ένα απλό αντικείμενο που του μοιάζει.
@@ -62,4 +62,20 @@ test('dateText: μία μέρα, εύρος στον ίδιο μήνα, και �
   assert.equal(dateText(info(race(11, '2026-11-08'), NOW), 'el', 'short'), '8 Νοε');
   assert.equal(dateText(info(race(11, '2026-11-28', '2026-11-29'), NOW), 'el', 'short'), '28–29 Νοε');
   assert.equal(dateText(info(race(11, '2026-11-08'), NOW), 'en', 'long'), '8 November');
+  assert.equal(dateText(info(race(3, '2027-03-07'), NOW), 'el', 'long'), '7 Μαρτίου 2027');   // όχι φέτος: με χρονιά
+  assert.equal(dateText(info(race(7, '2027-07-16', '2027-07-18'), NOW), 'el', 'short'), '16–18 Ιουλ 2027');
+});
+
+test('χωρίς ανακοινωμένη ημερομηνία: μήνας με χρονιά και πότε έγινε η τελευταία φορά', () => {
+  const past = info(race(3, '2026-03-29'), NOW);           // έγινε φέτος, το 2027 δεν ανακοινώθηκε
+  assert.equal(monthText(past, 'el', 'long'), 'Μάρτιος 2027');
+  assert.equal(monthText(past, 'el', 'short'), 'Μαρ 2027');
+  assert.equal(pendingText(past, 'el'), 'Μάρτιος 2027 · η ημερομηνία δεν έχει ανακοινωθεί ακόμα (2026: 29 Μαρτίου)');
+  assert.equal(lastText(info(race(4, '2026-04-17', '2026-04-19'), NOW), 'el'), '2026: 17–19 Απριλίου');
+});
+
+test('χωρίς καμία ημερομηνία: μόνο μήνας με χρονιά, χωρίς «τελευταία φορά»', () => {
+  const none = info(race(1), NOW);
+  assert.equal(lastText(none, 'el'), '');
+  assert.equal(pendingText(none, 'en'), 'January 2027 · date not announced yet');
 });
