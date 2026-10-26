@@ -26,11 +26,14 @@
     myLocation: 'My location',
     noHours: 'No more hours left in the forecast for today. Pick another day.',
     perKm: '/km',
-    yourPace: 'your pace with good weather',
     adjusted: 'adjusted pace',
     noPace: 'Enter your pace to see the adjusted one.',
-    slower: (pct, sec) => '+' + pct + '% (about ' + sec + ' s/km slower)',
-    none: 'No adjustment needed',
+    seconds: (n) => (n < 1 ? 'less than 1 second' : n === 1 ? '1 second' : n + ' seconds'),
+    slower: (secs, base, pct) => 'About ' + secs + ' per km slower than the ' + base + ' /km you run in cool weather (' + pct + '% slower).',
+    slowerLabel: 'slower than your pace in cool weather',
+    example: (base, adj) => 'For example, if you run ' + base + ' /km in cool weather, now it will be about ' + adj + ' /km. Enter your pace above to see yours.',
+    why: (t, d) => 'Why: ' + t + '°C with a dew point of ' + d + '°C. The higher the temperature and humidity, the harder it is for sweat to evaporate and cool you, so the same effort gives a slower pace.',
+    none: 'No adjustment needed: run your usual pace.',
     temp: 'Temperature', feels: 'Feels like', dew: 'Dew point', hum: 'Humidity',
     wind: 'Wind', rain: 'Chance of rain',
     levels: {
@@ -67,11 +70,14 @@
     myLocation: 'Η θέση μου',
     noHours: 'Δεν έχουν μείνει άλλες ώρες για σήμερα. Διάλεξε άλλη μέρα.',
     perKm: '/χλμ.',
-    yourPace: 'ο ρυθμός σου με καλό καιρό',
     adjusted: 'προσαρμοσμένος ρυθμός',
     noPace: 'Βάλε τον ρυθμό σου για να δεις τον προσαρμοσμένο.',
-    slower: (pct, sec) => '+' + pct + '% (περίπου ' + sec + '" πιο αργά ανά χλμ.)',
-    none: 'Δεν χρειάζεται προσαρμογή',
+    seconds: (n) => (n < 1 ? 'λιγότερο από 1 δευτερόλεπτο' : n === 1 ? '1 δευτερόλεπτο' : n + ' δευτερόλεπτα'),
+    slower: (secs, base, pct) => 'Περίπου ' + secs + ' πιο αργά ανά χιλιόμετρο από τα ' + base + ' /χλμ. που τρέχεις με δροσιά (' + pct + '% πιο αργά).',
+    slowerLabel: 'πιο αργά από τον ρυθμό σου με δροσιά',
+    example: (base, adj) => 'Π.χ. αν με δροσιά τρέχεις ' + base + ' /χλμ., τώρα θα βγει περίπου ' + adj + ' /χλμ. Βάλε τον ρυθμό σου πιο πάνω για να δεις τον δικό σου.',
+    why: (t, d) => 'Γιατί: ' + t + '°C με σημείο δρόσου ' + d + '°C. Όσο ανεβαίνουν η θερμοκρασία και η υγρασία, τόσο πιο δύσκολα εξατμίζεται ο ιδρώτας και σε δροσίζει, οπότε με τον ίδιο κόπο τρέχεις πιο αργά.',
+    none: 'Δεν χρειάζεται προσαρμογή: τρέξε στον κανονικό σου ρυθμό.',
     temp: 'Θερμοκρασία', feels: 'Αίσθηση', dew: 'Σημείο δρόσου', hum: 'Υγρασία',
     wind: 'Άνεμος', rain: 'Πιθανότητα βροχής',
     levels: {
@@ -395,19 +401,22 @@
     badge.className = 'wp-level lv-' + level;
     badge.textContent = T.levels[level];
 
+    // Το ποσοστό μόνο του («+1,3%») μπέρδευε: λέμε με λόγια πόσα δευτερόλεπτα ανά χιλιόμετρο
+    // είναι, σε σύγκριση με ποιον ρυθμό, και γιατί (θερμοκρασία και σημείο δρόσου)
+    const slow = pct >= 0.25;
+    const pctTxt = pct.toLocaleString(LOCALE, { maximumFractionDigits: 1 });
+    const EXAMPLE = 300; // 5:00 /χλμ., για το παράδειγμα όταν δεν έχει μπει ρυθμός
     if (pace) {
       const adj = pace * (1 + pct / 100);
       $('wpPace').textContent = fmtPace(adj);
       $('wpPaceLabel').textContent = T.adjusted + ' ' + T.perKm;
-      $('wpDelta').textContent = pct < 0.25
-        ? T.none
-        : T.slower(pct.toLocaleString(LOCALE, { maximumFractionDigits: 1 }), Math.round(adj - pace)) +
-          ' · ' + fmtPace(pace) + ' ' + T.yourPace;
+      $('wpDelta').textContent = slow ? T.slower(T.seconds(Math.round(adj - pace)), fmtPace(pace), pctTxt) : T.none;
     } else {
-      $('wpPace').textContent = pct < 0.25 ? '0%' : '+' + pct.toLocaleString(LOCALE, { maximumFractionDigits: 1 }) + '%';
-      $('wpPaceLabel').textContent = T.noPace;
-      $('wpDelta').textContent = pct < 0.25 ? T.none : '';
+      $('wpPace').textContent = slow ? pctTxt + '%' : '0%';
+      $('wpPaceLabel').textContent = slow ? T.slowerLabel : T.noPace;
+      $('wpDelta').textContent = slow ? T.example(fmtPace(EXAMPLE), fmtPace(EXAMPLE * (1 + pct / 100))) : T.none;
     }
+    $('wpWhy').textContent = slow ? T.why(Math.round(x.t), Math.round(x.d)) : '';
 
     const rows = [
       [T.temp, Math.round(x.t) + '°C'],

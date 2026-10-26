@@ -39,6 +39,8 @@
     today: 'Today',
     tomorrow: 'Tomorrow',
     noChange: 'no change needed',
+    slower: 'slower',
+    perKm: '/km',
     defaultCity: 'Showing Athens. Choose your city in the tool.',
     levels: { good: 'Ideal conditions', fair: 'Slightly warm', hard: 'Warm and humid', bad: 'Very hot', extreme: 'Dangerous heat' },
     texts: {
@@ -53,6 +55,8 @@
     today: 'Σήμερα',
     tomorrow: 'Αύριο',
     noChange: 'χωρίς αλλαγή',
+    slower: 'πιο αργά',
+    perKm: '/χλμ.',
     defaultCity: 'Δείχνει την Αθήνα. Διάλεξε την πόλη σου στο εργαλείο.',
     levels: { good: 'Ιδανικές συνθήκες', fair: 'Λίγη ζέστη', hard: 'Ζέστη και υγρασία', bad: 'Πολύ ζέστη', extreme: 'Επικίνδυνη ζέστη' },
     texts: {
@@ -74,7 +78,7 @@
     sec = Math.round(sec);
     return Math.floor(sec / 60) + ':' + String(sec % 60).padStart(2, '0');
   };
-  const pctText = (pct) => '+' + pct.toLocaleString(EN ? 'en-GB' : 'el-GR', { maximumFractionDigits: 1 }) + '%';
+  const pctText = (pct) => pct.toLocaleString(EN ? 'en-GB' : 'el-GR', { maximumFractionDigits: 1 }) + '% ' + T.slower;
 
   fetch('https://api.open-meteo.com/v1/forecast?latitude=' + place.lat + '&longitude=' + place.lon +
     '&hourly=temperature_2m,dew_point_2m&timezone=auto&forecast_days=2')
@@ -117,7 +121,7 @@
     badge.className = 'wp-level lv-' + level;
     badge.textContent = T.levels[level];
     $('hwPace').textContent = saved.pace
-      ? fmtPace(saved.pace) + ' → ' + fmtPace(saved.pace * (1 + pct / 100))
+      ? fmtPace(saved.pace) + ' → ' + fmtPace(saved.pace * (1 + pct / 100)) + ' ' + T.perKm
       : (pct < 0.25 ? T.noChange : pctText(pct));
     $('hwBest').textContent = when + ' ' + String(best.hour).padStart(2, '0') + ':00 · ' + Math.round(best.t) + '°C';
     $('hwStats').hidden = false;

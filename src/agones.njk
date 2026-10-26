@@ -87,7 +87,7 @@ activeNav: "agones"
       Από τον ιστορικό Μαραθώνιο της Αθήνας και τους ορεινούς αγώνες στα βουνά, μέχρι τους
       μεγάλους μαραθώνιους και ημιμαραθώνιους της Ευρώπης. Φιλτράρισε ανά περιοχή και τύπο,
       κάνε κλικ σε ένα σημάδι ή πάτησε «Δες στον χάρτη» σε μια κάρτα για να εστιάσεις στον
-      αγώνα. Οι κάρτες είναι σε χρονολογική σειρά, πρώτοι οι προσεχείς αγώνες.
+      αγώνα. Στο ημερολόγιο βλέπεις ποιοι αγώνες γίνονται κάθε μέρα. Οι κάρτες είναι σε χρονολογική σειρά, πρώτοι οι προσεχείς αγώνες.
     </p>
 
     <div class="race-filters" role="group" aria-label="Φίλτρο περιοχής">
@@ -101,6 +101,26 @@ activeNav: "agones"
       <button class="rf-btn" data-filter="mountain" type="button">Ορεινοί</button>
       <button class="rf-btn" data-filter="ultra" type="button">Υπερμαραθώνιοι</button>
     </div>
+
+    <section class="rc" id="raceCal" aria-labelledby="rcHeading" hidden>
+      <h2 class="rc-h" id="rcHeading">Ημερολόγιο αγώνων</h2>
+      <div class="rc-nav">
+        <button class="rc-btn rc-prev" type="button" aria-label="Προηγούμενος μήνας" title="Προηγούμενος μήνας"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></button>
+        <p class="rc-title" aria-live="polite"></p>
+        <button class="rc-btn rc-next" type="button" aria-label="Επόμενος μήνας" title="Επόμενος μήνας"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></button>
+        <button class="rc-btn rc-today" type="button">Σήμερα</button>
+      </div>
+      <div class="rc-weekdays" aria-hidden="true"></div>
+      <div class="rc-grid"></div>
+      <ul class="wp-legend rc-legend">
+        <li><i class="rc-dot t-road"></i>Δρόμου</li>
+        <li><i class="rc-dot t-mountain"></i>Ορεινός</li>
+        <li><i class="rc-dot t-ultra"></i>Υπερμαραθώνιος</li>
+        <li><span class="rc-swatch-now"></span>Σήμερα</li>
+      </ul>
+      <div class="rc-pending"></div>
+      <div class="rc-day" aria-live="polite"></div>
+    </section>
 
     <div id="race-map"></div>
     <div class="map-legend">
@@ -141,6 +161,7 @@ activeNav: "agones"
 {% block scripts_extra %}
   <script src="vendor/leaflet-1.9.4/leaflet.js"></script>
   <script src="js/race-dates.js?v={{ "js/race-dates.js" | assetHash }}"></script>
+  <script src="js/race-calendar.js?v={{ "js/race-calendar.js" | assetHash }}"></script>
   <script>
     (function () {
       if (typeof L === 'undefined') return;
@@ -234,6 +255,7 @@ activeNav: "agones"
           if (show) { e.marker.addTo(map); pts.push([e.lat, e.lng]); }
           else { map.removeLayer(e.marker); }
         });
+        if (cal) cal.render();
         if (fly && pts.length) {
           map.flyToBounds(L.latLngBounds(pts).pad(0.15), { duration: 0.8, maxZoom: 7 });
         }
@@ -255,6 +277,15 @@ activeNav: "agones"
           applyFilters(true);
         });
       });
+
+      // Ημερολόγιο αγώνων (js/race-calendar.js), με τα ίδια φίλτρα με τον χάρτη και τις κάρτες
+      var calRoot = document.getElementById('raceCal');
+      var cal = window.DKRaceCalendar && RD && calRoot
+        ? window.DKRaceCalendar.mount(calRoot, cards, function (card) {
+            return (curRegion === 'all' || (card.dataset.region || 'gr') === curRegion) &&
+                   (curType === 'all' || (card.dataset.type || 'road') === curType);
+          })
+        : null;
 
       // Αρχική προβολή: όλοι οι αγώνες (Ελλάδα + Ευρώπη) στο κάδρο
       if (entries.length) {
