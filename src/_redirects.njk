@@ -10,7 +10,7 @@ eleventyExcludeFromCollections: true
 # Παλιοί σύνδεσμοι χωρίς .html (π.χ. desekordonia.com/post-vo2max): το GitHub Pages
 # τους σέρβιρε, οπότε μπορεί να κυκλοφορούν. Πηγαίνουν μόνιμα στη σωστή διεύθυνση.
 {%- for item in collections.all %}
-{%- set p = item.data.permalink %}
+{%- set p = item | pagePath %}
 {%- if p and p.endsWith(".html") %}
 /{{ p | replace(".html", "") }} /{{ "" if p == "index.html" else p }} 301
 {%- endif %}

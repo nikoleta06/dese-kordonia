@@ -1,0 +1,177 @@
+{#- Σελίδα για κάθε αγώνα (src/agonas.njk, src/agonas-en.njk: μία σελίδα ανά αγώνα του races.js).
+    Αντίστροφη μέτρηση, «Πρόσθεσε στο ημερολόγιο» (.ics από το src/race-ics.njk), καιρός στην
+    εκκίνηση και προτεινόμενος ρυθμός· τα ζωντανά κομμάτια τα γεμίζει το js/race-page.js.
+    Χωρίς JavaScript μένουν τα στοιχεία του αγώνα και οι σύνδεσμοι. Δες docs/adr/0003. -#}
+{% extends "base.njk" %}
+
+{%- set SITE = "https://desekordonia.com" %}
+{%- set en = lang == "en" %}
+{%- set L = "en" if en else "el" %}
+{%- set suffix = "-en" if en else "" %}
+{%- set startUtc = race | raceStartUtc %}
+{%- set km = race | raceKm %}
+{%- set t = {
+  back: "All races",
+  calendar: "Add to calendar",
+  official: "Official site",
+  map: "Show on the race map",
+  countTitle: "Countdown",
+  days: "days", hours: "hours", minutes: "minutes",
+  start: "Start",
+  startLocal: "local time",
+  startTba: "Start time not announced yet. Check the official site.",
+  wxTitle: "Weather at the start",
+  wxIntro: "Forecast for race day at the start area, hour by hour. Tap an hour to see the details.",
+  paceTitle: "Suggested pace",
+  paceIntro: "Enter your goal time to see the pace per kilometre, the splits, and how much the weather on race day changes it.",
+  distance: "Distance",
+  goal: "Goal time",
+  h: "Hours", m: "Minutes", s: "Seconds",
+  paceTrail: "On mountain courses and ultras pace per kilometre says little: climbs, descents and terrain change it all the time. Run by effort and heart rate, and use the official course profile to plan your time.",
+  wxTool: "More on heat and pace: the Pace & Weather tool →",
+  note: "Dates and start times can change. Always check the official site before race day."
+} if en else {
+  back: "Όλοι οι αγώνες",
+  calendar: "Πρόσθεσε στο ημερολόγιο",
+  official: "Επίσημη σελίδα",
+  map: "Δες στον χάρτη αγώνων",
+  countTitle: "Αντίστροφη μέτρηση",
+  days: "μέρες", hours: "ώρες", minutes: "λεπτά",
+  start: "Εκκίνηση",
+  startLocal: "τοπική ώρα",
+  startTba: "Η ώρα εκκίνησης δεν έχει ανακοινωθεί ακόμα. Δες την επίσημη σελίδα.",
+  wxTitle: "Καιρός στην εκκίνηση",
+  wxIntro: "Πρόγνωση για τη μέρα του αγώνα στο σημείο της εκκίνησης, ώρα προς ώρα. Πάτησε μια ώρα για λεπτομέρειες.",
+  paceTitle: "Προτεινόμενος ρυθμός",
+  paceIntro: "Βάλε τον χρόνο-στόχο σου για να δεις τον ρυθμό ανά χιλιόμετρο, τους ενδιάμεσους χρόνους, και πόσο τον αλλάζει ο καιρός της μέρας.",
+  distance: "Απόσταση",
+  goal: "Χρόνος-στόχος",
+  h: "Ώρες", m: "Λεπτά", s: "Δευτερόλεπτα",
+  paceTrail: "Σε ορεινούς αγώνες και υπερμαραθώνιους ο ρυθμός ανά χιλιόμετρο δεν λέει πολλά: οι ανηφόρες, οι κατηφόρες και το έδαφος τον αλλάζουν συνέχεια. Τρέξε με την αίσθηση και τους παλμούς, και υπολόγισε τον χρόνο σου με το υψομετρικό της διαδρομής από την επίσημη σελίδα.",
+  wxTool: "Περισσότερα για τη ζέστη και τον ρυθμό: το εργαλείο Ρυθμός & Καιρός →",
+  note: "Οι ημερομηνίες και οι ώρες εκκίνησης μπορεί να αλλάξουν. Έλεγξε πάντα την επίσημη σελίδα πριν τον αγώνα."
+} %}
+
+{% block head_extra0 %}{% endblock %}
+
+{% block head_extra %}
+  <link rel="canonical" href="{{ SITE }}/{{ permalink }}">
+  <link rel="alternate" hreflang="el" href="{{ SITE }}/agonas-{{ race.id }}.html">
+  <link rel="alternate" hreflang="en" href="{{ SITE }}/agonas-{{ race.id }}-en.html">
+  <link rel="alternate" hreflang="x-default" href="{{ SITE }}/agonas-{{ race.id }}.html">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="{{ race.name[L] | escape }}">
+  <meta property="og:description" content="{{ description | escape }}">
+  <meta property="og:image" content="{{ SITE }}/images/cat-champions.jpg">
+  <meta property="og:url" content="{{ SITE }}/{{ permalink }}">
+  <meta name="twitter:card" content="summary_large_image">
+
+  {%- if race.date and (race | raceUpcoming) %}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SportsEvent",
+    "name": {{ race.name[L] | dump | safe }},
+    "description": {{ race.desc[L] | dump | safe }},
+    "startDate": "{{ startUtc if startUtc else race.date }}",
+    "endDate": "{{ race.dateEnd or race.date }}",
+    "eventStatus": "https://schema.org/EventScheduled",
+    "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+    "sport": "Running",
+    "location": {
+      "@type": "Place",
+      "name": {{ (race.country[L] if race.country else ("Greece" if en else "Ελλάδα")) | dump | safe }},
+      "geo": { "@type": "GeoCoordinates", "latitude": {{ race.lat }}, "longitude": {{ race.lng }} }
+    },
+    "url": "{{ SITE }}/{{ permalink }}",
+    "sameAs": "{{ race.url[L] }}"
+  }
+  </script>
+  {%- endif %}
+{% endblock %}
+
+{% block head_extra2 %}{% endblock %}
+
+{% block content %}
+  <main class="race-page">
+    <p class="rp-back"><a href="agones{{ suffix }}.html">← {{ t.back }}</a></p>
+    <p class="post-meta rp-meta"><span class="race-type type-{{ race.type }}">{{ races.typeLabels[race.type][L] }}</span>{% if race.country %} · {{ race.country[L] }}{% endif %}</p>
+    <h1 class="section-title">{{ race.name[L] }}</h1>
+    <p class="lead">{{ race.desc[L] }}</p>
+    <p class="rp-specs">{{ race.specs[L] }}</p>
+    {%- if race.note %}
+    <p class="race-note">{{ race.note[L] }}</p>
+    {%- endif %}
+
+    <section class="rp-card rp-count" id="rpCount" aria-labelledby="rpCountH"
+      data-id="{{ race.id }}" data-month="{{ race.month }}"{% if race.date %} data-date="{{ race.date }}"{% endif %}{% if race.dateEnd %} data-date-end="{{ race.dateEnd }}"{% endif %}{% if startUtc %} data-start-utc="{{ startUtc }}" data-start="{{ race.start }}"{% endif %}>
+      <h2 class="rp-h" id="rpCountH">{{ t.countTitle }}</h2>
+      <p class="rp-when" id="rpWhen">{{ races.monthNames[L][race.month - 1] }}</p>
+      <div class="rp-timer" id="rpTimer" hidden>
+        <div><b id="rpD">0</b><span>{{ t.days }}</span></div>
+        <div><b id="rpH">0</b><span>{{ t.hours }}</span></div>
+        <div><b id="rpM">0</b><span>{{ t.minutes }}</span></div>
+      </div>
+      <p class="rp-status" id="rpStatus" aria-live="polite"></p>
+      {%- if race.date %}
+      <p class="rp-start">{% if startUtc %}{{ t.start }}: <strong>{{ race.start }}</strong> ({{ t.startLocal }}){% else %}{{ t.startTba }}{% endif %}</p>
+      {%- endif %}
+      <div class="rp-actions">
+        {%- if race.date and (race | raceUpcoming) %}
+        <a class="rp-btn rp-btn-main" id="rpIcs" href="ics/{{ race.id }}{{ suffix }}.ics" download="{{ race.id }}.ics"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M12 14v4M10 16h4"/></svg>{{ t.calendar }}</a>
+        {%- endif %}
+        <a class="rp-btn" href="{{ race.url[L] }}" target="_blank" rel="noopener">{{ t.official }} →</a>
+        <a class="rp-btn" href="agones{{ suffix }}.html#{{ race.id }}">{{ t.map }}</a>
+      </div>
+    </section>
+
+    <section class="rp-card" id="rpWeather" aria-labelledby="rpWxH" data-lat="{{ race.lat }}" data-lng="{{ race.lng }}">
+      <h2 class="rp-h" id="rpWxH">{{ t.wxTitle }}</h2>
+      <p class="rp-intro" id="rpWxIntro" hidden>{{ t.wxIntro }}</p>
+      <p class="rp-status" id="rpWxStatus" role="status" aria-live="polite"></p>
+      <div class="rp-hours" id="rpWxGrid"></div>
+      <div class="wp-result rp-wx-result" id="rpWxResult" hidden aria-live="polite">
+        <p class="wp-when" id="rpWxWhen"></p>
+        <span class="wp-level" id="rpWxLevel"></span>
+        <p class="wp-delta" id="rpWxDelta"></p>
+        <table><tbody id="rpWxRows"></tbody></table>
+      </div>
+      <p class="rp-tool"><a href="kairos-rythmos{{ suffix }}.html">{{ t.wxTool }}</a></p>
+    </section>
+
+    <section class="rp-card" id="rpPace" aria-labelledby="rpPaceH"{% if km.length %} data-km="{{ km | join(',') }}"{% endif %}>
+      <h2 class="rp-h" id="rpPaceH">{{ t.paceTitle }}</h2>
+      {%- if km.length %}
+      <p class="rp-intro">{{ t.paceIntro }}</p>
+      <div class="rp-pace-form">
+        <label class="rp-field">
+          <span>{{ t.distance }}</span>
+          <select id="rpDist"></select>
+        </label>
+        <fieldset class="rp-field">
+          <legend>{{ t.goal }}</legend>
+          <div class="rp-time">
+            <div><input type="number" id="rpGh" aria-label="{{ t.h }}" min="0" max="23" inputmode="numeric" placeholder="3"><small>{{ t.h }}</small></div>
+            <div><input type="number" id="rpGm" aria-label="{{ t.m }}" min="0" max="59" inputmode="numeric" placeholder="45"><small>{{ t.m }}</small></div>
+            <div><input type="number" id="rpGs" aria-label="{{ t.s }}" min="0" max="59" inputmode="numeric" placeholder="00"><small>{{ t.s }}</small></div>
+          </div>
+        </fieldset>
+      </div>
+      <div class="rp-pace-out" id="rpPaceOut" aria-live="polite"></div>
+      {%- else %}
+      <p class="rp-intro">{{ t.paceTrail }}</p>
+      {%- endif %}
+    </section>
+
+    <p class="plan-note" style="margin-top:1.5rem;">{{ t.note }}</p>
+  </main>
+{% endblock %}
+
+{% block body_extra %}{% endblock %}
+
+{% block scripts_extra %}
+  <script src="js/weather-model.js?v={{ "js/weather-model.js" | assetHash }}"></script>
+  <script src="js/race-dates.js?v={{ "js/race-dates.js" | assetHash }}"></script>
+  <script src="js/race-page.js?v={{ "js/race-page.js" | assetHash }}"></script>
+{% endblock %}

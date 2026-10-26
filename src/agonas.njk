@@ -1,0 +1,15 @@
+---
+pagination:
+  data: races.list
+  size: 1
+  alias: race
+  addAllPagesToCollections: true
+lang: "el"
+activeNav: "agones"
+eleventyComputed:
+  permalink: "agonas-{{ race.id }}.html"
+  title: "{{ race.name.el }}: ημερομηνία, καιρός και ρυθμός | Δέσε Κορδόνια"
+  description: "{{ race.name.el }} ({{ race.specs.el }}): πότε γίνεται, αντίστροφη μέτρηση, πρόσθεση στο ημερολόγιο, καιρός στην εκκίνηση και ρυθμός για τον χρόνο-στόχο σου."
+---
+{#- Μία σελίδα ανά αγώνα του src/_data/races.js· το περιεχόμενο είναι στο _includes/race-page.njk -#}
+{% extends "race-page.njk" %}

@@ -1,0 +1,15 @@
+---
+pagination:
+  data: races.list
+  size: 1
+  alias: race
+  addAllPagesToCollections: true
+lang: "en"
+activeNav: "agones"
+eleventyComputed:
+  permalink: "agonas-{{ race.id }}-en.html"
+  title: "{{ race.name.en }}: date, weather and pace | Δέσε Κορδόνια"
+  description: "{{ race.name.en }} ({{ race.specs.en }}): when it takes place, countdown, add to calendar, weather at the start and pace for your goal time."
+---
+{#- One page per race in src/_data/races.js; the content is in _includes/race-page.njk -#}
+{% extends "race-page.njk" %}
