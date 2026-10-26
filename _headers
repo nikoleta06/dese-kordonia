@@ -39,6 +39,13 @@
 /vendor/*
   Cache-Control: public, max-age=2592000
 
+# Αρχεία ημερολογίου των αγώνων («Πρόσθεσε στο ημερολόγιο»): ως ημερολόγιο, όχι ως κείμενο,
+# ώστε το κινητό να προτείνει να το ανοίξει με την εφαρμογή ημερολογίου. Μία μέρα cache,
+# γιατί η ημερομηνία ή η ώρα μπορεί να αλλάξει.
+/ics/*
+  Content-Type: text/calendar; charset=utf-8
+  Cache-Control: public, max-age=86400
+
 # Εικόνες: μία εβδομάδα
 /images/*
   Cache-Control: public, max-age=604800

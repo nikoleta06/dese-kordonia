@@ -245,6 +245,12 @@
           toMap.addEventListener('click', () => mapBtn.click());
           actions.append(toMap);
         }
+        const page = card.querySelector('.race-page-link');
+        if (page) {
+          const a = el('a', 'race-page-link', page.textContent);
+          a.href = page.getAttribute('href');
+          actions.append(a);
+        }
         const link = card.querySelector('.read-more');
         if (link) {
           const a = el('a', 'read-more', link.textContent);

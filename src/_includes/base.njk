@@ -43,6 +43,9 @@
       {%- if "post-" in permalink %}
       { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://desekordonia.com/blog{% if lang == 'en' %}-en{% endif %}.html" },
       { "@type": "ListItem", "position": 3, "name": {{ crumbName | dump | safe }}, "item": "https://desekordonia.com/{{ permalink }}" }
+      {%- elif permalink.startsWith("agonas-") %}
+      { "@type": "ListItem", "position": 2, "name": {% if lang == 'en' %}"Races"{% else %}"Αγώνες"{% endif %}, "item": "https://desekordonia.com/agones{% if lang == 'en' %}-en{% endif %}.html" },
+      { "@type": "ListItem", "position": 3, "name": {{ crumbName | dump | safe }}, "item": "https://desekordonia.com/{{ permalink }}" }
       {%- else %}
       { "@type": "ListItem", "position": 2, "name": {{ crumbName | dump | safe }}, "item": "https://desekordonia.com/{{ permalink }}" }
       {%- endif %}

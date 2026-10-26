@@ -1,0 +1,13 @@
+---js
+// Αρχεία ημερολογίου (.ics) για το «Πρόσθεσε στο ημερολόγιο» των σελίδων αγώνων:
+// ics/<id>.ics (ελληνικά) και ics/<id>-en.ics, μόνο για αγώνες με ημερομηνία. Δες scripts/race-utils.js.
+const pagination = {
+  data: "races.list",
+  size: 1,
+  alias: "item",
+  before: (list) => list.filter((r) => r.date).flatMap((r) => [{ race: r, lang: "el" }, { race: r, lang: "en" }]),
+};
+const permalink = (data) => `ics/${data.item.race.id}${data.item.lang === "en" ? "-en" : ""}.ics`;
+const eleventyExcludeFromCollections = true;
+---
+{{- item.race | raceIcs(item.lang) | safe -}}

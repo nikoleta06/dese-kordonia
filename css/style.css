@@ -648,6 +648,10 @@ a.bento-card:focus-visible {
   font-weight: 500;
 }
 
+a.b-race-name:hover {
+  color: var(--accent);
+}
+
 .b-race-specs {
   color: var(--text-dim);
   font-size: 0.85rem;
@@ -2014,7 +2018,8 @@ tbody tr:last-child td {
 }
 
 .wp,
-.b-weather {
+.b-weather,
+.race-page {
   --lv-good: #34a853;
   --lv-fair: #f4c430;
   --lv-hard: #ff9800;
@@ -2695,6 +2700,17 @@ button.rc-cell:hover {
   gap: 0.5rem 0.8rem;
 }
 
+.rc-item-actions .race-page-link {
+  color: var(--text);
+  font-weight: 600;
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 0.85rem;
+}
+
+.rc-item-actions .race-page-link:hover {
+  color: var(--accent);
+}
+
 .rc-item-actions .read-more {
   color: var(--accent);
   font-weight: 600;
@@ -2756,6 +2772,375 @@ button.rc-cell:hover {
 @media (prefers-reduced-motion: reduce) {
   .rc-flash {
     animation: none;
+  }
+}
+
+/* ===== Σελίδα αγώνα (agonas-<id>, js/race-page.js) ===== */
+.race-page .race-type { font-weight: 600; }
+.race-page .type-road { color: #4da3ff; }
+.race-page .type-mountain { color: #3ddc84; }
+.race-page .type-ultra { color: #ff6b6b; }
+
+.rp-back {
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+.rp-back a {
+  color: var(--text-dim);
+}
+
+.rp-back a:hover {
+  color: var(--accent);
+}
+
+.rp-meta {
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  margin-bottom: 0.3rem;
+}
+
+.rp-specs {
+  color: var(--accent-2);
+  font-weight: 600;
+  margin: 0.8rem 0 0;
+}
+
+.race-page .race-note {
+  font-size: 0.88rem;
+  font-style: italic;
+  color: #ffb347;
+  margin-top: 0.6rem;
+}
+
+.rp-card {
+  max-width: 760px;
+  margin-top: 1.5rem;
+  padding: 1.5rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.rp-h {
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text);
+  margin: 0 0 0.8rem;
+}
+
+.rp-intro,
+.rp-hint {
+  color: var(--text-dim);
+  font-size: 0.92rem;
+  margin: 0 0 1rem;
+}
+
+.rp-when {
+  margin: 0 0 0.8rem;
+  color: var(--text);
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.rp-when::first-letter {
+  text-transform: uppercase;
+}
+
+.rp-timer {
+  display: flex;
+  gap: 0.8rem;
+  margin-bottom: 0.8rem;
+}
+
+.rp-timer[hidden] {
+  display: none;
+}
+
+.rp-timer div {
+  flex: 1;
+  max-width: 7rem;
+  padding: 0.7rem 0.4rem;
+  border-radius: 10px;
+  background: var(--surface-2);
+  text-align: center;
+}
+
+.rp-timer b {
+  display: block;
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 2.2rem;
+  line-height: 1;
+  color: var(--accent);
+}
+
+.rp-timer span {
+  display: block;
+  margin-top: 0.3rem;
+  color: var(--text-dim);
+  font-size: 0.8rem;
+}
+
+.rp-status:empty {
+  display: none;
+}
+
+.rp-status {
+  color: var(--text-dim);
+  margin: 0 0 0.8rem;
+}
+
+.rp-start {
+  color: var(--text-dim);
+  font-size: 0.92rem;
+  margin: 0 0 1rem;
+}
+
+.rp-start strong {
+  color: var(--text);
+}
+
+.rp-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.rp-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.55rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--text-dim);
+  font-size: 0.9rem;
+  transition: color .2s, border-color .2s, background-color .2s;
+}
+
+.rp-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.rp-btn[hidden] {
+  display: none;
+}
+
+.rp-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+.rp-btn-main {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.rp-btn-main:hover {
+  color: #fff;
+  filter: brightness(1.08);
+}
+
+/* Καιρός: ένα κουτάκι ανά ώρα, στα χρώματα του «Ρυθμός & Καιρός» */
+.rp-hours {
+  display: grid;
+  grid-template-columns: repeat(9, minmax(0, 1fr));
+  gap: 3px;
+}
+
+.rp-hour {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 0.45rem 0 0.4rem;
+  border: none;
+  border-radius: 4px;
+  color: #1b1e25;
+  font: inherit;
+  cursor: pointer;
+}
+
+.rp-hour.lv-bad,
+.rp-hour.lv-extreme {
+  color: #fff;
+}
+
+.rp-hour:hover {
+  filter: brightness(1.12);
+}
+
+.rp-hour.wp-sel {
+  outline: 2px solid var(--text);
+  outline-offset: 1px;
+  z-index: 1;
+}
+
+.rp-hour-h {
+  font-size: 0.72rem;
+}
+
+.rp-hour-t {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.rp-hour-s {
+  font-size: 0.62rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.rp-wx-result[hidden] {
+  display: none;
+}
+
+.rp-tool {
+  margin: 1rem 0 0;
+  font-size: 0.88rem;
+}
+
+/* Ρυθμός */
+.rp-pace-form {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 1rem;
+  align-items: start;
+}
+
+.rp-field {
+  margin: 0;
+  padding: 0;
+  border: none;
+  min-width: 0;
+}
+
+.rp-field > span,
+.rp-field legend {
+  display: block;
+  margin-bottom: 0.4rem;
+  padding: 0;
+  color: var(--text-dim);
+  font-weight: 500;
+}
+
+.rp-field select,
+.rp-time input {
+  width: 100%;
+  padding: 0.75rem 0.7rem;
+  background-color: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+.rp-field select:focus,
+.rp-time input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.rp-time {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.6rem;
+}
+
+.rp-time small {
+  display: block;
+  margin-top: 0.3rem;
+  color: var(--text-dim);
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+.rp-pace-out {
+  margin-top: 1.2rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--border);
+  text-align: center;
+}
+
+.rp-pace-out .pace {
+  margin-bottom: 0.6rem;
+}
+
+.rp-pace-out .big {
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 2.6rem;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.rp-pace-out .label {
+  display: block;
+  margin-top: 0.3rem;
+  color: var(--text-dim);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.rp-pace-out .rp-hint {
+  margin: 0;
+}
+
+.rp-splits {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.rp-splits th,
+.rp-splits td {
+  padding: 0.5rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-dim);
+  font-size: 0.9rem;
+}
+
+.rp-splits th {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.rp-splits td + td,
+.rp-splits th + th {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 600px) {
+  .rp-card {
+    padding: 1.1rem;
+  }
+
+  .rp-pace-form {
+    grid-template-columns: 1fr;
+  }
+
+  .rp-timer b {
+    font-size: 1.8rem;
+  }
+
+  .rp-hour-h {
+    font-size: 0.62rem;
+  }
+
+  .rp-hour-t {
+    font-size: 0.82rem;
+  }
+
+  .rp-hour-s {
+    font-size: 0.5rem;
   }
 }
 

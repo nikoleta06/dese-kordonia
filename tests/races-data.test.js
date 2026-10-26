@@ -36,3 +36,17 @@ test('οι ημερομηνίες είναι έγκυρες και ταιριά�
     }
   }
 });
+
+test('η ώρα εκκίνησης (start) είναι ΩΩ:ΛΛ, μόνο με ημερομηνία, και η ζώνη ώρας (tz) υπάρχει', () => {
+  for (const r of races.list) {
+    if (r.start) {
+      assert.ok(r.date, `${r.id}: start χωρίς date`);
+      assert.match(r.start, /^([01]\d|2[0-3]):[0-5]\d$/, `${r.id}: start πρέπει να είναι ΩΩ:ΛΛ`);
+    }
+    if (r.tz) {
+      assert.ok(r.start, `${r.id}: tz χωρίς start`);
+      assert.doesNotThrow(() => new Intl.DateTimeFormat('en', { timeZone: r.tz }), `${r.id}: άγνωστη ζώνη ώρας "${r.tz}"`);
+    }
+    if (r.region === 'eu' && r.start) assert.ok(r.tz, `${r.id}: αγώνας εκτός Ελλάδας με start χρειάζεται tz`);
+  }
+});

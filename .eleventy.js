@@ -80,13 +80,19 @@ module.exports = function (eleventyConfig) {
     return lastmodCache.get(inputPath);
   }
 
+  // Η διεύθυνση μιας σελίδας χωρίς το «/» μπροστά («agones.html», «index.html»). Από το url
+  // και όχι από το data.permalink: στις σελίδες με pagination (μία ανά αγώνα) το data.permalink
+  // είναι ίδιο για όλες.
+  const pagePath = (item) => (typeof item.url === "string" ? item.url.slice(1) || "index.html" : "");
+  eleventyConfig.addFilter("pagePath", pagePath);
+
   eleventyConfig.addFilter("sitemapPages", (items) => {
-    const pages = items.filter((item) => !item.data.noindex && String(item.data.permalink || "").endsWith(".html"));
+    const pages = items.filter((item) => !item.data.noindex && pagePath(item).endsWith(".html"));
     const urlOf = (permalink) => SITE_URL + "/" + (permalink === "index.html" ? "" : permalink);
-    const exists = new Set(pages.map((item) => item.data.permalink));
+    const exists = new Set(pages.map(pagePath));
     return pages
       .map((item) => {
-        const permalink = item.data.permalink;
+        const permalink = pagePath(item);
         const base = permalink.replace(/(-en)?\.html$/, "");
         const el = base + ".html";
         const en = base + "-en.html";
@@ -133,6 +139,16 @@ module.exports = function (eleventyConfig) {
     };
     return list.filter((r) => r.region === region).sort((a, b) => key(a) - key(b));
   });
+
+  // Σελίδες αγώνων και αρχεία .ics (src/agonas*.njk, src/race-ics.njk): δες scripts/race-utils.js
+  const raceUtils = require("./scripts/race-utils.js");
+  eleventyConfig.addFilter("raceKm", raceUtils.distancesKm);
+  eleventyConfig.addFilter("raceStartUtc", (race) => {
+    const d = raceUtils.startUtc(race);
+    return d ? d.toISOString().replace(".000Z", "Z") : "";
+  });
+  eleventyConfig.addFilter("raceUpcoming", (race) => raceUtils.isUpcoming(race));
+  eleventyConfig.addFilter("raceIcs", (race, lang) => raceUtils.raceIcs(race, lang));
 
   // RSS: το πρότυπο απαιτεί ημερομηνίες σε μορφή RFC-822 («Tue, 21 Jul 2026 08:00:00 GMT»),
   // ενώ στο postsData.js τις κρατάμε ως "2026-07-21".

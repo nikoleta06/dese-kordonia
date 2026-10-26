@@ -67,7 +67,7 @@
           {%- for r in races.list | racesFromNow("gr") %}
           <li data-month="{{ r.month }}"{% if r.date %} data-date="{{ r.date }}"{% endif %}{% if r.dateEnd %} data-date-end="{{ r.dateEnd }}"{% endif %}>
             <span class="b-race-month">{{ races.monthNames[lang][r.month - 1] }}</span>
-            <span class="b-race-name">{{ r.name[lang] }}</span>
+            <a class="b-race-name" href="agonas-{{ r.id }}{{ sfx }}.html">{{ r.name[lang] }}</a>
             <span class="b-race-specs">{{ r.specs[lang] }}</span>
           </li>
           {%- endfor %}
