@@ -66,11 +66,18 @@ test('.ics για κάθε αγώνα με ημερομηνία, σε δύο γ�
   }
 });
 
-test('ο σύνδεσμος «Πρόσθεσε στο ημερολόγιο» δείχνει σε αρχείο που υπάρχει', { skip: !built }, () => {
+test('το «Πρόσθεσε στο ημερολόγιο» έχει Google, Outlook και .ics που υπάρχει', { skip: !built }, () => {
   for (const r of races.list) {
     for (const f of [`agonas-${r.id}.html`, `agonas-${r.id}-en.html`]) {
-      const m = read(f).match(/id="rpIcs" href="([^"]+)"/);
-      if (m) assert.ok(fs.existsSync(path.join(SITE, m[1])), `${f}: ο σύνδεσμος .ics δείχνει στο ${m[1]} που δεν υπάρχει`);
+      const html = read(f);
+      const menu = html.match(/<details class="rp-cal" id="rpIcs">([\s\S]*?)<\/details>/);
+      if (!menu) continue; // αγώνας χωρίς επόμενη ημερομηνία: χωρίς μενού
+      assert.match(menu[1], /href="https:\/\/calendar\.google\.com\/calendar\/render\?action=TEMPLATE&amp;/, `${f}: λείπει το Google Calendar`);
+      assert.match(menu[1], /href="https:\/\/outlook\.live\.com\//, `${f}: λείπει το Outlook.com`);
+      assert.match(menu[1], /href="https:\/\/outlook\.office\.com\//, `${f}: λείπει το Outlook εργασίας`);
+      for (const m of menu[1].matchAll(/href="(ics\/[^"]+)"/g)) {
+        assert.ok(fs.existsSync(path.join(SITE, m[1])), `${f}: ο σύνδεσμος .ics δείχνει στο ${m[1]} που δεν υπάρχει`);
+      }
     }
   }
 });

@@ -149,6 +149,7 @@ module.exports = function (eleventyConfig) {
   });
   eleventyConfig.addFilter("raceUpcoming", (race) => raceUtils.isUpcoming(race));
   eleventyConfig.addFilter("raceIcs", (race, lang) => raceUtils.raceIcs(race, lang));
+  eleventyConfig.addFilter("raceCalendarLinks", (race, lang) => raceUtils.calendarLinks(race, lang));
 
   // RSS: το πρότυπο απαιτεί ημερομηνίες σε μορφή RFC-822 («Tue, 21 Jul 2026 08:00:00 GMT»),
   // ενώ στο postsData.js τις κρατάμε ως "2026-07-21".
