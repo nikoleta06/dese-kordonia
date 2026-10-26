@@ -3,7 +3,7 @@ const { test } = require('node:test');
 const assert = require('node:assert/strict');
 const path = require('node:path');
 
-const { distancesKm, startUtc, isUpcoming, raceIcs, fold } = require(path.join(__dirname, '..', 'scripts', 'race-utils.js'));
+const { distancesKm, startUtc, isUpcoming, raceIcs, calendarLinks, fold } = require(path.join(__dirname, '..', 'scripts', 'race-utils.js'));
 
 const base = {
   id: 'test-race', type: 'road', month: 11, lat: '38.155', lng: '23.965',
@@ -68,4 +68,32 @@ test('.ics: κόμματα με backslash, γραμμές έως 75 bytes χωρ
   }
   const long = 'SUMMARY:' + 'Αυθεντικός Μαραθώνιος Αθήνας '.repeat(4);
   assert.equal(fold(long).split('\r\n ').join(''), long);
+});
+
+test('σύνδεσμοι ημερολογίου με ώρα εκκίνησης: Google σε UTC, Outlook σε ISO', () => {
+  const links = calendarLinks(race({ date: '2026-11-08', start: '08:30' }), 'el');
+  const g = new URL(links.google);
+  assert.equal(g.origin + g.pathname, 'https://calendar.google.com/calendar/render');
+  assert.equal(g.searchParams.get('action'), 'TEMPLATE');
+  assert.equal(g.searchParams.get('text'), 'Δοκιμαστικός Μαραθώνιος: εκκίνηση');
+  assert.equal(g.searchParams.get('dates'), '20261108T063000Z/20261108T073000Z');
+  assert.match(g.searchParams.get('details'), /agonas-test-race\.html$/);
+  for (const key of ['outlook', 'office']) {
+    const o = new URL(links[key]);
+    assert.equal(o.searchParams.get('startdt'), '2026-11-08T06:30:00Z');
+    assert.equal(o.searchParams.get('enddt'), '2026-11-08T07:30:00Z');
+    assert.equal(o.searchParams.get('allday'), null);
+  }
+  assert.equal(new URL(links.outlook).host, 'outlook.live.com');
+  assert.equal(new URL(links.office).host, 'outlook.office.com');
+});
+
+test('σύνδεσμοι ημερολογίου χωρίς ώρα: ολοήμεροι, μέχρι και την τελευταία μέρα', () => {
+  const links = calendarLinks(race({ date: '2026-11-28', dateEnd: '2026-11-29' }), 'en');
+  assert.equal(new URL(links.google).searchParams.get('dates'), '20261128/20261130');
+  assert.equal(new URL(links.google).searchParams.get('text'), 'Test Marathon');
+  const o = new URL(links.outlook);
+  assert.equal(o.searchParams.get('startdt'), '2026-11-28');
+  assert.equal(o.searchParams.get('enddt'), '2026-11-30');
+  assert.equal(o.searchParams.get('allday'), 'true');
 });

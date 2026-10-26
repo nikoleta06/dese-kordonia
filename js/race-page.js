@@ -108,7 +108,7 @@
       $('rpWhen').textContent = RD.pendingText(i, lang);
       timer.hidden = true;
       status.textContent = '';
-      if (ics) ics.hidden = true; // το .ics είναι για τη διοργάνωση που πέρασε
+      if (ics) ics.hidden = true; // οι σύνδεσμοι είναι για τη διοργάνωση που πέρασε
       return;
     }
     const oneDay = i.start.getTime() === i.end.getTime();
@@ -131,6 +131,16 @@
   }
   renderCount();
   setInterval(renderCount, 30 * 1000);
+
+  // Το μενού του ημερολογίου κλείνει με κλικ έξω από αυτό, με Esc και μόλις διαλέξεις κάτι
+  const cal = $('rpIcs');
+  if (cal) {
+    document.addEventListener('click', (e) => { if (cal.open && !cal.contains(e.target)) cal.open = false; });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && cal.open) { cal.open = false; cal.querySelector('summary').focus(); }
+    });
+    cal.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => { cal.open = false; }));
+  }
 
   /* ---------- Καιρός στην εκκίνηση ---------- */
   let wxPct = null; // επιβράδυνση (%) στην ώρα εκκίνησης, όταν υπάρχει πρόγνωση

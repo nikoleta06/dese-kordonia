@@ -13,6 +13,10 @@
 {%- set t = {
   back: "All races",
   calendar: "Add to calendar",
+  calApple: "Apple Calendar (iPhone, iPad, Mac)",
+  calOutlook: "Outlook.com / Hotmail",
+  calOffice: "Outlook for work or school (Microsoft 365)",
+  calOther: "Other app (.ics file)",
   official: "Official site",
   map: "Show on the race map",
   countTitle: "Countdown",
@@ -33,6 +37,10 @@
 } if en else {
   back: "Όλοι οι αγώνες",
   calendar: "Πρόσθεσε στο ημερολόγιο",
+  calApple: "Apple Calendar (iPhone, iPad, Mac)",
+  calOutlook: "Outlook.com / Hotmail",
+  calOffice: "Outlook εργασίας ή σχολής (Microsoft 365)",
+  calOther: "Άλλη εφαρμογή (αρχείο .ics)",
   official: "Επίσημη σελίδα",
   map: "Δες στον χάρτη αγώνων",
   countTitle: "Αντίστροφη μέτρηση",
@@ -119,7 +127,20 @@
       {%- endif %}
       <div class="rp-actions">
         {%- if race.date and (race | raceUpcoming) %}
-        <a class="rp-btn rp-btn-main" id="rpIcs" href="ics/{{ race.id }}{{ suffix }}.ics" download="{{ race.id }}.ics"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M12 14v4M10 16h4"/></svg>{{ t.calendar }}</a>
+        {%- set cal = race | raceCalendarLinks(lang) %}
+        {%- set ics = "ics/" + race.id + suffix + ".ics" %}
+        {#- Μενού χωρίς JavaScript (<details>): Google και Outlook στο web ανοίγουν τη φόρμα νέου
+            γεγονότος ήδη συμπληρωμένη· Apple και κάθε άλλη εφαρμογή παίρνουν το .ics -#}
+        <details class="rp-cal" id="rpIcs">
+          <summary class="rp-btn rp-btn-main"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M12 14v4M10 16h4"/></svg>{{ t.calendar }}<span class="rp-caret" aria-hidden="true">▾</span></summary>
+          <ul class="rp-cal-menu">
+            <li><a href="{{ cal.google }}" target="_blank" rel="noopener">Google Calendar</a></li>
+            <li><a href="{{ ics }}" download="{{ race.id }}.ics">{{ t.calApple }}</a></li>
+            <li><a href="{{ cal.outlook }}" target="_blank" rel="noopener">{{ t.calOutlook }}</a></li>
+            <li><a href="{{ cal.office }}" target="_blank" rel="noopener">{{ t.calOffice }}</a></li>
+            <li><a href="{{ ics }}" download="{{ race.id }}.ics">{{ t.calOther }}</a></li>
+          </ul>
+        </details>
         {%- endif %}
         <a class="rp-btn" href="{{ race.url[L] }}" target="_blank" rel="noopener">{{ t.official }} →</a>
         <a class="rp-btn" href="agones{{ suffix }}.html#{{ race.id }}">{{ t.map }}</a>

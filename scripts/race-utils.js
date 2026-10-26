@@ -119,4 +119,41 @@ function raceIcs(race, lang, now = new Date()) {
   return lines.map(fold).join("\r\n") + "\r\n";
 }
 
-module.exports = { distancesKm, startUtc, isUpcoming, pageUrl, raceIcs, fold, DEFAULT_TZ };
+/* ---------- Σύνδεσμοι για ημερολόγια στο web ----------
+   Το .ics ανοίγει με την εφαρμογή ημερολογίου του υπολογιστή (στα Windows συνήθως το Outlook),
+   όχι με το Google Calendar στο web. Γι' αυτό υπάρχουν και σύνδεσμοι που ανοίγουν απευθείας τη
+   φόρμα νέου γεγονότος, ήδη συμπληρωμένη, στο Google Calendar και στο Outlook (προσωπικό και
+   εταιρικό). Ίδια στοιχεία με το .ics: με ώρα εκκίνησης μία ώρα σε UTC, αλλιώς ολοήμερο. */
+function calendarLinks(race, lang) {
+  const en = lang === "en";
+  const start = startUtc(race);
+  const name = race.name[en ? "en" : "el"];
+  const title = start ? name + (en ? ": start" : ": εκκίνηση") : name;
+  const details = race.specs[en ? "en" : "el"] + "\n" + pageUrl(race, lang);
+  const lastDay = addDays(race.dateEnd || race.date, 1);
+  const iso = (d) => d.toISOString().replace(".000Z", "Z");
+  const end = start && new Date(start.getTime() + 3600e3);
+
+  const google = new URLSearchParams({
+    action: "TEMPLATE",
+    text: title,
+    dates: start ? icsStamp(start) + "/" + icsStamp(end) : icsDate(race.date) + "/" + icsDate(lastDay),
+    details,
+  });
+  const outlookParams = new URLSearchParams({
+    path: "/calendar/action/compose",
+    rru: "addevent",
+    subject: title,
+    body: details,
+    startdt: start ? iso(start) : race.date,
+    enddt: start ? iso(end) : lastDay,
+    ...(start ? {} : { allday: "true" }),
+  });
+  return {
+    google: "https://calendar.google.com/calendar/render?" + google,
+    outlook: "https://outlook.live.com/calendar/0/deeplink/compose?" + outlookParams,
+    office: "https://outlook.office.com/calendar/0/deeplink/compose?" + outlookParams,
+  };
+}
+
+module.exports = { distancesKm, startUtc, isUpcoming, pageUrl, raceIcs, calendarLinks, fold, DEFAULT_TZ };
