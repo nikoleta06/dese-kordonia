@@ -3739,6 +3739,79 @@ button.rc-cell:hover {
   cursor: default;
 }
 
+.passkey-note {
+  margin-top: 0.4rem;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--text-dim);
+}
+
+.passkey-note[hidden] {
+  display: none;
+}
+
+/* Κλειστό: μία γραμμή σαν σύνδεσμος· ανοιχτό: πλαίσιο με την εξήγηση */
+.passkey-note summary {
+  display: inline-block;
+  padding: 0.2rem 0.4rem;
+  cursor: pointer;
+  list-style: none;
+  text-decoration: underline dotted;
+  text-underline-offset: 3px;
+}
+
+.passkey-note summary::-webkit-details-marker {
+  display: none;
+}
+
+.passkey-note summary:hover {
+  color: var(--text);
+}
+
+.passkey-note[open] {
+  padding: 0.6rem 1rem 0.8rem;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface-2);
+}
+
+.passkey-note[open] summary {
+  margin-bottom: 0.4rem;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.passkey-note p {
+  margin: 0 0 0.6rem;
+}
+
+.passkey-note-btn {
+  padding: 0.5rem 1.1rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.88rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color .2s, color .2s;
+}
+
+.passkey-note-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.passkey-note .passkey-note-done {
+  margin: 0.5rem 0 0;
+  color: var(--text);
+}
+
+.passkey-note .passkey-note-done:empty {
+  display: none;
+}
+
 .passkey-hint {
   margin: 0.45rem 0 0;
   text-align: center;

@@ -41,9 +41,18 @@
     return prepare(kind).then(function (o) { prepared[kind] = null; return o; });
   }
 
+  // Ο ενσωματωμένος browser μιας εφαρμογής (σύνδεσμος που άνοιξε μέσα από Instagram, Facebook,
+  // Messenger, Viber, TikTok κ.λπ.). Εκεί το Face ID συνήθως δεν δουλεύει, ακόμα κι αν ο browser
+  // λέει ότι το υποστηρίζει, γιατί η εφαρμογή δεν έχει δικαίωμα να ζητήσει passkey για το site μας.
+  const IN_APP = /FBAN|FBAV|FB_IAB|FBIOS|Instagram|Messenger|Viber|Line\/|Snapchat|TikTok|musical_ly|BytedanceWebview|Twitter|LinkedInApp|Pinterest|GSA\//i;
+
   window.DKPasskey = {
     supported: function () {
       return !!(SWA && SWA.browserSupportsWebAuthn());
+    },
+
+    inAppBrowser: function () {
+      return IN_APP.test(navigator.userAgent || '');
     },
 
     prepareLogin: function () { return prepare('login').catch(function () {}); },

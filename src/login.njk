@@ -63,6 +63,15 @@ description: "Συνδέσου στο Δέσε Κορδόνια με το email 
           Μπες με Face ID / δαχτυλικό
         </button>
       </div>
+      {#- Χωρίς Face ID σε αυτόν τον browser (συνήθως σελίδα που άνοιξε μέσα από Instagram, Facebook,
+          Viber κ.λπ.): μία γραμμή «Δεν υποστηρίζεται Face ID εδώ…» αντί να εξαφανίζεται απλώς το
+          κουμπί· όποιος θέλει την πατά και βλέπει γιατί, μαζί με την αντιγραφή του συνδέσμου -#}
+      <details class="passkey-note" id="passkeyNote" hidden>
+        <summary>Δεν υποστηρίζεται Face ID εδώ…</summary>
+        <p id="passkeyNoteText"></p>
+        <button class="passkey-note-btn" id="copyLinkBtn" type="button">Αντιγραφή συνδέσμου</button>
+        <p class="passkey-note-done" id="copyLinkDone" role="status" aria-live="polite"></p>
+      </details>
 
       <button class="btn-ghost btn-ghost-block" id="pwToggle" type="button" aria-expanded="false" aria-controls="pwPanel">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
@@ -185,10 +194,26 @@ description: "Συνδέσου στο Δέσε Κορδόνια με το email 
         btn.disabled = false;
       }
 
-      if (DKPasskey.supported()) {
+      // Μέσα σε εφαρμογή (Instagram, Facebook, Viber…) το Face ID δεν δουλεύει, κι ας λέει ο browser
+      // ότι το υποστηρίζει. Εκεί, και σε browsers χωρίς passkeys, εξηγούμε τι να κάνει ο επισκέπτης
+      if (DKPasskey.supported() && !DKPasskey.inAppBrowser()) {
         $('passkeyArea').hidden = false;
         DKPasskey.prepareLogin();
         $('passkeyBtn').addEventListener('click', passkeyLogin);
+      } else {
+        $('passkeyNoteText').textContent = DKPasskey.inAppBrowser()
+          ? 'Το Face ID δεν δουλεύει μέσα σε εφαρμογές όπως το Instagram, το Facebook ή το Viber. Άνοιξε τη σελίδα στο Safari ή στο Chrome (μενού ⋯ ή ⋮ της εφαρμογής → «Άνοιγμα στο πρόγραμμα περιήγησης») ή αντίγραψε τον σύνδεσμο. Μέχρι τότε, μπες με κωδικό ή με το email σου.'
+          : 'Αυτός ο browser δεν υποστηρίζει Face ID. Άνοιξε τη σελίδα στο Safari ή στο Chrome, ή μπες με κωδικό ή με το email σου.';
+        $('passkeyNote').hidden = false;
+        $('copyLinkBtn').addEventListener('click', async () => {
+          const url = location.origin + location.pathname;
+          try {
+            await navigator.clipboard.writeText(url);
+            $('copyLinkDone').textContent = 'Αντιγράφηκε. Επικόλλησέ τον στο Safari ή στο Chrome.';
+          } catch (e) {
+            $('copyLinkDone').textContent = 'Δεν έγινε αντιγραφή. Γράψε στο Safari ή στο Chrome: ' + url.replace(/^https?:\/\//, '');
+          }
+        });
       }
 
       /* --- Κωδικός: για όσους έχουν ορίσει (και σε παλιά κινητά χωρίς Face ID) --- */
