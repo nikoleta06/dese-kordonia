@@ -11,7 +11,6 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("robots.txt");
   eleventyConfig.addPassthroughCopy("favicon.ico");
   eleventyConfig.addPassthroughCopy("favicon.png");
-  eleventyConfig.addPassthroughCopy("CNAME");
   eleventyConfig.addPassthroughCopy("googlee4e046c775be8626.html");
   // Cloudflare: HTTP headers (security, cache) — δες το αρχείο _headers
   eleventyConfig.addPassthroughCopy("_headers");

@@ -1,6 +1,6 @@
 name: Build & deploy
 
-# push στο main → build και deploy (GitHub Pages + Cloudflare)
+# push στο main → build και deploy στο Cloudflare
 # pull request  → μόνο build (έλεγχος ότι δεν σπάει τίποτα) + προεπισκόπηση στο Cloudflare
 on:
   push:
@@ -43,12 +43,6 @@ jobs:
       - name: Run tests
         run: npm test
 
-      - name: Upload artifact for GitHub Pages
-        if: github.event_name != 'pull_request'
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: "_site"
-
       - name: Deploy to Cloudflare
         if: github.event_name != 'pull_request' && env.CLOUDFLARE_API_TOKEN != ''
         run: npx wrangler deploy
@@ -57,22 +51,3 @@ jobs:
       - name: Preview on Cloudflare
         if: github.event_name == 'pull_request' && env.CLOUDFLARE_API_TOKEN != ''
         run: npx wrangler versions upload --preview-alias pr-${{ github.event.number }}
-
-  # Το GitHub Pages μένει live μέχρι να περάσει το domain στο Cloudflare, ως εφεδρεία.
-  deploy-github-pages:
-    if: github.event_name != 'pull_request'
-    needs: build
-    runs-on: ubuntu-latest
-    permissions:
-      pages: write
-      id-token: write
-    concurrency:
-      group: "pages"
-      cancel-in-progress: false
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4

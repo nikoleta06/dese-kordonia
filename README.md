@@ -65,12 +65,12 @@
 
 ## Δομή
 ```
-robots.txt, CNAME
+robots.txt
 favicon.ico, favicon.png    # εικονίδιο site (και στο images/)
 package.json, .eleventy.js  # ρύθμιση Eleventy
 wrangler.jsonc              # ρύθμιση Cloudflare Workers
 _headers                    # security headers (CSP κ.λπ.) και cache για το Cloudflare
-.github/workflows/deploy.yml  # build + deploy (Cloudflare, GitHub Pages) και preview σε κάθε PR
+.github/workflows/deploy.yml  # build + deploy στο Cloudflare και preview σε κάθε PR
 NEO-ARTHRO.md               # πώς γράφεις νέο άρθρο
 src/
   _includes/
@@ -137,9 +137,8 @@ npm test        # node --test tests/*.test.js
 - Το δωρεάν πρόγραμμα του Open-Meteo είναι για **μη εμπορική χρήση**, και η άδεια των δεδομένων (CC BY 4.0) ζητά αναφορά: η γραμμή «Δεδομένα καιρού: Open-Meteo.com» στη σελίδα πρέπει να μείνει.
 
 ## Deployment
-Το build γίνεται στο GitHub Actions ([.github/workflows/deploy.yml](.github/workflows/deploy.yml)): σε κάθε push στο `main` τρέχει `npm ci` + `npx eleventy` και ο φάκελος `_site/` ανεβαίνει:
-- στο **Cloudflare Workers** (static assets) με `npx wrangler deploy` — ρυθμίσεις στο [wrangler.jsonc](wrangler.jsonc). Τα URLs μένουν ακριβώς όπως είναι (`post-x.html`)· η 404 είναι η branded σελίδα.
-- στο **GitHub Pages**, ως εφεδρεία μέχρι να περάσει οριστικά το domain στο Cloudflare.
+Το build γίνεται στο GitHub Actions ([.github/workflows/deploy.yml](.github/workflows/deploy.yml)): σε κάθε push στο `main` τρέχει `npm ci` + `npx eleventy` και ο φάκελος `_site/` ανεβαίνει
+στο **Cloudflare Workers** (static assets) με `npx wrangler deploy` — ρυθμίσεις στο [wrangler.jsonc](wrangler.jsonc). Τα URLs μένουν ακριβώς όπως είναι (`post-x.html`)· η 404 είναι η branded σελίδα.
 
 Σε κάθε pull request γίνεται build (έλεγχος) και ανεβαίνει προεπισκόπηση στο `pr-<αριθμός>-dese-kordonia.<subdomain>.workers.dev`.
 
