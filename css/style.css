@@ -1552,6 +1552,230 @@ tbody tr:last-child td {
   letter-spacing: 0.3px;
 }
 
+/* ===== Σελίδα Ευεξία: σχήμα που οδηγεί στις κάρτες ===== */
+a.body-map-node {
+  text-decoration: none;
+  color: inherit;
+}
+
+a.body-map-node:focus-visible .node-icon,
+a.body-map-node:hover .node-icon {
+  border-color: var(--accent);
+}
+
+.cards .card[id] {
+  scroll-margin-top: 140px; /* κάτω από το header, που φτάνει τα ~130px */
+}
+
+.cards .card:target {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px var(--accent);
+}
+
+/* η κάρτα που άνοιξε από το σχήμα φαίνεται αμέσως, χωρίς να περιμένει το scroll reveal */
+.cards .card.reveal:target {
+  opacity: 1;
+  transform: none;
+}
+
+/* ===== Πόση άσκηση φτάνει (σελίδα Ευεξία) ===== */
+.am-goals {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.am-goal {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem 1.2rem;
+  text-align: center;
+}
+
+.am-goal .num {
+  display: block;
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.am-goal .cap {
+  color: var(--text-dim);
+  font-size: 0.9rem;
+}
+
+.am-note {
+  max-width: 740px;
+  margin: 1.2rem auto 0;
+  color: var(--text-dim);
+  text-align: center;
+}
+
+.am-tool {
+  max-width: 640px;
+  margin: 1.8rem auto 0;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.3rem 1.4rem;
+}
+
+.am-tool h3 {
+  color: var(--accent-2);
+  margin-bottom: 0.9rem;
+}
+
+.am-fields {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.9rem;
+}
+
+.am-fields label {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.35rem;
+  color: var(--text-dim);
+  font-size: 0.9rem;
+}
+
+.am-fields input {
+  background-color: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  font-size: 1.1rem;
+  padding: 0.55rem 0.7rem;
+  width: 100%;
+}
+
+.am-fields input:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.am-bar {
+  position: relative;
+  height: 14px;
+  margin-top: 1.3rem;
+  border-radius: 7px;
+  background-color: var(--surface-2);
+  overflow: hidden;
+}
+
+.am-fill {
+  height: 100%;
+  width: 0;
+  border-radius: 7px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  transition: width 0.3s;
+}
+
+/* ο βασικός στόχος (150) στη μέση της μπάρας, που φτάνει ως τα 300 */
+.am-mark {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 2px;
+  background-color: var(--text);
+  opacity: 0.6;
+}
+
+.am-scale {
+  display: flex;
+  justify-content: space-between;
+  color: var(--text-dim);
+  font-size: 0.78rem;
+  margin-top: 0.3rem;
+}
+
+.am-result {
+  margin-top: 0.8rem;
+  color: var(--text);
+}
+
+.am-tool[data-goal="base"] .am-result,
+.am-tool[data-goal="upper"] .am-result {
+  color: var(--accent-2);
+}
+
+.am-small {
+  max-width: 740px;
+  margin: 1rem auto 0;
+  color: var(--text-dim);
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+.am-small a,
+.stop a {
+  color: var(--accent);
+}
+
+/* ===== Πότε να κόψεις ή να σταματήσεις (σελίδα Ευεξία) ===== */
+.stop-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.2rem;
+  margin-top: 1.5rem;
+}
+
+.stop-card {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-top: 4px solid var(--stop-color);
+  border-radius: 12px;
+  padding: 1.1rem 1.3rem;
+}
+
+.stop-now { --stop-color: #e53935; }
+.stop-rest { --stop-color: var(--accent); }
+.stop-slow { --stop-color: var(--accent-2); }
+
+.stop-card h3 {
+  color: var(--stop-color);
+  font-size: 1.1rem;
+  margin-bottom: 0.6rem;
+}
+
+.stop-card ul,
+.stop-before ul {
+  padding-left: 1.1rem;
+}
+
+.stop-card li,
+.stop-before li {
+  color: var(--text-dim);
+  font-size: 0.92rem;
+  margin-bottom: 0.4rem;
+}
+
+.stop-card p,
+.stop-before p {
+  color: var(--text-dim);
+  font-size: 0.88rem;
+  margin-top: 0.6rem;
+}
+
+.stop-before {
+  max-width: 740px;
+  margin: 1.5rem auto 0;
+  background-color: var(--surface-2);
+  border-radius: 12px;
+  padding: 1.1rem 1.3rem;
+}
+
+.stop-before h3 {
+  color: var(--accent-2);
+  font-size: 1.05rem;
+  margin-bottom: 0.6rem;
+}
+
 /* ===== Blog listing ===== */
 .post-grid {
   display: grid;
