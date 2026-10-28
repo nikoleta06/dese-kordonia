@@ -1,8 +1,9 @@
 {# «Διάβασε επίσης» — στατικά related άρθρα στο build (αντικατέστησε τον JS injector του main.js) #}
-{%- set relatedPicks = permalink | relatedPosts -%}
+{#- Μια σελίδα μπορεί να δώσει δικά της άρθρα (relatedPicks) και τίτλο (relatedHeading) πριν το include -#}
+{%- set relatedPicks = relatedPicks or (permalink | relatedPosts) -%}
 {%- if relatedPicks.length %}
       <section data-pagefind-ignore="all" class="related">
-        <h3 class="related-title">{% if lang == 'en' %}Read also{% else %}Διάβασε επίσης{% endif %}</h3>
+        <h3 class="related-title">{% if relatedHeading %}{{ relatedHeading }}{% elif lang == 'en' %}Read also{% else %}Διάβασε επίσης{% endif %}</h3>
         <div class="related-grid post-grid">
           {%- for p in relatedPicks %}
           {%- set cmeta = postsData.cats[p.cat] %}

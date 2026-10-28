@@ -5,6 +5,7 @@ heading: "Γιατί οι ελίτ δρομείς τρέχουν αργά, κα�
 summary: "Η επιστήμη πίσω από τις easy προπονήσεις και την πολωμένη προπόνηση 80/20."
 cardTitle: "Γιατί οι ελίτ δρομείς τρέχουν αργά"
 cat: science
+wellness: true
 published: "2026-06-18"
 updated: "2026-07-16"
 readMinutes: 5

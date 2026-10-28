@@ -200,6 +200,9 @@ module.exports = function (eleventyConfig) {
     return same.concat(others).slice(0, 3);
   });
 
+  // Τα άρθρα για την υγεία (wellness: true), τα πιο πρόσφατα πρώτα, για τη σελίδα Ευεξία
+  eleventyConfig.addFilter("wellnessPosts", (posts, limit = 3) => posts.filter((p) => p.wellness).slice(0, limit));
+
   // Μετά το build: OG images (μία κάρτα κοινοποίησης ανά άρθρο) και το ευρετήριο
   // αναζήτησης του Pagefind (_site/pagefind), που χρησιμοποιεί η σελίδα αναζήτησης.
   eleventyConfig.on("eleventy.after", async () => {

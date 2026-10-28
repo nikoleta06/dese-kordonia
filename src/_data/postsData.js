@@ -1,6 +1,8 @@
 /* Κατηγορίες και λίστα άρθρων του blog.
 
    Τα άρθρα γράφονται στο src/posts/ (ένα .md ανά γλώσσα: post-x.md και post-x-en.md).
+   Με «wellness: true» στο front matter του ελληνικού .md, ένα άρθρο εμφανίζεται και στα
+   σχετικά άρθρα της σελίδας Ευεξία (healthy.njk).
    Η λίστα «posts» παρακάτω ΔΕΝ γράφεται με το χέρι: φτιάχνεται σε κάθε build από το
    front matter των άρθρων, και τροφοδοτεί το «Διάβασε επίσης» (related.njk), τα RSS
    feeds (feed.njk / feed-en.njk) και τις κάρτες κοινοποίησης (scripts/generate-og.js).
@@ -38,7 +40,7 @@ function readPosts() {
     const en = byLang.en[slug];
     if (!en) throw new Error(`Λείπει η αγγλική εκδοχή: src/posts/${slug}-en.md`);
     const feed = (d) => ({ title: d.feedTitle || d.shareTitle || d.heading, desc: d.feedSummary || d.summary });
-    return { slug, cat: el.cat, date: el.published, el: el.cardTitle, en: en.cardTitle, feed: { el: feed(el), en: feed(en) } };
+    return { slug, cat: el.cat, date: el.published, wellness: !!el.wellness, el: el.cardTitle, en: en.cardTitle, feed: { el: feed(el), en: feed(en) } };
   });
   return posts.sort(
     (a, b) =>
