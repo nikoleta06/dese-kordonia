@@ -1,6 +1,6 @@
 # ADR 0002: Πολιτική ασφαλείας: HTTP headers και CSP χωρίς 'unsafe-inline' στα scripts
 
-- **Κατάσταση:** Αποδεκτή
+- **Κατάσταση:** Αποδεκτή (το [ADR 0005](0005-syndesi-me-google.md) αλλάζει το `frame-src` και το `Cross-Origin-Opener-Policy` για τη σύνδεση με Google)
 - **Ημερομηνία:** 22 Οκτωβρίου 2026
 - **Υλοποίηση:** τα headers μπήκαν με το [PR #18](https://github.com/nikoleta06/dese-kordonia/pull/18) (μεταφορά στο Cloudflare)· τα hashes των scripts με το PR του `csp-strict`
 - **Αποφάσισε:** Νικολέτα Ακρίδα
@@ -53,13 +53,13 @@ server για τις σελίδες, αλλά οι σελίδες μιλούν �
 | `X-Frame-Options` | `DENY` | Το site δεν μπαίνει σε iframe (clickjacking)· μαζί με το `frame-ancestors 'none'` του CSP |
 | `Referrer-Policy` | `strict-origin-when-cross-origin` | Τα ξένα sites βλέπουν μόνο ότι ο επισκέπτης ήρθε από το desekordonia.com, όχι ποια σελίδα |
 | `Permissions-Policy` | κάμερα, μικρόφωνο, πληρωμές, USB: κανείς· τοποθεσία: μόνο το site | Τοποθεσία μόνο για το «Χρησιμοποίησε τη θέση μου» του «Ρυθμός & Καιρός» |
-| `Cross-Origin-Opener-Policy` | `same-origin-allow-popups` | Παράθυρα άλλων sites δεν έχουν πρόσβαση στο δικό μας· εξαίρεση μόνο τα popups που ανοίγει η ίδια η σελίδα (το «Σύνδεση με Google» του login) |
+| `Cross-Origin-Opener-Policy` | `same-origin` | Παράθυρα άλλων sites δεν έχουν πρόσβαση στο δικό μας |
 | `Content-Security-Policy` | δες παρακάτω | Από πού επιτρέπεται να φορτώνει και να στέλνει δεδομένα η σελίδα |
 
 ### 2. Content-Security-Policy σε δύο επίπεδα
 
 **Header (ίδιο για όλες τις σελίδες):** `default-src 'self'`, μόνο οι υπηρεσίες του πίνακα
-παραπάνω, `object-src 'none'`, `frame-src` μόνο για το `accounts.google.com/gsi/` (κουμπί «Σύνδεση με Google»), `frame-ancestors 'none'`, `base-uri 'self'`,
+παραπάνω, `object-src 'none'`, `frame-src 'none'`, `frame-ancestors 'none'`, `base-uri 'self'`,
 `form-action 'self'`, `upgrade-insecure-requests`. Στα scripts έχει ακόμα `'unsafe-inline'`,
 επειδή ένα header δεν μπορεί να έχει διαφορετικά hashes ανά σελίδα.
 
