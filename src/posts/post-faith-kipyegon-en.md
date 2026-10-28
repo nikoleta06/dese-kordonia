@@ -6,7 +6,7 @@ summary: "Lessons in consistency and patience from a runner built gradually, not
 cardTitle: "Faith Kipyegon: Consistency and the return to the top"
 cat: champions
 published: "2026-07-07"
-updated: "2026-07-07"
+updated: "2026-10-28"
 readMinutes: 3
 heroAlt: "Running shoe laces: a symbol of consistency in running"
 ---
@@ -38,7 +38,7 @@ The talent showed early. But plenty of kids win medals at 16 and then disappear.
   <li><span class="year">2019</span>She comes back and takes silver at the World Championships in Doha.</li>
 </ul>
 
-This is where many expected her career to start fading. She just needed a little time to find her rhythm again.
+Kipyegon just needed a little time to find her rhythm again.
 
 <!-- YOUR OWN LINE: If you've taken a break from running yourself (work, injury, family),
      what was coming back like? One or two sentences. -->
