@@ -7,7 +7,7 @@
 (function () {
   // OAuth client ID από το Google Cloud Console (το ίδιο με το GOOGLE_CLIENT_ID του backend).
   // Κενό = η σύνδεση με Google είναι κλειστή και το παραθυράκι δεν ανοίγει ποτέ.
-  const CLIENT_ID = '';
+  const CLIENT_ID = '311068400553-upco75r2jc5vp1s5vfr93lq61jafg3sj.apps.googleusercontent.com';
 
   const API = (location.hostname === 'localhost') ? 'http://localhost:4000' : 'https://api.desekordonia.com';
 
