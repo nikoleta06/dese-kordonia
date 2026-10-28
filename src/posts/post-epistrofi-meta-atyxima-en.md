@@ -39,6 +39,8 @@ When I recovered, after three and a half months, I went out again for an easy ru
 
 This was my own path, without a plan from a coach or specialist. I went out every afternoon, five times a week, without pushing myself at all. The first week I ran 1 to 1.5 kilometres. The second, 2 to 2.5. The third, 3 to 3.5.
 
+My approach was simple. I didn't push to run fast. I kept a steady pace and kept checking my watch, so my heart rate stayed under 150. For me that means close to my [aerobic zone](post-zones-palmon-en.html), only barely touching the orange zone on my watch, that is 140 to 150.
+
 ### The kilometre I didn't expect
 
 One day that third week, I ran my first kilometre in **4:48**. I didn't push. It just happened, the way it used to. I hadn't run a kilometre at that pace in two years, and my new Garmin beeped for a personal record, because it had never recorded it before.
