@@ -5388,3 +5388,79 @@ footer .accent {
   color: var(--accent);
   font-weight: 600;
 }
+
+/* ===== Σελίδα login: «Συνέχεια με την Google» κάτω από το πεδίο του email ===== */
+.field:has(.google-pop) {
+  position: relative;
+}
+
+.google-pop {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  left: 0;
+  right: 0;
+  z-index: 20;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 0.9rem 1rem 0.8rem;
+  text-align: center;
+  animation: google-pop-in 0.2s ease-out;
+}
+
+.google-pop[hidden] {
+  display: none;
+}
+
+.google-pop-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.7rem;
+  color: var(--text);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.google-pop-close {
+  background: none;
+  border: none;
+  color: var(--text-dim);
+  font-size: 1.3rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0.2rem 0.4rem;
+}
+
+.google-pop-close:hover {
+  color: var(--text);
+}
+
+.google-pop-btn {
+  display: flex;
+  justify-content: center;
+  min-height: 44px;
+}
+
+.google-pop-error {
+  margin-top: 0.7rem;
+  color: #e57373;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.google-pop-hint {
+  margin-top: 0.6rem;
+  color: var(--text-dim);
+  font-size: 0.85rem;
+}
+
+@keyframes google-pop-in {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .google-pop { animation: none; }
+}

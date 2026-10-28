@@ -13,18 +13,21 @@
   # Κάμερα, μικρόφωνο, πληρωμές: κανείς δεν τα χρειάζεται εδώ. Τοποθεσία: μόνο το ίδιο
   # το site (κουμπί «Χρησιμοποίησε τη θέση μου» στο Ρυθμός & Καιρός), ποτέ ξένα iframes
   Permissions-Policy: camera=(), microphone=(), geolocation=(self), payment=(), usb=()
-  Cross-Origin-Opener-Policy: same-origin
+  # same-origin-allow-popups (όχι same-origin): το παράθυρο «Συνέχεια με την Google» της σελίδας
+  # login χρειάζεται να μιλά με τη σελίδα που το άνοιξε
+  Cross-Origin-Opener-Policy: same-origin-allow-popups
   # CSP: από πού επιτρέπεται να φορτώνει η σελίδα. Ό,τι δεν είναι στη λίστα μπλοκάρεται,
   # οπότε ακόμα κι αν κάποιος καταφέρει να βάλει δικό του script, δεν μπορεί να στείλει
   # δεδομένα πουθενά. Εξωτερικά: GoatCounter (στατιστικά), OpenStreetMap (χάρτης αγώνων),
-  # Supabase (likes), το API (λογαριασμός, newsletter) και το Open-Meteo (καιρός, αναζήτηση πόλης).
+  # Supabase (likes), το API (λογαριασμός, newsletter), το Open-Meteo (καιρός, αναζήτηση πόλης)
+  # και η Google (κουμπί «Σύνδεση με Google» στη σελίδα login, μόνο από το accounts.google.com/gsi/).
   # 'wasm-unsafe-eval': για την αναζήτηση (Pagefind). 'unsafe-inline' στα styles: για τα style="…".
   # 'unsafe-inline' στα scripts: ΜΟΝΟ εδώ, επειδή ένα header δεν μπορεί να έχει διαφορετικά hashes
   # ανά σελίδα. Κάθε σελίδα έχει και δικό της <meta http-equiv="Content-Security-Policy"> με το
   # hash κάθε inline script (το φτιάχνει το .eleventy.js, «cspScriptHashes»). Ο browser εφαρμόζει
   # ΚΑΙ τις δύο πολιτικές, οπότε τρέχουν μόνο τα δικά μας scripts. Δες docs/adr/0002.
   # Νέα εξωτερική υπηρεσία με script: μπαίνει εδώ ΚΑΙ στο SCRIPT_SOURCES του .eleventy.js.
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://gc.zgo.at; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://tile.openstreetmap.org https://nikol.goatcounter.com; font-src 'self'; connect-src 'self' https://api.desekordonia.com https://kblnwbcyhkgnuwrgzmdt.supabase.co https://nikol.goatcounter.com https://api.open-meteo.com https://geocoding-api.open-meteo.com; worker-src 'self' blob:; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://gc.zgo.at https://accounts.google.com/gsi/client; style-src 'self' 'unsafe-inline' https://accounts.google.com/gsi/style; img-src 'self' data: https://tile.openstreetmap.org https://nikol.goatcounter.com; font-src 'self'; connect-src 'self' https://api.desekordonia.com https://kblnwbcyhkgnuwrgzmdt.supabase.co https://nikol.goatcounter.com https://api.open-meteo.com https://geocoding-api.open-meteo.com https://accounts.google.com/gsi/; worker-src 'self' blob:; frame-src https://accounts.google.com/gsi/; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests
 
 # CSS/JS: κάθε αλλαγή αλλάζει το ?v=<hash> στο URL, οπότε ο browser μπορεί να τα κρατά
 # για έναν χρόνο χωρίς να ξαναρωτά.

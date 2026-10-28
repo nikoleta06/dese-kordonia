@@ -39,6 +39,16 @@ description: "Sign in to Δέσε Κορδόνια with your email (no password 
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-4 8"/></svg>
           <input type="email" id="email" autocomplete="username email" placeholder="you@example.com">
         </div>
+        {#- "Continue with Google": opens as soon as someone taps the email field (js/google-signin.js) #}
+        <div class="google-pop" id="googlePop" hidden>
+          <div class="google-pop-head">
+            <span>Faster, no email needed</span>
+            <button class="google-pop-close" type="button" aria-label="Close">×</button>
+          </div>
+          <div class="google-pop-btn" id="googleBtn"></div>
+          <p class="google-pop-error" id="googleError" role="alert" hidden></p>
+          <p class="google-pop-hint">or type your email above</p>
+        </div>
       </div>
 
       {#- .pop-anchor: where each button's message bubble attaches #}
@@ -115,6 +125,7 @@ description: "Sign in to Δέσε Κορδόνια with your email (no password 
   <script src="js/vendor/simplewebauthn-browser-14.0.0.umd.min.js"></script>
   <script src="js/passkey.js?v={{ "js/passkey.js" | assetHash }}"></script>
   <script src="js/password.js?v={{ "js/password.js" | assetHash }}"></script>
+  <script src="js/google-signin.js?v={{ "js/google-signin.js" | assetHash }}"></script>
   <script>
     (function () {
       const $ = (id) => document.getElementById(id);
@@ -257,6 +268,17 @@ description: "Sign in to Δέσε Κορδόνια with your email (no password 
       $('pwLoginBtn').addEventListener('click', passwordLogin);
       $('password').addEventListener('keydown', (e) => { if (e.key === 'Enter') passwordLogin(); });
 
+      DKGoogle.attach({
+        input: $('email'),
+        panel: $('googlePop'),
+        button: $('googleBtn'),
+        error: $('googleError'),
+        language: 'en',
+        messages: {
+          taken: 'This email is already signed up here. Type it above and tap "Send me a link".',
+          failed: "Google sign-in didn't work. Type your email above and tap \"Send me a link\"."
+        }
+      });
       $('sendBtn').addEventListener('click', requestLink);
       $('email').addEventListener('keydown', (e) => { if (e.key === 'Enter') requestLink(); });
     })();
