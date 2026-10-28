@@ -1,19 +1,23 @@
-// Σχήμα της σελίδας Ευεξία: όταν διαλέγεις ένα σημείο, το κέντρο δείχνει τον αριθμό του
-// και από κάτω τα οφέλη της κάρτας, με σύνδεσμο προς την κάρτα. Τα κείμενα τα παίρνει από
-// τις ίδιες τις κάρτες, οπότε δουλεύει και στα αγγλικά. Χωρίς JS οι σύνδεσμοι πάνε κατευθείαν στις κάρτες.
+// Σχήμα της σελίδας Ευεξία: όταν διαλέγεις ένα σημείο, το κέντρο δείχνει τον αριθμό του και ανοίγει
+// ένα pop-up με τα οφέλη της κάρτας και σύνδεσμο προς την κάρτα. Σε μεγάλη οθόνη το pop-up βγαίνει
+// δίπλα στο σχήμα, στην πλευρά του σημείου. Στο κινητό βγαίνει ακριβώς κάτω από το σχήμα.
+// Τα κείμενα τα παίρνει από τις ίδιες τις κάρτες, οπότε δουλεύει και στα αγγλικά.
+// Χωρίς JS οι σύνδεσμοι πάνε κατευθείαν στις κάρτες.
 (function () {
-  var map = document.querySelector('.body-map');
-  if (!map) return;
+  var wrap = document.querySelector('.body-map-wrap');
+  if (!wrap) return;
+  var map = wrap.querySelector('.body-map');
   var num = map.querySelector('.bm-num');
   var title = map.querySelector('.bm-title');
-  var info = document.querySelector('.body-map-info');
+  var info = wrap.querySelector('.body-map-info');
+  var infoTitle = info.querySelector('.bm-info-title');
   var text = info.querySelector('.bm-text');
   var list = info.querySelector('.bm-list');
   var more = info.querySelector('.bm-more');
-  var hint = text.textContent;
   var nodes = map.querySelectorAll('.body-map-node');
   var lines = map.querySelectorAll('.body-map-lines line');
   var locked = null; // το σημείο που πατήθηκε μένει επιλεγμένο
+  var calm = window.matchMedia('(prefers-reduced-motion: reduce)');
 
   function mark(sys) {
     nodes.forEach(function (n) { n.classList.toggle('is-active', n.dataset.sys === sys); });
@@ -21,12 +25,11 @@
   }
 
   function reset() {
+    delete wrap.dataset.active;
     delete map.dataset.active;
     delete info.dataset.active;
     mark(null);
-    text.textContent = hint;
-    list.textContent = '';
-    more.hidden = true;
+    info.hidden = true;
   }
 
   function show(node) {
@@ -34,12 +37,16 @@
     var card = document.querySelector(node.getAttribute('href'));
     if (!card) return;
     var stat = card.querySelector('.card-stat .num').textContent;
-    map.dataset.active = info.dataset.active = node.dataset.sys;
+    var heading = card.querySelector('h3').textContent;
+    wrap.dataset.active = map.dataset.active = info.dataset.active = node.dataset.sys;
+    // τα σημεία στο αριστερό μισό ανοίγουν το pop-up αριστερά, τα υπόλοιπα δεξιά
+    info.dataset.side = parseFloat(node.style.left) < 50 ? 'left' : 'right';
     mark(node.dataset.sys);
-    title.textContent = card.querySelector('h3').textContent;
+    title.textContent = heading;
+    infoTitle.textContent = heading;
 
-    // Ένα σκέτο βελάκι (↑/↓) στο κέντρο θα έμοιαζε με «κοίτα πάνω/κάτω»,
-    // οπότε εκεί μπαίνει το εικονίδιο και στη λεζάντα η φράση του data-summary.
+    // Ένα σκέτο σύμβολο (+/−) στο κέντρο δεν λέει πολλά, οπότε εκεί μπαίνει το εικονίδιο
+    // και στο pop-up η φράση του data-summary.
     var summary = card.querySelector('.card-stat').dataset.summary;
     num.textContent = '';
     num.classList.toggle('bm-num-icon', !!summary);
@@ -58,12 +65,25 @@
 
     list.textContent = '';
     card.querySelectorAll('ul li').forEach(function (li) {
+      if (li.textContent === summary) return; // να μην γράφεται η ίδια φράση δύο φορές
       var item = document.createElement('li');
       item.textContent = li.textContent;
       list.appendChild(item);
     });
     more.href = node.getAttribute('href');
-    more.hidden = false;
+    info.hidden = false;
+  }
+
+  // Στο κινητό το pop-up μπορεί να βγει κάτω από την οθόνη: κύλα ίσα ίσα για να φανεί
+  function reveal() {
+    var r = info.getBoundingClientRect();
+    var over = r.bottom - window.innerHeight + 16;
+    if (over > 0) window.scrollBy({ top: over, behavior: calm.matches ? 'instant' : 'smooth' });
+  }
+
+  function close() {
+    locked = null;
+    reset();
   }
 
   nodes.forEach(function (node) {
@@ -77,13 +97,20 @@
       e.preventDefault();
       locked = node;
       show(node);
+      reveal();
     });
   });
 
-  map.addEventListener('pointerleave', function (e) {
+  info.querySelector('.bm-close').addEventListener('click', close);
+  wrap.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && !info.hidden) close();
+  });
+
+  // Το wrap περιέχει και το pop-up, οπότε μπορείς να πας με το ποντίκι από το σημείο στο pop-up
+  wrap.addEventListener('pointerleave', function (e) {
     if (e.pointerType === 'mouse') show(locked);
   });
-  map.addEventListener('focusout', function (e) {
-    if (!map.contains(e.relatedTarget)) show(locked);
+  wrap.addEventListener('focusout', function (e) {
+    if (!wrap.contains(e.relatedTarget)) show(locked);
   });
 })();

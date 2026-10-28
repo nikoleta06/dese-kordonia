@@ -38,6 +38,7 @@ activeNav: "healthy"
     <p class="page-updated">Τελευταία ενημέρωση: 28 Οκτωβρίου 2026</p>
     <nav class="page-toc" aria-label="Περιεχόμενα σελίδας"><a href="#ofeli">Οφέλη</a><a href="#posi-askisi">Πόση άσκηση</a><a href="#pote-na-stamatiseis">Πότε να σταματήσεις</a><a href="#xekourasi">Ξεκούραση</a><a href="#gynaikes">Γυναίκες</a><a href="#piges">Πηγές</a></nav>
 
+    <div class="body-map-wrap">
     <figure class="body-map">
       <svg class="body-map-lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
         <line data-sys="brain" x1="50" y1="50" x2="50" y2="12"/>
@@ -76,11 +77,15 @@ activeNav: "healthy"
         <span class="node-label">Ύπνος</span>
       </a>
     </figure>
-    <div class="body-map-info" aria-live="polite">
-      <p class="bm-text">Πάτησε ένα σημείο για να δεις τι κερδίζει από το τρέξιμο.</p>
+    <div class="body-map-info" aria-live="polite" hidden>
+      <button class="bm-close" type="button" aria-label="Κλείσιμο">×</button>
+      <p class="bm-info-title"></p>
+      <p class="bm-text"></p>
       <ul class="bm-list"></ul>
-      <a class="bm-more" href="#" hidden>Δες όλη την κάρτα ↓</a>
+      <a class="bm-more" href="#">Δες όλη την κάρτα ↓</a>
     </div>
+    </div>
+    <p class="body-map-hint">Πάτησε ένα σημείο για να δεις τι κερδίζει από το τρέξιμο.</p>
 
     <h2 class="section-title" id="ofeli">Οφέλη ανά Σύστημα του Σώματος</h2>
     <p class="lead">Πάτησε ένα σημείο στο σχήμα ή διάλεξε μια κάρτα: το τρέξιμο βοηθάει σχεδόν παντού.</p>
@@ -122,7 +127,7 @@ activeNav: "healthy"
           <div class="icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v4"/><path d="M12 7L7 10"/><path d="M12 7l5 3"/><rect x="4" y="10" width="6" height="9" rx="3"/><rect x="14" y="10" width="6" height="9" rx="3"/></svg>
           </div>
-          <div class="card-stat" data-summary="Καλύτερη αερόβια αντοχή"><span class="num">↑</span><span class="cap">αερόβια αντοχή</span></div>
+          <div class="card-stat" data-summary="Καλύτερη αερόβια αντοχή"><span class="num">+</span><span class="cap">αερόβια αντοχή</span></div>
         </div>
         <h3>Πνεύμονες</h3>
         <ul>
@@ -137,7 +142,7 @@ activeNav: "healthy"
           <div class="icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 12h8"/><circle cx="5.5" cy="9.5" r="1.8"/><circle cx="5.5" cy="14.5" r="1.8"/><circle cx="18.5" cy="9.5" r="1.8"/><circle cx="18.5" cy="14.5" r="1.8"/></svg>
           </div>
-          <div class="card-stat" data-summary="Μεγαλύτερη οστική πυκνότητα, πιο γερά οστά"><span class="num">↑</span><span class="cap">οστική πυκνότητα</span></div>
+          <div class="card-stat" data-summary="Μεγαλύτερη οστική πυκνότητα, πιο γερά οστά"><span class="num">+</span><span class="cap">οστική πυκνότητα</span></div>
         </div>
         <h3>Οστά &amp; Μύες</h3>
         <ul>
@@ -152,7 +157,7 @@ activeNav: "healthy"
           <div class="icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
           </div>
-          <div class="card-stat" data-summary="Αποκοιμιέσαι πιο γρήγορα"><span class="num">↓</span><span class="cap">χρόνος για να αποκοιμηθείς</span></div>
+          <div class="card-stat" data-summary="Αποκοιμιέσαι πιο γρήγορα"><span class="num">−</span><span class="cap">χρόνος για να αποκοιμηθείς</span></div>
         </div>
         <h3>Ύπνος</h3>
         <ul>

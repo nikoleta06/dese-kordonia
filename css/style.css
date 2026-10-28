@@ -1726,18 +1726,60 @@ a.body-map-node[data-sys]:focus-visible .node-icon,
   }
 }
 
-/* Λεζάντα κάτω από το σχήμα */
+/* Pop-up με τις πληροφορίες: δίπλα στο σχήμα σε μεγάλη οθόνη, ακριβώς κάτω του στο κινητό */
+.body-map-wrap {
+  position: relative;
+}
+
 .body-map-info {
+  position: relative;
   max-width: 480px;
-  min-height: 6.5rem;
   margin: 0 auto 1rem;
-  text-align: center;
+  padding: 1rem 2.2rem 1rem 1.2rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--sys, var(--accent));
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
   color: var(--text-dim);
   font-size: 0.9rem;
+  z-index: 2;
+  animation: bm-popin 0.22s ease-out;
+}
+
+.body-map-info[hidden] {
+  display: none;
+}
+
+.bm-close {
+  position: absolute;
+  top: 0.35rem;
+  right: 0.5rem;
+  background: none;
+  border: 0;
+  color: var(--text-dim);
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0.2rem;
+}
+
+.bm-close:hover,
+.bm-close:focus-visible {
+  color: var(--text);
+}
+
+.body-map-info .bm-info-title {
+  margin: 0 0 0.3rem;
+  font-family: "Roboto Condensed", sans-serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--sys, var(--accent));
 }
 
 .body-map-info .bm-text {
   margin: 0;
+  color: var(--text);
 }
 
 .body-map-info .bm-text strong {
@@ -1745,21 +1787,17 @@ a.body-map-node[data-sys]:focus-visible .node-icon,
 }
 
 .body-map-info .bm-list {
-  list-style: none;
-  margin: 0.5rem 0;
-  padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.35rem;
+  margin: 0.5rem 0 0.6rem;
+  padding-left: 1.1rem;
 }
 
 .body-map-info .bm-list li {
-  padding: 0.2rem 0.6rem;
-  border-radius: 999px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  font-size: 0.8rem;
+  margin-bottom: 0.2rem;
+  font-size: 0.85rem;
+}
+
+.body-map-info .bm-list li::marker {
+  color: var(--sys, var(--accent));
 }
 
 .body-map-info .bm-more {
@@ -1770,6 +1808,65 @@ a.body-map-node[data-sys]:focus-visible .node-icon,
 
 .body-map-info .bm-more:hover {
   text-decoration: underline;
+}
+
+.body-map-hint {
+  margin: 0 0 1rem;
+  text-align: center;
+  color: var(--text-dim);
+  font-size: 0.9rem;
+}
+
+/* μόνο κίνηση, όχι διαφάνεια: αν το animation δεν τρέξει, το pop-up φαίνεται κανονικά */
+@keyframes bm-popin {
+  from {
+    scale: 0.94;
+  }
+}
+
+/* Μεγάλη οθόνη: το pop-up βγαίνει στην πλευρά του σημείου, με μύτη προς το σχήμα */
+@media (min-width: 1150px) {
+  .body-map-info {
+    position: absolute;
+    top: 50%;
+    width: 280px;
+    margin: 0;
+    translate: 0 -50%;
+  }
+  .body-map-info[data-side="right"] {
+    left: calc(50% + 260px);
+  }
+  .body-map-info[data-side="left"] {
+    right: calc(50% + 260px);
+  }
+  .body-map-info::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 12px;
+    height: 12px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    translate: 0 -50%;
+    rotate: 45deg;
+  }
+  .body-map-info[data-side="right"]::before {
+    left: -7px;
+    border-top: 0;
+    border-right: 0;
+  }
+  .body-map-info[data-side="left"]::before {
+    right: -7px;
+    border-bottom: 0;
+    border-left: 0;
+  }
+}
+
+/* Μικρότερη οθόνη: όσο είναι ανοιχτό το pop-up, η οδηγία από κάτω δεν χρειάζεται */
+@media (max-width: 1149px) {
+  .body-map-wrap[data-active] + .body-map-hint {
+    display: none;
+  }
 }
 
 /* Κίνηση: ροή στις γραμμές, παλμός στην καρδιά, τα σημεία εμφανίζονται ένα ένα */
@@ -1796,9 +1893,9 @@ a.body-map-node[data-sys]:focus-visible .node-icon,
   26% { transform: scale(1.08); }
 }
 
+/* κι εδώ χωρίς διαφάνεια, για να μη μείνουν αόρατα τα σημεία αν δεν τρέξει η κίνηση */
 @keyframes bm-pop {
   from {
-    opacity: 0;
     transform: translate(-50%, -50%) scale(0.6);
   }
 }
@@ -1813,6 +1910,9 @@ a.body-map-node[data-sys]:focus-visible .node-icon,
   .body-map-node,
   .body-map-lines line[data-sys] {
     transition: none;
+  }
+  .body-map-info {
+    animation: none;
   }
 }
 
