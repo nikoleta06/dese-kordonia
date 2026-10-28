@@ -40,46 +40,52 @@ activeNav: "healthy"
 
     <figure class="body-map">
       <svg class="body-map-lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-        <line x1="50" y1="50" x2="50" y2="12"/>
-        <line x1="50" y1="50" x2="82.9" y2="31"/>
-        <line x1="50" y1="50" x2="82.9" y2="69"/>
-        <line x1="50" y1="50" x2="50" y2="88"/>
-        <line x1="50" y1="50" x2="17.1" y2="69"/>
-        <line x1="50" y1="50" x2="17.1" y2="31"/>
+        <line data-sys="brain" x1="50" y1="50" x2="50" y2="12"/>
+        <line data-sys="lungs" x1="50" y1="50" x2="82.9" y2="31"/>
+        <line data-sys="heart" x1="50" y1="50" x2="82.9" y2="69"/>
+        <line data-sys="weight" x1="50" y1="50" x2="50" y2="88"/>
+        <line data-sys="bones" x1="50" y1="50" x2="17.1" y2="69"/>
+        <line data-sys="sleep" x1="50" y1="50" x2="17.1" y2="31"/>
       </svg>
       <div class="body-map-center" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="15" cy="4" r="1.8"/><path d="M13 7 10.5 11"/><path d="M10.5 11 13 14 11 19"/><path d="M10.5 11 8 13 5 12"/><path d="M13 7 16.5 8.5 18.5 6"/><path d="M13 7 10 9.5 7 11"/></svg>
+        <svg class="bm-runner" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="15" cy="4" r="1.8"/><path d="M13 7 10.5 11"/><path d="M10.5 11 13 14 11 19"/><path d="M10.5 11 8 13 5 12"/><path d="M13 7 16.5 8.5 18.5 6"/><path d="M13 7 10 9.5 7 11"/></svg>
+        <span class="bm-num"></span><span class="bm-title"></span>
       </div>
-      <a class="body-map-node" href="#benefit-brain" style="left:50%;top:12%;">
+      <a class="body-map-node" data-sys="brain" href="#benefit-brain" style="left:50%;top:12%;--i:0;">
         <span class="node-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5a3 3 0 0 0-3 3 2.5 2.5 0 0 0-2 4 2.5 2.5 0 0 0 1.5 4.5A2.5 2.5 0 0 0 12 19V5z"/><path d="M12 5a3 3 0 0 1 3 3 2.5 2.5 0 0 1 2 4 2.5 2.5 0 0 1-1.5 4.5A2.5 2.5 0 0 1 12 19"/></svg></span>
         <span class="node-label">Brain</span>
       </a>
-      <a class="body-map-node" href="#benefit-lungs" style="left:82.9%;top:31%;">
+      <a class="body-map-node" data-sys="lungs" href="#benefit-lungs" style="left:82.9%;top:31%;--i:1;">
         <span class="node-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v4"/><path d="M12 7L7 10"/><path d="M12 7l5 3"/><rect x="4" y="10" width="6" height="9" rx="3"/><rect x="14" y="10" width="6" height="9" rx="3"/></svg></span>
         <span class="node-label">Lungs</span>
       </a>
-      <a class="body-map-node" href="#benefit-heart" style="left:82.9%;top:69%;">
+      <a class="body-map-node" data-sys="heart" href="#benefit-heart" style="left:82.9%;top:69%;--i:2;">
         <span class="node-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.49 4.04 3 5.5l7 7Z"/></svg></span>
         <span class="node-label">Heart</span>
       </a>
-      <a class="body-map-node" href="#benefit-weight" style="left:50%;top:88%;">
+      <a class="body-map-node" data-sys="weight" href="#benefit-weight" style="left:50%;top:88%;--i:3;">
         <span class="node-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18"/><path d="M7 21h10"/><path d="M5 7h14"/><path d="M5 7 3 12h4Z"/><path d="M19 7l-2 5h4Z"/></svg></span>
         <span class="node-label">Weight</span>
       </a>
-      <a class="body-map-node" href="#benefit-bones" style="left:17.1%;top:69%;">
+      <a class="body-map-node" data-sys="bones" href="#benefit-bones" style="left:17.1%;top:69%;--i:4;">
         <span class="node-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 12h8"/><circle cx="5.5" cy="9.5" r="1.8"/><circle cx="5.5" cy="14.5" r="1.8"/><circle cx="18.5" cy="9.5" r="1.8"/><circle cx="18.5" cy="14.5" r="1.8"/></svg></span>
         <span class="node-label">Bones &amp; Muscles</span>
       </a>
-      <a class="body-map-node" href="#benefit-sleep" style="left:17.1%;top:31%;">
+      <a class="body-map-node" data-sys="sleep" href="#benefit-sleep" style="left:17.1%;top:31%;--i:5;">
         <span class="node-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg></span>
         <span class="node-label">Sleep</span>
       </a>
     </figure>
+    <div class="body-map-info" aria-live="polite">
+      <p class="bm-text">Tap a point to see what it gains from running.</p>
+      <ul class="bm-list"></ul>
+      <a class="bm-more" href="#" hidden>See the full card ↓</a>
+    </div>
 
     <h2 class="section-title" id="benefits">Benefits by Body System</h2>
     <p class="lead">Tap a spot on the figure or pick a card: running helps almost everywhere.</p>
     <div class="cards cards-centered">
-      <article class="card" id="benefit-heart">
+      <article class="card" id="benefit-heart" data-sys="heart">
         <div class="card-head">
           <div class="icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.49 4.04 3 5.5l7 7Z"/></svg>
@@ -95,7 +101,7 @@ activeNav: "healthy"
         <a class="card-source" href="https://bjsm.bmj.com/content/54/15/898" target="_blank" rel="noopener">Source: British Journal of Sports Medicine, 2020 ↗</a><br>
         <a class="card-link" href="post-easy-running-en.html">Why slow runs strengthen your heart →</a>
       </article>
-      <article class="card" id="benefit-brain">
+      <article class="card" id="benefit-brain" data-sys="brain">
         <div class="card-head">
           <div class="icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5a3 3 0 0 0-3 3 2.5 2.5 0 0 0-2 4 2.5 2.5 0 0 0 1.5 4.5A2.5 2.5 0 0 0 12 19V5z"/><path d="M12 5a3 3 0 0 1 3 3 2.5 2.5 0 0 1 2 4 2.5 2.5 0 0 1-1.5 4.5A2.5 2.5 0 0 1 12 19"/></svg>
@@ -111,12 +117,12 @@ activeNav: "healthy"
         <a class="card-source" href="https://www.health.harvard.edu/mind-and-mood/more-evidence-that-exercise-can-boost-mood" target="_blank" rel="noopener">Source: Harvard Health ↗</a><br>
         <a class="card-link" href="post-trexsimo-imikranies-en.html">How running helped me with migraines →</a>
       </article>
-      <article class="card" id="benefit-lungs">
+      <article class="card" id="benefit-lungs" data-sys="lungs">
         <div class="card-head">
           <div class="icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v4"/><path d="M12 7L7 10"/><path d="M12 7l5 3"/><rect x="4" y="10" width="6" height="9" rx="3"/><rect x="14" y="10" width="6" height="9" rx="3"/></svg>
           </div>
-          <div class="card-stat"><span class="num">↑</span><span class="cap">aerobic endurance</span></div>
+          <div class="card-stat" data-summary="Better aerobic endurance"><span class="num">↑</span><span class="cap">aerobic endurance</span></div>
         </div>
         <h3>Lungs</h3>
         <ul>
@@ -126,12 +132,12 @@ activeNav: "healthy"
         <a class="card-source" href="https://www.lung.org/lung-health-diseases/wellness/exercise-and-lung-health" target="_blank" rel="noopener">Source: American Lung Association ↗</a><br>
         <a class="card-link" href="post-vo2max-en.html">What is VO₂max →</a>
       </article>
-      <article class="card" id="benefit-bones">
+      <article class="card" id="benefit-bones" data-sys="bones">
         <div class="card-head">
           <div class="icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 12h8"/><circle cx="5.5" cy="9.5" r="1.8"/><circle cx="5.5" cy="14.5" r="1.8"/><circle cx="18.5" cy="9.5" r="1.8"/><circle cx="18.5" cy="14.5" r="1.8"/></svg>
           </div>
-          <div class="card-stat"><span class="num">↑</span><span class="cap">bone density</span></div>
+          <div class="card-stat" data-summary="Higher bone density, stronger bones"><span class="num">↑</span><span class="cap">bone density</span></div>
         </div>
         <h3>Bones &amp; Muscles</h3>
         <ul>
@@ -141,12 +147,12 @@ activeNav: "healthy"
         <a class="card-source" href="https://www.niams.nih.gov/health-topics/exercise-your-bone-health" target="_blank" rel="noopener">Source: NIH (NIAMS) ↗</a><br>
         <a class="card-link" href="post-allagi-papoutsion-en.html">When to replace your running shoes →</a>
       </article>
-      <article class="card" id="benefit-sleep">
+      <article class="card" id="benefit-sleep" data-sys="sleep">
         <div class="card-head">
           <div class="icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
           </div>
-          <div class="card-stat"><span class="num">↓</span><span class="cap">time to fall asleep</span></div>
+          <div class="card-stat" data-summary="You fall asleep faster"><span class="num">↓</span><span class="cap">time to fall asleep</span></div>
         </div>
         <h3>Sleep</h3>
         <ul>
@@ -155,7 +161,7 @@ activeNav: "healthy"
         </ul>
         <a class="card-source" href="https://www.sleepfoundation.org/physical-activity/exercise-and-sleep" target="_blank" rel="noopener">Source: Sleep Foundation ↗</a>
       </article>
-      <article class="card" id="benefit-weight">
+      <article class="card" id="benefit-weight" data-sys="weight">
         <div class="card-head">
           <div class="icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18"/><path d="M7 21h10"/><path d="M5 7h14"/><path d="M5 7 3 12h4Z"/><path d="M19 7l-2 5h4Z"/></svg>
@@ -459,6 +465,7 @@ activeNav: "healthy"
 
 {% block scripts_extra %}
   <script src="js/activity-minutes.js?v={{ "js/activity-minutes.js" | assetHash }}" defer></script>
+  <script src="js/body-map.js?v={{ "js/body-map.js" | assetHash }}" defer></script>
   <script>
     document.querySelectorAll('.timeline-toggle').forEach(function (btn) {
       btn.addEventListener('click', function () {
