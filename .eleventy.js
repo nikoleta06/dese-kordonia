@@ -48,7 +48,7 @@ module.exports = function (eleventyConfig) {
   // να περνά και τις δύο: τρέχουν μόνο τα scripts που γράψαμε εμείς. Αλλάζεις ένα script →
   // το hash ξαναϋπολογίζεται μόνο του. Τα JSON-LD δεν εκτελούνται, άρα δεν χρειάζονται hash.
   // Οι πηγές πρέπει να ταιριάζουν με το script-src του _headers (χωρίς το 'unsafe-inline').
-  const SCRIPT_SOURCES = "'self' 'wasm-unsafe-eval' https://gc.zgo.at";
+  const SCRIPT_SOURCES = "'self' 'wasm-unsafe-eval' https://gc.zgo.at https://accounts.google.com/gsi/client";
   eleventyConfig.addTransform("cspScriptHashes", function (content) {
     const out = this.page.outputPath;
     if (typeof out !== "string" || !out.endsWith(".html") || !content.includes("<head>")) return content;
