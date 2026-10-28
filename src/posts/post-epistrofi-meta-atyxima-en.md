@@ -1,6 +1,6 @@
 ---
 title: "The fitness I thought I had lost | Δέσε Κορδόνια"
-description: "My return to running after an accident and 3.5 months in a cast, and why a break doesn't erase what you've built."
+description: "My return to running after an accident and 3.5 months off running, and why a break doesn't erase what you've built."
 heading: "The fitness I thought I had lost"
 summary: "After an accident and months away from running, I was sure I had lost everything. The first kilometre showed me the fear was bigger than the loss."
 cardTitle: "The fitness I thought I had lost"
@@ -29,7 +29,7 @@ A few months ago, things had finally started to fall into place. I had just star
 
 Two weeks after my first run, and just a few days after the site appeared on Google, I had an accident. It could have been much worse. I got away with a broken arm.
 
-### Three and a half months in a cast
+### Three and a half months off running
 
 Running was out of the question. The only thing that made me happy during the day was this site. I thought about what new things to add, I made it better, I worked on its backend. It was my way of staying close to running, even when I couldn't run.
 
