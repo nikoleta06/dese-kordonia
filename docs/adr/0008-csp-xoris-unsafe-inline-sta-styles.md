@@ -2,7 +2,7 @@
 
 - **Κατάσταση:** Αποδεκτή
 - **Ημερομηνία:** 29 Οκτωβρίου 2026
-- **Υλοποίηση:** branch `csp-styles`
+- **Υλοποίηση:** [PR #29](https://github.com/nikoleta06/dese-kordonia/pull/29) «CSP without 'unsafe-inline' for styles» (merge `f7656ed`)
 - **Αποφάσισε:** Νικολέτα Ακρίδα
 - **Σχέση:** συνεχίζει το ADR 0002, που έκλεισε το 'unsafe-inline' μόνο στα scripts
 
