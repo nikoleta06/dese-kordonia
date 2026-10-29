@@ -10,7 +10,11 @@
    Είναι inline SVG χωρίς κείμενο και χωρίς id: κανένα επιπλέον αρχείο να κατέβει, καμία
    αλλαγή στο CSP, και μπορεί να εμφανιστεί δύο φορές στην ίδια σελίδα. */
 
-// Εικονίδια σε πλέγμα 24×24, με γραμμή (stroke), όπως τα υπόλοιπα του site
+// Εικονίδια σε πλέγμα 24×24, με γραμμή (stroke), όπως τα υπόλοιπα του site.
+// Τα σχήματα είναι από τη Lucide (https://lucide.dev), με άδεια ISC:
+// https://github.com/lucide-icons/lucide/blob/main/LICENSE
+// Copyright (c) for portions of Lucide are held by Cole Bemis 2013-2022 as part of Feather (MIT).
+// All other copyright (c) for Lucide are held by Lucide Contributors 2022.
 const ICONS = {
   sunrise: '<path d="M12 2v8"/><path d="m4.93 10.93 1.41 1.41"/><path d="M2 18h2"/><path d="M20 18h2"/><path d="m19.07 10.93-1.41 1.41"/><path d="M22 22H2"/><path d="m8 6 4-4 4 4"/><path d="M16 18a4 4 0 0 0-8 0"/>',
   snowflake: '<path d="m10 20-1.25-2.5L6 18"/><path d="M10 4 8.75 6.5 6 6"/><path d="m14 20 1.25-2.5L18 18"/><path d="m14 4 1.25 2.5L18 6"/><path d="m17 21-3-6h-4"/><path d="m17 3-3 6 1.5 3"/><path d="M2 12h6.5L10 9"/><path d="m20 10-1.5 2 1.5 2"/><path d="M22 12h-6.5L14 15"/><path d="m4 10 1.5 2L4 14"/><path d="m7 21 3-6-1.5-3"/><path d="m7 3 3 6h4"/>',
