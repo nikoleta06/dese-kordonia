@@ -9,7 +9,6 @@ cat: tips
 published: "2026-10-19"
 updated: "2026-10-19"
 readMinutes: 7
-heroAlt: "Runner tying their laces before a winter run"
 label: "Practical tips"
 ---
 

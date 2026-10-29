@@ -11,7 +11,6 @@ wellness: true
 published: "2026-06-28"
 updated: "2026-06-28"
 readMinutes: 6
-heroAlt: "Αθλητικά παπούτσια τρεξίματος σε στίβο"
 headStyle: |
     .shoe-compare { max-width: 600px; margin: 2.5rem auto; }
     .shoe-compare .sc-labels { display: flex; gap: 0.6rem; margin-bottom: 1.1rem; }

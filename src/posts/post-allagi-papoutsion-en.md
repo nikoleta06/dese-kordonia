@@ -9,7 +9,6 @@ cat: tips
 published: "2026-06-28"
 updated: "2026-06-28"
 readMinutes: 6
-heroAlt: "Running shoes on a track"
 label: "Practical tips"
 headStyle: |
     .shoe-compare { max-width: 600px; margin: 2.5rem auto; }

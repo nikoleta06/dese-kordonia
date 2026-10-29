@@ -9,7 +9,6 @@ cat: science
 published: "2026-07-03"
 updated: "2026-07-18"
 readMinutes: 6
-heroAlt: "Runner checking their training data"
 ---
 
 Why does a coach tell you to run "in Zone 2" instead of just "easy"? Because "easy" means something different to everyone, while heart-rate zones give everyone the same language. Once you understand them, they become one of the most **useful guides** for training the right way.

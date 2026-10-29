@@ -11,7 +11,6 @@ wellness: true
 published: "2026-10-19"
 updated: "2026-10-19"
 readMinutes: 7
-heroAlt: "Δρομέας δένει τα κορδόνια του πριν από ένα χειμωνιάτικο τρέξιμο"
 ---
 
 <div class="tldr">

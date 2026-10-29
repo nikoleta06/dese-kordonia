@@ -9,7 +9,6 @@ cat: champions
 published: "2026-06-18"
 updated: "2026-06-18"
 readMinutes: 5
-heroAlt: "Running shoe laces: a symbol of dedication to running"
 ---
 
 When you watch **Jakob Ingebrigtsen** run, you'd think everything comes easy. The Norwegian has Olympic gold in the 1500m (Tokyo) and the 5000m (Paris), and he grew up in a family of runners: his older brothers, Henrik and Filip, also raced at international level.

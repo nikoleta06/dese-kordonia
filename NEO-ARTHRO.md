@@ -27,7 +27,6 @@ cat: science
 published: "2026-11-02"
 updated: "2026-11-02"
 readMinutes: 5
-heroAlt: "Τι δείχνει η εικόνα στην αρχή του άρθρου"
 ---
 
 Η πρώτη παράγραφος του άρθρου.
@@ -56,12 +55,11 @@ heroAlt: "Τι δείχνει η εικόνα στην αρχή του άρθρ�
 | `summary` | Περιγραφή για κοινοποίηση και RSS |
 | `cardTitle` | Σύντομος τίτλος στις κάρτες (blog, αρχική, «Διάβασε επίσης») |
 | `cardText` | Το κείμενο κάτω από τον τίτλο στην κάρτα του blog (αν λείπει, μπαίνει το `summary`) |
-| `artIcon` | Μόνο στο ελληνικό αρχείο: το εικονίδιο στο γραφικό της κάρτας. Ένα από: `sunrise`, `snowflake`, `heart-pulse`, `timer`, `medal`, `gauge`, `footprints`, `wind`, `mountain`, `flask`, `sprout`, `infinity`, `pie`, `apple`, `flag`, `brain`, `star`, `heart`, `bulb`. Νέα εικονίδια μπαίνουν στο `scripts/post-art.js` |
-| `cat` | Κατηγορία: `champions`, `science`, `tips` ή `stories` (καθορίζει το χρώμα του γραφικού και την εικόνα στην αρχή του άρθρου) |
+| `artIcon` | Μόνο στο ελληνικό αρχείο: το εικονίδιο στο γραφικό του άρθρου, στις κάρτες και στην αρχή του άρθρου. Ένα από: `sunrise`, `snowflake`, `heart-pulse`, `timer`, `medal`, `gauge`, `footprints`, `wind`, `mountain`, `flask`, `sprout`, `infinity`, `pie`, `apple`, `flag`, `brain`, `star`, `heart`, `bulb`. Νέα εικονίδια μπαίνουν στο `scripts/post-art.js` |
+| `cat` | Κατηγορία: `champions`, `science`, `tips` ή `stories` (καθορίζει το χρώμα του γραφικού) |
 | `published` | Ημερομηνία δημοσίευσης, `"ΕΕΕΕ-ΜΜ-ΗΗ"` |
 | `updated` | Τελευταία ουσιαστική αλλαγή (πηγαίνει στη Google και στο sitemap) |
 | `readMinutes` | Λεπτά ανάγνωσης |
-| `heroAlt` | Περιγραφή της εικόνας, για όσους δεν τη βλέπουν |
 
 Προαιρετικά, μόνο όταν χρειάζονται:
 

@@ -9,7 +9,6 @@ cat: science
 published: "2026-07-21"
 updated: "2026-07-21"
 readMinutes: 6
-heroAlt: "Runner checking her heart rate on her watch during a long run"
 label: "The science of running"
 headStyle: |
     .ig { max-width: 580px; margin: 2.4rem auto; }

@@ -9,7 +9,6 @@ cat: science
 published: "2026-06-26"
 updated: "2026-07-18"
 readMinutes: 4
-heroAlt: "Runner checking their training data"
 ---
 
 Top marathon runners have a VO₂max above 80. An average adult sits somewhere between 30 and 45. So what does that number actually measure, and how much does it matter if you just want to run a bit better?

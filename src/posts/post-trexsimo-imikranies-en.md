@@ -9,7 +9,6 @@ cat: stories
 published: "2026-06-16"
 updated: "2026-06-16"
 readMinutes: 4
-heroAlt: "Runner tying their laces on a track"
 ---
 
 The first time I put on sportswear, tied my laces and went out for a run was 2 months after my university entrance exams. At the time I was dealing with a health issue: **migraines**, a headache that forces you to stop everything and shut yourself away in the dark.

@@ -10,7 +10,6 @@ cat: science
 published: "2026-07-14"
 updated: "2026-07-18"
 readMinutes: 7
-heroAlt: "Δρομέας ελέγχει το cadence στο ρολόι της"
 headStyle: |
     .ig { max-width: 580px; margin: 2.4rem auto; }
     /* --- Polish: hover micro-interactions (scroll-reveal handled by inline script, reusing .reveal) --- */

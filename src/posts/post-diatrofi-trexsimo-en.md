@@ -9,7 +9,6 @@ cat: tips
 published: "2026-06-18"
 updated: "2026-06-18"
 readMinutes: 5
-heroAlt: "Runner tying their laces"
 ---
 
 Have you ever gone for a run and, after just a few minutes, felt like you had no energy at all? Or finished a workout and stayed exhausted for hours? Often the answer isn't in the training, but in what you eat **before** and **after**.

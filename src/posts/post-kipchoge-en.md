@@ -10,7 +10,6 @@ cat: champions
 published: "2026-06-18"
 updated: "2026-06-18"
 readMinutes: 4
-heroAlt: "Running shoe laces: a symbol of dedication to running"
 ---
 
 **Eliud Kipchoge** is considered by many the greatest marathon runner of all time, with two Olympic marathon golds (Rio 2016, Tokyo 2021). He has said plenty of things that stuck. I picked two of them, plus a few of his habits that work for those of us who run a lot slower.

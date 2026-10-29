@@ -68,11 +68,7 @@
         {%- if cat.page %}<a href="{{ cat.page | navHref(lang) }}" style="color:inherit;">{{ label }}</a>{% else %}{{ label }}{% endif -%}
       </span> · {{ readMinutes }}{% if lang == 'en' %} min read{% else %}' ανάγνωση{% endif %}</p>
 
-      <picture>
-        <source type="image/avif" srcset="images/{{ cat.img }}.avif?v=1">
-        <source type="image/webp" srcset="images/{{ cat.img }}.webp?v=1">
-        <img src="images/{{ cat.img }}.jpg?v=1" alt="{{ heroAlt | escape }}" loading="lazy" decoding="async" width="740" height="494">
-      </picture>
+      {% postArt postsData.posts | postBySlug(slug) %}
 
 {{ content | safe }}
 

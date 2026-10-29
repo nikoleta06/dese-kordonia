@@ -9,7 +9,6 @@ cat: science
 published: "2026-06-19"
 updated: "2026-07-16"
 readMinutes: 5
-heroAlt: "Runner tying their laces before a tempo session"
 headStyle: |
     .ig { max-width: 580px; margin: 2.4rem auto; }
     /* --- Polish: hover micro-interactions (scroll-reveal handled by inline script, reusing .reveal) --- */

@@ -11,7 +11,6 @@ wellness: true
 published: "2026-06-17"
 updated: "2026-07-16"
 readMinutes: 5
-heroAlt: "Δρομέας δένει τα κορδόνια του"
 label: "Συμβουλές"
 ---
 

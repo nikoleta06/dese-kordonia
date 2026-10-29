@@ -2502,7 +2502,8 @@ a:focus-visible .pa-halo,
 }
 
 .article > img,
-.article > picture {
+.article > picture,
+.article > .post-art {
   display: block;
   width: 100%;
   overflow: hidden;

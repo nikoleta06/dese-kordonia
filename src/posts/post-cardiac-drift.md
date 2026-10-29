@@ -10,7 +10,6 @@ cat: science
 published: "2026-07-21"
 updated: "2026-07-21"
 readMinutes: 6
-heroAlt: "Δρομέας ελέγχει τους παλμούς της στο ρολόι κατά τη διάρκεια μεγάλου τρεξίματος"
 headStyle: |
     .ig { max-width: 580px; margin: 2.4rem auto; }
     /* --- Polish: hover micro-interactions (scroll-reveal handled by inline script, reusing .reveal) --- */

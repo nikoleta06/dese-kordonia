@@ -9,7 +9,6 @@ cat: champions
 published: "2026-07-07"
 updated: "2026-10-28"
 readMinutes: 3
-heroAlt: "Running shoe laces: a symbol of consistency in running"
 ---
 
 **Faith Kipyegon** has been at the top of the 1500m for more than ten years. Lasting that long in such a fast event is rare. To understand how she did it, it's worth looking at her path in order.

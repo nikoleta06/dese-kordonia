@@ -9,7 +9,6 @@ cat: science
 published: "2026-07-14"
 updated: "2026-07-18"
 readMinutes: 7
-heroAlt: "Runner checking cadence on her watch"
 label: "The science of running"
 headStyle: |
     .ig { max-width: 580px; margin: 2.4rem auto; }

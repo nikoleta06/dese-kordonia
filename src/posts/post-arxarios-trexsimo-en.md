@@ -9,7 +9,6 @@ cat: tips
 published: "2026-06-17"
 updated: "2026-07-16"
 readMinutes: 5
-heroAlt: "Runner tying their laces"
 ---
 
 The hardest part of running is simply getting started. If you're thinking of heading out for the first time, here are 6 things I wish I'd known when I began.

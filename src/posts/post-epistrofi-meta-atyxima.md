@@ -10,7 +10,6 @@ cat: stories
 published: "2026-10-28"
 updated: "2026-10-28"
 readMinutes: 4
-heroAlt: "Κορδόνια αθλητικού παπουτσιού, σύμβολο της επιμονής στο τρέξιμο"
 headStyle: |
     .article .quote { margin: 0 auto 2.5rem; }
     .article .quote blockquote { font-size: clamp(1.25rem, 3vw, 1.6rem); }

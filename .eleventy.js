@@ -118,6 +118,9 @@ module.exports = function (eleventyConfig) {
   // Αρχική: πόσα άρθρα έχει μια κατηγορία (για τις κατηγορίες κάτω από τα πρόσφατα άρθρα)
   eleventyConfig.addFilter("countCat", (posts, cat) => posts.filter((p) => p.cat === cat).length);
 
+  // Άρθρο: τα στοιχεία του από το postsData (για το γραφικό στην αρχή του, ίδιο και στις δύο γλώσσες)
+  eleventyConfig.addFilter("postBySlug", (posts, slug) => posts.find((p) => p.slug === slug));
+
   // Αρχική: οι αγώνες μιας περιοχής με σειρά επόμενης διοργάνωσης, με τη μέρα του build.
   // Ίδιος κανόνας με το js/race-dates.js, που τους ξαναταξινομεί στον browser ώστε η λίστα
   // να μένει σωστή κι αν περάσει καιρός χωρίς νέο build: ημερομηνία που δεν πέρασε μετρά

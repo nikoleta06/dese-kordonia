@@ -9,7 +9,6 @@ cat: champions
 published: "2026-06-19"
 updated: "2026-06-19"
 readMinutes: 4
-heroAlt: "Running shoe laces: a symbol of resilience in running"
 ---
 
 Tokyo, 2 August 2021. A 1500m heat at the Olympic Games. On the final lap, a runner in front of her trips and **Sifan Hassan** goes down with her. By the time she gets up, the pack is already well ahead.
