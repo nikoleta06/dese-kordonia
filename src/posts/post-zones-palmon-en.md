@@ -4,6 +4,7 @@ description: "What heart-rate zones are, how they're calculated, and what each o
 heading: "The 5 Heart-Rate Zones, explained simply"
 summary: "What each of the 5 heart-rate zones is and when to use it in your training."
 cardTitle: "The 5 Heart-Rate Zones, explained simply"
+cardText: "What each of the 5 heart-rate zones is and when to use it in your training."
 cat: science
 published: "2026-07-03"
 updated: "2026-07-18"

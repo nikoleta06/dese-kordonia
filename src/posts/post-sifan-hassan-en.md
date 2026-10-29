@@ -4,6 +4,7 @@ description: "Sifan Hassan, one of the most versatile runners of all time, teach
 heading: "What Sifan Hassan teaches us about resilience"
 summary: "Lessons in resilience from one of the most versatile runners of all time."
 cardTitle: "What Sifan Hassan teaches us about resilience"
+cardText: "She fell in the heat, got back up and won. Lessons in resilience from a unique runner."
 cat: champions
 published: "2026-06-19"
 updated: "2026-06-19"

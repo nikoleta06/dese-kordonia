@@ -4,6 +4,7 @@ description: "The science behind easy runs: why top runners run slow most days, 
 heading: "Why elite runners run slow, and why you maybe should too"
 summary: "The science behind easy runs and polarized 80/20 training."
 cardTitle: "Why elite runners run slow"
+cardText: "The science behind easy runs, polarized 80/20 training and the aerobic base."
 cat: science
 published: "2026-06-18"
 updated: "2026-07-16"

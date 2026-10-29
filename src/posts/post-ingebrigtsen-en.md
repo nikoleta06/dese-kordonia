@@ -4,6 +4,7 @@ description: "What Olympic champion Jakob Ingebrigtsen teaches runners who want 
 heading: "7 running lessons from Jakob Ingebrigtsen"
 summary: "7 lessons on consistency, patience and trusting the process."
 cardTitle: "7 lessons from Jakob Ingebrigtsen"
+cardText: "\"You can't pull the carrot out of the ground to see if it's growing.\" 7 lessons on consistency and patience."
 cat: champions
 published: "2026-06-18"
 updated: "2026-06-18"

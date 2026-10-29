@@ -8,11 +8,7 @@
           {%- for p in relatedPicks %}
           {%- set cmeta = postsData.cats[p.cat] %}
           <article class="post-card" data-category="{{ p.cat }}">
-            <picture>
-              <source type="image/avif" srcset="images/{{ cmeta.img }}.avif?v=1">
-              <source type="image/webp" srcset="images/{{ cmeta.img }}.webp?v=1">
-              <img src="images/{{ cmeta.img }}.jpg?v=1" alt="{{ p.en if lang == 'en' else p.el }}" loading="lazy" decoding="async" width="400" height="180">
-            </picture>
+            {% postArt p %}
             <div class="post-body">
               <p class="post-meta"><span class="post-cat">{{ cmeta.svg | safe }}{{ cmeta.en if lang == 'en' else cmeta.el }}</span></p>
               <h3>{{ p.en if lang == 'en' else p.el }}</h3>

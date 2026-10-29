@@ -4,6 +4,7 @@ description: "What running cadence (steps per minute) and stride length really a
 heading: "Running cadence: what it really means and why 180 steps isn't a rule"
 summary: "What cadence and stride length are, where the 'magic 180' came from, and how shorter, quicker steps reduce the load on your knees and hips."
 cardTitle: "Cadence: why 180 steps isn't a rule"
+cardText: "What steps per minute and stride length really are, where the \"magic 180\" came from and why one number doesn't fit everyone."
 cat: science
 published: "2026-07-14"
 updated: "2026-07-18"

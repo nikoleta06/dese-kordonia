@@ -574,11 +574,8 @@ a.bento-card:focus-visible {
   overflow: hidden;
 }
 
-.b-latest img {
-  display: block;
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
+.b-latest .post-art {
+  flex-shrink: 0;
 }
 
 .b-latest-body {
@@ -591,14 +588,8 @@ a.bento-card:focus-visible {
 
 /* Υπολογιστής: η κάρτα είναι όσο ψηλή καιρός + αγώνες· την επιπλέον θέση την παίρνει η εικόνα */
 @media (min-width: 900px) {
-  .b-latest picture {
-    display: block;
+  .b-latest .post-art {
     flex: 1;
-    min-height: 0;
-  }
-
-  .b-latest img {
-    height: 100%;
     min-height: 220px;
     aspect-ratio: auto;
   }
@@ -735,13 +726,10 @@ a.b-race-name:hover {
   color: var(--text);
 }
 
-.home-post img {
-  display: block;
-  width: 100%;
+.home-post .post-art {
   aspect-ratio: 16 / 10;
   margin-bottom: 0.45rem;
   border-radius: var(--radius);
-  object-fit: cover;
 }
 
 .home-post h3 {
@@ -2258,6 +2246,140 @@ a.body-map-node[data-sys]:focus-visible .node-icon,
   letter-spacing: 0.3px;
 }
 
+/* ===== Το γραφικό κάθε άρθρου (scripts/post-art.js) =====
+   Φόντο με το χρώμα της κατηγορίας· γραμμές, τελίτσες και εικονίδιο σε λευκό. Ίδιο
+   σε σκούρο και ανοιχτό θέμα, όπως και οι φωτογραφίες. */
+.post-art {
+  --art-1: #ff5722;
+  --art-2: #c2185b;
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.16), transparent 60%),
+    linear-gradient(135deg, var(--art-1), var(--art-2));
+  color: #fff;
+}
+
+.post-art[data-cat="champions"] { --art-1: #ffb300; --art-2: #e65100; }
+.post-art[data-cat="science"] { --art-1: #4f6bff; --art-2: #6a3de8; }
+.post-art[data-cat="tips"] { --art-1: #12b886; --art-2: #0b6e6e; }
+.post-art[data-cat="stories"] { --art-1: #ff6a3d; --art-2: #c2185b; }
+
+.post-art > svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.pa-lanes {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.2);
+  stroke-width: 1.5;
+}
+
+.pa-dots {
+  fill: rgba(255, 255, 255, 0.35);
+}
+
+.pa-halo {
+  fill: rgba(255, 255, 255, 0.14);
+  stroke: rgba(255, 255, 255, 0.35);
+  stroke-width: 1.2;
+}
+
+.pa-icon {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.pa-icon,
+.pa-halo {
+  transition: transform 0.35s ease;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+a:hover .pa-icon,
+a:focus-visible .pa-icon,
+.post-card:hover .pa-icon,
+a:hover .pa-halo,
+a:focus-visible .pa-halo,
+.post-card:hover .pa-halo {
+  transform: scale(1.08);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pa-icon,
+  .pa-halo {
+    transition: none;
+  }
+}
+
+/* ===== Blog: ίδιο ύφος με την αρχική ===== */
+.blog .lead a {
+  color: var(--accent);
+}
+
+.blog-grid {
+  gap: 1.4rem;
+}
+
+.blog .post-card .post-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.blog .post-card .post-cat,
+.related .post-card .post-cat {
+  color: var(--accent-2);
+}
+
+.blog .post-card h3 {
+  font-family: "Roboto Condensed", sans-serif;
+  line-height: 1.25;
+}
+
+.blog .post-card > p,
+.blog .post-card .post-body > p:not(.post-meta) {
+  line-height: 1.6;
+}
+
+/* Το νεότερο άρθρο: σε όλο το πλάτος, και στον υπολογιστή γραφικό αριστερά, κείμενο δεξιά */
+.post-featured {
+  grid-column: 1 / -1;
+}
+
+@media (min-width: 760px) {
+  .post-featured {
+    flex-direction: row;
+  }
+
+  .post-featured .post-art {
+    flex: 0 0 55%;
+    aspect-ratio: auto;
+    min-height: 300px;
+  }
+
+  .post-featured .post-body {
+    justify-content: center;
+    padding: 2rem;
+  }
+
+  .post-featured h3 {
+    font-size: 1.75rem;
+  }
+
+  .post-featured .post-body > p:not(.post-meta) {
+    font-size: 1.02rem;
+  }
+}
+
 /* ===== Blog category filters ===== */
 .blog-filters {
   display: flex;
@@ -2287,6 +2409,16 @@ a.body-map-node[data-sys]:focus-visible .node-icon,
   background-color: var(--accent);
   border-color: var(--accent);
   color: #fff;
+}
+
+.filter-count {
+  margin-left: 0.45rem;
+  color: var(--text-dim);
+  font-size: 0.8rem;
+}
+
+.filter-btn.active .filter-count {
+  color: rgba(255, 255, 255, 0.85);
 }
 
 .post-card .post-cat {

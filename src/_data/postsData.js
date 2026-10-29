@@ -4,8 +4,10 @@
    Με «wellness: true» στο front matter του ελληνικού .md, ένα άρθρο εμφανίζεται και στα
    σχετικά άρθρα της σελίδας Ευεξία (healthy.njk).
    Η λίστα «posts» παρακάτω ΔΕΝ γράφεται με το χέρι: φτιάχνεται σε κάθε build από το
-   front matter των άρθρων, και τροφοδοτεί το «Διάβασε επίσης» (related.njk), τα RSS
-   feeds (feed.njk / feed-en.njk) και τις κάρτες κοινοποίησης (scripts/generate-og.js).
+   front matter των άρθρων, και τροφοδοτεί τη λίστα του blog (blog-list.njk), το «Διάβασε
+   επίσης» (related.njk), τα RSS feeds (feed.njk / feed-en.njk) και τις κάρτες κοινοποίησης
+   (scripts/generate-og.js). Στις κάρτες: cardTitle, cardText (αλλιώς summary) και το
+   γραφικό του άρθρου με artIcon (scripts/post-art.js).
 
    Κάθε κατηγορία:
      el/en     — σύντομη ονομασία (κάρτες, RSS, κάρτα κοινοποίησης)
@@ -40,7 +42,12 @@ function readPosts() {
     const en = byLang.en[slug];
     if (!en) throw new Error(`Λείπει η αγγλική εκδοχή: src/posts/${slug}-en.md`);
     const feed = (d) => ({ title: d.feedTitle || d.shareTitle || d.heading, desc: d.feedSummary || d.summary });
-    return { slug, cat: el.cat, date: el.published, wellness: !!el.wellness, el: el.cardTitle, en: en.cardTitle, feed: { el: feed(el), en: feed(en) } };
+    return {
+      slug, cat: el.cat, date: el.published, wellness: !!el.wellness, icon: el.artIcon,
+      el: el.cardTitle, en: en.cardTitle,
+      text: { el: el.cardText || el.summary, en: en.cardText || en.summary },
+      feed: { el: feed(el), en: feed(en) },
+    };
   });
   return posts.sort(
     (a, b) =>

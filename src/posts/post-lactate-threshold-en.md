@@ -4,6 +4,7 @@ description: "What lactate threshold is, why it determines how fast you can run 
 heading: "What is lactate threshold and why it's the key to endurance"
 summary: "Lactate threshold explained simply, and how to improve it with tempo workouts."
 cardTitle: "What is lactate threshold"
+cardText: "The \"lactate threshold\" explained simply, and why it determines how fast you can run before tiring."
 cat: science
 published: "2026-06-19"
 updated: "2026-07-16"

@@ -4,6 +4,7 @@ description: "A practical guide to running in winter: what to wear by temperatur
 heading: "Winter running: what to wear and how to keep going"
 summary: "What to wear by temperature, how to run safely in rain and darkness, and how to stay consistent all winter."
 cardTitle: "Winter running: what to wear"
+cardText: "What to wear by temperature, how to run safely in rain and darkness, and how to stay consistent until spring."
 cat: tips
 published: "2026-10-19"
 updated: "2026-10-19"

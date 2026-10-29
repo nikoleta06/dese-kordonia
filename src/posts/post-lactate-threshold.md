@@ -4,6 +4,8 @@ description: "Τι είναι το lactate threshold (κατώφλι γαλακ�
 heading: "Τι είναι το lactate threshold και γιατί είναι το κλειδί της αντοχής"
 summary: "Το κατώφλι γαλακτικού εξηγημένο απλά, και πώς το βελτιώνεις."
 cardTitle: "Τι είναι το lactate threshold"
+cardText: "Το «κατώφλι γαλακτικού» εξηγημένο απλά, και γιατί καθορίζει πόσο γρήγορα τρέχεις πριν κουραστείς."
+artIcon: flask
 cat: science
 published: "2026-06-19"
 updated: "2026-07-16"

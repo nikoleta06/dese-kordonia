@@ -4,6 +4,7 @@ description: "Faith Kipyegon teaches us what real consistency looks like: a come
 heading: "Faith Kipyegon: Consistency and the return to the top"
 summary: "Lessons in consistency and patience from a runner built gradually, not in a single year."
 cardTitle: "Faith Kipyegon: Consistency and the return to the top"
+cardText: "She came back stronger after motherhood. Lessons in patience and years of steady improvement."
 cat: champions
 published: "2026-07-07"
 updated: "2026-10-28"

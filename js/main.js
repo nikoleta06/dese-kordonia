@@ -174,20 +174,10 @@ document.addEventListener('DOMContentLoaded', function () {
     targets.forEach((el) => observer.observe(el));
   }
 
-  /* --- Blog card category images --- */
-  (function () {
-    const catImg = {
-      champions: 'cat-champions.jpg',
-      science: 'cat-science.jpg',
-      stories: 'cat-stories.jpg',
-      tips: 'cat-tips.jpg'
-    };
-    document.querySelectorAll('.post-card').forEach((card) => {
-      const img = card.querySelector('img');
-      const cat = card.dataset.category;
-      if (img && catImg[cat]) img.src = '../images/' + catImg[cat] + '?v=1';
-    });
-  })();
+  /* --- Ετικέτα «Νέο» (αρχική, blog) για άρθρα έως 30 ημερών --- */
+  document.querySelectorAll('.new-badge[data-published]').forEach((b) => {
+    if (Date.now() - Date.parse(b.dataset.published) < 30 * 864e5) b.hidden = false;
+  });
 
   /* --- Blog category filters --- */
   const filterBtns = document.querySelectorAll('.filter-btn');

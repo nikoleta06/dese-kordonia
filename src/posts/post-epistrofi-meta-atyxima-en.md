@@ -4,6 +4,7 @@ description: "My return to running after an accident and 3.5 months off running,
 heading: "The fitness I thought I had lost"
 summary: "After an accident and months away from running, I was sure I had lost everything. The first kilometre showed me the fear was bigger than the loss."
 cardTitle: "The fitness I thought I had lost"
+cardText: "After an accident and months away from running, I was sure I had lost everything. The first kilometre showed me the fear was bigger than the loss."
 cat: stories
 published: "2026-10-28"
 updated: "2026-10-28"
