@@ -41,24 +41,63 @@ module.exports = function (eleventyConfig) {
     return hashCache.get(file);
   });
 
-  // CSP χωρίς 'unsafe-inline' για τα scripts (δες docs/adr/0002 και _headers).
+  // CSP χωρίς 'unsafe-inline' για scripts και styles (δες docs/adr/0002, 0008 και _headers).
   // Σε κάθε σελίδα: ένα hash SHA-256 για κάθε inline <script> (και speculation rules) και
-  // ένα <meta http-equiv="Content-Security-Policy"> στην αρχή του <head> που επιτρέπει μόνο
-  // αυτά. Ο browser εφαρμόζει και την πολιτική του _headers και αυτή, οπότε ένα script πρέπει
-  // να περνά και τις δύο: τρέχουν μόνο τα scripts που γράψαμε εμείς. Αλλάζεις ένα script →
-  // το hash ξαναϋπολογίζεται μόνο του. Τα JSON-LD δεν εκτελούνται, άρα δεν χρειάζονται hash.
-  // Οι πηγές πρέπει να ταιριάζουν με το script-src του _headers (χωρίς το 'unsafe-inline').
+  // κάθε <style>, και ένα <meta http-equiv="Content-Security-Policy"> στην αρχή του <head> που
+  // επιτρέπει μόνο αυτά. Ο browser εφαρμόζει και την πολιτική του _headers και αυτή, οπότε ένα
+  // script ή style πρέπει να περνά και τις δύο: ισχύουν μόνο όσα γράψαμε εμείς. Αλλάζεις ένα
+  // script → το hash ξαναϋπολογίζεται μόνο του. Τα JSON-LD δεν εκτελούνται, άρα δεν χρειάζονται hash.
+  // Οι πηγές πρέπει να ταιριάζουν με το script-src / style-src του _headers (χωρίς το 'unsafe-inline').
   const SCRIPT_SOURCES = "'self' 'wasm-unsafe-eval' https://gc.zgo.at https://accounts.google.com/gsi/client";
-  eleventyConfig.addTransform("cspScriptHashes", function (content) {
+  const STYLE_SOURCES = "'self' https://accounts.google.com/gsi/style";
+  // Ο browser διαβάζει τα \r\n (αρχεία Windows) ως \n πριν υπολογίσει το hash· κάνουμε το ίδιο
+  const cspHash = (text) =>
+    "'sha256-" + crypto.createHash("sha256").update(text.replace(/\r\n?/g, "\n"), "utf8").digest("base64") + "'";
+
+  // Τα style="…" δεν μπορούν να εγκριθούν με hash. Οπότε στο build κάθε style="…" γίνεται
+  // data-s="<id>" και ένας κανόνας [data-s="<id>"] { … !important } σε ένα <style> της σελίδας,
+  // που εγκρίνεται με hash όπως τα υπόλοιπα. Το !important κρατά την προτεραιότητα που είχε το
+  // style="…" απέναντι στο style.css. Έτσι στα άρθρα και τις σελίδες γράφεις style="…" όπως πριν.
+  // Όσα φτιάχνει η JavaScript την ώρα που τρέχει (innerHTML) δεν περνούν από εδώ: εκεί κλάσεις.
+  function inlineStylesToRules(html) {
+    const rules = new Map();
+    // Τα <script> μένουν ως έχουν (ένα style="…" μέσα σε κείμενο script δεν είναι attribute)
+    const parts = html.split(/(<script\b[\s\S]*?<\/script>)/);
+    for (let i = 0; i < parts.length; i += 2) {
+      parts[i] = parts[i].replace(/(<[a-zA-Z][^<>]*?)\sstyle="([^"]*)"/g, (_, tag, decls) => {
+        const css = decls
+          .split(";")
+          .map((d) => d.trim())
+          .filter(Boolean)
+          .map((d) => (/!important$/.test(d) ? d : d + " !important"))
+          .join("; ");
+        const id = crypto.createHash("sha256").update(css).digest("hex").slice(0, 8);
+        rules.set(id, `[data-s="${id}"] { ${css}; }`);
+        return `${tag} data-s="${id}"`;
+      });
+    }
+    html = parts.join("");
+    if (!rules.size) return html;
+    return html.replace("</head>", () => "<style>\n" + [...rules.values()].join("\n") + "\n</style>\n</head>");
+  }
+
+  eleventyConfig.addTransform("cspHashes", function (content) {
     const out = this.page.outputPath;
     if (typeof out !== "string" || !out.endsWith(".html") || !content.includes("<head>")) return content;
-    const hashes = new Set();
+    content = inlineStylesToRules(content);
+    const scriptHashes = new Set();
     for (const m of content.matchAll(/<script(?:\s+type="speculationrules")?\s*>([\s\S]*?)<\/script>/g)) {
-      // Ο browser διαβάζει τα \r\n (αρχεία Windows) ως \n πριν υπολογίσει το hash· κάνουμε το ίδιο
-      const text = m[1].replace(/\r\n?/g, "\n");
-      hashes.add("'sha256-" + crypto.createHash("sha256").update(text, "utf8").digest("base64") + "'");
+      scriptHashes.add(cspHash(m[1]));
     }
-    const policy = ["script-src", SCRIPT_SOURCES, ...hashes].join(" ");
+    const styleHashes = new Set();
+    for (const m of content.matchAll(/<style(?:\s[^>]*)?>([\s\S]*?)<\/style>/g)) styleHashes.add(cspHash(m[1]));
+    // Εξαίρεση: το κουμπί «Συνέχεια με την Google» (js/google-signin.js, σελίδα login) βάζει μόνο του inline styles
+    // που δεν ξέρουμε από πριν, οπότε εκεί τα styles μένουν με 'unsafe-inline'. Χωρίς hashes,
+    // γιατί με hash ο browser αγνοεί το 'unsafe-inline'.
+    const googleButton = /<script[^>]+src="js\/google-signin\.js/.test(content);
+    const styleSrc = googleButton ? [STYLE_SOURCES, "'unsafe-inline'"] : [STYLE_SOURCES, ...styleHashes];
+    const policy =
+      ["script-src", SCRIPT_SOURCES, ...scriptHashes].join(" ") + "; " + ["style-src", ...styleSrc].join(" ");
     return content.replace("<head>", () => '<head>\n  <meta http-equiv="Content-Security-Policy" content="' + policy + '">');
   });
 

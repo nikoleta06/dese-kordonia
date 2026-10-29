@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function () {
   };
 
   /* --- Εικονίδια & ονόματα κατηγοριών (για τη σελίδα Αποθηκευμένα) --- */
-  const ICO = 'style="width:1em;height:1em;vertical-align:-0.15em;margin-right:0.25em"';
+  const ICO = 'class="cat-ico"'; // μέγεθος και απόσταση στο css/style.css (.cat-ico), όχι style="…" λόγω CSP
   const DK_CAT_META = {
     champions: { el: 'Πρωταθλητές', en: 'Champions', svg: '<svg ' + ICO + ' viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.26 6.88.56-5.2 4.52 1.56 6.7L12 17.27 5.86 20.54l1.56-6.7-5.2-4.52 6.88-.56z"/></svg>' },
     science: { el: 'Επιστήμη', en: 'Science', svg: '<svg ' + ICO + ' viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5a3 3 0 0 0-3 3 2.5 2.5 0 0 0-2 4 2.5 2.5 0 0 0 1.5 4.5A2.5 2.5 0 0 0 12 19V5z"/><path d="M12 5a3 3 0 0 1 3 3 2.5 2.5 0 0 1 2 4 2.5 2.5 0 0 1-1.5 4.5A2.5 2.5 0 0 1 12 19"/></svg>' },

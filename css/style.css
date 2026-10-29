@@ -2246,6 +2246,14 @@ a.body-map-node[data-sys]:focus-visible .node-icon,
   letter-spacing: 0.3px;
 }
 
+/* Εικονίδιο κατηγορίας δίπλα στο όνομά της (postsData.js και main.js) */
+.cat-ico {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.15em;
+  margin-right: 0.25em;
+}
+
 /* ===== Το γραφικό κάθε άρθρου (scripts/post-art.js) =====
    Φόντο με το χρώμα της κατηγορίας· γραμμές, τελίτσες και εικονίδιο σε λευκό. Ίδιο
    σε σκούρο και ανοιχτό θέμα, όπως και οι φωτογραφίες. */
@@ -2503,7 +2511,7 @@ a:focus-visible .pa-halo,
 /* Σύνδεσμοι μέσα στο κείμενο ενός άρθρου ([κείμενο](σελίδα.html) στο Markdown):
    πορτοκαλί, όπως ήταν πριν με το inline style. Οι σύνδεσμοι με δικό τους class
    (κάρτες, συγγραφέας, «Πίσω») ή target (πηγές) κρατούν το δικό τους στυλ. */
-.article a:not([class]):not([target]):not([style]) {
+.article a:not([class]):not([target]):not([style]):not([data-s]) {
   color: var(--accent);
 }
 
