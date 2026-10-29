@@ -47,9 +47,10 @@ function postArt(post) {
   const icon = ICONS[post.icon] || ICONS[CAT_ICON[post.cat]];
   if (!icon) throw new Error(`Άγνωστο artIcon «${post.icon}» στο ${post.slug}`);
   const angle = (s % 37) - 18; // −18° έως 18°
-  const side = (s >> 6) & 1 ? 1 : -1; // οι γραμμές από αριστερά ή από δεξιά
-  const cx = 160 + side * (40 + ((s >> 8) % 40));
-  const cy = 90 + (((s >> 14) % 50) - 25);
+  // >>> και όχι >>: το >> κάνει τα μεγάλα hash αρνητικά, και η θέση θα έβγαινε εκτός ορίων
+  const side = (s >>> 6) & 1 ? 1 : -1; // οι γραμμές από αριστερά ή από δεξιά
+  const cx = 160 + side * (40 + ((s >>> 8) % 40)); // 40–79 μονάδες από τη μέση
+  const cy = 90 + (((s >>> 14) % 50) - 25); // 65–114
   const lanes = [0, 1, 2, 3]
     .map((i) => {
       const w = 230 + i * 34;
