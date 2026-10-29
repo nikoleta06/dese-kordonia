@@ -40,7 +40,10 @@
     var heading = card.querySelector('h3').textContent;
     wrap.dataset.active = map.dataset.active = info.dataset.active = node.dataset.sys;
     // τα σημεία στο αριστερό μισό ανοίγουν το pop-up αριστερά, τα υπόλοιπα δεξιά
-    info.dataset.side = parseFloat(node.style.left) < 50 ? 'left' : 'right';
+    // (από τη θέση στην οθόνη: το style="left:…" γίνεται κανόνας CSS στο build, λόγω CSP)
+    var box = node.getBoundingClientRect();
+    var mapBox = map.getBoundingClientRect();
+    info.dataset.side = box.left + box.width / 2 < mapBox.left + mapBox.width / 2 ? 'left' : 'right';
     mark(node.dataset.sys);
     title.textContent = heading;
     infoTitle.textContent = heading;

@@ -18,7 +18,7 @@
      metaIcon  — αν το εικονίδιο φαίνεται και σε εκείνη τη γραμμή
      page      — σελίδα της κατηγορίας, για σύνδεσμο από την ετικέτα (προαιρετικό) */
 
-const ICO = 'style="width:1em;height:1em;vertical-align:-0.15em;margin-right:0.25em"';
+const ICO = 'class="cat-ico"'; // μέγεθος και απόσταση στο css/style.css (.cat-ico), όχι style="…" λόγω CSP
 
 const fs = require("fs");
 const path = require("path");
