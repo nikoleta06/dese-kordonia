@@ -4,6 +4,7 @@ description: "When to replace running shoes: the mileage rule by shoe type, the 
 heading: "When to replace your running shoes"
 summary: "The mileage rule, the wear signs and practical tips for when to replace your running shoes."
 cardTitle: "When to replace your running shoes"
+cardText: "The mileage rule, the wear signs and practical tips to make your shoes last longer."
 cat: tips
 published: "2026-06-28"
 updated: "2026-06-28"

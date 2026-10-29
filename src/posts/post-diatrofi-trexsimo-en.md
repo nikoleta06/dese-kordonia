@@ -4,6 +4,7 @@ description: "A practical nutrition guide for runners: what to eat before and af
 heading: "What to eat before and after running"
 summary: "A practical nutrition guide for runners: what to eat before and after running."
 cardTitle: "What to eat before and after running"
+cardText: "Nutrition doesn't need to be complicated. Simple habits for energy and better recovery."
 cat: tips
 published: "2026-06-18"
 updated: "2026-06-18"

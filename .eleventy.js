@@ -200,6 +200,19 @@ module.exports = function (eleventyConfig) {
     return same.concat(others).slice(0, 3);
   });
 
+  // Το γραφικό ενός άρθρου στις κάρτες: {% postArt p %} (δες scripts/post-art.js)
+  eleventyConfig.addShortcode("postArt", require("./scripts/post-art.js").postArt);
+
+  // Ημερομηνία στις κάρτες του blog: «28 Οκτ 2026» / «28 Oct 2026»
+  const SHORT_MONTHS = {
+    el: ["Ιαν", "Φεβ", "Μαρ", "Απρ", "Μαΐ", "Ιουν", "Ιουλ", "Αυγ", "Σεπ", "Οκτ", "Νοε", "Δεκ"],
+    en: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+  };
+  eleventyConfig.addFilter("shortDate", (iso, lang) => {
+    const [y, m, d] = String(iso).split("-").map(Number);
+    return `${d} ${SHORT_MONTHS[lang === "en" ? "en" : "el"][m - 1]} ${y}`;
+  });
+
   // Τα άρθρα για την υγεία (wellness: true), τα πιο πρόσφατα πρώτα, για τη σελίδα Ευεξία
   eleventyConfig.addFilter("wellnessPosts", (posts, limit = 3) => posts.filter((p) => p.wellness).slice(0, limit));
 

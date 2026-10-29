@@ -5,6 +5,7 @@ heading: "The philosophy of Eliud Kipchoge"
 shareTitle: "The philosophy of Eliud Kipchoge: \"No human is limited\""
 summary: "What the greatest marathoner of all time teaches us about discipline and mindset."
 cardTitle: "The philosophy of Eliud Kipchoge"
+cardText: "\"No human is limited.\" What the greatest marathoner of all time teaches us."
 cat: champions
 published: "2026-06-18"
 updated: "2026-06-18"

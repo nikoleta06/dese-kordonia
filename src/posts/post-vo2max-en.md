@@ -4,6 +4,7 @@ description: "What VO₂max is, why it's the 'engine' of your endurance, and how
 heading: "What is VO₂max and how to improve it"
 summary: "The engine of your endurance, explained simply, and how to improve it."
 cardTitle: "What is VO₂max"
+cardText: "The \"engine\" of your endurance explained simply, and how to improve it."
 cat: science
 published: "2026-06-26"
 updated: "2026-07-18"

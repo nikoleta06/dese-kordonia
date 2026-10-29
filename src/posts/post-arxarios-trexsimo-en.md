@@ -4,6 +4,7 @@ description: "Want to start running but don't know where to begin? 6 simple, pra
 heading: "6 tips to start running from scratch"
 summary: "6 simple, practical tips for beginner runners to start right."
 cardTitle: "6 tips to start running from scratch"
+cardText: "The hardest part of running is simply getting started. 6 things I wish I knew when I began."
 cat: tips
 published: "2026-06-17"
 updated: "2026-07-16"

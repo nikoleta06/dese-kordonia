@@ -42,11 +42,7 @@
 
       {#- Το πιο πρόσφατο άρθρο, με ετικέτα «Νέο» για 30 μέρες #}
       <a class="bento-card b-latest" href="{{ latest.slug }}{{ sfx }}.html">
-        <picture>
-          <source type="image/avif" srcset="images/{{ latestCat.img }}.avif?v=1">
-          <source type="image/webp" srcset="images/{{ latestCat.img }}.webp?v=1">
-          <img src="images/{{ latestCat.img }}.jpg?v=1" alt="" loading="lazy" decoding="async">
-        </picture>
+        {% postArt latest %}
         <div class="b-latest-body">
           <p class="b-kicker"><span class="new-badge" data-published="{{ latest.date }}" hidden>{% if en %}New{% else %}Νέο{% endif %}</span>{{ latestCat.label[lang] }}</p>
           <h2 class="b-title">{{ latest[lang] }}</h2>
@@ -113,11 +109,7 @@
         {%- for p in postsData.posts.slice(1, 4) %}
         {%- set pc = postsData.cats[p.cat] %}
         <a class="home-post" href="{{ p.slug }}{{ sfx }}.html">
-          <picture>
-            <source type="image/avif" srcset="images/{{ pc.img }}.avif?v=1">
-            <source type="image/webp" srcset="images/{{ pc.img }}.webp?v=1">
-            <img src="images/{{ pc.img }}.jpg?v=1" alt="" loading="lazy" decoding="async">
-          </picture>
+          {% postArt p %}
           <p class="b-kicker">{{ pc[lang] }}</p>
           <h3>{{ p[lang] }}</h3>
         </a>
@@ -154,8 +146,3 @@
       <cite>Δέσε Κορδόνια</cite>
     </div>
   </main>
-  <script>
-    document.querySelectorAll('.new-badge[data-published]').forEach(function (b) {
-      if (Date.now() - Date.parse(b.dataset.published) < 30 * 864e5) b.hidden = false;
-    });
-  </script>

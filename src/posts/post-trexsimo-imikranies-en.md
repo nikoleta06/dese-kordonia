@@ -4,6 +4,7 @@ description: "My personal story: how I started running after my exams and how it
 heading: "How running helped me with migraines"
 summary: "My personal story: how running became part of my life and helped with my migraines."
 cardTitle: "How running helped me with migraines"
+cardText: "I started running almost by chance, keeping my brother company. I never imagined it would become my medicine."
 cat: stories
 published: "2026-06-16"
 updated: "2026-06-16"

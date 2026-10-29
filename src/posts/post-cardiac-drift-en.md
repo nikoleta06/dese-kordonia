@@ -4,6 +4,7 @@ description: "What cardiac drift (cardiovascular drift) is: why your heart rate 
 heading: "Cardiac drift: why your heart rate climbs while your pace stays the same"
 summary: "Why your heart rate rises in the second half of a long run while your pace stays flat, and what it means for your heart-rate zones."
 cardTitle: "Cardiac drift: why your heart rate climbs"
+cardText: "Why your heart rate rises in the second half of a long run while your pace stays flat, and what it means for your zones."
 cat: science
 published: "2026-07-21"
 updated: "2026-07-21"

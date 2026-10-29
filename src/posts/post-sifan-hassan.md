@@ -4,6 +4,8 @@ description: "Η Sifan Hassan, μια από τις πιο ευέλικτες δ
 heading: "Τι μας μαθαίνει η Sifan Hassan για την επιμονή"
 summary: "Μαθήματα επιμονής από μια από τις πιο ευέλικτες δρομείς όλων των εποχών."
 cardTitle: "Τι μας μαθαίνει η Sifan Hassan για την επιμονή"
+cardText: "Έπεσε στον προκριματικό, σηκώθηκε και κέρδισε. Μαθήματα επιμονής από μια μοναδική δρομέα."
+artIcon: mountain
 cat: champions
 published: "2026-06-19"
 updated: "2026-06-19"

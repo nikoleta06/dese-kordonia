@@ -1,0 +1,46 @@
+{#- Η λίστα του blog (blog.njk / blog-en.njk), κοινή για τις δύο γλώσσες, με το ύφος της
+    αρχικής. Οι κάρτες φτιάχνονται από το src/_data/postsData.js, οπότε ένα νέο άρθρο μπαίνει
+    μόνο του, πρώτο και μεγάλο. Τα φίλτρα (και το ?cat= από την αρχική), οι μετρητές και η
+    ένδειξη «Αποθηκευμένο» είναι στο js/main.js και βασίζονται στα .post-card, data-category
+    και .read-more. -#}
+{%- set en = lang == "en" %}
+{%- set sfx = "-en" if en else "" %}
+  <main class="blog">
+    <h1 class="section-title">Blog</h1>
+    <p class="lead">
+      {%- if en %}
+      Here you'll find four content categories: lessons from <strong>elite athletes</strong>, the
+      <strong><a href="epistimi-trexsimatos-en.html">science of running</a></strong>, <strong>stories &amp; psychology</strong>, and
+      <strong>practical tips</strong> for every runner.
+      {%- else %}
+      Εδώ θα βρεις τέσσερις κατηγορίες περιεχομένου: μαθήματα από <strong>κορυφαίους
+      αθλητές</strong>, την <strong><a href="epistimi-trexsimatos.html">επιστήμη του τρεξίματος</a></strong>,
+      <strong>ιστορίες &amp; ψυχολογία</strong>, και <strong>πρακτικές συμβουλές</strong> για
+      κάθε δρομέα.
+      {%- endif %}
+    </p>
+
+    <div class="blog-filters" role="group" aria-label="{% if en %}Categories{% else %}Κατηγορίες{% endif %}">
+      <button class="filter-btn active" data-filter="all" type="button">{% if en %}All{% else %}Όλα{% endif %}<span class="filter-count">{{ postsData.posts.length }}</span></button>
+      {%- for key, c in postsData.cats %}
+      <button class="filter-btn" data-filter="{{ key }}" type="button">{{ c.svg | safe }}{{ c[lang] }}<span class="filter-count">{{ postsData.posts | countCat(key) }}</span></button>
+      {%- endfor %}
+    </div>
+
+    <div class="post-grid blog-grid">
+      {%- for p in postsData.posts %}
+      {%- set c = postsData.cats[p.cat] %}
+      <article class="post-card{% if loop.first %} post-featured{% endif %}" data-category="{{ p.cat }}">
+        {% postArt p %}
+        <div class="post-body">
+          <p class="post-meta">
+            {%- if loop.first %}<span class="new-badge" data-published="{{ p.date }}" hidden>{% if en %}New{% else %}Νέο{% endif %}</span>{% endif -%}
+            <span class="post-cat">{{ c.svg | safe }}{{ c[lang] }}</span> · {{ p.date | shortDate(lang) }}</p>
+          <h3>{{ p[lang] }}</h3>
+          <p>{{ p.text[lang] }}</p>
+          <a class="read-more" href="{{ p.slug }}{{ sfx }}.html">{% if en %}Read the article{% else %}Διάβασε το άρθρο{% endif %} →</a>
+        </div>
+      </article>
+      {%- endfor %}
+    </div>
+  </main>
