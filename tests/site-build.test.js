@@ -81,3 +81,21 @@ test('το «Πρόσθεσε στο ημερολόγιο» έχει Google, Out
     }
   }
 });
+
+test('η σελίδα της Επιστήμης δείχνει κάθε άρθρο επιστήμης, με κάρτα και στο ItemList', { skip: !built }, () => {
+  const science = require(path.join(ROOT, 'src', '_data', 'postsData.js')).posts.filter((p) => p.cat === 'science');
+  assert.ok(science.length > 0);
+  for (const sfx of ['', '-en']) {
+    const html = read(`epistimi-trexsimatos${sfx}.html`);
+    const items = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)]
+      .map((m) => JSON.parse(m[1]))
+      .find((ld) => ld.mainEntity).mainEntity.itemListElement;
+    assert.equal(items.length, science.length, 'λάθος πλήθος στο ItemList');
+    assert.equal((html.match(/class="post-art"/g) || []).length, science.length, 'λάθος πλήθος γραφικών');
+    for (const p of science) {
+      const f = `${p.slug}${sfx}.html`;
+      assert.ok(html.includes(`class="read-more" href="${f}"`), `λείπει η κάρτα του ${f}`);
+      assert.ok(items.some((i) => i.url === URL + f), `ItemList: λείπει το ${f}`);
+    }
+  }
+});

@@ -1,0 +1,16 @@
+{#- Οι κάρτες της σελίδας «Η Επιστήμη του Τρεξίματος», κοινές για τις δύο γλώσσες. Φτιάχνονται από
+    το src/_data/postsData.js (πιο πρόσφατο πρώτο), οπότε ένα νέο άρθρο επιστήμης μπαίνει μόνο του. -#}
+{%- set c = postsData.cats.science %}
+    <div class="post-grid">
+      {%- for p in postsData.posts | byCat("science") %}
+      <article class="post-card" data-category="{{ p.cat }}">
+        {% postArt p %}
+        <div class="post-body">
+          <p class="post-meta"><span class="post-cat">{{ c.svg | safe }}{{ c[lang] }}</span> · {{ p.date | shortDate(lang) }}</p>
+          <h3>{{ p[lang] }}</h3>
+          <p>{{ p.text[lang] }}</p>
+          <a class="read-more" href="{{ p.slug }}{% if lang == "en" %}-en{% endif %}.html">{% if lang == "en" %}Read the article{% else %}Διάβασε το άρθρο{% endif %} →</a>
+        </div>
+      </article>
+      {%- endfor %}
+    </div>

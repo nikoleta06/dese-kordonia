@@ -156,6 +156,7 @@ module.exports = function (eleventyConfig) {
 
   // Αρχική: πόσα άρθρα έχει μια κατηγορία (για τις κατηγορίες κάτω από τα πρόσφατα άρθρα)
   eleventyConfig.addFilter("countCat", (posts, cat) => posts.filter((p) => p.cat === cat).length);
+  eleventyConfig.addFilter("byCat", (posts, cat) => posts.filter((p) => p.cat === cat));
 
   // Άρθρο: τα στοιχεία του από το postsData (για το γραφικό στην αρχή του, ίδιο και στις δύο γλώσσες)
   eleventyConfig.addFilter("postBySlug", (posts, slug) => posts.find((p) => p.slug === slug));
