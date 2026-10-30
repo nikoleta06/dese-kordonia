@@ -39,7 +39,8 @@
     today: 'Today',
     tomorrow: 'Tomorrow',
     noChange: 'no change needed',
-    slower: 'slower',
+    upTo1: 'up to 1% slower',
+    about: (n) => 'about ' + n + '% slower',
     perKm: '/km',
     defaultCity: 'Showing Athens. Choose your city in the tool.',
     levels: { good: 'Ideal conditions', fair: 'Slightly warm', hard: 'Warm and humid', bad: 'Very hot', extreme: 'Dangerous heat' },
@@ -55,7 +56,8 @@
     today: 'Σήμερα',
     tomorrow: 'Αύριο',
     noChange: 'χωρίς αλλαγή',
-    slower: 'πιο αργά',
+    upTo1: 'έως 1% πιο αργά',
+    about: (n) => 'περίπου ' + n + '% πιο αργά',
     perKm: '/χλμ.',
     defaultCity: 'Δείχνει την Αθήνα. Διάλεξε την πόλη σου στο εργαλείο.',
     levels: { good: 'Ιδανικές συνθήκες', fair: 'Λίγη ζέστη', hard: 'Ζέστη και υγρασία', bad: 'Πολύ ζέστη', extreme: 'Επικίνδυνη ζέστη' },
@@ -78,7 +80,8 @@
     sec = Math.round(sec);
     return Math.floor(sec / 60) + ':' + String(sec % 60).padStart(2, '0');
   };
-  const pctText = (pct) => pct.toLocaleString(EN ? 'en-GB' : 'el-GR', { maximumFractionDigits: 1 }) + '% ' + T.slower;
+  // Πρακτική εκτίμηση: χωρίς δεκαδικά που μοιάζουν με ακριβή μέτρηση (δες weather-model.js)
+  const pctText = (est) => (est.upTo1 ? T.upTo1 : T.about(est.pct));
 
   fetch('https://api.open-meteo.com/v1/forecast?latitude=' + place.lat + '&longitude=' + place.lon +
     '&hourly=temperature_2m,dew_point_2m&timezone=auto&forecast_days=2')
@@ -103,6 +106,7 @@
     const sum = M.heatSum(now.t, now.d);
     const level = M.levelOf(sum);
     const pct = M.slowdownPct(sum);
+    const est = M.estimate(pct);
 
     // Η πιο δροσερή ώρα (05:00–22:00) που απομένει σήμερα, αλλιώς αύριο
     const daytime = (x) => x.hour >= 5 && x.hour <= 22;
@@ -120,9 +124,11 @@
     const badge = $('hwLevel');
     badge.className = 'wp-level lv-' + level;
     badge.textContent = T.levels[level];
-    $('hwPace').textContent = saved.pace
-      ? fmtPace(saved.pace) + ' → ' + fmtPace(saved.pace * (1 + pct / 100)) + ' ' + T.perKm
-      : (pct < 0.25 ? T.noChange : pctText(pct));
+    $('hwPace').textContent = est.none
+      ? T.noChange
+      : saved.pace && !est.upTo1
+        ? fmtPace(saved.pace) + ' → ~' + fmtPace(saved.pace + Math.max(5, M.round5(saved.pace * pct / 100))) + ' ' + T.perKm
+        : pctText(est);
     $('hwBest').textContent = when + ' ' + String(best.hour).padStart(2, '0') + ':00 · ' + Math.round(best.t) + '°C';
     $('hwStats').hidden = false;
   }

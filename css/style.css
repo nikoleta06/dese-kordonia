@@ -568,6 +568,12 @@ a.bento-card:focus-visible {
   font-size: 1.3rem;
 }
 
+.hw-note {
+  margin: 0;
+  color: var(--text-dim);
+  font-size: 0.8rem;
+}
+
 /* Το πιο πρόσφατο άρθρο */
 .b-latest {
   padding: 0;
@@ -2977,12 +2983,68 @@ a:focus-visible .pa-halo,
 }
 
 .wp-status {
-  color: var(--text-dim);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0.8rem 0 0;
+  padding: 0.7rem 0.9rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface-2);
+  color: var(--text);
   font-size: 0.95rem;
 }
 
+/* Το σφάλμα πρέπει να φαίνεται: κόκκινο περίγραμμα και γραμμή στα αριστερά */
 .wp-status.wp-error {
-  color: var(--lv-bad);
+  border-color: var(--lv-bad);
+  border-left-width: 4px;
+  color: var(--text);
+}
+
+/* Φόρτωση: κύκλος που γυρίζει πριν από το κείμενο, και στο κουμπί «Αναζήτηση» */
+.wp-status.wp-loading::before,
+#wpSearchBtn.is-loading::before {
+  content: "";
+  flex: 0 0 auto;
+  width: 1em;
+  height: 1em;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: wp-spin 0.8s linear infinite;
+}
+
+.wp-status.wp-loading::before {
+  color: var(--accent);
+}
+
+#wpSearchBtn.is-loading {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: progress;
+  opacity: 0.85;
+}
+
+@keyframes wp-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wp-status.wp-loading::before,
+  #wpSearchBtn.is-loading::before {
+    animation-duration: 2.4s;
+  }
+}
+
+.wp-places-title {
+  margin: 0.2rem 0 0.1rem;
+  color: var(--text);
+  font-size: 0.95rem;
+  font-weight: 600;
 }
 
 .wp-h {

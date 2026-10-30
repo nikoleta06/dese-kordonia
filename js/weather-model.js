@@ -39,5 +39,13 @@
     return 'extreme';
   }
 
-  window.DKWeatherModel = { heatSum, slowdownPct, levelOf };
+  // Ο κανόνας είναι πρακτική προσέγγιση, οπότε δεν δείχνουμε δεκαδικά που μοιάζουν με
+  // ακριβή μέτρηση: κάτω από 1% λέμε «έως 1%», αλλιώς «περίπου» σε ακέραιο ποσοστό, και ο
+  // ρυθμός στρογγυλεύει στα 5 δευτερόλεπτα.
+  function estimate(pct) {
+    return { none: pct < 0.25, upTo1: pct < 1, pct: Math.max(1, Math.round(pct)) };
+  }
+  const round5 = (sec) => Math.round(sec / 5) * 5;
+
+  window.DKWeatherModel = { heatSum, slowdownPct, levelOf, estimate, round5 };
 })();

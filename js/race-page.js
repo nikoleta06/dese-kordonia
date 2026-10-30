@@ -28,7 +28,8 @@
     loading: 'Loading the forecast…',
     netError: 'Could not reach the weather service. Check your connection and try again later.',
     start: 'start',
-    slower: (pct, a, b) => 'With this weather the same effort is about ' + pct + '% slower: for example ' + a + ' → ' + b + ' /km.',
+    pct: (est) => (est.upTo1 ? 'up to 1% slower' : 'about ' + est.pct + '% slower'),
+    slower: (pct, a, b) => 'Estimated adjustment for this weather, ' + pct + ' for the same effort. For example ' + a + ' → ~' + b + ' /km. A practical approximation, not an exact measurement.',
     none: 'No pace adjustment needed: good conditions for racing.',
     temp: 'Temperature', feels: 'Feels like', dew: 'Dew point', hum: 'Humidity', wind: 'Wind', rain: 'Chance of rain',
     kmh: ' km/h',
@@ -38,7 +39,7 @@
     goalPace: 'pace for your goal',
     hint: 'Enter a goal time to see your pace.',
     invalid: 'That time gives a pace outside 2:00–20:00 /km. Check the hours and minutes.',
-    wxPace: (pct, pace, time) => 'With the forecast for the start (' + pct + '% slower), the same effort gives about ' + pace + ' /km, a finish time of around ' + time + '. Start at that pace, and if you feel good, speed up in the second half.',
+    wxPace: (pct, pace, time) => 'With the forecast for the start (estimated ' + pct + '), the same effort gives about ' + pace + ' /km, a finish time of around ' + time + '. Start at that pace, and if you feel good, speed up in the second half.',
     wxOk: 'The forecast for the start needs no adjustment: you can run your goal pace.',
     wxPending: 'When the forecast for race day is out, you will also see here how much the weather changes this pace.',
     split: 'Split', goalCol: 'Goal', wxCol: 'With the weather',
@@ -52,7 +53,8 @@
     loading: 'Φορτώνει η πρόγνωση…',
     netError: 'Δεν ήταν δυνατή η σύνδεση με την υπηρεσία καιρού. Έλεγξε τη σύνδεσή σου και δοκίμασε ξανά αργότερα.',
     start: 'εκκίνηση',
-    slower: (pct, a, b) => 'Με αυτόν τον καιρό ο ίδιος κόπος βγάζει περίπου ' + pct + '% πιο αργό ρυθμό: π.χ. ' + a + ' → ' + b + ' /χλμ.',
+    pct: (est) => (est.upTo1 ? 'έως 1% πιο αργά' : 'περίπου ' + est.pct + '% πιο αργά'),
+    slower: (pct, a, b) => 'Εκτιμώμενη προσαρμογή για αυτόν τον καιρό, ' + pct + ' με τον ίδιο κόπο. Π.χ. ' + a + ' → ~' + b + ' /χλμ. Είναι πρακτική προσέγγιση, όχι ακριβής μέτρηση.',
     none: 'Δεν χρειάζεται προσαρμογή του ρυθμού: καλές συνθήκες για αγώνα.',
     temp: 'Θερμοκρασία', feels: 'Αίσθηση', dew: 'Σημείο δρόσου', hum: 'Υγρασία', wind: 'Άνεμος', rain: 'Πιθανότητα βροχής',
     kmh: ' χλμ./ώρα',
@@ -62,7 +64,7 @@
     goalPace: 'ρυθμός για τον στόχο σου',
     hint: 'Βάλε έναν χρόνο-στόχο για να δεις τον ρυθμό σου.',
     invalid: 'Αυτός ο χρόνος βγάζει ρυθμό έξω από το 2:00–20:00 /χλμ. Έλεγξε τις ώρες και τα λεπτά.',
-    wxPace: (pct, pace, time) => 'Με την πρόγνωση για την εκκίνηση (' + pct + '% πιο αργά), ο ίδιος κόπος βγάζει περίπου ' + pace + ' /χλμ., δηλαδή τελικό χρόνο γύρω στο ' + time + '. Ξεκίνα με αυτόν τον ρυθμό, κι αν νιώθεις καλά, ανέβασε στο δεύτερο μισό.',
+    wxPace: (pct, pace, time) => 'Με την πρόγνωση για την εκκίνηση (εκτίμηση ' + pct + '), ο ίδιος κόπος βγάζει περίπου ' + pace + ' /χλμ., δηλαδή τελικό χρόνο γύρω στο ' + time + '. Ξεκίνα με αυτόν τον ρυθμό, κι αν νιώθεις καλά, ανέβασε στο δεύτερο μισό.',
     wxOk: 'Η πρόγνωση για την εκκίνηση δεν χρειάζεται προσαρμογή: μπορείς να τρέξεις τον ρυθμό του στόχου σου.',
     wxPending: 'Όταν βγει η πρόγνωση για τη μέρα του αγώνα, θα δεις εδώ και πόσο αλλάζει ο καιρός αυτόν τον ρυθμό.',
     split: 'Σημείο', goalCol: 'Στόχος', wxCol: 'Με τον καιρό',
@@ -220,7 +222,9 @@
       const badge = $('rpWxLevel');
       badge.className = 'wp-level lv-' + level;
       badge.textContent = T.levels[level];
-      $('rpWxDelta').textContent = pct >= 0.25 ? T.slower(num(pct, 1), '5:00', fmtPace(300 * (1 + pct / 100))) : T.none;
+      // Πρακτική εκτίμηση: ποσοστό χωρίς δεκαδικά, ρυθμός στα 5 δευτερόλεπτα (δες weather-model.js)
+      const est = M.estimate(pct);
+      $('rpWxDelta').textContent = est.none ? T.none : T.slower(T.pct(est), '5:00', fmtPace(300 + Math.max(5, M.round5(3 * pct))));
       const rows = [
         [T.temp, Math.round(x.t) + '°C'],
         [T.feels, Math.round(x.feels) + '°C'],
@@ -295,8 +299,10 @@
 
     const adj = wxPct != null && wxPct >= 0.25 ? 1 + wxPct / 100 : null;
     if (wxPct != null) {
+      // Ρυθμός στα 5 δευτερόλεπτα και χρόνος στο λεπτό: είναι εκτίμηση, όχι ακριβής πρόβλεψη
       out.append(el('p', 'wp-delta', adj
-        ? T.wxPace(num(wxPct, 1), fmtPace(pace * adj), fmtTime(total * adj))
+        ? T.wxPace(T.pct(M.estimate(wxPct)), fmtPace(pace + Math.max(5, M.round5(pace * wxPct / 100))),
+          fmtTime(Math.round(total * adj / 60) * 60))
         : T.wxOk));
     } else {
       out.append(el('p', 'wp-delta', T.wxPending));

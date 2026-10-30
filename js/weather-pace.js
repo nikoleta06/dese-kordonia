@@ -14,23 +14,27 @@
 
   const T = EN ? {
     searching: 'Searching…',
+    tooShort: 'Enter at least 2 letters of the city.',
     notFoundLatin: 'No city found with that name. Check the spelling, or write it in the local language (e.g. "München").',
     notFoundGreek: 'No city found with that name. If you entered a region or an island, enter the city or town instead. For a city outside Greece, write it in English or in Latin letters (e.g. "Milan", "Lisbon").',
     notFoundOther: 'No city found with that name. Write it in English or in Latin letters (e.g. "Moscow", "Tokyo").',
     isCountry: (q) => '"' + q + '" is a country. Enter a city or town, e.g. "Athens" or "London".',
     isRegion: (q) => '"' + q + '" is a region or an island, not a city. Enter the city or town where you will run.',
     loading: 'Loading the forecast…',
-    netError: 'Could not reach the weather service. Check your connection and try again.',
+    netError: 'Could not reach the weather service, or it took too long to answer. Check your connection and try again.',
     geoUnsupported: 'Your browser does not support location.',
     geoDenied: 'Location access was not allowed. Search for your city instead.',
     myLocation: 'My location',
     noHours: 'No more hours left in the forecast for today. Pick another day.',
     perKm: '/km',
-    adjusted: 'adjusted pace',
+    adjusted: 'estimated pace',
     noPace: 'Enter your pace to see the adjusted one.',
-    seconds: (n) => (n < 1 ? 'less than 1 second' : n === 1 ? '1 second' : n + ' seconds'),
-    slower: (secs, base, pct) => 'About ' + secs + ' per km slower than the ' + base + ' /km you run in cool weather (' + pct + '% slower).',
-    slowerLabel: 'slower than your pace in cool weather',
+    seconds: (n) => (n < 5 ? 'less than 5 seconds' : 'about ' + n + ' seconds'),
+    pct: (est) => (est.upTo1 ? 'up to 1% slower' : 'about ' + est.pct + '% slower'),
+    pctBig: (est) => (est.upTo1 ? '≤ 1%' : '~' + est.pct + '%'),
+    slower: (secs, base, pct) => 'Estimated adjustment: ' + secs + ' per km slower than the ' + base + ' /km you run in cool weather (' + pct + '). A practical approximation, not an exact measurement.',
+    slowerLabel: 'estimated pace adjustment',
+    choose: (n) => n + ' places found with that name. Choose where you will run.',
     example: (base, adj) => 'For example, if you run ' + base + ' /km in cool weather, now it will be about ' + adj + ' /km. Enter your pace above to see yours.',
     why: (t, d) => 'Why: ' + t + '°C with a dew point of ' + d + '°C. The higher the temperature and humidity, the harder it is for sweat to evaporate and cool you, so the same effort gives a slower pace.',
     none: 'No adjustment needed: run your usual pace.',
@@ -58,23 +62,27 @@
     cellLabel: (day, h, t, d) => day + ' ' + h + ', ' + t + '°C, dew point ' + d + '°C'
   } : {
     searching: 'Αναζήτηση…',
+    tooShort: 'Γράψε τουλάχιστον 2 γράμματα της πόλης.',
     notFoundLatin: 'Δεν βρέθηκε πόλη με αυτό το όνομα. Έλεγξε την ορθογραφία ή γράψ’ τη στη γλώσσα της χώρας (π.χ. «München»).',
     notFoundGreek: 'Δεν βρέθηκε πόλη με αυτό το όνομα. Αν έγραψες περιοχή ή νησί, γράψε την πόλη ή το χωριό. Αν είναι πόλη του εξωτερικού, γράψ’ τη στα αγγλικά ή με λατινικούς χαρακτήρες (π.χ. «Milan», «Lisbon»).',
     notFoundOther: 'Δεν βρέθηκε πόλη με αυτό το όνομα. Γράψ’ τη στα αγγλικά ή με λατινικούς χαρακτήρες (π.χ. «Moscow», «Tokyo»).',
     isCountry: (q) => 'Το «' + q + '» είναι χώρα. Γράψε μια πόλη ή ένα χωριό, π.χ. «Αθήνα» ή «Λονδίνο».',
     isRegion: (q) => 'Το «' + q + '» είναι περιοχή ή νησί, όχι πόλη. Γράψε την πόλη ή το χωριό όπου θα τρέξεις.',
     loading: 'Φορτώνει η πρόγνωση…',
-    netError: 'Δεν ήταν δυνατή η σύνδεση με την υπηρεσία καιρού. Έλεγξε τη σύνδεσή σου και δοκίμασε ξανά.',
+    netError: 'Η υπηρεσία καιρού δεν απάντησε ή άργησε πολύ. Έλεγξε τη σύνδεσή σου και δοκίμασε ξανά.',
     geoUnsupported: 'Ο browser σου δεν υποστηρίζει τοποθεσία.',
     geoDenied: 'Δεν δόθηκε πρόσβαση στην τοποθεσία. Αναζήτησε την πόλη σου.',
     myLocation: 'Η θέση μου',
     noHours: 'Δεν έχουν μείνει άλλες ώρες για σήμερα. Διάλεξε άλλη μέρα.',
     perKm: '/χλμ.',
-    adjusted: 'προσαρμοσμένος ρυθμός',
+    adjusted: 'εκτιμώμενος ρυθμός',
     noPace: 'Βάλε τον ρυθμό σου για να δεις τον προσαρμοσμένο.',
-    seconds: (n) => (n < 1 ? 'λιγότερο από 1 δευτερόλεπτο' : n === 1 ? '1 δευτερόλεπτο' : n + ' δευτερόλεπτα'),
-    slower: (secs, base, pct) => 'Περίπου ' + secs + ' πιο αργά ανά χιλιόμετρο από τα ' + base + ' /χλμ. που τρέχεις με δροσιά (' + pct + '% πιο αργά).',
-    slowerLabel: 'πιο αργά από τον ρυθμό σου με δροσιά',
+    seconds: (n) => (n < 5 ? 'λιγότερο από 5 δευτερόλεπτα' : 'περίπου ' + n + ' δευτερόλεπτα'),
+    pct: (est) => (est.upTo1 ? 'έως 1% πιο αργά' : 'περίπου ' + est.pct + '% πιο αργά'),
+    pctBig: (est) => (est.upTo1 ? '≤ 1%' : '~' + est.pct + '%'),
+    slower: (secs, base, pct) => 'Εκτιμώμενη προσαρμογή, ' + secs + ' πιο αργά ανά χιλιόμετρο από τα ' + base + ' /χλμ. που τρέχεις με δροσιά (' + pct + '). Είναι πρακτική προσέγγιση, όχι ακριβής μέτρηση.',
+    slowerLabel: 'εκτιμώμενη προσαρμογή ρυθμού',
+    choose: (n) => 'Βρέθηκαν ' + n + ' μέρη με αυτό το όνομα. Διάλεξε σε ποιο θα τρέξεις.',
     example: (base, adj) => 'Π.χ. αν με δροσιά τρέχεις ' + base + ' /χλμ., τώρα θα βγει περίπου ' + adj + ' /χλμ. Βάλε τον ρυθμό σου πιο πάνω για να δεις τον δικό σου.',
     why: (t, d) => 'Γιατί: ' + t + '°C με σημείο δρόσου ' + d + '°C. Όσο ανεβαίνουν η θερμοκρασία και η υγρασία, τόσο πιο δύσκολα εξατμίζεται ο ιδρώτας και σε δροσίζει, οπότε με τον ίδιο κόπο τρέχεις πιο αργά.',
     none: 'Δεν χρειάζεται προσαρμογή: τρέξε στον κανονικό σου ρυθμό.',
@@ -105,7 +113,7 @@
   const $ = (id) => document.getElementById(id);
 
   /* ---------- Το μοντέλο: js/weather-model.js (κοινό με την κάρτα της αρχικής) ---------- */
-  const { heatSum, slowdownPct, levelOf } = window.DKWeatherModel;
+  const { heatSum, slowdownPct, levelOf, estimate, round5 } = window.DKWeatherModel;
 
   /* ---------- Βοηθητικά ---------- */
   function fmtPace(sec) {
@@ -136,10 +144,32 @@
   function save(patch) {
     try { localStorage.setItem(STORE_KEY, JSON.stringify(Object.assign(load(), patch))); } catch (e) { /* ιδιωτική περιήγηση κ.λπ. */ }
   }
-  function status(msg, isError) {
+  // Ένα μήνυμα που δεν φαίνεται είναι σαν να μην υπάρχει: η σελίδα κυλά ώστε να μπει στην
+  // οθόνη (στο κινητό η φόρμα πιάνει όλο το ύψος). isError: κόκκινο· loading: με σπινεράκι.
+  function reveal(node) {
+    const smooth = !matchMedia('(prefers-reduced-motion: reduce)').matches;
+    node.scrollIntoView({ block: 'nearest', behavior: smooth ? 'smooth' : 'auto' });
+  }
+  function status(msg, isError, loading) {
     const s = $('wpStatus');
     s.textContent = msg || '';
     s.classList.toggle('wp-error', !!isError);
+    s.classList.toggle('wp-loading', !!loading);
+    if (msg) reveal(s);
+  }
+
+  // fetch με όριο χρόνου: αν η υπηρεσία καιρού δεν απαντήσει, δείχνουμε σφάλμα αντί να περιμένει
+  // ο χρήστης χωρίς να ξέρει τι γίνεται
+  async function getJson(url) {
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), 12000);
+    try {
+      const res = await fetch(url, { signal: ctrl.signal });
+      if (!res.ok) throw new Error(res.status);
+      return await res.json();
+    } finally {
+      clearTimeout(timer);
+    }
   }
 
   /* ---------- Κατάσταση ---------- */
@@ -182,12 +212,9 @@
   // το αεροδρόμιο) και κρατάμε τη γλώσσα της σελίδας όπου υπάρχει.
   async function geocode(name) {
     const langs = EN ? ['en', 'el'] : ['el', 'en'];
-    const lists = await Promise.all(langs.map(async (lang) => {
-      const res = await fetch('https://geocoding-api.open-meteo.com/v1/search?count=10&format=json&language=' +
-        lang + '&name=' + encodeURIComponent(name));
-      if (!res.ok) throw new Error(res.status);
-      return (await res.json()).results || [];
-    }));
+    const lists = await Promise.all(langs.map(async (lang) =>
+      (await getJson('https://geocoding-api.open-meteo.com/v1/search?count=10&format=json&language=' +
+        lang + '&name=' + encodeURIComponent(name))).results || []));
     // Κρατάμε το όνομα και στις δύο γλώσσες: το νησί «Crete» στα ελληνικά λέγεται «Nísos Kríti»,
     // και η πόλη «Σιγκαπούρη» στα αγγλικά «Singapore»
     const byId = new Map();
@@ -244,13 +271,22 @@
   const isCountry = (r) => /^PCL/.test(r.feature_code || '');
   const isRegion = (r) => /^(ADM|ISL|RGN|AREA|PEN|PRSH)/.test(r.feature_code || '');
 
+  // Το κουμπί δείχνει ότι δουλεύει, και δεν πατιέται δεύτερη φορά στο μεταξύ
+  function busy(on) {
+    const b = $('wpSearchBtn');
+    b.disabled = on;
+    b.classList.toggle('is-loading', on);
+    b.setAttribute('aria-busy', on ? 'true' : 'false');
+  }
+
   async function search() {
     const q = $('wpQuery').value.trim();
-    if (q.length < 2) return;
+    if (q.length < 2) { status(T.tooShort, true); return; }
     const myRun = run;
     const list = $('wpPlaces');
     list.replaceChildren();
-    status(T.searching);
+    status(T.searching, false, true);
+    busy(true);
     try {
       const found = await findPlaces(q);
       if (myRun !== run) return;
@@ -263,7 +299,11 @@
       if (!bigTown && found.some((r) => sameName(r) && isRegion(r))) { status(T.isRegion(q), true); return; }
       const results = towns.slice(0, 6);
       if (!results.length) { status(notFoundMsg(q), true); return; }
+      const pick = (r) => choosePlace({ name: r.name + (r.country_code && r.country_code !== 'GR' ? ', ' + r.country : ''), lat: r.latitude, lon: r.longitude });
+      // Ένα μόνο μέρος: δεν ρωτάμε, φέρνουμε κατευθείαν την πρόγνωση
+      if (results.length === 1) { pick(results[0]); return; }
       status('');
+      list.append(el('p', 'wp-places-title', T.choose(results.length)));
       results.forEach((r) => {
         const detail = [r.admin1, r.country].filter(Boolean).join(', ');
         const b = el('button', 'wp-place');
@@ -271,18 +311,21 @@
         b.append(el('strong', null, r.name), el('span', null, detail));
         b.addEventListener('click', () => {
           list.replaceChildren();
-          choosePlace({ name: r.name + (r.country_code && r.country_code !== 'GR' ? ', ' + r.country : ''), lat: r.latitude, lon: r.longitude });
+          pick(r);
         });
         list.append(b);
       });
+      reveal(list);
     } catch (e) {
-      status(T.netError, true);
+      if (myRun === run) status(T.netError, true);
+    } finally {
+      busy(false);
     }
   }
 
   function useMyLocation() {
     if (!navigator.geolocation) { status(T.geoUnsupported, true); return; }
-    status(T.loading);
+    status(T.loading, false, true);
     const myRun = run;
     navigator.geolocation.getCurrentPosition(
       (pos) => myRun === run && choosePlace({
@@ -308,15 +351,13 @@
   /* ---------- Πρόγνωση ---------- */
   async function fetchForecast() {
     const myRun = run;
-    status(T.loading);
+    status(T.loading, false, true);
     $('wpOut').classList.add('calc-hidden');
     try {
       const url = 'https://api.open-meteo.com/v1/forecast?latitude=' + place.lat + '&longitude=' + place.lon +
         '&hourly=temperature_2m,dew_point_2m,relative_humidity_2m,apparent_temperature,wind_speed_10m,precipitation_probability' +
         '&timezone=auto&forecast_days=' + DAYS;
-      const res = await fetch(url);
-      if (!res.ok) throw new Error(res.status);
-      const data = await res.json();
+      const data = await getJson(url);
       if (myRun !== run) return;
       const h = data.hourly;
       // «Τώρα» στην ώρα του μέρους, όχι του browser
@@ -338,6 +379,7 @@
       renderGrid();
       renderResult();
       $('wpOut').classList.remove('calc-hidden');
+      reveal($('wpOut'));
     } catch (e) {
       if (myRun === run) status(T.netError, true);
     }
@@ -403,18 +445,20 @@
 
     // Το ποσοστό μόνο του («+1,3%») μπέρδευε: λέμε με λόγια πόσα δευτερόλεπτα ανά χιλιόμετρο
     // είναι, σε σύγκριση με ποιον ρυθμό, και γιατί (θερμοκρασία και σημείο δρόσου)
-    const slow = pct >= 0.25;
-    const pctTxt = pct.toLocaleString(LOCALE, { maximumFractionDigits: 1 });
+    // Πρακτική εκτίμηση: ποσοστό χωρίς δεκαδικά και ρυθμός στα 5 δευτερόλεπτα (δες weather-model.js)
+    const est = estimate(pct);
+    const slow = !est.none;
+    const extra = (base) => round5(base * pct / 100); // πόσα δευτερόλεπτα παραπάνω, στα 5
     const EXAMPLE = 300; // 5:00 /χλμ., για το παράδειγμα όταν δεν έχει μπει ρυθμός
     if (pace) {
-      const adj = pace * (1 + pct / 100);
-      $('wpPace').textContent = fmtPace(adj);
+      // Κάτω από 5 δευτερόλεπτα ο ρυθμός μένει ουσιαστικά ίδιος («≈ 6:00»), όπως λέει και το κείμενο
+      $('wpPace').textContent = !slow ? fmtPace(pace) : extra(pace) ? '~' + fmtPace(pace + extra(pace)) : '≈ ' + fmtPace(pace);
       $('wpPaceLabel').textContent = T.adjusted + ' ' + T.perKm;
-      $('wpDelta').textContent = slow ? T.slower(T.seconds(Math.round(adj - pace)), fmtPace(pace), pctTxt) : T.none;
+      $('wpDelta').textContent = slow ? T.slower(T.seconds(extra(pace)), fmtPace(pace), T.pct(est)) : T.none;
     } else {
-      $('wpPace').textContent = slow ? pctTxt + '%' : '0%';
+      $('wpPace').textContent = slow ? T.pctBig(est) : '0%';
       $('wpPaceLabel').textContent = slow ? T.slowerLabel : T.noPace;
-      $('wpDelta').textContent = slow ? T.example(fmtPace(EXAMPLE), fmtPace(EXAMPLE * (1 + pct / 100))) : T.none;
+      $('wpDelta').textContent = slow ? T.example(fmtPace(EXAMPLE), fmtPace(EXAMPLE + Math.max(5, extra(EXAMPLE)))) : T.none;
     }
     $('wpWhy').textContent = slow ? T.why(Math.round(x.t), Math.round(x.d)) : '';
 

@@ -33,9 +33,10 @@
         <div class="hw-stats" id="hwStats" hidden>
           <span class="wp-level" id="hwLevel"></span>
           <dl>
-            <div><dt>{% if en %}Your pace{% else %}Ο ρυθμός σου{% endif %}</dt><dd id="hwPace"></dd></div>
+            <div><dt>{% if en %}Estimated adjustment{% else %}Εκτιμώμενη προσαρμογή{% endif %}</dt><dd id="hwPace"></dd></div>
             <div><dt id="hwBestLabel">{% if en %}Coolest hour{% else %}Πιο δροσερή ώρα{% endif %}</dt><dd id="hwBest"></dd></div>
           </dl>
+          <p class="hw-note">{% if en %}A practical estimate from temperature and humidity, not an exact measurement.{% else %}Πρακτική εκτίμηση από θερμοκρασία και υγρασία, όχι ακριβής μέτρηση.{% endif %}</p>
         </div>
         <span class="b-more">{% if en %}Open the tool{% else %}Άνοιξε το εργαλείο{% endif %} →</span>
       </a>
