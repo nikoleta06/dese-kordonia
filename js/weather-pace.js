@@ -176,7 +176,7 @@
   let place = null;    // { name, lat, lon }
   let hours = [];      // [{ date, hour, t, d, rh, feels, wind, rain, sum, past }]
   let selected = null; // στοιχείο του hours
-  let run = 0;         // αυξάνεται με το «Καθαρισμός»: απαντήσεις που έρχονται αργότερα αγνοούνται
+  let run = 0;         // αυξάνεται με το «Καθαρισμός» και το «Αλλαγή»: απαντήσεις που έρχονται αργότερα αγνοούνται
 
   /* ---------- Ρυθμός ---------- */
   function paceSec() {
@@ -521,6 +521,13 @@
   $('wpQuery').addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); search(); } });
   $('wpGeoBtn').addEventListener('click', useMyLocation);
   $('wpChange').addEventListener('click', () => {
+    // Η παλιά πρόγνωση φεύγει: αλλιώς μια αποτυχημένη νέα αναζήτηση θα έδειχνε το σφάλμα πάνω από
+    // δεδομένα άλλης πόλης. Το run++ ακυρώνει και μια πρόγνωση που φορτώνει ακόμα.
+    run++;
+    hours = [];
+    selected = null;
+    $('wpOut').classList.add('calc-hidden');
+    status('');
     $('wpSearchBox').classList.remove('calc-hidden');
     $('wpPlaceBox').classList.add('calc-hidden');
     $('wpQuery').focus();
