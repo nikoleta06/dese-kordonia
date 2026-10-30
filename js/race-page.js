@@ -321,7 +321,8 @@
         : p === 21.0975 ? T.half + ' (' + short(p) + ')'
         : short(p);
       tr.append(el('td', null, name), el('td', null, fmtTime(pace * p)));
-      if (adj) tr.append(el('td', null, fmtTime(pace * adj * p)));
+      // Στο λεπτό, όπως και το κείμενο από πάνω: είναι εκτίμηση, όχι ακριβής πρόβλεψη
+      if (adj) tr.append(el('td', null, fmtTime(Math.round(pace * adj * p / 60) * 60)));
       tbody.append(tr);
     });
     table.append(thead, tbody);
