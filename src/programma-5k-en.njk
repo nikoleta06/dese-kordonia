@@ -44,20 +44,15 @@ activeNav: "programma-5k"
     </div>
 
     <div class="table-wrap">
-      <table class="plan-table">
+      <table class="plan-table" id="planTable">
         <caption>8-week plan · 3 workouts / week</caption>
         <thead>
           <tr><th>Week</th><th>Workout (after warm-up)</th></tr>
         </thead>
         <tbody>
-          <tr><td>Week 1</td><td>1' run / 2' walk, repeat ×7 (≈21')</td></tr>
-          <tr><td>Week 2</td><td>2' run / 2' walk, repeat ×6 (≈24')</td></tr>
-          <tr><td>Week 3</td><td>3' run / 2' walk, repeat ×5 (≈25')</td></tr>
-          <tr><td>Week 4</td><td>5' run / 2' walk, repeat ×4 (≈28')</td></tr>
-          <tr><td>Week 5</td><td>8' run / 2' walk, repeat ×3 (≈30')</td></tr>
-          <tr><td>Week 6</td><td>12' run / 1' walk, repeat ×2 (≈26')</td></tr>
-          <tr><td>Week 7</td><td>20' continuous run</td></tr>
-          <tr><td>Week 8</td><td>25–30' continuous run. You've reached 5K! 🎉</td></tr>
+          {%- for w in plan5k.weeks %}
+          <tr data-week="{{ loop.index }}"><td>Week {{ loop.index }}</td><td>{{ w.en }}{% if w.goal %}. {{ w.goal.en }}{% endif %}</td></tr>
+          {%- endfor %}
         </tbody>
       </table>
     </div>
@@ -166,4 +161,6 @@ activeNav: "programma-5k"
 
 {% block body_extra %}{% endblock %}
 
-{% block scripts_extra %}{% endblock %}
+{% block scripts_extra %}
+  <script src="js/plan-5k.js?v={{ "js/plan-5k.js" | assetHash }}" defer></script>
+{% endblock %}

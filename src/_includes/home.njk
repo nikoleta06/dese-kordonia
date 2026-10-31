@@ -21,6 +21,19 @@
   <main class="home">
     <div class="bento">
 
+      {#- Πού έμεινες στο πρόγραμμα 5K: κρυφή, το js/plan-5k.js τη δείχνει μόνο σε όποιον έχει ξεκινήσει #}
+      <a class="bento-card b-plan" href="programma-5k{{ sfx }}.html" id="homePlan" hidden>
+        <p class="b-kicker">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+          {% if en %}Your 5K plan{% else %}Το πρόγραμμά σου 5K{% endif %}
+        </p>
+        <h2 class="b-title"></h2>
+        <p class="b-text"></p>
+        <p class="plan-count"></p>
+        <span class="b-more"></span>
+        <template id="homePlanWeeks">{% for w in plan5k.weeks %}<span>{{ w[lang] }}</span>{% endfor %}</template>
+      </a>
+
       {#- Καιρός: χωρίς JavaScript μένει κάρτα που οδηγεί στο εργαλείο· το js/home.js τη γεμίζει
           με την πρόγνωση για την πόλη που έχει διαλέξει ο επισκέπτης (ή την Αθήνα). #}
       <a class="bento-card b-weather" href="kairos-rythmos{{ sfx }}.html" id="homeWeather">
