@@ -14,6 +14,7 @@
 | [0006](0006-blog-me-grafiko-ana-arthro.md) | Blog στο ύφος της αρχικής, με γραφικό ανά άρθρο | Αποδεκτή | 29/10/2026 |
 | [0007](0007-grafiko-stin-arxi-tou-arthrou.md) | Το γραφικό του άρθρου και στην αρχή του άρθρου | Αποδεκτή | 29/10/2026 |
 | [0008](0008-csp-xoris-unsafe-inline-sta-styles.md) | CSP χωρίς 'unsafe-inline' και στα styles | Αποδεκτή | 29/10/2026 |
+| [0009](0009-proodos-sto-programma-5k.md) | Πρόοδος στο πρόγραμμα 5K, αποθηκευμένη στον browser | Αποδεκτή | 31/10/2026 |
 
 ## Πρότυπο για νέο ADR
 

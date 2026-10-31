@@ -73,14 +73,18 @@
     seeHome: 'Δες το πρόγραμμα'
   };
 
+  // Αν ο browser δεν επιτρέπει αποθήκευση, τα τικ μένουν για όσο είναι ανοιχτή η σελίδα. Χωρίς αυτό
+  // το κουτάκι θα ξετσεκαριζόταν μόνο του αμέσως μετά το πάτημα.
+  let unsaved = null;
   function load() {
+    if (unsaved) return unsaved;
     try { return parse(localStorage.getItem(STORE_KEY)); } catch (e) { return []; }
   }
   function save(done) {
     try {
       if (done.length) localStorage.setItem(STORE_KEY, JSON.stringify(done));
       else localStorage.removeItem(STORE_KEY);
-    } catch (e) { /* ιδιωτική περιήγηση κ.λπ. */ }
+    } catch (e) { unsaved = done; }
   }
   function el(tag, cls, text) {
     const e = document.createElement(tag);

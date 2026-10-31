@@ -4495,6 +4495,10 @@ button.rc-cell:hover {
     display: block;
   }
 
+  .plan-table caption {
+    padding: 0.8rem 1rem 0;
+  }
+
   .plan-table thead {
     display: none;
   }
