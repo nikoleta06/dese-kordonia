@@ -32,12 +32,12 @@
     seconds: (n) => (n < 5 ? 'less than 5 seconds' : 'about ' + n + ' seconds'),
     pct: (est) => (est.upTo1 ? 'up to 1% slower' : 'about ' + est.pct + '% slower'),
     pctBig: (est) => (est.upTo1 ? '≤ 1%' : '~' + est.pct + '%'),
-    slower: (secs, base, pct) => 'Estimated adjustment: ' + secs + ' per km slower than the ' + base + ' /km you run in cool weather (' + pct + '). A practical approximation, not an exact measurement.',
+    slower: (secs, base, pct) => 'Estimated adjustment, ' + secs + ' per km slower than the ' + base + ' /km you run in cool weather (' + pct + '). A practical approximation, not an exact measurement.',
     slowerLabel: 'estimated pace adjustment',
     choose: (n) => n + ' places found with that name. Choose where you will run.',
     example: (base, adj) => 'For example, if you run ' + base + ' /km in cool weather, now it will be about ' + adj + ' /km. Enter your pace above to see yours.',
-    why: (t, d) => 'Why: ' + t + '°C with a dew point of ' + d + '°C. The higher the temperature and humidity, the harder it is for sweat to evaporate and cool you, so the same effort gives a slower pace.',
-    none: 'No adjustment needed: run your usual pace.',
+    why: (t, d) => 'Why? ' + t + '°C with a dew point of ' + d + '°C. The higher the temperature and humidity, the harder it is for sweat to evaporate and cool you, so the same effort gives a slower pace.',
+    none: 'No adjustment needed, run your usual pace.',
     temp: 'Temperature', feels: 'Feels like', dew: 'Dew point', hum: 'Humidity',
     wind: 'Wind', rain: 'Chance of rain',
     levels: {
@@ -53,10 +53,10 @@
       hard: 'Run by effort or heart rate, not by pace. Take water with you on runs over 45 minutes and look for shade.',
       bad: 'Keep it easy, or move your run to the early morning. Water and electrolytes are a must, and drop any hard session.',
       extreme: 'Not a day for running hard. If you go out, keep it short and easy, close to water and shade, or move indoors.',
-      rain: 'High chance of rain: a cap helps, and watch for slippery surfaces.',
-      wind: 'Strong wind: start into the wind so it is behind you on the way back.',
-      cold: 'Cold: dress in layers and start slightly faster than feels right, you will warm up within 10 minutes.',
-      drift: 'Why your heart rate climbs in the heat: cardiac drift →'
+      rain: 'High chance of rain, a cap helps, and watch for slippery surfaces.',
+      wind: 'Strong wind, start into the wind so it is behind you on the way back.',
+      cold: 'Cold, dress in layers and start slightly faster than feels right, you will warm up within 10 minutes.',
+      drift: 'Why your heart rate climbs in the heat, cardiac drift →'
     },
     best: 'coolest hour of the day',
     cellLabel: (day, h, t, d) => day + ' ' + h + ', ' + t + '°C, dew point ' + d + '°C'
@@ -84,8 +84,8 @@
     slowerLabel: 'εκτιμώμενη προσαρμογή ρυθμού',
     choose: (n) => 'Βρέθηκαν ' + n + ' μέρη με αυτό το όνομα. Διάλεξε σε ποιο θα τρέξεις.',
     example: (base, adj) => 'Π.χ. αν με δροσιά τρέχεις ' + base + ' /χλμ., τώρα θα βγει περίπου ' + adj + ' /χλμ. Βάλε τον ρυθμό σου πιο πάνω για να δεις τον δικό σου.',
-    why: (t, d) => 'Γιατί: ' + t + '°C με σημείο δρόσου ' + d + '°C. Όσο ανεβαίνουν η θερμοκρασία και η υγρασία, τόσο πιο δύσκολα εξατμίζεται ο ιδρώτας και σε δροσίζει, οπότε με τον ίδιο κόπο τρέχεις πιο αργά.',
-    none: 'Δεν χρειάζεται προσαρμογή: τρέξε στον κανονικό σου ρυθμό.',
+    why: (t, d) => 'Γιατί; ' + t + '°C με σημείο δρόσου ' + d + '°C. Όσο ανεβαίνουν η θερμοκρασία και η υγρασία, τόσο πιο δύσκολα εξατμίζεται ο ιδρώτας και σε δροσίζει, οπότε με τον ίδιο κόπο τρέχεις πιο αργά.',
+    none: 'Δεν χρειάζεται προσαρμογή, τρέξε στον κανονικό σου ρυθμό.',
     temp: 'Θερμοκρασία', feels: 'Αίσθηση', dew: 'Σημείο δρόσου', hum: 'Υγρασία',
     wind: 'Άνεμος', rain: 'Πιθανότητα βροχής',
     levels: {
@@ -101,10 +101,10 @@
       hard: 'Τρέξε με βάση την αίσθηση ή τους παλμούς, όχι τον ρυθμό. Πάρε νερό μαζί σου αν τρέξεις πάνω από 45 λεπτά και ψάξε σκιά.',
       bad: 'Κράτα το χαλαρό ή μετάφερέ το νωρίς το πρωί. Νερό και ηλεκτρολύτες είναι απαραίτητα, και άφησε τη δυνατή προπόνηση για άλλη μέρα.',
       extreme: 'Δεν είναι μέρα για δυνατό τρέξιμο. Αν βγεις, κράτα το σύντομο και χαλαρό, κοντά σε νερό και σκιά, ή τρέξε σε κλειστό χώρο.',
-      rain: 'Μεγάλη πιθανότητα βροχής: ένα καπέλο βοηθά, και πρόσεχε τις γλιστερές επιφάνειες.',
-      wind: 'Δυνατός άνεμος: ξεκίνα κόντρα στον αέρα, ώστε στην επιστροφή να σε σπρώχνει.',
-      cold: 'Κρύο: ντύσου σε στρώσεις και ξεκίνα με λίγο λιγότερα ρούχα απ’ όσα θέλεις, θα ζεσταθείς στα πρώτα 10 λεπτά.',
-      drift: 'Γιατί ανεβαίνουν οι παλμοί στη ζέστη: cardiac drift →'
+      rain: 'Μεγάλη πιθανότητα βροχής, ένα καπέλο βοηθά, και πρόσεχε τις γλιστερές επιφάνειες.',
+      wind: 'Δυνατός άνεμος, ξεκίνα κόντρα στον αέρα, ώστε στην επιστροφή να σε σπρώχνει.',
+      cold: 'Κρύο, ντύσου σε στρώσεις και ξεκίνα με λίγο λιγότερα ρούχα απ’ όσα θέλεις, θα ζεσταθείς στα πρώτα 10 λεπτά.',
+      drift: 'Γιατί ανεβαίνουν οι παλμοί στη ζέστη, cardiac drift →'
     },
     best: 'η πιο δροσερή ώρα της μέρας',
     cellLabel: (day, h, t, d) => day + ' ' + h + ', ' + t + '°C, σημείο δρόσου ' + d + '°C'

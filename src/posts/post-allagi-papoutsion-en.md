@@ -1,6 +1,6 @@
 ---
 title: "When to replace your running shoes | Δέσε Κορδόνια"
-description: "When to replace running shoes: the mileage rule by shoe type, the wear signs to watch for, and practical tips to make your shoes last longer."
+description: "When to replace running shoes, the mileage rule by shoe type, the wear signs to watch for, and practical tips to make your shoes last longer."
 heading: "When to replace your running shoes"
 summary: "The mileage rule, the wear signs and practical tips for when to replace your running shoes."
 cardTitle: "When to replace your running shoes"
@@ -30,9 +30,9 @@ headStyle: |
 <div class="tldr">
   <h4>📌 At a glance</h4>
   <ul>
-    <li>Daily trainers: <strong>500–800 km</strong></li>
-    <li>Racing shoes: <strong>300–500 km</strong></li>
-    <li>Carbon shoes: <strong>250–450 km</strong></li>
+    <li>Daily trainers, <strong>500–800 km</strong></li>
+    <li>Racing shoes, <strong>300–500 km</strong></li>
+    <li>Carbon shoes, <strong>250–450 km</strong></li>
     <li>If <strong>new aches</strong> appear, you may need to replace them sooner.</li>
   </ul>
 </div>
@@ -41,9 +41,9 @@ Running shoes are the only "gear" you really need, and the only one that **wears
 
 When shock absorption drops, your body takes more load with every step. That often shows up as little aches that "have no explanation". One of the most common questions runners ask is **how many kilometres before you replace running shoes**, so let's look at their lifespan and the wear signs that say it's really time for a new pair.
 
-### The general rule: mileage
+### The general rule, mileage
 
-The best-known guide is mileage. Most running shoes last around **500 to 800 kilometres** (≈300–500 miles). But it's not the same for all of them: it depends on the type and the midsole material:
+The best-known guide is mileage. Most running shoes last around **500 to 800 kilometres** (≈300–500 miles). But it's not the same for all of them, it depends on the type and the midsole material
 
 <div class="table-wrap">
   <table class="plan-table">
@@ -59,7 +59,7 @@ The best-known guide is mileage. Most running shoes last around **500 to 800 kil
   </table>
 </div>
 
-Keep in mind there's **no "magic" number** with solid scientific backing: the real lifespan varies a lot with your **weight**, how you land, the **surface** (road, trail, treadmill) and the midsole material. That's why tracking your own mileage is the most reliable approach.
+Keep in mind there's **no "magic" number** with solid scientific backing, the real lifespan varies a lot with your **weight**, how you land, the **surface** (road, trail, treadmill) and the midsole material. That's why tracking your own mileage is the most reliable approach.
 
 <figure class="shoe-compare">
   <div class="sc-labels">
@@ -70,7 +70,7 @@ Keep in mind there's **no "magic" number** with solid scientific backing: the re
     <picture>
       <source type="image/avif" srcset="images/papoutsia-compare.avif?v=2">
       <source type="image/webp" srcset="images/papoutsia-compare.webp?v=2">
-      <img src="images/papoutsia-compare.jpg?v=2" alt="Comparison of a new and a worn running shoe: side, sole and back view" loading="lazy" decoding="async" width="1536" height="1024">
+      <img src="images/papoutsia-compare.jpg?v=2" alt="Comparison of a new and a worn running shoe, side, sole and back view" loading="lazy" decoding="async" width="1536" height="1024">
     </picture>
   </a>
   <figcaption class="sc-notes">
@@ -83,7 +83,7 @@ Keep in mind there's **no "magic" number** with solid scientific backing: the re
 
 ### Going by time
 
-Mileage is always a more reliable indicator than time. But if you don't track it, you can use the guide below as a **rough estimate**, based on how much you run per week:
+Mileage is always a more reliable indicator than time. But if you don't track it, you can use the guide below as a **rough estimate**, based on how much you run per week
 
 <ul style="list-style:none; padding:0; margin:1rem 0;">
   <li style="margin-bottom:0.8rem; color:var(--text-dim);"><strong style="color:var(--text);">A few km/week</strong> (easy running) → every <strong>8–12 months</strong></li>
@@ -96,10 +96,10 @@ Even if you run very little, materials age over time (they oxidise), so a 4–5 
 
 ### The signs that say "it's time"
 
-Beyond numbers, your body and the shoe itself give you signals. Watch for these:
+Beyond numbers, your body and the shoe itself give you signals. Watch for these
 
 <ul style="list-style:none; padding:0; margin:1rem 0;">
-  <li style="margin-bottom:1rem; color:var(--text-dim);"><strong style="color:var(--text);">🔻 The midsole feels "dead".</strong><br>The ride feels harder, with less bounce. Press the sole with your thumb: if it's solid and doesn't give, the cushioning is gone.</li>
+  <li style="margin-bottom:1rem; color:var(--text-dim);"><strong style="color:var(--text);">🔻 The midsole feels "dead".</strong><br>The ride feels harder, with less bounce. Press the sole with your thumb, if it's solid and doesn't give, the cushioning is gone.</li>
   <li style="margin-bottom:1rem; color:var(--text-dim);"><strong style="color:var(--text);">🔻 Worn or uneven outsole.</strong><br>Smooth patches underneath, or one side much more chewed up than the other.</li>
   <li style="margin-bottom:1rem; color:var(--text-dim);"><strong style="color:var(--text);">🔻 New aches for no reason.</strong><br>Fresh soreness in feet, shins, knees, hips or back, often the first warning sign.</li>
   <li style="margin-bottom:1rem; color:var(--text-dim);"><strong style="color:var(--text);">🔻 Blisters or rubbing in new spots.</strong><br>If you start chafing where you never did, the shoe has lost its support.</li>
@@ -108,9 +108,9 @@ Beyond numbers, your body and the shoe itself give you signals. Watch for these:
 
 {% note %}💡 **Don't judge by the upper!** The fabric upper can look brand new while the midsole underneath is finished. The wear that matters is the wear you can't see.{% endnote %}
 
-### Tip: rotate between two pairs
+### Tip, rotate between two pairs
 
-One of the best tricks is **rotation**: running in two pairs alternately instead of one. A 2015 study of runners found that those who rotated shoes had **up to 39% lower injury risk**. Why? Each shoe loads your muscles and tendons a little differently, so it doesn't always hammer the same spots. Plus the midsole gets time to recover between runs, and the shoes last longer.
+One of the best tricks is **rotation**, running in two pairs alternately instead of one. A 2015 study of runners found that those who rotated shoes had **up to 39% lower injury risk**. Why? Each shoe loads your muscles and tendons a little differently, so it doesn't always hammer the same spots. Plus the midsole gets time to recover between runs, and the shoes last longer.
 
 <div class="note">
   💡 <strong>Why it works</strong>
@@ -127,17 +127,17 @@ One of the best tricks is **rotation**: running in two pairs alternately instead
 <ul style="list-style:none; padding:0; margin:1rem 0;">
   <li style="margin-bottom:0.8rem; color:var(--text-dim);"><strong style="color:var(--text);">✅ Note the date</strong> you started them, with a marker inside the tongue.</li>
   <li style="margin-bottom:0.8rem; color:var(--text-dim);"><strong style="color:var(--text);">✅ Log the kilometres</strong> in an app (e.g. Strava, which has a "shoes" tab).</li>
-  <li style="margin-bottom:0.8rem; color:var(--text-dim);"><strong style="color:var(--text);">✅ Keep them for running only</strong>: don't wear them for everyday walking, they wear faster.</li>
-  <li style="margin-bottom:0.8rem; color:var(--text-dim);"><strong style="color:var(--text);">✅ Don't bin them right away:</strong> once "retired" from running, they're still great for walks.</li>
+  <li style="margin-bottom:0.8rem; color:var(--text-dim);"><strong style="color:var(--text);">✅ Keep them for running only</strong>, don't wear them for everyday walking, they wear faster.</li>
+  <li style="margin-bottom:0.8rem; color:var(--text-dim);"><strong style="color:var(--text);">✅ Don't bin them right away,</strong> once "retired" from running, they're still great for walks.</li>
 </ul>
 
-{% note %}**If it hurts:** pain that doesn't ease after a few days of rest needs a doctor or physiotherapist, not new shoes. What I write here comes from my own experience and reliable sources.{% endnote %}
+{% note %}**If it hurts,** pain that doesn't ease after a few days of rest needs a doctor or physiotherapist, not new shoes. What I write here comes from my own experience and reliable sources.{% endnote %}
 
 ### Can I keep running in old shoes?
 
 If a shoe has passed the recommended mileage but still feels comfortable, you can usually keep it for **easy runs or walking**. But if **new aches** appear or you notice a clear **loss of shock absorption**, it's better to replace it. Saving money on old shoes often costs you in injuries.
 
-In the end, the rule is simple: listen to your body. If running started to "hurt" differently and the kilometres have added up, it's probably time. New laces, fresh start.
+In the end, the rule is simple, listen to your body. If running started to "hurt" differently and the kilometres have added up, it's probably time. New laces, fresh start.
 
 {% sources %}
 1. Malisoux, L., Ramesh, J., Mann, R., Seil, R., Urhausen, A., & Theisen, D. (2015). <cite>Can parallel use of different running shoes decrease running-related injury risk?</cite> Scandinavian Journal of Medicine & Science in Sports, 25(1), 110–115. <a href="https://onlinelibrary.wiley.com/doi/10.1111/sms.12154" target="_blank" rel="noopener">Wiley →</a>

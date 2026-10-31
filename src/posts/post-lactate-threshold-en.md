@@ -56,17 +56,17 @@ headStyle: |
 
 ---
 
-There's a pace a trained runner can hold for about an hour. Go a little faster and within minutes your legs get heavy and your breathing runs away from you. The line between the two has a name: **lactate threshold**, or simply threshold.
+There's a pace a trained runner can hold for about an hour. Go a little faster and within minutes your legs get heavy and your breathing runs away from you. The line between the two has a name, **lactate threshold**, or simply threshold.
 
 <!-- YOUR OWN LINE: Your first tempo run. How it felt, or how hard it was to find the right
      pace. -->
 
-### First: what is lactate?
+### First, what is lactate?
 
 When you run, your muscles produce energy. At low intensity, the body manages easily. But as the intensity rises, **lactate** is produced as a by-product. At low paces, the body keeps "clearing" it. There comes a point, though, where lactate starts to accumulate faster than it can be removed.
 
 <figure class="ig">
-  <p class="ig-title">How the threshold works: lactate production vs clearance</p>
+  <p class="ig-title">How the threshold works, lactate production vs clearance</p>
   <div class="ig-bal">
     <div class="ig-bal-row" style="border-left-color:#2ecc71;">
       <div class="ig-bal-head"><strong>Low intensity</strong><span class="ig-verdict" style="background-color:rgba(46,204,113,0.18);color:#2ecc71;">Balanced · run for hours</span></div>
@@ -89,12 +89,12 @@ When you run, your muscles produce energy. At low intensity, the body manages ea
 
 ### The threshold
 
-That exact point is the **lactate threshold**: the maximum intensity you can sustain for a long time without "drowning" in lactate. Just below it, you can run for a long time. Just above it, fatigue comes quickly.
+That exact point is the **lactate threshold**, the maximum intensity you can sustain for a long time without "drowning" in lactate. Just below it, you can run for a long time. Just above it, fatigue comes quickly.
 
-{% note %}💡 **In practice:** The threshold is roughly the pace you could hold in a 1-hour race. A "comfortably hard" pace.{% endnote %}
+{% note %}💡 **In practice.** The threshold is roughly the pace you could hold in a 1-hour race. A "comfortably hard" pace.{% endnote %}
 
 <figure class="ig">
-  <p class="ig-title">The "Talk Test": read your intensity from your speech</p>
+  <p class="ig-title">The "Talk Test", read your intensity from your speech</p>
   <div class="ig-talk">
     <div class="ig-card">
       <span class="ig-ic" style="color:#2ecc71;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg></span>
@@ -115,7 +115,7 @@ That exact point is the **lactate threshold**: the maximum intensity you can sus
       <span>Can't talk at all</span>
     </div>
   </div>
-  <figcaption class="ig-caption">No watch needed: at <strong>threshold</strong> you can say a few words, not a full conversation.</figcaption>
+  <figcaption class="ig-caption">No watch needed, at <strong>threshold</strong> you can say a few words, not a full conversation.</figcaption>
 </figure>
 
 ### Why does it matter?
@@ -142,18 +142,18 @@ The higher your threshold, the **faster** you can run before tiring. Two runners
       <span class="ig-stat" style="opacity:0.8;">≈ 1 hour</span>
     </div>
   </div>
-  <figcaption class="ig-caption">Same "engine", but <strong>Runner B</strong> holds a faster pace for an hour: thanks to a higher threshold.</figcaption>
+  <figcaption class="ig-caption">Same "engine", but <strong>Runner B</strong> holds a faster pace for an hour, thanks to a higher threshold.</figcaption>
 </figure>
 
 ### Why do top runners care so much about the threshold?
 
-The reason athletes like [Jakob Ingebrigtsen](post-ingebrigtsen-en.html) and [Eliud Kipchoge](post-kipchoge-en.html) can run so fast for so long isn't only their large VO₂ max. It's also their ability to sustain high speed without fatigue building up quickly. In simple terms: they've pushed their threshold very high.
+The reason athletes like [Jakob Ingebrigtsen](post-ingebrigtsen-en.html) and [Eliud Kipchoge](post-kipchoge-en.html) can run so fast for so long isn't only their large VO₂ max. It's also their ability to sustain high speed without fatigue building up quickly. In simple terms, they've pushed their threshold very high.
 
 {% note %}📌 **Did you know?** An amateur runner is at their threshold at roughly [80–90% of their maximum heart rate](post-zones-palmon-en.html), while elite athletes can sustain very high intensity for a much longer time.{% endnote %}
 
 ### How do you improve it?
 
-With **tempo (threshold) workouts**: running at that "comfortably hard" intensity for 20–40 minutes (continuously or in intervals). Over time, the body learns to manage lactate better, and the threshold rises.
+With **tempo (threshold) workouts**, running at that "comfortably hard" intensity for 20–40 minutes (continuously or in intervals). Over time, the body learns to manage lactate better, and the threshold rises.
 
 <figure class="ig">
   <div class="ig-flow">
@@ -168,7 +168,7 @@ With **tempo (threshold) workouts**: running at that "comfortably hard" intensit
   <figcaption class="ig-caption"><strong>Tempo</strong> workouts push your threshold higher, and that's where the biggest endurance gains hide.</figcaption>
 </figure>
 
-Be careful though: the threshold is only one piece. You also need easy days for your base: remember the 80/20 rule. Balance is the secret.
+Be careful though, the threshold is only one piece. You also need easy days for your base, remember the 80/20 rule. Balance is the secret.
 
 You don't need a lab to improve. You need consistency, patience and a few targeted tempo workouts. Your body takes care of the rest.
 

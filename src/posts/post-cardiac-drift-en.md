@@ -1,9 +1,9 @@
 ---
-title: "Cardiac drift: why your heart rate climbs while your pace stays the same | Δέσε Κορδόνια"
-description: "What cardiac drift (cardiovascular drift) is: why your heart rate slowly climbs while you run at exactly the same pace, how heat and dehydration make it bigger, and what it means for heart-rate zone training."
-heading: "Cardiac drift: why your heart rate climbs while your pace stays the same"
+title: "Cardiac drift, why your heart rate climbs while your pace stays the same | Δέσε Κορδόνια"
+description: "What cardiac drift (cardiovascular drift) is, why your heart rate slowly climbs while you run at exactly the same pace, how heat and dehydration make it bigger, and what it means for heart-rate zone training."
+heading: "Cardiac drift, why your heart rate climbs while your pace stays the same"
 summary: "Why your heart rate rises in the second half of a long run while your pace stays flat, and what it means for your heart-rate zones."
-cardTitle: "Cardiac drift: why your heart rate climbs"
+cardTitle: "Cardiac drift, why your heart rate climbs"
 cardText: "Why your heart rate rises in the second half of a long run while your pace stays flat, and what it means for your zones."
 cat: science
 published: "2026-07-21"
@@ -63,7 +63,7 @@ headStyle: |
 
 ---
 
-You're fifty minutes into a long, easy run. Your pace is **exactly the same** as it was in minute ten: 5:45 per kilometre. Your breathing is calm. And yet your watch says 162 beats per minute, when it said 145 at the start.
+You're fifty minutes into a long, easy run. Your pace is **exactly the same** as it was in minute ten, 5:45 per kilometre. Your breathing is calm. And yet your watch says 162 beats per minute, when it said 145 at the start.
 
 Your sensor isn't broken and you haven't lost your fitness in half an hour. What you're seeing is called **cardiac drift** (cardiovascular drift).
 
@@ -73,11 +73,11 @@ It's the **gradual rise in heart rate** during prolonged exercise at a constant,
 
 The key point is that it isn't just one number moving. Alongside the rise in heart rate, **stroke volume** (the amount of blood your heart pushes out with each beat) **falls**. The two go together, like two sides of the same coin.
 
-How big is the rise? On an hour-long easy run you may see your heart rate climb by **quite a few beats**, without your pace having changed at all. There is no single "normal" number that fits everyone: the size of the drift depends on the heat, the humidity, your hydration, the intensity and your heat acclimation.
+How big is the rise? On an hour-long easy run you may see your heart rate climb by **quite a few beats**, without your pace having changed at all. There is no single "normal" number that fits everyone, the size of the drift depends on the heat, the humidity, your hydration, the intensity and your heat acclimation.
 
 <figure class="ig">
   <p class="ig-title">A long run at 5:45 per kilometre</p>
-  <svg class="ig-chart" viewBox="0 0 560 300" role="img" aria-label="Chart: over 60 minutes of running the pace stays flat at 5:45 per kilometre while heart rate climbs steadily from 145 to 162 beats per minute.">
+  <svg class="ig-chart" viewBox="0 0 560 300" role="img" aria-label="Chart, over 60 minutes of running the pace stays flat at 5:45 per kilometre while heart rate climbs steadily from 145 to 162 beats per minute.">
     <!-- Legend -->
     <line class="l-hr" x1="60" y1="18" x2="86" y2="18"/>
     <text class="lbl lbl-hr" x="94" y="22">Heart rate</text>
@@ -121,18 +121,18 @@ How big is the rise? On an hour-long easy run you may see your heart rate climb 
 
 As you run, you produce heat. To avoid overheating, your body sends **more blood to the skin** and you sweat.
 
-But sweating comes at a cost: along with the water, you lose **plasma volume**, some of the liquid part of your blood.
+But sweating comes at a cost, along with the water, you lose **plasma volume**, some of the liquid part of your blood.
 
-The result: less blood returns to the heart, so it fills less and pushes out less blood with every beat. To offset part of that drop and keep supplying your muscles, the heart **raises the frequency of its beats**.
+The result, less blood returns to the heart, so it fills less and pushes out less blood with every beat. To offset part of that drop and keep supplying your muscles, the heart **raises the frequency of its beats**.
 
-There's also a detail that often gets left out. Coyle and González-Alonso argued that the relationship isn't one-way: the rise in heart rate itself leaves the heart **less time to fill** between beats, which pushes stroke volume down even further. The two mechanisms feed each other.
+There's also a detail that often gets left out. Coyle and González-Alonso argued that the relationship isn't one-way, the rise in heart rate itself leaves the heart **less time to fill** between beats, which pushes stroke volume down even further. The two mechanisms feed each other.
 
 <figure class="ig">
   <p class="ig-title">The cardiac-drift chain</p>
   <div class="ig-flow">
-    <div class="ig-step"><span class="ig-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4v10.54a4 4 0 1 1-4 0V4a2 2 0 0 1 4 0Z"/></svg></span><div><strong>Your temperature rises</strong><span>Running produces heat: the body has to get rid of it</span></div></div>
+    <div class="ig-step"><span class="ig-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4v10.54a4 4 0 1 1-4 0V4a2 2 0 0 1 4 0Z"/></svg></span><div><strong>Your temperature rises</strong><span>Running produces heat, the body has to get rid of it</span></div></div>
     <div class="ig-conn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></div>
-    <div class="ig-step"><span class="ig-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"/></svg></span><div><strong>You sweat: plasma volume drops</strong><span>And more blood is directed towards the skin</span></div></div>
+    <div class="ig-step"><span class="ig-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"/></svg></span><div><strong>You sweat, plasma volume drops</strong><span>And more blood is directed towards the skin</span></div></div>
     <div class="ig-conn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></div>
     <div class="ig-step"><span class="ig-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 17V3"/><path d="m6 11 6 6 6-6"/><path d="M19 21H5"/></svg></span><div><strong>Stroke volume falls</strong><span>Less blood with every beat of the heart</span></div></div>
     <div class="ig-conn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></div>
@@ -150,31 +150,31 @@ If you've mostly noticed this in July and not in January, it isn't your imaginat
   <div class="ig-vs">
     <div class="ig-card ig-good">
       <span class="ig-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m10 20-1.25-2.5L6 18"/><path d="M10 4 8.75 6.5 6 6"/><path d="m14 20 1.25-2.5L18 18"/><path d="m14 4 1.25 2.5L18 6"/><path d="m17 21-3-6h-4"/><path d="m17 3-3 6 1.5 3"/><path d="M2 12h6.5L10 9"/><path d="m20 10-1.5 2 1.5 2"/><path d="M22 12h-6.5L14 15"/><path d="m4 10 1.5 2L4 14"/><path d="m7 21 3-6-1.5-3"/><path d="M7 3l3 6h4"/></svg></span>
-      <strong>Cool conditions: 22°C</strong>
+      <strong>Cool conditions, 22°C</strong>
       <span class="ig-stat">Heart rate <b>+2%</b> · stroke volume <b>−2%</b></span>
       <span class="ig-stat">No significant change in VO₂max</span>
     </div>
     <div class="ig-card">
       <span class="ig-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg></span>
-      <strong>Heat: 35°C</strong>
+      <strong>Heat, 35°C</strong>
       <span class="ig-stat">Heart rate <b>+11%</b> · stroke volume <b>−11%</b></span>
       <span class="ig-stat">VO₂max <b>−15%</b></span>
     </div>
   </div>
-  <figcaption class="ig-caption">The same run, two different summers: <strong>temperature changes the picture</strong>.</figcaption>
+  <figcaption class="ig-caption">The same run, two different summers, <strong>temperature changes the picture</strong>.</figcaption>
 </figure>
 
-The most interesting part isn't the heart rate. It's that last number: when the researchers measured [VO₂max](post-vo2max-en.html) immediately afterwards, they found it had **dropped** in the heat. In other words, after 45 minutes of running in the sun, your ceiling at that moment is lower than it was at the start.
+The most interesting part isn't the heart rate. It's that last number, when the researchers measured [VO₂max](post-vo2max-en.html) immediately afterwards, they found it had **dropped** in the heat. In other words, after 45 minutes of running in the sun, your ceiling at that moment is lower than it was at the start.
 
-And here is the practical conclusion that matters for you: if the ceiling comes down while your pace stays the same, then the same run has become a **larger percentage of your current capacity**. Your heart rate isn't lying to you: it's showing you that the same speed now costs you more. A run that started out genuinely easy can gradually become more demanding and pull you out of the relative intensity you originally chose, without you ever pressing the accelerator.
+And here is the practical conclusion that matters for you, if the ceiling comes down while your pace stays the same, then the same run has become a **larger percentage of your current capacity**. Your heart rate isn't lying to you, it's showing you that the same speed now costs you more. A run that started out genuinely easy can gradually become more demanding and pull you out of the relative intensity you originally chose, without you ever pressing the accelerator.
 
-{% note %}📌 **Did you know?** Dehydration isn't the only culprit. Montain and Coyle (1992) showed that the greater the fluid loss, the greater the rise in heart rate, so drinking does help. But in a study of 45 minutes of exercise at 35°C, fluid intake **did not eliminate** the drift: you reduce it, you don't cancel it.{% endnote %}
+{% note %}📌 **Did you know?** Dehydration isn't the only culprit. Montain and Coyle (1992) showed that the greater the fluid loss, the greater the rise in heart rate, so drinking does help. But in a study of 45 minutes of exercise at 35°C, fluid intake **did not eliminate** the drift, you reduce it, you don't cancel it.{% endnote %}
 
 ### What it means for your training
 
-First, the most important thing: **cardiac drift is not a sign of poor fitness**. It happens to everyone: beginners and elites alike. You don't need to "fix" it. It's enough to know it happens.
+First, the most important thing, **cardiac drift is not a sign of poor fitness**. It happens to everyone, beginners and elites alike. You don't need to "fix" it. It's enough to know it happens.
 
-It does have one very specific consequence, though: **the average heart rate of a long run is not a reliable basis for comparison**. If in the second half of an easy run you drift into [Zone 3](post-zones-palmon-en.html), even though your pace is unchanged and the effort still feels controlled, you're most likely looking at drift, not necessarily a mistake in your training.
+It does have one very specific consequence, though, **the average heart rate of a long run is not a reliable basis for comparison**. If in the second half of an easy run you drift into [Zone 3](post-zones-palmon-en.html), even though your pace is unchanged and the effort still feels controlled, you're most likely looking at drift, not necessarily a mistake in your training.
 
 The cleanest way to compare yourself with yourself is to look at a **consistent segment after the initial warm-up** (say from minute 10 to minute 20) at a similar pace, on a similar route and in similar weather. If after a few weeks your heart rate is lower in that same segment at the same pace, that can be a sign of improvement.
 
@@ -184,26 +184,26 @@ If you want something more specific, platforms like TrainingPeaks and Intervals.
      screenshot from your watch or app), or one sentence with your numbers. E.g. "Last July,
      on a 15K at ___, my heart rate climbed from ___ to ___." -->
 
-And a dose of realism for the summer months: if in July you're running with 10 beats more at the same pace than you were in March, you haven't lost your fitness. You're simply running in harder conditions.
+And a dose of realism for the summer months, if in July you're running with 10 beats more at the same pace than you were in March, you haven't lost your fitness. You're simply running in harder conditions.
 
 ### How to limit it
 
 <figure class="ig">
   <p class="ig-title">What actually helps</p>
   <div class="ig-methods">
-    <div class="ig-card"><span class="ig-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"/></svg></span><strong>Fluids</strong><span>Start hydrated and drink on long runs: fluid loss makes the drift bigger</span></div>
-    <div class="ig-card"><span class="ig-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><strong>Time &amp; route</strong><span>Early morning or late evening, with shade: temperature matters more than anything</span></div>
+    <div class="ig-card"><span class="ig-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"/></svg></span><strong>Fluids</strong><span>Start hydrated and drink on long runs, fluid loss makes the drift bigger</span></div>
+    <div class="ig-card"><span class="ig-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><strong>Time &amp; route</strong><span>Early morning or late evening, with shade, temperature matters more than anything</span></div>
     <div class="ig-card"><span class="ig-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h4l3-9 4 18 3-9h4"/></svg></span><strong>Heat acclimation</strong><span>After a few weeks of consistent running in the heat, the body adapts</span></div>
   </div>
-  <figcaption class="ig-caption">None of the three makes the drift disappear: <strong>they make it smaller</strong>.</figcaption>
+  <figcaption class="ig-caption">None of the three makes the drift disappear, <strong>they make it smaller</strong>.</figcaption>
 </figure>
 
-{% note %}💡 **Practical rule:** a gradual rise in heart rate on a long run in the heat is expected. A sudden spike together with dizziness, chills, nausea or stopping sweating **is not**: that's when you stop, cool down and drink.{% endnote %}
+{% note %}💡 **Practical rule,** a gradual rise in heart rate on a long run in the heat is expected. A sudden spike together with dizziness, chills, nausea or stopping sweating **is not**, that's when you stop, cool down and drink.{% endnote %}
 
 <div class="recap">
   <h4><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>3 things to remember</h4>
   <ul>
-    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Heart rate <strong>up</strong>, pace flat: that's normal.</li>
+    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Heart rate <strong>up</strong>, pace flat, that's normal.</li>
     <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><strong>Heat</strong> and fluid loss make it bigger.</li>
     <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Compare the same <strong>steady segment</strong>, not just the average.</li>
   </ul>

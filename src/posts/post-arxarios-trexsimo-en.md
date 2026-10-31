@@ -15,7 +15,7 @@ The hardest part of running is simply getting started. If you're thinking of hea
 
 ### 1. Start slower than you think
 
-The number one reason beginners quit is that they start too fast. Try the ["talk test"](post-easy-running-en.html): if you can talk while running, your pace is right. Speed comes on its own with time.
+The number one reason beginners quit is that they start too fast. Try the ["talk test"](post-easy-running-en.html), if you can talk while running, your pace is right. Speed comes on its own with time.
 
 ### 2. Combine running and walking
 
@@ -37,7 +37,7 @@ Your first kilometre without stopping. Your first week with three runs. Every sm
 
 On social media you'll see people running 10 or 20 kilometres. But don't forget that you're seeing **chapter 20** of their story, while you're still on the first one. Compare yourself only to who you were yesterday.
 
-{% note %}💡 **Calculate your pace:** Once you do your first run, try the [Pace Calculator](calculator-en.html) to see where you stand and set your next goal.{% endnote %}
+{% note %}💡 **Calculate your pace.** Once you do your first run, try the [Pace Calculator](calculator-en.html) to see where you stand and set your next goal.{% endnote %}
 
 Every runner you admire once gasped for breath after just a few minutes. Once doubted themselves. Once thought about quitting. The only thing that set them apart was that they **kept going**.
 

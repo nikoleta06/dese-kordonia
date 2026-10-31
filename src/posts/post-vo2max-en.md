@@ -1,5 +1,5 @@
 ---
-title: "What is VO₂max and how to improve it: a runner's guide | Δέσε Κορδόνια"
+title: "What is VO₂max and how to improve it, a runner's guide | Δέσε Κορδόνια"
 description: "What VO₂max is, why it's the 'engine' of your endurance, and how you can improve it with training, explained simply."
 heading: "What is VO₂max and how to improve it"
 summary: "The engine of your endurance, explained simply, and how to improve it."
@@ -37,9 +37,9 @@ VO₂max is the **maximum amount of oxygen** your body can use in one minute of 
 
 ### What it depends on
 
-Mainly three things: how much blood your **heart** sends with each beat, how efficiently your **blood** carries oxygen, and how well your **muscles** use it. Genetics play a role too, but the good news is that VO₂max **improves with training**. It declines gradually with age, but consistent aerobic training slows that decline considerably.
+Mainly three things, how much blood your **heart** sends with each beat, how efficiently your **blood** carries oxygen, and how well your **muscles** use it. Genetics play a role too, but the good news is that VO₂max **improves with training**. It declines gradually with age, but consistent aerobic training slows that decline considerably.
 
-{% note %}💡 **For scale:** An average adult has a VO₂max of about 30–45, a fit amateur 50+, while top endurance athletes reach over 80 (ml/kg/min). Don't compare yourself to the elite: watch your own progress.{% endnote %}
+{% note %}💡 **For scale.** An average adult has a VO₂max of about 30–45, a fit amateur 50+, while top endurance athletes reach over 80 (ml/kg/min). Don't compare yourself to the elite, watch your own progress.{% endnote %}
 
 <div class="table-wrap">
   <table class="plan-table">
@@ -65,14 +65,14 @@ Mainly three things: how much blood your **heart** sends with each beat, how eff
     <div class="ig-seg" style="background-color:#9b59b6;"><b>60</b><small>Excellent</small></div>
     <div class="ig-seg" style="background-color:#e6a817;"><b>70+</b><small>Elite</small></div>
   </div>
-  <figcaption class="ig-caption">A rough VO₂max scale (ml/kg/min): focus mostly on <strong>your own</strong> progress.</figcaption>
+  <figcaption class="ig-caption">A rough VO₂max scale (ml/kg/min), focus mostly on <strong>your own</strong> progress.</figcaption>
 </figure>
 
 ### How to improve it
 
-The most effective way is **interval training** at high intensity: e.g. repeats of 3–5 minutes near your maximum pace, with rest in between. These push your cardiovascular system to grow stronger.
+The most effective way is **interval training** at high intensity, e.g. repeats of 3–5 minutes near your maximum pace, with rest in between. These push your cardiovascular system to grow stronger.
 
-But be careful: it isn't built with hard days alone. You also need the [aerobic base](post-easy-running-en.html) from easy runs, along with a good [lactate threshold](post-lactate-threshold-en.html). It all ties together.
+But be careful, it isn't built with hard days alone. You also need the [aerobic base](post-easy-running-en.html) from easy runs, along with a good [lactate threshold](post-lactate-threshold-en.html). It all ties together.
 
 <figure class="ig">
   <div class="ig-pyramid">
@@ -80,12 +80,12 @@ But be careful: it isn't built with hard days alone. You also need the [aerobic 
     <div class="ig-tier" style="width:70%; background-color:#ff9800;">Tempo / Threshold<small>moderate intensity</small></div>
     <div class="ig-tier" style="width:100%; background-color:#2ecc71;">Easy running<small>aerobic base · 80% of training</small></div>
   </div>
-  <figcaption class="ig-caption">Build a big <strong>base</strong> of easy miles: a little targeted intensity at the top.</figcaption>
+  <figcaption class="ig-caption">Build a big <strong>base</strong> of easy miles, a little targeted intensity at the top.</figcaption>
 </figure>
 
 <div class="note ig-myth">
-  <span class="ig-myth-l">❌ <strong>Myth:</strong> If my VO₂max is low, I can't become a good runner.</span>
-  <span class="ig-myth-l">✅ <strong>Truth:</strong> VO₂max is only one factor. Your lactate threshold, running economy and proper training matter just as much.</span>
+  <span class="ig-myth-l">❌ <strong>Myth.</strong> If my VO₂max is low, I can't become a good runner.</span>
+  <span class="ig-myth-l">✅ <strong>Truth.</strong> VO₂max is only one factor. Your lactate threshold, running economy and proper training matter just as much.</span>
 </div>
 
 <figure class="ig">
@@ -93,7 +93,7 @@ But be careful: it isn't built with hard days alone. You also need the [aerobic 
     <div class="ig-card ig-est"><span class="ig-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="6"/><path d="M12 10v2l1 1"/><path d="m16.13 7.66-.81-4.05a2 2 0 0 0-2-1.61h-2.68a2 2 0 0 0-2 1.61l-.78 4.05"/><path d="m7.88 16.36.8 4a2 2 0 0 0 2 1.61h2.72a2 2 0 0 0 2-1.61l.81-4.05"/></svg></span><strong>Your watch</strong><span>Estimate (from heart rate &amp; pace)</span><span class="ig-res ig-res-est">≈ Estimated VO₂max</span></div>
     <div class="ig-card"><span class="ig-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 2v7.31"/><path d="M14 9.3V1.99"/><path d="M8.5 2h7"/><path d="M14 9.3a6.5 6.5 0 1 1-4 0"/><path d="M5.52 16h12.96"/></svg></span><strong>Lab test</strong><span>Direct measurement</span><span class="ig-res ig-res-real">✓ Real VO₂max</span></div>
   </div>
-  <figcaption class="ig-caption">A watch doesn't <strong>measure</strong> VO₂max: it <strong>estimates</strong> it. Useful for the trend, not for an exact number.</figcaption>
+  <figcaption class="ig-caption">A watch doesn't <strong>measure</strong> VO₂max, it <strong>estimates</strong> it. Useful for the trend, not for an exact number.</figcaption>
 </figure>
 
 Don't fixate on the number. VO₂max is a tool, not the goal. The real aim is to run, improve and enjoy it.

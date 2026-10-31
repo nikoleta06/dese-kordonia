@@ -1,6 +1,6 @@
 ---
 title: "7 running lessons from Jakob Ingebrigtsen | Δέσε Κορδόνια"
-description: "What Olympic champion Jakob Ingebrigtsen teaches runners who want to improve: 7 lessons on consistency, patience and trusting the process."
+description: "What Olympic champion Jakob Ingebrigtsen teaches runners who want to improve, 7 lessons on consistency, patience and trusting the process."
 heading: "7 running lessons from Jakob Ingebrigtsen"
 summary: "7 lessons on consistency, patience and trusting the process."
 cardTitle: "7 lessons from Jakob Ingebrigtsen"
@@ -11,7 +11,7 @@ updated: "2026-06-18"
 readMinutes: 5
 ---
 
-When you watch **Jakob Ingebrigtsen** run, you'd think everything comes easy. The Norwegian has Olympic gold in the 1500m (Tokyo) and the 5000m (Paris), and he grew up in a family of runners: his older brothers, Henrik and Filip, also raced at international level.
+When you watch **Jakob Ingebrigtsen** run, you'd think everything comes easy. The Norwegian has Olympic gold in the 1500m (Tokyo) and the 5000m (Paris), and he grew up in a family of runners, his older brothers, Henrik and Filip, also raced at international level.
 
 In interviews he often says things that fit every runner, not just champions. I gathered 7 of them.
 
@@ -21,7 +21,7 @@ In interviews he often says things that fit every runner, not just champions. I 
   "You can't pull the carrot out of the ground to see if it's growing."
 </p>
 
-With this wonderful analogy he explains that you don't need to constantly test your limits. Improvement is slow and cumulative. In practice: don't run a 5K test every week, and don't get discouraged if you don't see immediate results. Progress comes after months of consistency.
+With this wonderful analogy he explains that you don't need to constantly test your limits. Improvement is slow and cumulative. In practice, don't run a 5K test every week, and don't get discouraged if you don't see immediate results. Progress comes after months of consistency.
 
 ### 2. Consistency matters more than talent
 
@@ -49,7 +49,7 @@ Your body adapts and gets stronger while you rest. Without enough recovery, the 
   "I don't feel motivated or unmotivated. It's irrelevant."
 </p>
 
-He doesn't wait to feel like it before running. He runs because he has decided this is his path. And here lies a big secret: **great athletes rely on their habits, not on motivation.**
+He doesn't wait to feel like it before running. He runs because he has decided this is his path. And here lies a big secret, **great athletes rely on their habits, not on motivation.**
 
 ### 6. Don't fear failure
 

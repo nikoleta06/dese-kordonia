@@ -234,7 +234,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const row = document.createElement('div');
     row.className = 'share-row';
     row.innerHTML =
-      '<span class="share-label">' + (en ? 'Share:' : 'Κοινοποίηση:') + '</span>' +
+      '<span class="share-label">' + (en ? 'Share' : 'Κοινοποίηση') + '</span>' +
       '<a class="share-btn" target="_blank" rel="noopener" aria-label="Facebook" href="https://www.facebook.com/sharer/sharer.php?u=' + u + '">' + FB + '</a>' +
       '<a class="share-btn" target="_blank" rel="noopener" aria-label="X" href="https://twitter.com/intent/tweet?url=' + u + '&text=' + t + '">' + X + '</a>' +
       '<a class="share-btn" target="_blank" rel="noopener" aria-label="WhatsApp" href="https://wa.me/?text=' + t + '%20' + u + '">' + WA + '</a>' +
@@ -528,7 +528,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const controls = document.createElement('div');
     controls.className = 'saved-controls';
     controls.innerHTML =
-      '<label class="saved-sort-label" for="savedSort">' + (en ? 'Sort:' : 'Ταξινόμηση:') + '</label>' +
+      '<label class="saved-sort-label" for="savedSort">' + (en ? 'Sort' : 'Ταξινόμηση') + '</label>' +
       '<select id="savedSort" class="saved-sort" aria-label="' + (en ? 'Sort saved articles' : 'Ταξινόμηση αποθηκευμένων') + '">' +
       SORT_OPTS.map((o) => '<option value="' + o[0] + '"' + (o[0] === sortMode ? ' selected' : '') + '>' + o[1] + '</option>').join('') +
       '</select>';

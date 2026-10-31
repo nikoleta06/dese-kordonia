@@ -1,6 +1,6 @@
 ---
 title: "Why elite runners run slow, and why you maybe should too | Δέσε Κορδόνια"
-description: "The science behind easy runs: why top runners run slow most days, what polarized 80/20 training is, and how the aerobic base is built."
+description: "The science behind easy runs, why top runners run slow most days, what polarized 80/20 training is, and how the aerobic base is built."
 heading: "Why elite runners run slow, and why you maybe should too"
 summary: "The science behind easy runs and polarized 80/20 training."
 cardTitle: "Why elite runners run slow"
@@ -39,11 +39,11 @@ headStyle: |
 
 ---
 
-One of the most paradoxical things in running: the best runners in the world run **slow** on most of their days: much slower than you'd expect. There's a strategy behind it, with a scientific basis.
+One of the most paradoxical things in running, the best runners in the world run **slow** on most of their days, much slower than you'd expect. There's a strategy behind it, with a scientific basis.
 
 ### The 80/20 rule
 
-Many elite athletes follow what's called **polarized training**: roughly **80% of the kilometres** are run at an [easy, relaxed intensity](post-zones-palmon-en.html), and only **20%** in hard, intense sessions. The easy days are truly easy, and the hard days truly hard.
+Many elite athletes follow what's called **polarized training**, roughly **80% of the kilometres** are run at an [easy, relaxed intensity](post-zones-palmon-en.html), and only **20%** in hard, intense sessions. The easy days are truly easy, and the hard days truly hard.
 
 <figure class="ig">
   <p class="ig-title">The 80/20 rule in one picture</p>
@@ -56,7 +56,7 @@ Many elite athletes follow what's called **polarized training**: roughly **80% o
 
 ### What slow running builds
 
-When you run at an easy intensity, your body adapts in ways that build the **aerobic base**:
+When you run at an easy intensity, your body adapts in ways that build the **aerobic base**,
 
 More mitochondria are created (the cells' "energy factories"), the network of capillaries becomes denser for better oxygen delivery, fat is used more efficiently as fuel, and the heart grows stronger, sending more blood with each beat. These are the same "ingredients" that determine your [VO₂max](post-vo2max-en.html) too.
 
@@ -73,7 +73,7 @@ More mitochondria are created (the cells' "energy factories"), the network of ca
 
 ### The "grey zone"
 
-The mistake many amateurs make is to run constantly at a moderate intensity: neither easy enough to recover, nor hard enough to improve. This "grey zone" brings fatigue without a matching benefit.
+The mistake many amateurs make is to run constantly at a moderate intensity, neither easy enough to recover, nor hard enough to improve. This "grey zone" brings fatigue without a matching benefit.
 
 <figure class="ig">
   <p class="ig-title">Where to spend your intensity</p>
@@ -82,10 +82,10 @@ The mistake many amateurs make is to run constantly at a moderate intensity: nei
     <div class="ig-zone ig-zone-trap"><b>Grey zone</b><small>Fatigue, no benefit ✗</small></div>
     <div class="ig-zone" style="background-color:#e24b4a;"><b>Hard</b><small>Real improvement ✓</small></div>
   </div>
-  <figcaption class="ig-caption">The trap is the <strong>middle</strong>: train at the extremes, avoid the grey zone.</figcaption>
+  <figcaption class="ig-caption">The trap is the <strong>middle</strong>, train at the extremes, avoid the grey zone.</figcaption>
 </figure>
 
-{% note %}💡 **Practical rule:** If you can talk in full sentences during your easy run without gasping, you're doing it right. If you struggle to say two words, you're running too fast for an "easy" day.{% endnote %}
+{% note %}💡 **Practical rule.** If you can talk in full sentences during your easy run without gasping, you're doing it right. If you struggle to say two words, you're running too fast for an "easy" day.{% endnote %}
 
 <!-- YOUR OWN LINE: How slow your own easy runs are, and whether it bothered you at first.
      E.g. "At first I felt embarrassed when people passed me in the park." -->
@@ -94,13 +94,13 @@ The mistake many amateurs make is to run constantly at a moderate intensity: nei
 
 It may surprise you, but a marathoner who can run under 2 hours and 5 minutes will often do their easy runs at a pace that looks very slow relative to their ability.
 
-They're not trying to prove anything in every session. They're trying to be better next week, next month, next year: exactly as [Kipchoge](post-kipchoge-en.html) and [Ingebrigtsen](post-ingebrigtsen-en.html) teach.
+They're not trying to prove anything in every session. They're trying to be better next week, next month, next year, exactly as [Kipchoge](post-kipchoge-en.html) and [Ingebrigtsen](post-ingebrigtsen-en.html) teach.
 
 {% note %}📌 **Did you know?** Eliud Kipchoge has mentioned that several of his easy runs are done at an intensity well below his race pace. Great athletes save their strength for race day.{% endnote %}
 
 ### How do you improve it?
 
-Through **tempo (threshold) workouts** and a solid base of easy running. With time, your body learns to sustain higher speeds for longer. But remember: balance is the secret: the 80/20 rule.
+Through **tempo (threshold) workouts** and a solid base of easy running. With time, your body learns to sustain higher speeds for longer. But remember, balance is the secret, the 80/20 rule.
 
 In short, running slow builds you to become faster when it matters. Less rush, more patience.
 

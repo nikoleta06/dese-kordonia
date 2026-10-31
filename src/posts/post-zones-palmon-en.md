@@ -1,6 +1,6 @@
 ---
-title: "The 5 Heart-Rate Zones: what each one is and when to use it | Δέσε Κορδόνια"
-description: "What heart-rate zones are, how they're calculated, and what each of the 5 zones is actually useful for: explained simply, with infographics."
+title: "The 5 Heart-Rate Zones, what each one is and when to use it | Δέσε Κορδόνια"
+description: "What heart-rate zones are, how they're calculated, and what each of the 5 zones is actually useful for, explained simply, with infographics."
 heading: "The 5 Heart-Rate Zones, explained simply"
 summary: "What each of the 5 heart-rate zones is and when to use it in your training."
 cardTitle: "The 5 Heart-Rate Zones, explained simply"
@@ -15,7 +15,7 @@ Why does a coach tell you to run "in Zone 2" instead of just "easy"? Because "ea
 
 ### What heart-rate zones are
 
-Heart-rate zones split your training into **5 intensity levels**, based on a percentage (%) of your maximum heart rate. Each zone corresponds to a different intensity level and triggers different adaptations in your body: some help recovery, some build endurance, others build speed. Knowing which zone you're in helps you stop running at the same pace every time, with no clear purpose.
+Heart-rate zones split your training into **5 intensity levels**, based on a percentage (%) of your maximum heart rate. Each zone corresponds to a different intensity level and triggers different adaptations in your body, some help recovery, some build endurance, others build speed. Knowing which zone you're in helps you stop running at the same pace every time, with no clear purpose.
 
 <figure class="ig">
   <div class="ig-flow">
@@ -25,14 +25,14 @@ Heart-rate zones split your training into **5 intensity levels**, based on a per
     <div class="ig-conn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></div>
     <div class="ig-step ig-final"><span class="ig-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></span><div><strong>5 Training Zones</strong><span>From recovery to maximum intensity</span></div></div>
   </div>
-  <figcaption class="ig-caption">Zones come out as a <strong>percentage</strong> of your max heart rate, not an absolute number. The <em>208 − 0.7 × age</em> formula is one of the more reliable empirical equations: it's an estimate, not an exact measurement.</figcaption>
+  <figcaption class="ig-caption">Zones come out as a <strong>percentage</strong> of your max heart rate, not an absolute number. The <em>208 − 0.7 × age</em> formula is one of the more reliable empirical equations, it's an estimate, not an exact measurement.</figcaption>
 </figure>
 
 ### What each one does
 
 <div class="table-wrap">
   <table class="plan-table">
-    <caption>📊 The 5 zones: how it feels &amp; what it's for</caption>
+    <caption>📊 The 5 zones, how it feels &amp; what it's for</caption>
     <thead>
       <tr><th>Zone</th><th>% Max Heart Rate</th><th>How it feels</th><th>When to use it</th></tr>
     </thead>
@@ -46,7 +46,7 @@ Heart-rate zones split your training into **5 intensity levels**, based on a per
   </table>
 </div>
 
-{% note %}💡 **For a more accurate result:** If you know your resting heart rate (measured in the morning, before getting out of bed), use the **Karvonen** method instead of a plain percentage of your max heart rate: it accounts for your own fitness level. Zones can vary slightly depending on your watch or the calculation method it uses.{% endnote %}
+{% note %}💡 **For a more accurate result.** If you know your resting heart rate (measured in the morning, before getting out of bed), use the **Karvonen** method instead of a plain percentage of your max heart rate, it accounts for your own fitness level. Zones can vary slightly depending on your watch or the calculation method it uses.{% endnote %}
 
 <div class="note" style="border-left-color:#4aa3ff;">
   💙 <strong>Want your own zones?</strong><br>
@@ -55,7 +55,7 @@ Heart-rate zones split your training into **5 intensity levels**, based on a per
 
 ### What it looks like in practice
 
-Here's how the zones show up in a real training week:
+Here's how the zones show up in a real training week
 
 <figure class="ig">
   <div class="ig-vs" style="grid-template-columns:repeat(3, 1fr);">
@@ -93,7 +93,7 @@ Here's how the zones show up in a real training week:
       </div>
     </div>
   </div>
-  <figcaption class="ig-caption">Same week, three different zones: every session with its own purpose.</figcaption>
+  <figcaption class="ig-caption">Same week, three different zones, every session with its own purpose.</figcaption>
 </figure>
 
 <!-- YOUR OWN LINE: A real week of your own: which days you run and in which zone.
@@ -101,11 +101,11 @@ Here's how the zones show up in a real training week:
 
 ### How much time in each zone
 
-Ever finished an "easy" run feeling completely wrecked? You probably spent that time in Zone 3 or 4 when the goal was Zone 2: without noticing, you "stole" intensity from a day that was supposed to be relaxed.
+Ever finished an "easy" run feeling completely wrecked? You probably spent that time in Zone 3 or 4 when the goal was Zone 2, without noticing, you "stole" intensity from a day that was supposed to be relaxed.
 
 You don't need to split your time equally across the 5 zones. Most runners, even elite ones, spend most of their training at **low intensity**, keeping a small, targeted amount of time for the hard stuff. It's the same idea behind polarized 80/20 training.
 
-👉 **Read also:** [Why elite runners run slow on easy days](post-easy-running-en.html).
+👉 **Read also,** [Why elite runners run slow on easy days](post-easy-running-en.html).
 
 <figure class="ig">
   <div class="ig-pyramid">
@@ -113,15 +113,15 @@ You don't need to split your time equally across the 5 zones. Most runners, even
     <div class="ig-tier" style="width:68%; background-color:#f1c40f; color:#2a2a2a;">Zone 3<small>Tempo · ~10-15%</small></div>
     <div class="ig-tier" style="width:100%; background-color:#2ecc71;">Zones 1-2<small>Base · ~75-80% of training time</small></div>
   </div>
-  <figcaption class="ig-caption">Build a big <strong>base</strong> at low intensity: a small, targeted amount of time in the top zones.</figcaption>
+  <figcaption class="ig-caption">Build a big <strong>base</strong> at low intensity, a small, targeted amount of time in the top zones.</figcaption>
 </figure>
 
 <div class="note ig-myth">
-  <span class="ig-myth-l">❌ <strong>Myth:</strong> The harder I run every time, the faster I'll improve.</span>
-  <span class="ig-myth-l">✅ <strong>Truth:</strong> Without enough time in low zones you don't build endurance, and hard sessions lose quality due to accumulated fatigue.</span>
+  <span class="ig-myth-l">❌ <strong>Myth.</strong> The harder I run every time, the faster I'll improve.</span>
+  <span class="ig-myth-l">✅ <strong>Truth.</strong> Without enough time in low zones you don't build endurance, and hard sessions lose quality due to accumulated fatigue.</span>
 </div>
 
-Heart-rate zones aren't there to hold you back. They're there to show you when to slow down and when it's actually worth pushing. When every session has the right purpose, progress comes more steadily: with fewer injuries.
+Heart-rate zones aren't there to hold you back. They're there to show you when to slow down and when it's actually worth pushing. When every session has the right purpose, progress comes more steadily, with fewer injuries.
 
 You don't need to chase perfect numbers. It's enough to know the goal of each session, and heart-rate zones are a simple way to hit that goal more often.
 
@@ -129,11 +129,11 @@ You don't need to chase perfect numbers. It's enough to know the goal of each se
   <h3>Frequently asked questions about heart-rate zones</h3>
   <div class="faq-item">
     <h4>Should I always run in Zone 2?</h4>
-    <p>No. Most of your training is best done in the low zones, but the higher zones have their role in small, targeted doses: each zone serves a different purpose.</p>
+    <p>No. Most of your training is best done in the low zones, but the higher zones have their role in small, targeted doses, each zone serves a different purpose.</p>
   </div>
   <div class="faq-item">
     <h4>Why is my heart rate high even though I'm running slowly?</h4>
-    <p>Very common in beginners: your aerobic base is still being built. Heat, fatigue, poor sleep, caffeine and stress also push heart rate up. If you can talk comfortably, don't panic over one day's number: look at the trend across weeks.</p>
+    <p>Very common in beginners, your aerobic base is still being built. Heat, fatigue, poor sleep, caffeine and stress also push heart rate up. If you can talk comfortably, don't panic over one day's number, look at the trend across weeks.</p>
   </div>
   <div class="faq-item">
     <h4>How accurate is my watch's heart-rate reading?</h4>
@@ -141,7 +141,7 @@ You don't need to chase perfect numbers. It's enough to know the goal of each se
   </div>
   <div class="faq-item">
     <h4>My watch shows different zones than the table, which one is right?</h4>
-    <p>Calculation methods differ: a simple percentage of maximum heart rate, Karvonen, or each manufacturer's own algorithm. Small differences are normal: what matters is using the same method consistently, so you can compare your runs properly.</p>
+    <p>Calculation methods differ, a simple percentage of maximum heart rate, Karvonen, or each manufacturer's own algorithm. Small differences are normal, what matters is using the same method consistently, so you can compare your runs properly.</p>
   </div>
   <div class="faq-item">
     <h4>Do I really need a watch to train by zones?</h4>

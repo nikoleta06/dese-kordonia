@@ -53,10 +53,10 @@
     return new Intl.DateTimeFormat(locale, { month: monthStyle, year: 'numeric' }).format(new Date(i.year, i.month - 1, 15));
   }
 
-  // Πότε έγινε η τελευταία διοργάνωση: «2026: 29 Μαρτίου», «2026: 17–19 Απριλίου» (ή '' αν δεν ξέρουμε)
+  // Πότε έγινε η τελευταία διοργάνωση: «2026, 29 Μαρτίου», «2026, 17–19 Απριλίου» (ή '' αν δεν ξέρουμε)
   function lastText(i, lang) {
     if (!i.last) return '';
-    return i.last.start.getFullYear() + ': ' + dateText(i.last, lang, 'long');
+    return i.last.start.getFullYear() + ', ' + dateText(i.last, lang, 'long');
   }
 
   // Ολόκληρη η ετικέτα για τη σελίδα «Αγώνες» και τον χάρτη, όταν δεν υπάρχει ημερομηνία:

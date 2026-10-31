@@ -1,9 +1,9 @@
 ---
-title: "Faith Kipyegon: Consistency and the return to the top | Δέσε Κορδόνια"
-description: "Faith Kipyegon teaches us what real consistency looks like: a comeback after motherhood, patience, and years of steady work to reach, and stay at, the top."
-heading: "Faith Kipyegon: Consistency and the return to the top"
+title: "Faith Kipyegon, consistency and the return to the top | Δέσε Κορδόνια"
+description: "Faith Kipyegon teaches us what real consistency looks like, a comeback after motherhood, patience, and years of steady work to reach, and stay at, the top."
+heading: "Faith Kipyegon, consistency and the return to the top"
 summary: "Lessons in consistency and patience from a runner built gradually, not in a single year."
-cardTitle: "Faith Kipyegon: Consistency and the return to the top"
+cardTitle: "Faith Kipyegon, consistency and the return to the top"
 cardText: "She came back stronger after motherhood. Lessons in patience and years of steady improvement."
 cat: champions
 published: "2026-07-07"
@@ -48,12 +48,12 @@ Kipyegon just needed a little time to find her rhythm again.
 <ul class="career-timeline">
   <li><span class="year">2021</span>Second Olympic gold in the 1500m, in Tokyo, in an Olympic record.</li>
   <li><span class="year">2022</span>World champion again, in Eugene.</li>
-  <li><span class="year">2023</span>Within a few weeks she breaks three world records: 1500m, 5000m and the mile. At the World Championships in Budapest she wins gold at both distances.</li>
+  <li><span class="year">2023</span>Within a few weeks she breaks three world records, 1500m, 5000m and the mile. At the World Championships in Budapest she wins gold at both distances.</li>
   <li><span class="year">2024</span>A third straight Olympic gold in the 1500m, in Paris. No one before her, man or woman, had done it.</li>
 </ul>
 
 ### What I see in this list
 
-Read it from top to bottom and it's hard to find a single year when everything changed. You see silvers before the golds, a year without racing and a lot of work in between. That's how our own progress comes too: one training cycle at a time.
+Read it from top to bottom and it's hard to find a single year when everything changed. You see silvers before the golds, a year without racing and a lot of work in between. That's how our own progress comes too, one training cycle at a time.
 
 Try writing your own list, from the day you started running. Your first run without stopping, your first race, your first break. You'll see you've come further than you think.

@@ -1,8 +1,8 @@
 ---
-title: "The philosophy of Eliud Kipchoge: \"No human is limited\" | Δέσε Κορδόνια"
-description: "What Eliud Kipchoge, the greatest marathoner of all time, teaches us: discipline, humility and the mindset behind 'No human is limited'."
+title: "The philosophy of Eliud Kipchoge, \"No human is limited\" | Δέσε Κορδόνια"
+description: "What Eliud Kipchoge, the greatest marathoner of all time, teaches us, discipline, humility and the mindset behind 'No human is limited'."
 heading: "The philosophy of Eliud Kipchoge"
-shareTitle: "The philosophy of Eliud Kipchoge: \"No human is limited\""
+shareTitle: "The philosophy of Eliud Kipchoge, \"No human is limited\""
 summary: "What the greatest marathoner of all time teaches us about discipline and mindset."
 cardTitle: "The philosophy of Eliud Kipchoge"
 cardText: "\"No human is limited.\" What the greatest marathoner of all time teaches us."
@@ -28,7 +28,7 @@ The idea behind the phrase is simple. Once good habits become routine, you don't
 
 ### The smile in the hard kilometres
 
-Anyone who has watched Kipchoge race has noticed him smiling in the toughest parts. He has explained that he does it to relax and forget the pain. A 2018 study found something similar: runners who smiled ran slightly more economically than those who frowned.
+Anyone who has watched Kipchoge race has noticed him smiling in the toughest parts. He has explained that he does it to relax and forget the pain. A 2018 study found something similar, runners who smiled ran slightly more economically than those who frowned.
 
 <!-- YOUR OWN LINE: Have you tried it? One sentence on whether smiling helped you through
      a hard stretch. -->
@@ -37,4 +37,4 @@ Anyone who has watched Kipchoge race has noticed him smiling in the toughest par
 
 Even though he's the biggest name at the camp, he always trains with the group, alongside runners much slower than him, and stays down to earth despite his success. They run together and push each other. If you run with a club or with friends, you know how much easier a hard interval feels when you're not alone.
 
-If you keep one thing from this article, make it the log. A notebook or a note on your phone, with three lines after every run: how far you went, how you felt, what you'd change. In six months you'll have your own story written down.
+If you keep one thing from this article, make it the log. A notebook or a note on your phone, with three lines after every run, how far you went, how you felt, what you'd change. In six months you'll have your own story written down.

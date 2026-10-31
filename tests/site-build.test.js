@@ -99,3 +99,20 @@ test('η σελίδα της Επιστήμης δείχνει κάθε άρθρ
     }
   }
 });
+
+// Όχι άνω και κάτω τελεία στο ορατό κείμενο. Μένουν ώρες και ρυθμοί (5:20), σύνδεσμοι, το «--:--»,
+// ο όρος Pa:Hr και οι τίτλοι δημοσιεύσεων μέσα σε <cite>, που είναι ακριβείς παραπομπές.
+test('το ορατό κείμενο κάθε σελίδας δεν έχει «:»', { skip: !built }, () => {
+  const clean = (s) => s.replace(/&nbsp;/g, ' ').replace(/\d:\d/g, '').replace(/https?:\/\/\S*/g, '').replace(/--:--|Pa:Hr/g, '');
+  const found = [];
+  for (const f of fs.readdirSync(SITE).filter((x) => x.endsWith('.html'))) {
+    const html = read(f);
+    const texts = [(html.match(/<title>([\s\S]*?)<\/title>/) || [])[1] || ''];
+    for (const m of html.matchAll(/<meta (?:name|property)="(?:description|og:title|og:description)" content="([^"]*)"/g)) texts.push(m[1]);
+    for (const m of html.matchAll(/\b(?:aria-label|alt|title|placeholder)="([^"]*)"/g)) texts.push(m[1]);
+    const body = html.slice(html.indexOf('<body')).replace(/<(script|style|template|svg|code|cite)\b[\s\S]*?<\/\1>/g, ' ');
+    for (const m of body.matchAll(/>([^<]+)</g)) texts.push(m[1]);
+    for (const t of texts) if (clean(t).includes(':')) found.push(`${f}: ${t.trim().slice(0, 80)}`);
+  }
+  assert.deepEqual(found, []);
+});

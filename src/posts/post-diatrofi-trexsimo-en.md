@@ -1,8 +1,8 @@
 ---
 title: "What to eat before and after running | Δέσε Κορδόνια"
-description: "A practical nutrition guide for runners: what to eat before and after running for energy and better recovery, without complications."
+description: "A practical nutrition guide for runners, what to eat before and after running for energy and better recovery, without complications."
 heading: "What to eat before and after running"
-summary: "A practical nutrition guide for runners: what to eat before and after running."
+summary: "A practical nutrition guide for runners, what to eat before and after running."
 cardTitle: "What to eat before and after running"
 cardText: "Nutrition doesn't need to be complicated. Simple habits for energy and better recovery."
 cat: tips
@@ -17,9 +17,9 @@ Nutrition doesn't need to be complicated to help you run better. With a few simp
 
 ### Before the run
 
-The goal is **energy without weight in your stomach**. If you run in the morning, a small snack 30–60 minutes before is enough:
+The goal is **energy without weight in your stomach**. If you run in the morning, a small snack 30–60 minutes before is enough,
 
-🍌 A banana, a slice of bread with honey, or a little oatmeal. Avoid heavy, fatty or high-fibre foods right before: they can "weigh you down". If you run early and don't have time, even a glass of juice helps.
+🍌 A banana, a slice of bread with honey, or a little oatmeal. Avoid heavy, fatty or high-fibre foods right before, they can "weigh you down". If you run early and don't have time, even a glass of juice helps.
 
 <div class="table-wrap">
   <table class="plan-table">
@@ -42,16 +42,16 @@ For runs under an hour, you mostly need **water**. For longer distances (e.g. ha
 
 ### After the run
 
-The "window" after running is ideal for recovery. Combine **carbohydrates + protein** within 1–2 hours:
+The "window" after running is ideal for recovery. Combine **carbohydrates + protein** within 1–2 hours,
 
-🥣 Yoghurt with fruit and honey, an egg with bread, or a smoothie. And of course: replace with **water** whatever you lost through sweat.
+🥣 Yoghurt with fruit and honey, an egg with bread, or a smoothie. And of course, replace with **water** whatever you lost through sweat.
 
 ### 3 mistakes most runners make
 
 <ul style="list-style:none; padding:0; margin:1rem 0;">
-  <li style="margin-bottom:1rem; color:var(--text-dim);"><strong style="color:var(--text);">❌ Running on an empty stomach when it doesn't suit them.</strong><br>It works for some, not for others: if you feel dizzy or weak, have a small snack before.</li>
+  <li style="margin-bottom:1rem; color:var(--text-dim);"><strong style="color:var(--text);">❌ Running on an empty stomach when it doesn't suit them.</strong><br>It works for some, not for others, if you feel dizzy or weak, have a small snack before.</li>
   <li style="margin-bottom:1rem; color:var(--text-dim);"><strong style="color:var(--text);">❌ Eating too little after the workout.</strong><br>Your body needs "fuel" to recover. Don't skip the post-run meal.</li>
-  <li style="margin-bottom:1rem; color:var(--text-dim);"><strong style="color:var(--text);">❌ Forgetting hydration.</strong><br>You don't drink water only when thirsty: hydration starts well before the run.</li>
+  <li style="margin-bottom:1rem; color:var(--text-dim);"><strong style="color:var(--text);">❌ Forgetting hydration.</strong><br>You don't drink water only when thirsty, hydration starts well before the run.</li>
 </ul>
 
 {% note %}What's above is what has worked for me, plus what the sources at the end of the article suggest. If you have a health condition or want a plan built for you, a nutritionist will help you far more.{% endnote %}

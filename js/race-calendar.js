@@ -66,8 +66,8 @@
       card: 'See the card',
       map: 'Show on map',
       more: (n) => '+' + n,
-      next: 'Next race:',
-      dayLabel: (d, names) => d + (names ? ': ' + names : '')
+      next: 'Next race,',
+      dayLabel: (d, names) => d + (names ? ', ' + names : '')
     } : {
       pending: 'Αυτόν τον μήνα, χωρίς ανακοινωμένη ημερομηνία',
       hint: 'Πάτησε μια μέρα με αγώνα για να δεις λεπτομέρειες.',
@@ -76,8 +76,8 @@
       card: 'Δες την κάρτα',
       map: 'Δες στον χάρτη',
       more: (n) => '+' + n,
-      next: 'Επόμενος αγώνας:',
-      dayLabel: (d, names) => d + (names ? ': ' + names : '')
+      next: 'Επόμενος αγώνας,',
+      dayLabel: (d, names) => d + (names ? ', ' + names : '')
     };
 
     const $ = (sel) => root.querySelector(sel);

@@ -224,7 +224,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPairedShortcode("sources", function (inner) {
     const en = isEn(this.page);
     const icon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>';
-    const intro = en ? "The main scientific references behind this article:" : "Οι κύριες επιστημονικές αναφορές πίσω από αυτό το άρθρο:";
+    const intro = en ? "The main scientific references behind this article" : "Οι κύριες επιστημονικές αναφορές πίσω από αυτό το άρθρο";
     // Μία γραμμή χωρίς κενές γραμμές: αλλιώς το Markdown γύρω του θα έκοβε το HTML
     const list = md.render(inner.trim()).replace(/\n+/g, "");
     return `<div class="sources"><h4>${icon}${en ? "Sources" : "Πηγές"}</h4><p>${intro}</p>${list}</div>`;
