@@ -2962,6 +2962,16 @@ a:focus-visible .pa-halo,
   font-size: 0.85rem;
 }
 
+.wp-place-note {
+  margin-top: 0.5rem;
+  color: var(--text-dim);
+  font-size: 0.85rem;
+}
+
+.wp-place-note:empty {
+  display: none;
+}
+
 .wp-placebox {
   display: flex;
   align-items: center;

@@ -1,7 +1,7 @@
 /* Ρυθμός & Καιρός: πόσο να «κόψεις» τον ρυθμό σου με βάση την πρόγνωση.
    Κοινό για τις σελίδες kairos-rythmos.html και kairos-rythmos-en.html (η γλώσσα από το <html lang>).
-   Καιρός και αναζήτηση πόλης από το Open-Meteo (δωρεάν, χωρίς κλειδί), απευθείας από τον browser:
-   τίποτα δεν περνά από τον δικό μας server. */
+   Καιρός από το Open-Meteo, αναζήτηση μέρους από το Open-Meteo και το OpenStreetMap (δωρεάν, χωρίς
+   κλειδί), απευθείας από τον browser: τίποτα δεν περνά από τον δικό μας server. */
 (function () {
   'use strict';
 
@@ -14,16 +14,17 @@
 
   const T = EN ? {
     searching: 'Searching…',
-    tooShort: 'Enter at least 2 letters of the city.',
-    notFoundLatin: 'No city found with that name. Check the spelling, or write it in the local language (e.g. "München").',
-    notFoundGreek: 'No city found with that name. If you entered a region or an island, enter the city or town instead. For a city outside Greece, write it in English or in Latin letters (e.g. "Milan", "Lisbon").',
-    notFoundOther: 'No city found with that name. Write it in English or in Latin letters (e.g. "Moscow", "Tokyo").',
-    isCountry: (q) => '"' + q + '" is a country. Enter a city or town, e.g. "Athens" or "London".',
-    isRegion: (q) => '"' + q + '" is a region or an island, not a city. Enter the city or town where you will run.',
+    tooShort: 'Enter at least 2 letters of the place.',
+    notFoundLatin: 'No place found with that name. Check the spelling, try a town nearby, or write it in the local language (e.g. "München").',
+    notFoundGreek: 'No place found with that name. Check the spelling or try a town nearby. For a place outside Greece, write it in English or in Latin letters (e.g. "Milan", "Lisbon").',
+    notFoundOther: 'No place found with that name. Write it in English or in Latin letters (e.g. "Moscow", "Tokyo").',
+    isCountry: (q) => '"' + q + '" is a country. Enter something more specific, e.g. "Athens" or "Crete".',
+    wideNote: 'The weather varies across a place this big. The forecast is for its centre, so for a closer one enter the town or village.',
+    kinds: { island: 'Island', mountain: 'Mountain', park: 'Park', lake: 'Lake', beach: 'Beach', region: 'Region' },
     loading: 'Loading the forecast…',
     netError: 'Could not reach the weather service, or it took too long to answer. Check your connection and try again.',
     geoUnsupported: 'Your browser does not support location.',
-    geoDenied: 'Location access was not allowed. Search for your city instead.',
+    geoDenied: 'Location access was not allowed. Search for the place instead.',
     myLocation: 'My location',
     noHours: 'No more hours left in the forecast for today. Pick another day.',
     perKm: '/km',
@@ -62,16 +63,17 @@
     cellLabel: (day, h, t, d) => day + ' ' + h + ', ' + t + '°C, dew point ' + d + '°C'
   } : {
     searching: 'Αναζήτηση…',
-    tooShort: 'Γράψε τουλάχιστον 2 γράμματα της πόλης.',
-    notFoundLatin: 'Δεν βρέθηκε πόλη με αυτό το όνομα. Έλεγξε την ορθογραφία ή γράψ’ τη στη γλώσσα της χώρας (π.χ. «München»).',
-    notFoundGreek: 'Δεν βρέθηκε πόλη με αυτό το όνομα. Αν έγραψες περιοχή ή νησί, γράψε την πόλη ή το χωριό. Αν είναι πόλη του εξωτερικού, γράψ’ τη στα αγγλικά ή με λατινικούς χαρακτήρες (π.χ. «Milan», «Lisbon»).',
-    notFoundOther: 'Δεν βρέθηκε πόλη με αυτό το όνομα. Γράψ’ τη στα αγγλικά ή με λατινικούς χαρακτήρες (π.χ. «Moscow», «Tokyo»).',
-    isCountry: (q) => 'Το «' + q + '» είναι χώρα. Γράψε μια πόλη ή ένα χωριό, π.χ. «Αθήνα» ή «Λονδίνο».',
-    isRegion: (q) => 'Το «' + q + '» είναι περιοχή ή νησί, όχι πόλη. Γράψε την πόλη ή το χωριό όπου θα τρέξεις.',
+    tooShort: 'Γράψε τουλάχιστον 2 γράμματα του μέρους.',
+    notFoundLatin: 'Δεν βρέθηκε μέρος με αυτό το όνομα. Έλεγξε την ορθογραφία, δοκίμασε κάτι κοντινό ή γράψ’ το στη γλώσσα της χώρας (π.χ. «München»).',
+    notFoundGreek: 'Δεν βρέθηκε μέρος με αυτό το όνομα. Έλεγξε την ορθογραφία ή δοκίμασε ένα κοντινό χωριό ή πόλη. Αν είναι στο εξωτερικό, γράψ’ το στα αγγλικά ή με λατινικούς χαρακτήρες (π.χ. «Milan», «Lisbon»).',
+    notFoundOther: 'Δεν βρέθηκε μέρος με αυτό το όνομα. Γράψ’ το στα αγγλικά ή με λατινικούς χαρακτήρες (π.χ. «Moscow», «Tokyo»).',
+    isCountry: (q) => 'Το «' + q + '» είναι χώρα. Γράψε κάτι πιο συγκεκριμένο, π.χ. «Αθήνα» ή «Κρήτη».',
+    wideNote: 'Σε τόσο μεγάλο μέρος ο καιρός αλλάζει από σημείο σε σημείο. Η πρόγνωση είναι για το κέντρο του, οπότε για πιο ακριβή γράψε την πόλη ή το χωριό.',
+    kinds: { island: 'Νησί', mountain: 'Βουνό', park: 'Πάρκο', lake: 'Λίμνη', beach: 'Παραλία', region: 'Περιοχή' },
     loading: 'Φορτώνει η πρόγνωση…',
     netError: 'Η υπηρεσία καιρού δεν απάντησε ή άργησε πολύ. Έλεγξε τη σύνδεσή σου και δοκίμασε ξανά.',
     geoUnsupported: 'Ο browser σου δεν υποστηρίζει τοποθεσία.',
-    geoDenied: 'Δεν δόθηκε πρόσβαση στην τοποθεσία. Αναζήτησε την πόλη σου.',
+    geoDenied: 'Δεν δόθηκε πρόσβαση στην τοποθεσία. Αναζήτησε το μέρος όπου θα τρέξεις.',
     myLocation: 'Η θέση μου',
     noHours: 'Δεν έχουν μείνει άλλες ώρες για σήμερα. Διάλεξε άλλη μέρα.',
     perKm: '/χλμ.',
@@ -173,7 +175,7 @@
   }
 
   /* ---------- Κατάσταση ---------- */
-  let place = null;    // { name, lat, lon }
+  let place = null;    // { name, lat, lon, wide }
   let hours = [];      // [{ date, hour, t, d, rh, feels, wind, rain, sum, past }]
   let selected = null; // στοιχείο του hours
   let run = 0;         // αυξάνεται με το «Καθαρισμός» και το «Αλλαγή»: απαντήσεις που έρχονται αργότερα αγνοούνται
@@ -255,8 +257,64 @@
     return fallback;
   }
 
-  // Πόλεις πριν από αεροδρόμια και μικρά χωριά με το ίδιο όνομα
-  const byPopulation = (a, b) => (b.population || 0) - (a.population || 0);
+  // Το Open-Meteo έχει κενά, δεν ξέρει π.χ. «Κρήτη», «Πάρνηθα» ή «Χαλκιδική». Ρωτάμε μαζί και το
+  // OpenStreetMap και φέρνουμε τα αποτελέσματά του στη μορφή του Open-Meteo, με κωδικούς GeoNames.
+  // Τα υπόλοιπα είδη του (δρόμοι, μαγαζιά, κτίρια) δεν είναι μέρη για πρόγνωση.
+  const OSM_CODES = {
+    country: 'PCLI', island: 'ISL', islet: 'ISL', archipelago: 'ISL',
+    peak: 'MT', mountain_range: 'MT', ridge: 'MT', hill: 'MT', volcano: 'MT',
+    park: 'PRK', garden: 'PRK', nature_reserve: 'PRK', stadium: 'PRK', track: 'PRK',
+    lake: 'LK', reservoir: 'LK', beach: 'BCH', bay: 'BCH', cape: 'BCH', peninsula: 'PEN',
+    city: 'PPL', town: 'PPL', village: 'PPL', hamlet: 'PPL', suburb: 'PPL', quarter: 'PPL',
+    neighbourhood: 'PPL', locality: 'PPL', municipality: 'PPL', city_district: 'PPL'
+  };
+  async function osmPlaces(q) {
+    const list = await getJson('https://nominatim.openstreetmap.org/search?format=jsonv2&limit=8&addressdetails=1&accept-language=' +
+      (EN ? 'en' : 'el') + '&q=' + encodeURIComponent(q));
+    return list.filter((r) => /^(place|natural|leisure|water|boundary)$/.test(r.category)).map((r) => {
+      const a = r.address || {};
+      const name = r.name || r.display_name.split(',')[0];
+      return {
+        id: 'osm' + r.place_id,
+        osm: true,
+        name,
+        names: [norm(name)],
+        latitude: +r.lat,
+        longitude: +r.lon,
+        feature_code: OSM_CODES[r.category === 'boundary' ? r.addresstype : r.type] || 'RGN',
+        // Δεν δίνει πληθυσμό: η «σημαντικότητα» (0–1) παίρνει τη θέση του στην κατάταξη
+        population: (r.importance || 0) * 100000,
+        admin1: a.state || a.region || a.county,
+        country: a.country,
+        country_code: (a.country_code || '').toUpperCase()
+      };
+    });
+  }
+
+  // Κωδικοί GeoNames: PPL* = πόλη/χωριό, PCL* = χώρα, και τα είδη μέρους που δείχνουμε (όχι αεροδρόμια, ξενοδοχεία κ.λπ.)
+  const isTown = (r) => !r.feature_code || r.feature_code.startsWith('PPL');
+  const isCountry = (r) => /^PCL/.test(r.feature_code || '');
+  const KINDS = [
+    ['island', /^ISL/], ['mountain', /^(MT|PK|HLL|RDG)/], ['park', /^(PRK|RES|GDN|STDM)/], ['lake', /^(LK|RSV)/],
+    ['beach', /^(BCH|BAY|CAPE)/], ['region', /^(ADM|RGN|AREA|PEN|PRSH|VAL|FRST)/]
+  ];
+  const kindOf = (r) => (KINDS.find(([, code]) => code.test(r.feature_code || '')) || [null])[0];
+  // Σε αυτά η πρόγνωση αφορά το κέντρο τους, και οι δύο πηγές το τοποθετούν διαφορετικά
+  const isWide = (r) => ['island', 'mountain', 'region'].includes(kindOf(r));
+
+  // Τα πιο μεγάλα πρώτα. Το ίδιο μέρος από τις δύο πηγές μένει μία φορά, με το όνομα του
+  // OpenStreetMap στα νησιά κ.λπ. («Κρήτη» αντί για «Nísos Kríti»).
+  function mergePlaces(found) {
+    const merged = [];
+    [...found].sort((a, b) => (b.population || 0) - (a.population || 0)).forEach((r) => {
+      const near = isWide(r) ? 0.5 : 0.05;
+      const same = merged.find((m) => kindOf(m) === kindOf(r) &&
+        Math.abs(m.latitude - r.latitude) < near && Math.abs(m.longitude - r.longitude) < near);
+      if (!same) merged.push(r);
+      else if (r.osm && isWide(r)) same.name = r.name;
+    });
+    return merged;
+  }
 
   // Τι λέμε όταν δεν βρέθηκε τίποτα: εξαρτάται από το αλφάβητο που έγραψε ο χρήστης.
   // Πολλές ξένες πόλεις δεν υπάρχουν με ελληνικό όνομα (π.χ. «Μιλάνο»), αλλά βρίσκονται στα αγγλικά.
@@ -265,11 +323,6 @@
     if (/[^\u0000-ɏ\s.,'’-]/.test(q)) return T.notFoundOther;
     return T.notFoundLatin;
   }
-
-  // Κωδικοί GeoNames: PPL* = πόλη/χωριό, PCL* = χώρα, ADM*/ISL*/RGN* = περιοχή, νησί κ.λπ.
-  const isTown = (r) => !r.feature_code || r.feature_code.startsWith('PPL');
-  const isCountry = (r) => /^PCL/.test(r.feature_code || '');
-  const isRegion = (r) => /^(ADM|ISL|RGN|AREA|PEN|PRSH)/.test(r.feature_code || '');
 
   // Το κουμπί δείχνει ότι δουλεύει, και δεν πατιέται δεύτερη φορά στο μεταξύ
   function busy(on) {
@@ -288,24 +341,25 @@
     status(T.searching, false, true);
     busy(true);
     try {
-      const found = await findPlaces(q);
+      // Αν πέσει η μία πηγή, αρκεί η άλλη. Σφάλμα δείχνουμε μόνο αν δεν απαντήσει καμία.
+      const [meteo, osm] = await Promise.all([findPlaces(q).catch(() => null), osmPlaces(q).catch(() => null)]);
       if (myRun !== run) return;
+      if (!meteo && !osm) throw new Error('search');
+      const found = (meteo || []).concat(osm || []);
       const sameName = (r) => r.names.includes(norm(q));
-      const towns = found.filter(isTown).sort(byPopulation);
       // Μεγάλη πόλη με το ίδιο όνομα (Σιγκαπούρη, Λουξεμβούργο, Νέα Υόρκη): δεν είναι λάθος, τη δείχνουμε.
-      // Αλλιώς «Ελλάδα», «Germany» είναι χώρα και «Crete» νησί, όχι τα χωριά των ΗΠΑ με το ίδιο όνομα.
-      const bigTown = towns.some((r) => sameName(r) && (r.feature_code === 'PPLC' || (r.population || 0) >= 50000));
+      // Αλλιώς «Ελλάδα», «Germany» είναι χώρα, όχι τα χωριά των ΗΠΑ με το ίδιο όνομα.
+      const bigTown = found.some((r) => isTown(r) && sameName(r) && !r.osm && (r.feature_code === 'PPLC' || (r.population || 0) >= 50000));
       if (!bigTown && found.some((r) => sameName(r) && isCountry(r))) { status(T.isCountry(q), true); return; }
-      if (!bigTown && found.some((r) => sameName(r) && isRegion(r))) { status(T.isRegion(q), true); return; }
-      const results = towns.slice(0, 6);
+      const results = mergePlaces(found.filter((r) => isTown(r) || kindOf(r))).slice(0, 6);
       if (!results.length) { status(notFoundMsg(q), true); return; }
-      const pick = (r) => choosePlace({ name: r.name + (r.country_code && r.country_code !== 'GR' ? ', ' + r.country : ''), lat: r.latitude, lon: r.longitude });
+      const pick = (r) => choosePlace({ name: r.name + (r.country_code && r.country_code !== 'GR' ? ', ' + r.country : ''), lat: r.latitude, lon: r.longitude, wide: isWide(r) });
       // Ένα μόνο μέρος: δεν ρωτάμε, φέρνουμε κατευθείαν την πρόγνωση
       if (results.length === 1) { pick(results[0]); return; }
       status('');
       list.append(el('p', 'wp-places-title', T.choose(results.length)));
       results.forEach((r) => {
-        const detail = [r.admin1, r.country].filter(Boolean).join(', ');
+        const detail = [T.kinds[kindOf(r)], r.admin1, r.country].filter(Boolean).join(', ');
         const b = el('button', 'wp-place');
         b.type = 'button';
         b.append(el('strong', null, r.name), el('span', null, detail));
@@ -343,6 +397,7 @@
     place = p;
     save({ place: p });
     $('wpPlaceName').textContent = p.name;
+    $('wpPlaceNote').textContent = p.wide ? T.wideNote : '';
     $('wpPlaceBox').classList.remove('calc-hidden');
     $('wpSearchBox').classList.add('calc-hidden');
     fetchForecast();
@@ -493,7 +548,7 @@
   }
 
   /* ---------- Καθαρισμός ----------
-     Σβήνει ρυθμό, πόλη και πρόγνωση, και από τη σελίδα και από το localStorage,
+     Σβήνει ρυθμό, μέρος και πρόγνωση, και από τη σελίδα και από το localStorage,
      ώστε την επόμενη φορά να ανοίγει άδειο. */
   function reset() {
     run++;
@@ -509,6 +564,7 @@
     $('wpGrid').replaceChildren();
     $('wpOut').classList.add('calc-hidden');
     $('wpPlaceBox').classList.add('calc-hidden');
+    $('wpPlaceNote').textContent = '';
     $('wpSearchBox').classList.remove('calc-hidden');
     status('');
     $('wpMin').focus();
@@ -522,7 +578,7 @@
   $('wpGeoBtn').addEventListener('click', useMyLocation);
   $('wpChange').addEventListener('click', () => {
     // Η παλιά πρόγνωση φεύγει: αλλιώς μια αποτυχημένη νέα αναζήτηση θα έδειχνε το σφάλμα πάνω από
-    // δεδομένα άλλης πόλης. Το run++ ακυρώνει και μια πρόγνωση που φορτώνει ακόμα.
+    // δεδομένα άλλου μέρους. Το run++ ακυρώνει και μια πρόγνωση που φορτώνει ακόμα.
     run++;
     hours = [];
     selected = null;
@@ -530,6 +586,7 @@
     status('');
     $('wpSearchBox').classList.remove('calc-hidden');
     $('wpPlaceBox').classList.add('calc-hidden');
+    $('wpPlaceNote').textContent = '';
     $('wpQuery').focus();
   });
 

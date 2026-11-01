@@ -2,7 +2,7 @@
 permalink: "kairos-rythmos.html"
 lang: "el"
 title: "Ρυθμός και Καιρός, Πόσο να Κόψεις τον Ρυθμό στη Ζέστη | Δέσε Κορδόνια"
-description: "Δωρεάν εργαλείο, βάλε τον ρυθμό σου και την πόλη σου και δες πόσο πιο αργά να τρέξεις με τη ζέστη και την υγρασία της πρόγνωσης, και ποια είναι η πιο δροσερή ώρα για τρέξιμο τις επόμενες 7 μέρες."
+description: "Δωρεάν εργαλείο, βάλε τον ρυθμό σου και το μέρος όπου τρέχεις και δες πόσο πιο αργά να τρέξεις με τη ζέστη και την υγρασία της πρόγνωσης, και ποια είναι η πιο δροσερή ώρα για τρέξιμο τις επόμενες 7 μέρες."
 activeNav: "kairos-rythmos"
 ---
 
@@ -32,16 +32,16 @@ activeNav: "kairos-rythmos"
     <h1 class="section-title">Ρυθμός και Καιρός</h1>
     <p class="lead">
       Με 30°C και υγρασία, ο ίδιος ρυθμός σού κοστίζει πολύ περισσότερο απ’ ό,τι ένα δροσερό
-      πρωινό. Βάλε τον ρυθμό σου και την πόλη σου, και δες <strong>πόσο πιο αργά να τρέξεις</strong>
+      πρωινό. Βάλε τον ρυθμό σου και το μέρος όπου τρέχεις, και δες <strong>πόσο πιο αργά να τρέξεις</strong>
       με βάση την πρόγνωση, και ποια είναι η <strong>πιο δροσερή ώρα</strong> τις επόμενες 7 μέρες.
     </p>
-    <p class="wp-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10Z"/></svg><span>Δουλεύει για κάθε πόλη, <strong>στην Ελλάδα και σε όλο τον κόσμο</strong>.</span></p>
+    <p class="wp-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10Z"/></svg><span>Δουλεύει για πόλεις, χωριά, νησιά, βουνά και πάρκα, <strong>στην Ελλάδα και σε όλο τον κόσμο</strong>.</span></p>
 
     <div class="calc wp">
       <div class="field">
         <div class="wp-label-row">
           <label>Ο ρυθμός σου με καλό καιρό</label>
-          <button class="wp-reset" id="wpReset" type="button" aria-label="Καθαρισμός, σβήνει τον ρυθμό, την πόλη και την πρόγνωση" title="Καθαρισμός, σβήνει τον ρυθμό, την πόλη και την πρόγνωση"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg><span>Καθαρισμός</span></button>
+          <button class="wp-reset" id="wpReset" type="button" aria-label="Καθαρισμός, σβήνει τον ρυθμό, το μέρος και την πρόγνωση" title="Καθαρισμός, σβήνει τον ρυθμό, το μέρος και την πρόγνωση"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg><span>Καθαρισμός</span></button>
         </div>
         <div class="time-inputs wp-pace-inputs">
           <div><input type="number" id="wpMin" min="2" max="20" step="1" placeholder="π.χ. 5" aria-label="Λεπτά ανά χιλιόμετρο" inputmode="numeric"><small>Λεπτά</small></div>
@@ -53,7 +53,7 @@ activeNav: "kairos-rythmos"
         <label for="wpQuery">Πού θα τρέξεις;</label>
         <div id="wpSearchBox">
           <div class="wp-search">
-            <input type="search" id="wpQuery" placeholder="π.χ. Θεσσαλονίκη ή Λονδίνο" autocomplete="off" enterkeyhint="search">
+            <input type="search" id="wpQuery" placeholder="π.χ. Θεσσαλονίκη, Εύβοια ή Πάρνηθα" autocomplete="off" enterkeyhint="search">
             <button class="btn" id="wpSearchBtn" type="button">Αναζήτηση</button>
           </div>
           <button class="wp-link" id="wpGeoBtn" type="button">
@@ -67,6 +67,7 @@ activeNav: "kairos-rythmos"
           <strong id="wpPlaceName"></strong>
           <button class="wp-link" id="wpChange" type="button">Αλλαγή</button>
         </div>
+        <p class="wp-place-note" id="wpPlaceNote"></p>
       </div>
 
       <p class="wp-status" id="wpStatus" role="status" aria-live="polite"></p>
@@ -101,7 +102,7 @@ activeNav: "kairos-rythmos"
           προσαρμόζεται μέσα σε 10–14 μέρες προπόνησης στη ζέστη. Αν νιώσεις ζάλη, ναυτία ή σταματήσεις
           να ιδρώνεις, σταμάτα αμέσως, βρες σκιά και πιες νερό.
         </p>
-        <p class="image-credit">Δεδομένα καιρού, <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo.com</a> (CC BY 4.0)</p>
+        <p class="image-credit">Δεδομένα καιρού, <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo.com</a> (CC BY 4.0). Αναζήτηση μερών, <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">© OpenStreetMap</a>.</p>
       </div>
     </div>
 
