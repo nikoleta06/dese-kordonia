@@ -37,7 +37,7 @@
 - **Χάρτης αγώνων** (Leaflet): φίλτρα ανά τύπο, χρωματιστά pins, λίστα-κάρτες με «δες στον χάρτη»
 - **«Διάβασε επίσης»** σχετικά άρθρα στο τέλος κάθε post
 - **Αρχική σε πλέγμα «bento»** (`src/_includes/home.njk`, κοινό για EL/EN): η κάρτα καιρού δείχνει την πόλη και τον ρυθμό που έβαλε ο επισκέπτης στο «Ρυθμός & Καιρός» (αλλιώς την Αθήνα), οι αγώνες μπαίνουν σε σειρά από τον τρέχοντα μήνα, και οι κατηγορίες ανοίγουν το blog φιλτραρισμένο (`blog.html?cat=science`)
-- **Ρυθμός & Καιρός**: πρόγνωση από το Open-Meteo, πλέγμα 7 μερών × 05:00–22:00 χρωματισμένο ανάλογα με τη ζέστη, προσαρμοσμένος ρυθμός, συμβουλές, κουμπί «Καθαρισμός» και έξυπνη αναζήτηση πόλης (ελληνικά και αγγλικά, «Ηράκλειο Κρήτης», ειδοποίηση όταν γράφεις χώρα ή περιοχή)
+- **Ρυθμός & Καιρός**: πρόγνωση από το Open-Meteo, πλέγμα 7 μερών × 05:00–22:00 χρωματισμένο ανάλογα με τη ζέστη, προσαρμοσμένος ρυθμός, συμβουλές, κουμπί «Καθαρισμός» και έξυπνη αναζήτηση μέρους, για πόλεις, χωριά, νησιά, βουνά, πάρκα και λίμνες (ελληνικά και αγγλικά, «Ηράκλειο Κρήτης», ειδοποίηση όταν γράφεις χώρα)
 - **Αναζήτηση** σε άρθρα και εργαλεία (Pagefind), ξεχωριστά για ελληνικά και αγγλικά — εικονίδιο στο μενού, `search.html?q=…`
 - **Ομαλές μεταβάσεις** ανάμεσα στις σελίδες (View Transitions) και **prefetch** της σελίδας που πας να ανοίξεις (Speculation Rules)
 - **Analytics** (GoatCounter, privacy-friendly)
@@ -56,10 +56,12 @@
 - **Vanilla JavaScript** (`js/main.js`) — theme, μενού, φίλτρα blog, like/save, σχετικά άρθρα, analytics
   - `js/passkey.js` και `js/password.js` — σύνδεση με passkey και με κωδικό
   - `js/weather-pace.js` — το εργαλείο «Ρυθμός & Καιρός» (κοινό για ελληνικά και αγγλικά)
+  - `js/place-search.js` — ενώνει τα αποτελέσματα της αναζήτησης μέρους και αποφασίζει τι θα δει ο χρήστης (το ελέγχει το `tests/place-search.test.js`)
 - **[Leaflet](https://leafletjs.com/)** — διαδραστικός χάρτης αγώνων (σερβίρεται από το site, `vendor/leaflet-1.9.4/`)
 - **[Supabase](https://supabase.com/)** — κοινό μέτρημα στα like (`article_likes`, REST + RPC)
 - **Custom backend API** (`api.desekordonia.com`, `localhost:4000` σε dev) — σύνδεση (magic link, passkey, κωδικός), προφίλ χρήστη & newsletter (`/api/auth/*`, `/api/profile`, `/api/newsletter/*`)
-- **[Open-Meteo](https://open-meteo.com/)** — πρόγνωση καιρού και αναζήτηση πόλης για το «Ρυθμός & Καιρός»· δωρεάν, χωρίς κλειδί, καλείται απευθείας από τον browser
+- **[Open-Meteo](https://open-meteo.com/)** — πρόγνωση καιρού και αναζήτηση μέρους για το «Ρυθμός & Καιρός»· δωρεάν, χωρίς κλειδί, καλείται απευθείας από τον browser
+- **[Nominatim του OpenStreetMap](https://nominatim.org/)** — αναζήτηση μέρους για το «Ρυθμός & Καιρός», μαζί με το Open-Meteo (δες ADR 0010)· δωρεάν, χωρίς κλειδί, καλείται απευθείας από τον browser
 - **[GoatCounter](https://www.goatcounter.com/)** — στατιστικά επισκεψιμότητας
 - **[Cloudflare Workers](https://developers.cloudflare.com/workers/)** — φιλοξενία του site, με security headers και redirects
 
@@ -97,6 +99,7 @@ js/main.js                  # κοινό JavaScript
 js/passkey.js, js/password.js  # σύνδεση με passkey / κωδικό
 js/weather-model.js         # ο υπολογισμός ζέστης/ρυθμού, κοινός για εργαλείο και αρχική
 js/weather-pace.js          # λογική του «Ρυθμός & Καιρός» (Open-Meteo, αναζήτηση, πλέγμα)
+js/place-search.js          # αναζήτηση μέρους: ένωση Open-Meteo και OpenStreetMap, χωρίς κλήσεις στο δίκτυο
 js/home.js                  # αρχική: κάρτα καιρού και σειρά αγώνων
 images/                     # logo, favicon, εικόνες (originals στο images/_originals/)
 SETUP-LIKES.md              # οδηγίες Supabase (μέτρημα like)

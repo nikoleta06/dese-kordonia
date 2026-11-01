@@ -15,6 +15,7 @@
 | [0007](0007-grafiko-stin-arxi-tou-arthrou.md) | Το γραφικό του άρθρου και στην αρχή του άρθρου | Αποδεκτή | 29/10/2026 |
 | [0008](0008-csp-xoris-unsafe-inline-sta-styles.md) | CSP χωρίς 'unsafe-inline' και στα styles | Αποδεκτή | 29/10/2026 |
 | [0009](0009-proodos-sto-programma-5k.md) | Πρόοδος στο πρόγραμμα 5K, αποθηκευμένη στον browser | Αποδεκτή | 31/10/2026 |
+| [0010](0010-anazitisi-merous-me-openstreetmap.md) | Αναζήτηση μέρους με Open-Meteo και OpenStreetMap μαζί, και όχι μόνο πόλεις | Αποδεκτή | 01/11/2026 |
 
 ## Πρότυπο για νέο ADR
 

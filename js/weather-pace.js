@@ -206,8 +206,8 @@
   }
 
   /* ---------- Τοποθεσία ---------- */
-  // Χωρίς τόνους, πεζά, ς → σ: «Κρήτης» και «κρητησ» συγκρίνονται ίδια
-  const norm = (s) => String(s).normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/ς/g, 'σ');
+  // Ό,τι δεν καλεί το δίκτυο είναι στο js/place-search.js
+  const { norm, fromOsm, kindOf, isWide, pickPlaces } = window.DKPlaceSearch;
 
   // Το Open-Meteo ψάχνει μόνο με το όνομα του μέρους, σε μία γλώσσα κάθε φορά. Ρωτάμε
   // ελληνικά και αγγλικά μαζί (αλλιώς το «Heraklion» στην ελληνική σελίδα βρίσκει μόνο
@@ -257,63 +257,9 @@
     return fallback;
   }
 
-  // Το Open-Meteo έχει κενά, δεν ξέρει π.χ. «Κρήτη», «Πάρνηθα» ή «Χαλκιδική». Ρωτάμε μαζί και το
-  // OpenStreetMap και φέρνουμε τα αποτελέσματά του στη μορφή του Open-Meteo, με κωδικούς GeoNames.
-  // Τα υπόλοιπα είδη του (δρόμοι, μαγαζιά, κτίρια) δεν είναι μέρη για πρόγνωση.
-  const OSM_CODES = {
-    country: 'PCLI', island: 'ISL', islet: 'ISL', archipelago: 'ISL',
-    peak: 'MT', mountain_range: 'MT', ridge: 'MT', hill: 'MT', volcano: 'MT',
-    park: 'PRK', garden: 'PRK', nature_reserve: 'PRK', stadium: 'PRK', track: 'PRK',
-    lake: 'LK', reservoir: 'LK', beach: 'BCH', bay: 'BCH', cape: 'BCH', peninsula: 'PEN',
-    city: 'PPL', town: 'PPL', village: 'PPL', hamlet: 'PPL', suburb: 'PPL', quarter: 'PPL',
-    neighbourhood: 'PPL', locality: 'PPL', municipality: 'PPL', city_district: 'PPL'
-  };
   async function osmPlaces(q) {
-    const list = await getJson('https://nominatim.openstreetmap.org/search?format=jsonv2&limit=8&addressdetails=1&accept-language=' +
-      (EN ? 'en' : 'el') + '&q=' + encodeURIComponent(q));
-    return list.filter((r) => /^(place|natural|leisure|water|boundary)$/.test(r.category)).map((r) => {
-      const a = r.address || {};
-      const name = r.name || r.display_name.split(',')[0];
-      return {
-        id: 'osm' + r.place_id,
-        osm: true,
-        name,
-        names: [norm(name)],
-        latitude: +r.lat,
-        longitude: +r.lon,
-        feature_code: OSM_CODES[r.category === 'boundary' ? r.addresstype : r.type] || 'RGN',
-        // Δεν δίνει πληθυσμό: η «σημαντικότητα» (0–1) παίρνει τη θέση του στην κατάταξη
-        population: (r.importance || 0) * 100000,
-        admin1: a.state || a.region || a.county,
-        country: a.country,
-        country_code: (a.country_code || '').toUpperCase()
-      };
-    });
-  }
-
-  // Κωδικοί GeoNames: PPL* = πόλη/χωριό, PCL* = χώρα, και τα είδη μέρους που δείχνουμε (όχι αεροδρόμια, ξενοδοχεία κ.λπ.)
-  const isTown = (r) => !r.feature_code || r.feature_code.startsWith('PPL');
-  const isCountry = (r) => /^PCL/.test(r.feature_code || '');
-  const KINDS = [
-    ['island', /^ISL/], ['mountain', /^(MT|PK|HLL|RDG)/], ['park', /^(PRK|RES|GDN|STDM)/], ['lake', /^(LK|RSV)/],
-    ['beach', /^(BCH|BAY|CAPE)/], ['region', /^(ADM|RGN|AREA|PEN|PRSH|VAL|FRST)/]
-  ];
-  const kindOf = (r) => (KINDS.find(([, code]) => code.test(r.feature_code || '')) || [null])[0];
-  // Σε αυτά η πρόγνωση αφορά το κέντρο τους, και οι δύο πηγές το τοποθετούν διαφορετικά
-  const isWide = (r) => ['island', 'mountain', 'region'].includes(kindOf(r));
-
-  // Τα πιο μεγάλα πρώτα. Το ίδιο μέρος από τις δύο πηγές μένει μία φορά, με το όνομα του
-  // OpenStreetMap στα νησιά κ.λπ. («Κρήτη» αντί για «Nísos Kríti»).
-  function mergePlaces(found) {
-    const merged = [];
-    [...found].sort((a, b) => (b.population || 0) - (a.population || 0)).forEach((r) => {
-      const near = isWide(r) ? 0.5 : 0.05;
-      const same = merged.find((m) => kindOf(m) === kindOf(r) &&
-        Math.abs(m.latitude - r.latitude) < near && Math.abs(m.longitude - r.longitude) < near);
-      if (!same) merged.push(r);
-      else if (r.osm && isWide(r)) same.name = r.name;
-    });
-    return merged;
+    return fromOsm(await getJson('https://nominatim.openstreetmap.org/search?format=jsonv2&limit=8&addressdetails=1&accept-language=' +
+      (EN ? 'en' : 'el') + '&q=' + encodeURIComponent(q)));
   }
 
   // Τι λέμε όταν δεν βρέθηκε τίποτα: εξαρτάται από το αλφάβητο που έγραψε ο χρήστης.
@@ -346,12 +292,8 @@
       if (myRun !== run) return;
       if (!meteo && !osm) throw new Error('search');
       const found = (meteo || []).concat(osm || []);
-      const sameName = (r) => r.names.includes(norm(q));
-      // Μεγάλη πόλη με το ίδιο όνομα (Σιγκαπούρη, Λουξεμβούργο, Νέα Υόρκη): δεν είναι λάθος, τη δείχνουμε.
-      // Αλλιώς «Ελλάδα», «Germany» είναι χώρα, όχι τα χωριά των ΗΠΑ με το ίδιο όνομα.
-      const bigTown = found.some((r) => isTown(r) && sameName(r) && !r.osm && (r.feature_code === 'PPLC' || (r.population || 0) >= 50000));
-      if (!bigTown && found.some((r) => sameName(r) && isCountry(r))) { status(T.isCountry(q), true); return; }
-      const results = mergePlaces(found.filter((r) => isTown(r) || kindOf(r))).slice(0, 6);
+      const { country, results } = pickPlaces(found, q);
+      if (country) { status(T.isCountry(q), true); return; }
       if (!results.length) { status(notFoundMsg(q), true); return; }
       const pick = (r) => choosePlace({ name: r.name + (r.country_code && r.country_code !== 'GR' ? ', ' + r.country : ''), lat: r.latitude, lon: r.longitude, wide: isWide(r) });
       // Ένα μόνο μέρος: δεν ρωτάμε, φέρνουμε κατευθείαν την πρόγνωση
