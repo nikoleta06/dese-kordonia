@@ -102,5 +102,38 @@ test('το γνωστό μέρος του OpenStreetMap ανεβαίνει πά�
 });
 
 test('τίποτα χρήσιμο σημαίνει κενή λίστα, όχι σφάλμα', () => {
-  assert.deepEqual(pickPlaces([], 'asdfghjk'), { country: false, results: [] });
+  assert.deepEqual(pickPlaces([], 'asdfghjk'), { country: false, results: [], auto: false });
+});
+
+test('στενά και ύφαλοι στη θάλασσα μένουν εκτός', () => {
+  const list = [
+    { place_id: 1, name: 'Ύφαλος Παξών', category: 'natural', type: 'reef', lat: '39.22', lon: '20.17' },
+    { place_id: 2, name: 'Στενό Παξών', category: 'natural', type: 'strait', lat: '39.3', lon: '20.13' }
+  ];
+  assert.deepEqual(fromOsm(list), []);
+});
+
+test('κατευθείαν στην πρόγνωση μόνο αν το μοναδικό μέρος είναι αυτό που γράφτηκε', () => {
+  const island = () => osm('Εύβοια', 'place', 'island', 38.494, 23.911);
+  assert.equal(pickPlaces([island()], 'ευβοια').auto, true);
+  assert.equal(pickPlaces([meteo('Ηράκλειο', 'PPLA', 35.34, 25.13, 137000)], 'Ηράκλειο Κρήτης').auto, true);
+  // Παρόμοιο όνομα: το δείχνουμε, αλλά ρωτάμε
+  const steni = pickPlaces([osm('Στενή Δίρφυος', 'place', 'village', 38.58, 23.84)], 'Στενή Ευβοίας');
+  assert.equal(steni.results.length, 1);
+  assert.equal(steni.auto, false);
+  // Δύο ή περισσότερα: πάντα ρωτάμε
+  assert.equal(pickPlaces([meteo('Βουλιαγμένη', 'PPL', 37.81, 23.78), meteo('Βουλιαγμένη', 'PPL', 37.84, 21.61)], 'Βουλιαγμένη').auto, false);
+});
+
+test('το όνομα και από τις δύο πηγές μετρά για την αυτόματη επιλογή', () => {
+  const { results, auto } = pickPlaces([meteo('Nísos Kríti', 'ISL', 35.2, 24.9, 623065), osm('Κρήτη', 'place', 'island', 35.308, 24.463, 0.7)], 'Κρήτη');
+  assert.equal(results.length, 1);
+  assert.equal(auto, true);
+});
+
+test('δύο νησιά με άλλο όνομα από την ίδια πηγή μένουν χωριστά, ακόμα κι αν είναι κοντά', () => {
+  const near = mergePlaces([osm('Νησί Α', 'place', 'island', 37.6, 25.1), osm('Νησί Β', 'place', 'island', 37.5, 25.3)]);
+  assert.equal(near.length, 2);
+  const sameName = mergePlaces([osm('Πήλιο', 'natural', 'peak', 39.365, 23.136), osm('Πήλιο', 'natural', 'mountain_range', 39.438, 23.046)]);
+  assert.equal(sameName.length, 1);
 });

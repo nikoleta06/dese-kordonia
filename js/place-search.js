@@ -18,8 +18,9 @@
     city: 'PPL', town: 'PPL', village: 'PPL', hamlet: 'PPL', suburb: 'PPL', quarter: 'PPL',
     neighbourhood: 'PPL', locality: 'PPL', municipality: 'PPL', city_district: 'PPL'
   };
+  // Ύφαλοι και στενά είναι στη θάλασσα: οι «Παξοί» έβγαζαν το «Στενό Παξών»
   function fromOsm(list) {
-    return list.filter((r) => /^(place|natural|leisure|water|boundary)$/.test(r.category)).map((r) => {
+    return list.filter((r) => /^(place|natural|leisure|water|boundary)$/.test(r.category) && !/^(strait|reef|shoal)$/.test(r.type)).map((r) => {
       const a = r.address || {};
       const name = r.name || r.display_name.split(',')[0];
       return {
@@ -51,26 +52,37 @@
   const isWide = (r) => ['island', 'mountain', 'region'].includes(kindOf(r));
 
   // Τα πιο μεγάλα πρώτα. Το ίδιο μέρος από τις δύο πηγές μένει μία φορά, με το όνομα του
-  // OpenStreetMap στα νησιά κ.λπ. («Κρήτη» αντί για «Nísos Kríti»).
+  // OpenStreetMap στα νησιά κ.λπ. («Κρήτη» αντί για «Nísos Kríti»). Από την ίδια πηγή, δύο νησιά ή
+  // βουνά με άλλο όνομα είναι διαφορετικά μέρη, όσο κοντά κι αν είναι.
   function mergePlaces(found) {
     const merged = [];
     [...found].sort((a, b) => (b.population || 0) - (a.population || 0)).forEach((r) => {
       const near = isWide(r) ? 0.5 : 0.05;
       const same = merged.find((m) => kindOf(m) === kindOf(r) &&
-        Math.abs(m.latitude - r.latitude) < near && Math.abs(m.longitude - r.longitude) < near);
-      if (!same) merged.push(r);
-      else if (r.osm && isWide(r)) same.name = r.name;
+        Math.abs(m.latitude - r.latitude) < near && Math.abs(m.longitude - r.longitude) < near &&
+        (!isWide(r) || !m.osm !== !r.osm || m.names.some((n) => r.names.includes(n))));
+      if (!same) { merged.push(r); return; }
+      same.names = same.names.concat(r.names);
+      if (r.osm && isWide(r)) same.name = r.name;
     });
     return merged;
   }
+
+  // Γράφτηκε αυτό το μέρος; Το όνομα ή μια από τις λέξεις, ώστε να πιάνει το «Ηράκλειο Κρήτης»
+  const namesMatch = (r, q) => {
+    const words = norm(q).split(/[\s,]+/).filter(Boolean);
+    return r.names.includes(norm(q)) || r.names.some((n) => words.includes(n));
+  };
 
   function pickPlaces(found, q) {
     const sameName = (r) => r.names.includes(norm(q));
     // Μεγάλη πόλη με το ίδιο όνομα (Σιγκαπούρη, Λουξεμβούργο, Νέα Υόρκη): δεν είναι λάθος, τη δείχνουμε.
     // Αλλιώς «Ελλάδα», «Germany» είναι χώρα, όχι τα χωριά των ΗΠΑ με το ίδιο όνομα.
     const bigTown = found.some((r) => isTown(r) && sameName(r) && !r.osm && (r.feature_code === 'PPLC' || (r.population || 0) >= 50000));
-    if (!bigTown && found.some((r) => sameName(r) && isCountry(r))) return { country: true, results: [] };
-    return { country: false, results: mergePlaces(found.filter((r) => isTown(r) || kindOf(r))).slice(0, 6) };
+    if (!bigTown && found.some((r) => sameName(r) && isCountry(r))) return { country: true, results: [], auto: false };
+    const results = mergePlaces(found.filter((r) => isTown(r) || kindOf(r))).slice(0, 6);
+    // Ένα μόνο μέρος πάει κατευθείαν στην πρόγνωση, αν είναι αυτό που γράφτηκε. Αν όχι, ρωτάμε.
+    return { country: false, results, auto: results.length === 1 && namesMatch(results[0], q) };
   }
 
   window.DKPlaceSearch = { norm, fromOsm, kindOf, isWide, mergePlaces, pickPlaces };

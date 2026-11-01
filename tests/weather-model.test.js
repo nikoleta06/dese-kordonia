@@ -7,6 +7,14 @@ const path = require('node:path');
 // Στο Node δεν υπάρχει window, οπότε φτιάχνουμε ένα άδειο πριν το φορτώσουμε.
 globalThis.window = globalThis.window || {};
 require(path.join(__dirname, '..', 'js', 'weather-model.js'));
+
+test('το υψόμετρο επισημαίνεται μόνο σε μεγάλα μέρη που είναι ψηλά, όχι σε χωριά στο βουνό', () => {
+  const { isHighUp } = window.DKWeatherModel;
+  assert.equal(isHighUp({ wide: true }, 2841), true);
+  assert.equal(isHighUp({ wide: true }, 300), true);
+  assert.equal(isHighUp({ wide: true }, 226), false);
+  assert.equal(isHighUp({}, 1150), false);
+});
 const { heatSum, slowdownPct, levelOf } = window.DKWeatherModel;
 
 // Σύγκριση δεκαδικών: 0.1 + 0.2 δεν κάνει ακριβώς 0.3 στους υπολογιστές

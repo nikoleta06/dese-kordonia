@@ -119,7 +119,9 @@
     }
     const best = pool.reduce((a, b) => (M.heatSum(b.t, b.d) < M.heatSum(a.t, a.d) ? b : a));
 
-    $('hwTitle').textContent = place.name + ' · ' + T.now + ' ' + Math.round(now.t) + '°C';
+    const altitude = M.isHighUp(place, data.elevation)
+      ? ', ' + Math.round(data.elevation).toLocaleString(EN ? 'en-GB' : 'el-GR') + (EN ? ' m' : ' μ.') : '';
+    $('hwTitle').textContent = place.name + altitude + ' · ' + T.now + ' ' + Math.round(now.t) + '°C';
     $('hwText').textContent = T.texts[level] + (hasPlace ? '' : ' ' + T.defaultCity);
     const badge = $('hwLevel');
     badge.className = 'wp-level lv-' + level;

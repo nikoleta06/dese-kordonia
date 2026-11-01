@@ -47,5 +47,10 @@
   }
   const round5 = (sec) => Math.round(sec / 5) * 5;
 
-  window.DKWeatherModel = { heatSum, slowdownPct, levelOf, estimate, round5 };
+  // Σε νησιά, βουνά και περιοχές η πρόγνωση αφορά το κέντρο τους, που μπορεί να είναι ψηλά, ενώ ο
+  // δρομέας τρέχει πιο χαμηλά: στον Όλυμπο 14 °C πιο κρύο από το Λιτόχωρο. Σε χωριό στο βουνό το
+  // υψόμετρο είναι όντως εκεί που τρέχει κάποιος, οπότε δεν λέμε τίποτα.
+  const isHighUp = (place, elevation) => !!place.wide && elevation >= 300;
+
+  window.DKWeatherModel = { heatSum, slowdownPct, levelOf, estimate, round5, isHighUp };
 })();

@@ -20,6 +20,9 @@
     notFoundOther: 'No place found with that name. Write it in English or in Latin letters (e.g. "Moscow", "Tokyo").',
     isCountry: (q) => '"' + q + '" is a country. Enter something more specific, e.g. "Athens" or "Crete".',
     wideNote: 'The weather varies across a place this big. The forecast is for its centre, so for a closer one enter the town or village.',
+    highNote: (m) => 'The forecast is for the centre of this place, at ' + m + '. Lower down it is warmer, by roughly 6 °C per 1,000 m, so for a closer forecast enter the town or village.',
+    metres: (m) => m.toLocaleString(LOCALE) + ' m',
+    chooseOne: 'We found this place with a similar name. Is it where you will run?',
     kinds: { island: 'Island', mountain: 'Mountain', park: 'Park', lake: 'Lake', beach: 'Beach', region: 'Region' },
     loading: 'Loading the forecast…',
     netError: 'Could not reach the weather service, or it took too long to answer. Check your connection and try again.',
@@ -69,6 +72,9 @@
     notFoundOther: 'Δεν βρέθηκε μέρος με αυτό το όνομα. Γράψ’ το στα αγγλικά ή με λατινικούς χαρακτήρες (π.χ. «Moscow», «Tokyo»).',
     isCountry: (q) => 'Το «' + q + '» είναι χώρα. Γράψε κάτι πιο συγκεκριμένο, π.χ. «Αθήνα» ή «Κρήτη».',
     wideNote: 'Σε τόσο μεγάλο μέρος ο καιρός αλλάζει από σημείο σε σημείο. Η πρόγνωση είναι για το κέντρο του, οπότε για πιο ακριβή γράψε την πόλη ή το χωριό.',
+    highNote: (m) => 'Η πρόγνωση είναι για το κέντρο του μέρους, σε υψόμετρο ' + m + ' Πιο χαμηλά κάνει πιο πολλή ζέστη, περίπου 6 °C ανά 1.000 μ., οπότε για πιο ακριβή γράψε την πόλη ή το χωριό.',
+    metres: (m) => m.toLocaleString(LOCALE) + ' μ.',
+    chooseOne: 'Βρέθηκε αυτό το μέρος με παρόμοιο όνομα. Εκεί θα τρέξεις;',
     kinds: { island: 'Νησί', mountain: 'Βουνό', park: 'Πάρκο', lake: 'Λίμνη', beach: 'Παραλία', region: 'Περιοχή' },
     loading: 'Φορτώνει η πρόγνωση…',
     netError: 'Η υπηρεσία καιρού δεν απάντησε ή άργησε πολύ. Έλεγξε τη σύνδεσή σου και δοκίμασε ξανά.',
@@ -115,7 +121,7 @@
   const $ = (id) => document.getElementById(id);
 
   /* ---------- Το μοντέλο: js/weather-model.js (κοινό με την κάρτα της αρχικής) ---------- */
-  const { heatSum, slowdownPct, levelOf, estimate, round5 } = window.DKWeatherModel;
+  const { heatSum, slowdownPct, levelOf, estimate, round5, isHighUp } = window.DKWeatherModel;
 
   /* ---------- Βοηθητικά ---------- */
   function fmtPace(sec) {
@@ -178,6 +184,7 @@
   let place = null;    // { name, lat, lon, wide }
   let hours = [];      // [{ date, hour, t, d, rh, feels, wind, rain, sum, past }]
   let selected = null; // στοιχείο του hours
+  let altitude = '';   // το υψόμετρο της πρόγνωσης, όταν είναι πολύ πιο ψηλά από εκεί που τρέχει κάποιος
   let run = 0;         // αυξάνεται με το «Καθαρισμός» και το «Αλλαγή»: απαντήσεις που έρχονται αργότερα αγνοούνται
 
   /* ---------- Ρυθμός ---------- */
@@ -292,14 +299,13 @@
       if (myRun !== run) return;
       if (!meteo && !osm) throw new Error('search');
       const found = (meteo || []).concat(osm || []);
-      const { country, results } = pickPlaces(found, q);
+      const { country, results, auto } = pickPlaces(found, q);
       if (country) { status(T.isCountry(q), true); return; }
       if (!results.length) { status(notFoundMsg(q), true); return; }
       const pick = (r) => choosePlace({ name: r.name + (r.country_code && r.country_code !== 'GR' ? ', ' + r.country : ''), lat: r.latitude, lon: r.longitude, wide: isWide(r) });
-      // Ένα μόνο μέρος: δεν ρωτάμε, φέρνουμε κατευθείαν την πρόγνωση
-      if (results.length === 1) { pick(results[0]); return; }
+      if (auto) { pick(results[0]); return; }
       status('');
-      list.append(el('p', 'wp-places-title', T.choose(results.length)));
+      list.append(el('p', 'wp-places-title', results.length === 1 ? T.chooseOne : T.choose(results.length)));
       results.forEach((r) => {
         const detail = [T.kinds[kindOf(r)], r.admin1, r.country].filter(Boolean).join(', ');
         const b = el('button', 'wp-place');
@@ -340,6 +346,7 @@
     save({ place: p });
     $('wpPlaceName').textContent = p.name;
     $('wpPlaceNote').textContent = p.wide ? T.wideNote : '';
+    $('wpPlaceNote').classList.remove('is-high');
     $('wpPlaceBox').classList.remove('calc-hidden');
     $('wpSearchBox').classList.add('calc-hidden');
     fetchForecast();
@@ -356,6 +363,9 @@
         '&timezone=auto&forecast_days=' + DAYS;
       const data = await getJson(url);
       if (myRun !== run) return;
+      altitude = isHighUp(place, data.elevation) ? T.metres(Math.round(data.elevation)) : '';
+      if (altitude) $('wpPlaceNote').textContent = T.highNote(altitude);
+      $('wpPlaceNote').classList.toggle('is-high', !!altitude);
       const h = data.hourly;
       // «Τώρα» στην ώρα του μέρους, όχι του browser
       const nowLocal = new Date(Date.now() + data.utc_offset_seconds * 1000).toISOString().slice(0, 13);
@@ -434,7 +444,7 @@
     const pct = slowdownPct(x.sum);
     const pace = paceSec();
 
-    $('wpWhen').textContent = dayLong(x.date) + ', ' + hh(x.hour) + (place ? ' · ' + place.name : '');
+    $('wpWhen').textContent = dayLong(x.date) + ', ' + hh(x.hour) + (place ? ' · ' + place.name + (altitude ? ', ' + altitude : '') : '');
 
     const badge = $('wpLevel');
     badge.className = 'wp-level lv-' + level;
