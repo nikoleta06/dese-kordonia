@@ -8,7 +8,7 @@ cardText: "Doctors urged him not to run. He won the Boston Marathon anyway, for 
 cat: champions
 published: "2026-11-02"
 updated: "2026-11-02"
-readMinutes: 5
+readMinutes: 4
 ---
 
 Boston, 20 April 1946. Near the end of the marathon, a thin 36-year-old is running beside his friend Johnny Kelley, the winner of the year before. An older Greek-American shouts to him, "For Greece, for your children." **Stelios Kyriakides** pulls away and breaks the tape first, shouting "For Greece!"
@@ -51,11 +51,9 @@ When he returned to Athens, nearly a million people welcomed him, and the Acropo
 
 First we keep 1938. Dropping out wasn't the end of his story, it was the beginning.
 
-We also keep the years without races. As I wrote about [my own comeback](post-epistrofi-meta-atyxima-en.html), a break doesn't erase what you've built.
+We also keep the years without races. As I wrote about [my own comeback](post-epistrofi-meta-atyxima-en.html), a break doesn't erase what we've built.
 
 Above all, though, we keep the "why". Kyriakides ran hungry because he knew who he was running for. Our own "why" doesn't have to be that big, it only has to be ours.
-
-I run because it gives me strength and makes me feel alive. And somewhere in the kilometres I've found a way to put my thoughts in order. I don't know how it happens, but it does.
 
 Every November, thousands of runners take on the [Athens Authentic Marathon](agones-en.html), each for their own reason. If you find your own why, every kilometre will mean more.
 
