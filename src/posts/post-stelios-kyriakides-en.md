@@ -47,17 +47,17 @@ His biggest win came after the finish line. He stayed in America to gather money
 
 When he returned to Athens, nearly a million people welcomed him, and the Acropolis was lit in his honour, for the first time since the war. Today his statue, beside Spyros Louis, stands at the first mile of the Boston Marathon, and a twin stands in Marathon, Greece.
 
-### What I keep
+### What we could take from this
 
-First I keep 1938. Dropping out wasn't the end of his story, it was the beginning.
+First we keep 1938. Dropping out wasn't the end of his story, it was the beginning.
 
-I also keep the years without races. As I wrote about [my own comeback](post-epistrofi-meta-atyxima-en.html), a break doesn't erase what you've built.
+We also keep the years without races. As I wrote about [my own comeback](post-epistrofi-meta-atyxima-en.html), a break doesn't erase what you've built.
 
-Above all, though, I keep the "why". Kyriakides ran hungry because he knew who he was running for. Our own "why" doesn't have to be that big, it only has to be ours.
+Above all, though, we keep the "why". Kyriakides ran hungry because he knew who he was running for. Our own "why" doesn't have to be that big, it only has to be ours.
 
 I run because it gives me strength and makes me feel alive. And somewhere in the kilometres I've found a way to put my thoughts in order. I don't know how it happens, but it does.
 
-Every November, thousands of runners take on the [Athens Authentic Marathon](agones-en.html), each for their own reason. What's yours?
+Every November, thousands of runners take on the [Athens Authentic Marathon](agones-en.html), each for their own reason. If you find your own why, every kilometre will mean more.
 
 {% sources "history" %}
 1. Tsiotos, N., & Dabilis, A. (2001). <cite>Running with Pheidippides: Stylianos Kyriakides, the Miracle Marathoner.</cite> Syracuse University Press. <a href="https://press.syr.edu/supressbooks/1255/running-with-pheidippides/" target="_blank" rel="noopener">Publisher →</a>
