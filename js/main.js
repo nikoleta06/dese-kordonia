@@ -32,7 +32,8 @@ document.addEventListener('DOMContentLoaded', function () {
     'post-diatrofi-trexsimo': 'tips',
     'post-allagi-papoutsion': 'tips',
     'post-trexsimo-xeimona': 'tips',
-    'post-epistrofi-meta-atyxima': 'stories'
+    'post-epistrofi-meta-atyxima': 'stories',
+    'post-stelios-kyriakides': 'champions'
   };
 
   /* --- Εικονίδια & ονόματα κατηγοριών (για τη σελίδα Αποθηκευμένα) --- */
