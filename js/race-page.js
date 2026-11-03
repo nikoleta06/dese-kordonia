@@ -7,7 +7,9 @@
      πρόγνωση), για το σημείο της εκκίνησης (lat/lng του αγώνα), ώρα προς ώρα γύρω από την ώρα
      εκκίνησης. Το ίδιο μοντέλο ζέστης με το «Ρυθμός & Καιρός».
    - Προτεινόμενος ρυθμός (μόνο αγώνες δρόμου): ρυθμός και ενδιάμεσοι χρόνοι για τον χρόνο-στόχο,
-     και πόσο τον αλλάζει ο καιρός της ώρας εκκίνησης. Ο στόχος μένει στο localStorage ανά αγώνα. */
+     και πόσο τον αλλάζει ο καιρός της ώρας εκκίνησης. Ο στόχος μένει στο localStorage ανά αγώνα.
+     Σε αγώνες με course (π.χ. ο Αυθεντικός) και ρυθμός ανά τμήμα της διαδρομής, από το
+     js/race-course.js, και οι ενδιάμεσοι χρόνοι βγαίνουν με αυτόν. */
 (function () {
   'use strict';
 
@@ -43,7 +45,11 @@
     wxOk: 'The forecast for the start needs no adjustment, you can run your goal pace.',
     wxPending: 'When the forecast for race day is out, you will also see here how much the weather changes this pace.',
     split: 'Split', goalCol: 'Goal', wxCol: 'With the weather',
-    finish: 'Finish'
+    finish: 'Finish',
+    segTitle: 'Pace by section of the course',
+    segIntro: 'The same effort all the way, slower on the climb and faster on the descent, finishing on your goal time. A rough estimate from the gradient, run by feel.',
+    kmRange: (a, b) => 'km ' + a + '–' + b,
+    endAt: 'at the end'
   } : {
     inDays: (n) => 'σε ' + n + ' μέρες',
     started: 'Ο αγώνας ξεκίνησε. Καλή επιτυχία σε όσους τρέχουν!',
@@ -68,7 +74,11 @@
     wxOk: 'Η πρόγνωση για την εκκίνηση δεν χρειάζεται προσαρμογή, μπορείς να τρέξεις τον ρυθμό του στόχου σου.',
     wxPending: 'Όταν βγει η πρόγνωση για τη μέρα του αγώνα, θα δεις εδώ και πόσο αλλάζει ο καιρός αυτόν τον ρυθμό.',
     split: 'Σημείο', goalCol: 'Στόχος', wxCol: 'Με τον καιρό',
-    finish: 'Τερματισμός'
+    finish: 'Τερματισμός',
+    segTitle: 'Ρυθμός ανά τμήμα της διαδρομής',
+    segIntro: 'Ίδιος κόπος σε όλη τη διαδρομή, πιο αργά στην ανηφόρα και πιο γρήγορα στην κατηφόρα, με τερματισμό στον χρόνο-στόχο σου. Χοντρική εκτίμηση από την κλίση, τρέξε με την αίσθηση.',
+    kmRange: (a, b) => a + '–' + b + ' χλμ.',
+    endAt: 'στο τέλος'
   };
 
   const $ = (id) => document.getElementById(id);
@@ -248,6 +258,8 @@
   /* ---------- Προτεινόμενος ρυθμός ---------- */
   const paceBox = $('rpPace');
   const kms = paceBox && paceBox.dataset.km ? paceBox.dataset.km.split(',').map(Number) : [];
+  const C = window.DKRaceCourse;
+  const course = C && paceBox && paceBox.dataset.course ? JSON.parse(paceBox.dataset.course) : null;
 
   function loadGoal() {
     try { return (JSON.parse(localStorage.getItem(STORE_KEY)) || {})[raceId] || null; } catch (e) { return null; }
@@ -298,6 +310,8 @@
     out.append(big);
 
     const adj = wxPct != null && wxPct >= 0.25 ? 1 + wxPct / 100 : null;
+    const rows = course && km === course.km ? C.plan(course.segments, total) : null;
+    const timeOf = (p) => rows ? C.timeAt(rows, p) : pace * p;
     if (wxPct != null) {
       // Ρυθμός στα 5 δευτερόλεπτα και χρόνος στο λεπτό: είναι εκτίμηση, όχι ακριβής πρόβλεψη
       out.append(el('p', 'wp-delta', adj
@@ -307,6 +321,8 @@
     } else {
       out.append(el('p', 'wp-delta', T.wxPending));
     }
+
+    if (rows) out.append(renderCourse(rows, adj));
 
     const table = el('table', 'rp-splits');
     const head = el('tr');
@@ -320,13 +336,34 @@
       const name = p === km ? T.finish + ' (' + short(km) + ')'
         : p === 21.0975 ? T.half + ' (' + short(p) + ')'
         : short(p);
-      tr.append(el('td', null, name), el('td', null, fmtTime(pace * p)));
+      tr.append(el('td', null, name), el('td', null, fmtTime(timeOf(p))));
       // Στο λεπτό, όπως και το κείμενο από πάνω: είναι εκτίμηση, όχι ακριβής πρόβλεψη
-      if (adj) tr.append(el('td', null, fmtTime(Math.round(pace * adj * p / 60) * 60)));
+      if (adj) tr.append(el('td', null, fmtTime(Math.round(timeOf(p) * adj / 60) * 60)));
       tbody.append(tr);
     });
     table.append(thead, tbody);
     out.append(table);
+  }
+
+  // Τα τμήματα της διαδρομής: ρυθμός (και με τον καιρό, όταν χρειάζεται), χρόνος στο τέλος, συμβουλή
+  function renderCourse(rows, adj) {
+    const box = el('div', 'rp-course');
+    box.append(el('h3', 'rp-course-h', T.segTitle), el('p', 'rp-intro', T.segIntro));
+    const list = el('ol', 'rp-course-list');
+    rows.forEach((r, k) => {
+      const seg = course.segments[k];
+      const li = el('li', 'rp-seg');
+      const head = el('div', 'rp-seg-head');
+      head.append(el('strong', null, seg.name[lang]), el('span', 'rp-seg-km', T.kmRange(num(r.from, 1), short(r.to).replace(T.km, ''))));
+      const pace = el('p', 'rp-seg-pace');
+      pace.append(el('span', 'rp-seg-big', fmtPace(r.pace) + ' ' + T.perKm));
+      if (adj) pace.append(el('span', 'rp-seg-wx', T.wxCol + ' ~' + fmtPace(r.pace + Math.max(5, M.round5(r.pace * (adj - 1)))) + ' ' + T.perKm));
+      pace.append(el('span', 'rp-seg-at', fmtTime(r.endSec) + ' ' + T.endAt));
+      li.append(head, pace, el('p', 'rp-seg-tip', seg.tip[lang]));
+      list.append(li);
+    });
+    box.append(list);
+    return box;
   }
 
   if (kms.length) {

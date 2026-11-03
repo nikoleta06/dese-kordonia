@@ -43,6 +43,46 @@ module.exports = {
         en: "The historic marathon, from Marathon to the Panathenaic Stadium, the route that started it all.",
       },
       url: { el: "https://www.athensauthenticmarathon.gr/", en: "https://www.athensauthenticmarathon.gr/" },
+      // Τα τμήματα της διαδρομής για τον ρυθμό ανά τμήμα (js/race-course.js). effect, πόσο % πιο
+      // αργά (ή πιο γρήγορα, αρνητικό) βγαίνει ο ίδιος κόπος σε σχέση με το επίπεδο. Χοντρική
+      // εκτίμηση από την κλίση (~1% στην ανηφόρα, ~2% στην κατηφόρα), όχι ακριβές υψομετρικό.
+      course: {
+        km: 42.195,
+        segments: [
+          {
+            to: 10, effect: 0,
+            name: { el: "Μαραθώνας – Νέα Μάκρη", en: "Marathon – Nea Makri" },
+            tip: {
+              el: "Σχεδόν επίπεδο. Κράτα τον ρυθμό συγκρατημένο, ο αγώνας αρχίζει στην ανηφόρα.",
+              en: "Almost flat. Hold back, the real race starts on the climb.",
+            },
+          },
+          {
+            to: 31, effect: 3,
+            name: { el: "Η μεγάλη ανηφόρα, ως τον Σταυρό", en: "The long climb, up to Stavros" },
+            tip: {
+              el: "21 χλμ. συνεχούς ανηφόρας. Τρέξε με τον κόπο και όχι με το ρολόι, είναι φυσικό να χάνεις δευτερόλεπτα.",
+              en: "21 km of steady climbing. Run by effort, not by the watch, losing a few seconds is normal.",
+            },
+          },
+          {
+            to: 41, effect: -3,
+            name: { el: "Κατηφόρα προς το κέντρο", en: "Downhill into the city" },
+            tip: {
+              el: "Η κατηφόρα βοηθά, αλλά κουράζει τους τετρακέφαλους. Άνοιξε τον ρυθμό σιγά σιγά, όχι απότομα.",
+              en: "The descent helps but tires the quads. Pick up the pace gradually, not all at once.",
+            },
+          },
+          {
+            to: 42.195, effect: 0,
+            name: { el: "Τερματισμός στο Καλλιμάρμαρο", en: "Finish at the Panathenaic Stadium" },
+            tip: {
+              el: "Επίπεδο ως το στάδιο. Ό,τι σου έχει μείνει.",
+              en: "Flat to the stadium. Whatever you have left.",
+            },
+          },
+        ],
+      },
     },
     {
       id: "athens-half-marathon",

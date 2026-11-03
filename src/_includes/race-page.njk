@@ -161,7 +161,7 @@
       <p class="rp-tool"><a href="kairos-rythmos{{ suffix }}.html">{{ t.wxTool }}</a></p>
     </section>
 
-    <section class="rp-card" id="rpPace" aria-labelledby="rpPaceH"{% if km.length %} data-km="{{ km | join(',') }}"{% endif %}>
+    <section class="rp-card" id="rpPace" aria-labelledby="rpPaceH"{% if km.length %} data-km="{{ km | join(',') }}"{% endif %}{% if race.course %} data-course="{{ race.course | dump }}"{% endif %}>
       <h2 class="rp-h" id="rpPaceH">{{ t.paceTitle }}</h2>
       {%- if km.length %}
       <p class="rp-intro">{{ t.paceIntro }}</p>
@@ -194,5 +194,8 @@
 {% block scripts_extra %}
   <script src="js/weather-model.js?v={{ "js/weather-model.js" | assetHash }}"></script>
   <script src="js/race-dates.js?v={{ "js/race-dates.js" | assetHash }}"></script>
+  {%- if race.course %}
+  <script src="js/race-course.js?v={{ "js/race-course.js" | assetHash }}"></script>
+  {%- endif %}
   <script src="js/race-page.js?v={{ "js/race-page.js" | assetHash }}"></script>
 {% endblock %}

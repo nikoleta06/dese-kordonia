@@ -4019,6 +4019,63 @@ button.rc-cell:hover {
   margin: 0;
 }
 
+.rp-course {
+  margin: 1.2rem 0;
+  text-align: left;
+}
+
+.rp-course-h {
+  margin: 0 0 0.4rem;
+  font-size: 1.05rem;
+}
+
+.rp-course-list {
+  margin: 0.8rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.rp-seg {
+  padding: 0.8rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.rp-seg-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.2rem 0.8rem;
+}
+
+.rp-seg-km,
+.rp-seg-at,
+.rp-seg-wx {
+  color: var(--text-dim);
+  font-size: 0.85rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.rp-seg-pace {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.2rem 0.9rem;
+  margin: 0.3rem 0;
+}
+
+.rp-seg-big {
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 1.4rem;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+
+.rp-seg-tip {
+  margin: 0;
+  color: var(--text-dim);
+  font-size: 0.9rem;
+}
+
 .rp-splits {
   width: 100%;
   border-collapse: collapse;
