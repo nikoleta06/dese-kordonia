@@ -1,19 +1,19 @@
 ---
-title: "Stelios Kyriakides, the Greek runner who said he was running for seven million hungry people | Δέσε Κορδόνια"
+title: "Stelios Kyriakides: “I am here to run for 7 million famine-ravaged Greeks” | Δέσε Κορδόνια"
 description: "The story of Stelios Kyriakides, who won the 1946 Boston Marathon to help Greece, and what he teaches us about why we run."
-heading: "The Greek runner who said he was running for seven million hungry people"
+heading: "Stelios Kyriakides: “I am here to run for 7 million famine-ravaged Greeks”"
 summary: "In 1946 Stelios Kyriakides won the Boston Marathon to help Greece. What he teaches us about why we run."
 cardTitle: "Stelios Kyriakides, for seven million hungry people"
 cardText: "Doctors urged him not to run. He won the Boston Marathon anyway, for Greece."
 cat: champions
 published: "2026-11-02"
-updated: "2026-11-02"
+updated: "2026-11-04"
 readMinutes: 4
 ---
 
 Boston, 20 April 1946. Near the end of the marathon, a thin 36-year-old is running beside his friend Johnny Kelley, the winner of the year before. An older Greek-American shouts to him, "For Greece, for your children." **Stelios Kyriakides** pulls away and breaks the tape first, shouting "For Greece!"
 
-He hadn't gone to America only to win. He said so himself before the race, he had come to run for **seven million famine-stricken Greeks**.
+He hadn't gone to America only to win. Before the race he had said he would run for **seven million famine-stricken Greeks**.
 
 ### From Statos to Berlin
 
@@ -29,7 +29,7 @@ It took him eight years.
 
 ### The war years
 
-During the Occupation, Kyriakides sold many of his possessions, and in the end his home, to keep his family from starving. He joined the Resistance and twice escaped execution because he was recognised as an Olympic athlete.
+During the Occupation, Kyriakides sold many of his possessions, and in the end his home, to keep his family from starving. According to Olympedia, he joined the Resistance and twice escaped execution because he was recognised as an Olympic athlete.
 
 When the war ended, Greece was starving and the civil war had begun. He himself was now emaciated.
 
@@ -37,23 +37,23 @@ When the war ended, Greece was starving and the civil war had begun. He himself 
 
 He sold furniture to buy a ticket to America, and Greek-Americans supported him there.
 
-Doctors in Boston urged him not to run. "You will die in the streets," they told him. Even at the start there were doubts about his health, but in the end he was allowed to begin.
+According to the publisher of his biography, doctors in Boston urged him not to run. "You will die in the streets," they told him. Even at the start there were doubts about his health, but in the end he was allowed to begin.
 
-He finished in **2:29:27**, the best time in the world that year. Kelley said later that you can't beat a man like that, because he wasn't running for himself, but for his country.
+He finished in **2:29:27**, the best time in the world that year, as Cyprus Post notes. Kelley said later that you can't beat a man like that, because he wasn't running for himself, but for his country.
 
 ### The second win
 
-His biggest win came after the finish line. He stayed in America to gather money, equipment and medicine. The aid became known as the "Kyriakides Package". According to Cyprus Post it reached millions of dollars, while Olympedia reports over 25,000 tons of supplies.
+His biggest win came after the finish line. He stayed in America to gather money, equipment and medicine. The aid became known as the "Kyriakides Package", and according to Olympedia it came to over 25,000 tons of supplies.
 
-When he returned to Athens, nearly a million people welcomed him, and the Acropolis was lit in his honour, for the first time since the war. Today his statue, beside Spyros Louis, stands at the first mile of the Boston Marathon, and a twin stands in Marathon, Greece.
+When he returned to Athens, nearly a million people welcomed him, according to the publisher of his biography, and the Acropolis was lit in his honour, for the first time since the war. Today his statue, beside Spyros Louis, stands at the first mile of the Boston Marathon, and a twin stands in Marathon, Greece.
 
 ### What we could take from this
 
-First we keep 1938. Dropping out wasn't the end of his story, it was the beginning.
+His story has a lot to tell us. A drop-out in 1938 that wasn't the end. Years without races that didn't erase what he had built. The strongest part, though, is the "who for".
 
-We also keep the years without races. As I wrote about [my own comeback](post-epistrofi-meta-atyxima-en.html), a break doesn't erase what we've built.
+Kyriakides didn't run for a medal or a record. He ran so that a starving country would be heard, and in the end his win was measured in the aid that reached Greece, not in his time.
 
-Above all, though, we keep the "why". Kyriakides ran hungry because he knew who he was running for. Our own "why" doesn't have to be that big, it only has to be ours.
+Our own "why" just has to be ours.
 
 Every November, thousands of runners take on the [Athens Authentic Marathon](agones-en.html), each for their own reason. If you find your own why, every kilometre will mean more.
 

@@ -102,8 +102,10 @@ test('η σελίδα της Επιστήμης δείχνει κάθε άρθρ
 
 // Όχι άνω και κάτω τελεία στο ορατό κείμενο. Μένουν ώρες και ρυθμοί (5:20), σύνδεσμοι, το «--:--»,
 // ο όρος Pa:Hr και οι τίτλοι δημοσιεύσεων μέσα σε <cite>, που είναι ακριβείς παραπομπές.
+// Μοναδική εξαίρεση σε τίτλο άρθρου, ο Κυριακίδης, όπου η «:» εισάγει δική του φράση σε εισαγωγικά.
 test('το ορατό κείμενο κάθε σελίδας δεν έχει «:»', { skip: !built }, () => {
-  const clean = (s) => s.replace(/&nbsp;/g, ' ').replace(/\d:\d/g, '').replace(/https?:\/\/\S*/g, '').replace(/--:--|Pa:Hr/g, '');
+  const clean = (s) => s.replace(/&nbsp;/g, ' ').replace(/\d:\d/g, '').replace(/https?:\/\/\S*/g, '').replace(/--:--|Pa:Hr/g, '')
+    .replace(/(Στέλιος Κυριακίδης|Stelios Kyriakides): (?=«|“|&laquo;|&ldquo;|&quot;|&#8220;)/g, '');
   const found = [];
   for (const f of fs.readdirSync(SITE).filter((x) => x.endsWith('.html'))) {
     const html = read(f);
