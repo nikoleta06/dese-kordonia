@@ -13,7 +13,7 @@ readMinutes: 4
 
 Boston, 20 April 1946. Near the end of the marathon, a thin 36-year-old is running beside his friend Johnny Kelley, the winner of the year before. An older Greek-American shouts to him, "For Greece, for your children." **Stelios Kyriakides** pulls away and breaks the tape first, shouting "For Greece!"
 
-He hadn't gone to America only to win. Before the race he had said he would run for **seven million famine-stricken Greeks**.
+He hadn't gone to America only to win. Before the race he had said he would run for **seven million famine-ravaged Greeks**.
 
 ### From Statos to Berlin
 
@@ -49,13 +49,11 @@ When he returned to Athens, nearly a million people welcomed him, according to t
 
 ### What we could take from this
 
-His story has a lot to tell us. A drop-out in 1938 that wasn't the end. Years without races that didn't erase what he had built. The strongest part, though, is the "who for".
+A drop-out in 1938 that wasn't the end. Years without races that didn't erase what he had built. The strongest part, though, is the "who for".
 
 Kyriakides didn't run for a medal or a record. He ran so that a starving country would be heard, and in the end his win was measured in the aid that reached Greece, not in his time.
 
-Our own "why" just has to be ours.
-
-Every November, thousands of runners take on the [Athens Authentic Marathon](agones-en.html), each for their own reason. If you find your own why, every kilometre will mean more.
+Every November, thousands of runners take on the [Athens Authentic Marathon](agones-en.html), each for their own reason. It doesn't have to be a big one. If you find your own why, every kilometre will mean more.
 
 {% sources "history" %}
 1. Tsiotos, N., & Dabilis, A. (2001). <cite>Running with Pheidippides: Stylianos Kyriakides, the Miracle Marathoner.</cite> Syracuse University Press. <a href="https://press.syr.edu/supressbooks/1255/running-with-pheidippides/" target="_blank" rel="noopener">Publisher →</a>
