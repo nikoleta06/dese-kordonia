@@ -138,6 +138,7 @@ activeNav: "provlepsi-agona"
         }).join('');
 
         $('result').classList.remove('calc-hidden');
+        if (window.dkTrack) window.dkTrack('tool-race-predictor');
       }
 
       $('calcBtn').addEventListener('click', calculate);

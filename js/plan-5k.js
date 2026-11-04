@@ -131,6 +131,10 @@
         input.setAttribute('aria-label', T.session(week, s));
         input.addEventListener('change', () => {
           save(toggle(load(), id, input.checked));
+          if (input.checked && window.dkTrack) {
+            window.dkTrack('tool-5k-session-done');
+            if (summary(load()).finished) window.dkTrack('tool-5k-plan-finished');
+          }
           render();
         });
         label.append(input, el('span', null, String(s)));

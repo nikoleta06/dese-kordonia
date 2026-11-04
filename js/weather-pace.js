@@ -439,6 +439,7 @@
       if (hours.length) status(T.noHours);
       return;
     }
+    if (window.dkTrack) window.dkTrack('tool-weather-pace');
     const x = selected;
     const level = levelOf(x.sum);
     const pct = slowdownPct(x.sum);

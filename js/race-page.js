@@ -151,7 +151,10 @@
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && cal.open) { cal.open = false; cal.querySelector('summary').focus(); }
     });
-    cal.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => { cal.open = false; }));
+    cal.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => {
+      cal.open = false;
+      if (window.dkTrack) window.dkTrack('race-calendar');
+    }));
   }
 
   /* ---------- Καιρός στην εκκίνηση ---------- */
@@ -304,6 +307,7 @@
     if (!total) { out.append(el('p', 'rp-hint', T.hint)); return; }
     const pace = total / km;
     if (pace < 120 || pace > 1200) { out.append(el('p', 'rp-hint wp-error', T.invalid)); return; }
+    if (window.dkTrack) window.dkTrack('race-pace');
 
     const big = el('div', 'pace');
     big.append(el('div', 'big', fmtPace(pace) + ' ' + T.perKm), el('span', 'label', T.goalPace));

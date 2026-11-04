@@ -1,5 +1,32 @@
 /* ===== Δέσε Κορδόνια — shared scripts ===== */
 
+/* ===== Χρήση εργαλείων (events στο GoatCounter) =====
+   dkTrack('tool-pace-calculator'): ένα event ανά όνομα και ανά φόρτωση σελίδας, για να
+   μετράμε πόσοι χρησιμοποιούν κάθε εργαλείο κι όχι πόσες φορές πάτησαν το κουμπί. Ορίζεται
+   έξω από το DOMContentLoaded, ώστε να υπάρχει για τα inline scripts των εργαλείων. Αν το
+   count.js δεν έχει φορτώσει ακόμα, τα events περιμένουν στην ουρά· αν δεν φορτώσει ποτέ
+   (adblocker, localhost), απλώς δεν στέλνονται. Λίστα με τα ονόματα στο SETUP-ANALYTICS.md. */
+window.dkTrack = (function () {
+  const sent = new Set();
+  const queue = [];
+  function flush() {
+    const gc = window.goatcounter;
+    if (!gc || typeof gc.count !== 'function') return;
+    while (queue.length) {
+      const name = queue.shift();
+      try { gc.count({ path: name, title: name, event: true }); } catch (e) { /* τα στατιστικά δεν σπάνε ποτέ τη σελίδα */ }
+    }
+  }
+  function track(name) {
+    if (sent.has(name)) return;
+    sent.add(name);
+    queue.push(name);
+    flush();
+  }
+  track.flush = flush;
+  return track;
+})();
+
 document.addEventListener('DOMContentLoaded', function () {
 
   /* ===== Ρυθμίσεις μετρητή «like» (Supabase) =====
@@ -691,6 +718,7 @@ document.addEventListener('DOMContentLoaded', function () {
     s.async = true;
     s.src = '//gc.zgo.at/count.js';
     s.setAttribute('data-goatcounter', GC);
+    s.addEventListener('load', window.dkTrack.flush);
     document.body.appendChild(s);
   })();
 

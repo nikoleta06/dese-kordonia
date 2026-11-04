@@ -113,6 +113,7 @@ activeNav: "zones-palmon"
         ).join('');
 
         $('result').classList.remove('calc-hidden');
+        if (window.dkTrack) window.dkTrack('tool-hr-zones');
       }
 
       $('calcBtn').addEventListener('click', calculate);

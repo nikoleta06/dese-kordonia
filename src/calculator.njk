@@ -119,6 +119,7 @@ activeNav: "calculator"
         ).join('');
 
         $('result').classList.remove('calc-hidden');
+        if (window.dkTrack) window.dkTrack('tool-pace-calculator');
       }
 
       $('calcBtn').addEventListener('click', calculate);
