@@ -39,11 +39,11 @@ A big part of the answer is called **running economy**.
 
 ### What running economy is
 
-It's how much oxygen, and so how much energy, you need to run at a given pace. The less oxygen you use at the same pace, the more economical a runner you are.
+Running economy shows how much it costs you to hold a given pace. In the lab it is usually estimated from how much oxygen you use when running at a steady, submaximal speed. The less oxygen you need at the same pace, the better your economy.
 
-Think of a car's fuel consumption. Two cars with the same tank and the same engine won't get equally far if one burns 5 litres per 100 km and the other 7. In running, this "consumption" is measured in the lab as millilitres of oxygen per kilo of body weight for every kilometre.
+Think of a car's fuel consumption. Two cars with the same tank and the same engine won't get equally far if one burns 5 litres per 100 km and the other 7. In running, this "consumption" is often expressed as millilitres of oxygen per kilo of body weight for every kilometre.
 
-{% note %}💬 **So you don't get confused,** with running economy a lower number is better. It means the same pace costs you less energy.{% endnote %}
+{% note %}💬 **So you don't get confused,** with running economy a lower number is better. It means the same pace costs you less.{% endnote %}
 
 ### The three pieces of endurance
 
@@ -53,13 +53,11 @@ The physiologists Michael Joyner and Edward Coyle, in a well-known review on the
   <p class="ig-title">Three pieces, one performance</p>
   <div class="ig-methods">
     <div class="ig-card"><span class="ig-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg></span><strong>VO₂max</strong><span>The size of the engine, how much oxygen you can use at most</span></div>
-    <div class="ig-card"><span class="ig-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"/></svg></span><strong>Lactate threshold</strong><span>How close to that limit you can run for a long time</span></div>
+    <div class="ig-card"><span class="ig-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"/></svg></span><strong>Lactate threshold</strong><span>Helps us understand how high an intensity you can sustain for a long time</span></div>
     <div class="ig-card ig-good"><span class="ig-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" x2="15" y1="22" y2="22"/><line x1="4" x2="14" y1="9" y2="9"/><path d="M14 22V4a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v18"/><path d="M14 13h2a2 2 0 0 1 2 2v2a2 2 0 0 0 2 2a2 2 0 0 0 2-2V9.83a2 2 0 0 0-.59-1.42L18 5"/></svg></span><strong>Economy</strong><span>How fast you run on that oxygen, the "fuel consumption"</span></div>
   </div>
   <figcaption class="ig-caption">VO₂max and <a href="post-lactate-threshold-en.html">lactate threshold</a> set how much oxygen you can keep using. <strong>Economy</strong> sets how much speed you get from it.</figcaption>
 </figure>
-
-Put simply, VO₂max and your threshold tell you how much energy you can keep spending for a long time. Economy tells you what speed that energy turns into.
 
 ### Same VO₂max, different time
 
@@ -67,28 +65,25 @@ In 1980 the researchers Conley and Krahenbuhl studied 12 very good runners, who 
 
 The result was striking. Within this group, VO₂max did **not** show who was faster. Running economy, on the other hand, explained about **65%** of the differences in their times.
 
-<figure class="ig">
-  <p class="ig-title">Example, two runners with the same VO₂max at 5:00 per km</p>
-  <div class="ig-vs">
-    <div class="ig-card">
-      <span class="ig-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg></span>
-      <strong>Runner A</strong>
-      <span class="ig-stat">VO₂max <b>60</b></span>
-      <span class="ig-pace">~73%</span>
-      <span class="ig-stat">of their VO₂max at this pace</span>
-    </div>
-    <div class="ig-card ig-good">
-      <span class="ig-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" x2="15" y1="22" y2="22"/><line x1="4" x2="14" y1="9" y2="9"/><path d="M14 22V4a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v18"/><path d="M14 13h2a2 2 0 0 1 2 2v2a2 2 0 0 0 2 2a2 2 0 0 0 2-2V9.83a2 2 0 0 0-.59-1.42L18 5"/></svg></span>
-      <strong>Runner B, more economical</strong>
-      <span class="ig-stat">VO₂max <b>60</b></span>
-      <span class="ig-pace">~60%</span>
-      <span class="ig-stat">of their VO₂max at this pace</span>
-    </div>
-  </div>
-  <figcaption class="ig-caption">The same pace costs B less. B has <strong>more room</strong> to run faster or for longer.</figcaption>
-</figure>
+The study had few participants, all men and all at a high level, so we can't say the same percentage applies to everyone. It does show clearly that VO₂max doesn't tell the whole story.
 
-The example is illustrative, with rounded numbers to show the idea. The study itself had few participants, all men and all at a high level, so we can't say the same percentage applies to everyone. It does show clearly that VO₂max doesn't tell the whole story.
+To make the idea clearer, here is a hypothetical example with rounded numbers.
+
+<div class="table-wrap">
+  <table class="plan-table">
+    <caption>Hypothetical example, two runners at 5:00 per km</caption>
+    <thead>
+      <tr><th></th><th>Runner A</th><th>Runner B</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>VO₂max (mL/kg/min)</td><td>60</td><td>60</td></tr>
+      <tr><td>Oxygen used at the same pace (mL/kg/min)</td><td>44</td><td><strong>36</strong></td></tr>
+      <tr><td>Share of VO₂max</td><td>~73%</td><td><strong>60%</strong></td></tr>
+    </tbody>
+  </table>
+</div>
+
+B needs less oxygen for the same pace, so B runs further below their limit. B has **more room** to run faster or for longer.
 
 ### What affects economy
 
@@ -103,31 +98,31 @@ This ties in with what we saw in [cadence](post-cadence-en.html). If you run wit
 <figure class="ig">
   <p class="ig-title">Three routes to more economical running</p>
   <div class="ig-methods">
-    <div class="ig-card"><span class="ig-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg></span><strong>Years of consistency</strong><span>The slowest but surest improvement</span></div>
-    <div class="ig-card"><span class="ig-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.4 14.4 9.6 9.6"/><path d="M18.657 21.485a2 2 0 1 1-2.829-2.828l-1.767 1.768a2 2 0 1 1-2.829-2.829l6.364-6.364a2 2 0 1 1 2.829 2.829l-1.768 1.767a2 2 0 1 1 2.828 2.829z"/><path d="m21.5 21.5-1.4-1.4"/><path d="M3.9 3.9 2.5 2.5"/><path d="M6.404 12.768a2 2 0 1 1-2.829-2.829l1.768-1.767a2 2 0 1 1-2.828-2.829l2.828-2.828a2 2 0 1 1 2.829 2.828l1.767-1.768a2 2 0 1 1 2.829 2.829z"/></svg></span><strong>Strength training</strong><span>2–8% better in most studies</span></div>
-    <div class="ig-card"><span class="ig-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 16v-2.38C4 11.5 2.97 10.5 3 8c.03-2.72 1.49-6 4.5-6C9.37 2 10 3.8 10 5.5c0 3.11-2 5.66-2 8.68V16a2 2 0 1 1-4 0Z"/><path d="M20 20v-2.38c0-2.12 1.03-3.12 1-5.62-.03-2.72-1.49-6-4.5-6C14.63 6 14 7.8 14 9.5c0 3.11 2 5.66 2 8.68V20a2 2 0 1 0 4 0Z"/><path d="M16 17h4"/><path d="M4 13h4"/></svg></span><strong>Shoes</strong><span>About 4% less energy in one well-known study</span></div>
+    <div class="ig-card"><span class="ig-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg></span><strong>Consistent running</strong><span>Economy can keep improving for years</span></div>
+    <div class="ig-card"><span class="ig-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.4 14.4 9.6 9.6"/><path d="M18.657 21.485a2 2 0 1 1-2.829-2.828l-1.767 1.768a2 2 0 1 1-2.829-2.829l6.364-6.364a2 2 0 1 1 2.829 2.829l-1.768 1.767a2 2 0 1 1 2.828 2.829z"/><path d="m21.5 21.5-1.4-1.4"/><path d="M3.9 3.9 2.5 2.5"/><path d="M6.404 12.768a2 2 0 1 1-2.829-2.829l1.768-1.767a2 2 0 1 1-2.828-2.829l2.828-2.828a2 2 0 1 1 2.829 2.828l1.767-1.768a2 2 0 1 1 2.829 2.829z"/></svg></span><strong>Strength training</strong><span>Improvement in 14 of the 20 studies in one review</span></div>
+    <div class="ig-card"><span class="ig-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 16v-2.38C4 11.5 2.97 10.5 3 8c.03-2.72 1.49-6 4.5-6C9.37 2 10 3.8 10 5.5c0 3.11-2 5.66-2 8.68V16a2 2 0 1 1-4 0Z"/><path d="M20 20v-2.38c0-2.12 1.03-3.12 1-5.62-.03-2.72-1.49-6-4.5-6C14.63 6 14 7.8 14 9.5c0 3.11 2 5.66 2 8.68V20a2 2 0 1 0 4 0Z"/><path d="M16 17h4"/><path d="M4 13h4"/></svg></span><strong>Shoes</strong><span>One prototype cut energy cost by ~4%</span></div>
   </div>
 </figure>
 
-**1. Years and kilometres.** The best-known example is Paula Radcliffe, who held the women's marathon world record for years with 2:15:25. The physiologist Andrew Jones studied her lab measurements and recorded that her economy improved by **15%** from 1992 to 2003. In his view, this improvement was very important in allowing her to keep getting better for so many years. Economy doesn't change in a few weeks, it's built slowly.
+**1. Consistent training.** The best-known example is Paula Radcliffe, who held the women's marathon world record for years with 2:15:25. The physiologist Andrew Jones studied her lab measurements and recorded that her economy improved by **15%** from 1992 to 2003. In his view, this improvement was very important in allowing her to keep getting better for so many years. This is one athlete's story, and it doesn't tell us how much of the change came from the kilometres and how much from other parts of her training. It does show that economy can keep improving for many years.
 
-**2. Strength training.** A systematic review by Richard Blagrove and colleagues looked at 24 studies in middle- and long-distance runners. When weights, explosive exercises or plyometrics were added to running, economy usually improved by **2–8%** compared with runners who only ran, though not in every study. And something many people worry about, strength training didn't negatively affect body composition. The researchers suggest two to three sessions a week, with a variety of exercises.
+**2. Strength training.** A systematic review by Richard Blagrove and colleagues looked at 24 studies in middle- and long-distance runners who added weights, explosive exercises or plyometrics to their running. Of the 20 studies that measured economy, **14** found an improvement at at least one of the speeds they tested, while 6 found no difference compared with runners who only ran. Overall, the researchers estimate that a strength programme of 6 to 20 weeks improves economy by **2–8%**. And something many people worry about, strength training didn't negatively affect body composition. The researchers suggest two to three sessions a week, with a variety of exercises.
 
-**3. Shoes.** In 2018 a team at the University of Colorado compared prototype shoes with a plate and a very resilient midsole against two established racing shoes. In all 18 runners in the study, the new shoes reduced the energy they needed, by **4%** on average. The study was done with fast runners, though, at speeds from 14 to 18 km per hour, so we don't know whether the same percentage holds at slower paces.
+**3. Shoes.** In 2018 a team at the University of Colorado compared prototype shoes with a plate and a very resilient midsole against two established racing shoes. This particular prototype reduced energy cost by about **4%** compared with the two racing models, and the reduction showed up in all 18 runners in the study. The study was done with fast runners, though, at speeds from 14 to 18 km per hour, so we don't know whether the same percentage holds at slower paces.
 
 {% note %}📌 **Did you know?** Joyner and Coyle note that we know less for certain about economy than about VO₂max and lactate threshold. It's the piece of endurance with the most open questions.{% endnote %}
 
 ### Can you measure it?
 
-Measuring it properly takes a lab, with a mask that measures the oxygen you breathe while you run on a treadmill. Watches don't measure it directly.
+Measuring it properly takes a lab, with a mask that analyses the gases you breathe, to work out how much oxygen your body uses while you run on a treadmill. Watches don't measure it directly.
 
-There is an indirect sign, though. If over a few months you run the same easy pace at a lower heart rate, in the same conditions, something has improved. It could be your economy, it could be your general fitness, usually it's both. It isn't a measurement, but it's a good sign you're on the right track. Just watch out for heat and fatigue, which push your heart rate up, as we saw with [cardiac drift](post-cardiac-drift-en.html).
+There is an indirect sign, though. If over time you hold the same pace at a lower heart rate in similar conditions, it's a useful sign that this pace is less of a strain on you. To see whether your economy specifically has improved, you need a measurement of the gases you breathe. Just watch out for heat and fatigue, which push your heart rate up, as we saw with [cardiac drift](post-cardiac-drift-en.html).
 
 <section class="faq">
   <h3>Frequently asked questions about running economy</h3>
   <div class="faq-item">
     <h4>What is running economy in simple terms?</h4>
-    <p>It's how much energy you need to run at a given pace. Like a car's fuel consumption, the less energy you use at the same pace, the more economical a runner you are.</p>
+    <p>It shows how much it costs you to hold a given pace, and in the lab it's estimated from the oxygen you use. Like a car's fuel consumption, the less oxygen you need at the same pace, the better your economy.</p>
   </div>
   <div class="faq-item">
     <h4>Is it more important than VO₂max?</h4>
@@ -135,7 +130,7 @@ There is an indirect sign, though. If over a few months you run the same easy pa
   </div>
   <div class="faq-item">
     <h4>How do I improve my economy?</h4>
-    <p>With consistent running over a long time and with strength training two to three times a week, which improved it by 2–8% in most studies. Plated racing shoes can also reduce the energy you need.</p>
+    <p>With consistent running over a long time and with strength training, which can improve economy. The researchers behind the large review suggest two to three strength sessions a week. And some racing shoes can reduce the energy cost of running.</p>
   </div>
   <div class="faq-item">
     <h4>Do I need to change my technique to become more economical?</h4>
@@ -148,7 +143,7 @@ There is an indirect sign, though. If over a few months you run the same easy pa
   <ul>
     <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><strong>Economy</strong> is a runner's "fuel consumption", the lower the better.</li>
     <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>It explains why the same <strong>VO₂max</strong> doesn't mean the same time.</li>
-    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>It improves with <strong>years of running</strong> and <strong>strength training</strong>, not in a week.</li>
+    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>It improves with <strong>consistent running</strong> and <strong>strength training</strong>, and can keep improving for years.</li>
   </ul>
 </div>
 
