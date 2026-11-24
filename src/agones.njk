@@ -43,7 +43,7 @@ activeNav: "agones"
     .leaflet-popup-content .popup-when svg { width: 14px; height: 14px; flex-shrink: 0; }
     .leaflet-popup-content a { color: #ff5722; font-weight: 600; }
     @media (max-width: 600px) { #race-map { height: 400px; } }
-    /* Σκούρο στυλ για τα πλακίδια του OSM (στο φωτεινό θέμα μένουν όπως είναι) */
+    /* Σκούρο στυλ για τα πλακίδια του χάρτη (στο φωτεινό θέμα μένουν όπως είναι) */
     html:not([data-theme="light"]) .dk-tiles { filter: invert(1) hue-rotate(180deg) brightness(0.95) contrast(0.9); }
     html:not([data-theme="light"]) #race-map { background: #1b1e25; }
 
@@ -194,11 +194,17 @@ activeNav: "agones"
           hintTimer = setTimeout(function () { hint.classList.remove('show'); }, 1200);
         }, { passive: true });
       }
-      // OpenStreetMap: δωρεάν, χωρίς κλειδί (το CARTO ζητά πλέον API key)
-      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
+      // Esri Light Gray: χωρίς κλειδί, ονόματα τόπων στα αγγλικά
+      // (το OSM γράφει κάθε όνομα στο τοπικό αλφάβητο, π.χ. κυριλλικά ή αραβικά)
+      var esri = 'https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/';
+      L.tileLayer(esri + 'World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+        maxZoom: 16,
         className: 'dk-tiles',
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>'
+        attribution: 'Tiles &copy; <a href="https://www.esri.com/" target="_blank" rel="noopener">Esri</a>, HERE, Garmin, &copy; OpenStreetMap contributors'
+      }).addTo(map);
+      L.tileLayer(esri + 'World_Light_Gray_Reference/MapServer/tile/{z}/{y}/{x}', {
+        maxZoom: 16,
+        className: 'dk-tiles'
       }).addTo(map);
 
       // Εξασφάλισε σωστό render όλων των markers μόλις κουμπώσει το layout
