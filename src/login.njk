@@ -190,7 +190,11 @@ description: "Συνδέσου στο Δέσε Κορδόνια με το email 
         btn.disabled = true;
         try {
           await DKPasskey.login();
-          location.href = 'account.html';
+          // Από το admin panel (login.html?next=admin) γυρνάμε πίσω εκεί. Μόνο αυτή η
+          // σταθερή διεύθυνση, όχι ό,τι γράφει το link, για να μη στέλνει κανείς αλλού.
+          location.href = new URLSearchParams(location.search).get('next') === 'admin'
+            ? API + '/admin.html'
+            : 'account.html';
           return;
         } catch (e) {
           if (DKPasskey.isCancel(e)) {
